@@ -1,0 +1,27 @@
+main {
+    margin: 0 auto;
+}
+
+section {
+    padding: 10;
+}
+
+.head-color {
+    color: #4365BC;
+}
+
+.icon-button {
+    background-color: #4365BC;
+    color: #fff;
+    font-weight:bolder;
+}
+
+.icon-button:hover {
+    background-color: #3553a0;
+    color: #ccc;
+}
+
+.member-info {
+    font-size: 18px;
+    font-weight: bolder;
+}

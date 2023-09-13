@@ -1,0 +1,86 @@
+body {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+main {
+    padding-top: 30px;
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    font-size: 24px;
+}
+
+
+
+.btn-outline-secondary {
+    border-color: #ccc;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.col-mb-3{
+    display: flex;
+    align-items: center;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.sign-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.form-control {
+    width: 350px;
+    margin: 1px;
+}
+
+.post-display{
+    display: flex;
+    flex-direction: column;
+}
+
+
+label {
+	width : 150px;
+	text-align : left;
+    display: flex;
+}
+
+.input-group {
+    width: 350px; /* 원하는 너비로 조정 */
+}
+
+/* 인증 버튼과 입력 폼 간의 간격 조정 */
+.custom-input .input-group {
+    margin-bottom: 10px;
+}
+
+.sign-button {
+    width: 150px;
+    height: 50px;
+    background-color: #4365BC;
+    color: #fff;
+    font-weight:bold;
+    transition: background-color 0.3s ease; 
+}
+
+.sign-button:hover {
+background-color: #3553a0;
+color: #ccc; 
+}
+
