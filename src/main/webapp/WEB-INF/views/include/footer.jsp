@@ -51,7 +51,7 @@
                             <strong>Email:</strong> info@chazm.com<br>
                         </p>
 
-                    </div>W
+                    </div>
 
                 </div>
             </div>
