@@ -7,9 +7,9 @@
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-5 col-md-12 footer-info">
-                        <a href="index.html" class="logo d-flex align-items-center">
+                        <a href="/index.jsp" class="logo d-flex align-items-center">
                             <h2>찾음</h2>
-                            <img src="./resources/assets/img/light.png" alt="">
+                            <img src="../resources/assets/img/light.png" alt="">
                         </a>
                         <p style="font-size:18px;">분실물 관리 통합 포털</p>
                         <div class="social-links d-flex mt-4">
@@ -34,10 +34,10 @@
                     <div class="col-lg-2 col-6 col-md-3 footer-links">
                         <h4>서비스</h4>
                         <ul>
-                            <li><a href="#">찾음이란?</a></li>
-                            <li><a href="#">찾아주세요</a></li>
-                            <li><a href="#">주인을 찾아요</a></li>
-                            <li><a href="#">찾음+</a></li>
+                            <li><a href="/chazmInfo/chazmInfo.do">찾음이란?</a></li>
+                            <li><a href="/lost/list.do">찾아주세요</a></li>
+                            <li><a href="/find/list.do">주인을 찾아요</a></li>
+                            <li><a href="/plusA/list.do">찾음+</a></li>
                         </ul>
                     </div>
 
@@ -51,7 +51,7 @@
                             <strong>Email:</strong> info@chazm.com<br>
                         </p>
 
-                    </div>
+                    </div>W
 
                 </div>
             </div>
