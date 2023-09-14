@@ -1,5 +1,7 @@
 package kr.co.chazm.plusadmin.domain;
 
+import java.sql.Date;
+
 public class PlusABoard {
 
 	private int plusANo;
@@ -7,8 +9,8 @@ public class PlusABoard {
 	private String plusAContent;
 	private String plusAWriter;
 	private String plusADntPlace;
-	private String plusACreateDate;
-	private String plusAUpdateDate;
+	private Date plusACreateDate;
+	private Date plusAUpdateDate;
 	private String plusAStateYn;
 
 	public int getPlusANo() {
@@ -51,19 +53,19 @@ public class PlusABoard {
 		this.plusADntPlace = plusADntPlace;
 	}
 
-	public String getPlusACreateDate() {
+	public Date getPlusACreateDate() {
 		return plusACreateDate;
 	}
 
-	public void setPlusACreateDate(String plusACreateDate) {
+	public void setPlusACreateDate(Date plusACreateDate) {
 		this.plusACreateDate = plusACreateDate;
 	}
 
-	public String getPlusAUpdateDate() {
+	public Date getPlusAUpdateDate() {
 		return plusAUpdateDate;
 	}
 
-	public void setPlusAUpdateDate(String plusAUpdateDate) {
+	public void setPlusAUpdateDate(Date plusAUpdateDate) {
 		this.plusAUpdateDate = plusAUpdateDate;
 	}
 

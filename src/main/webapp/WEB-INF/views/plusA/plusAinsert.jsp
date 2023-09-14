@@ -80,7 +80,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <!-- <label for="plusAContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="editordata" id="plusAContent" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" id="summernote" name="plusAContent" id="plusAContent" cols="30" rows="10"></textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
                                 <button type="submit">등록</button>
