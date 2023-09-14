@@ -279,7 +279,7 @@
                             </tr>
                         </table>
                         <div class="btnArea justify-content-center text-center">
-                            <button class="writeBtn btn">글쓰기</button>
+                            <button class="writeBtn btn" onclick="showInsertForm();">글쓰기</button>
                             <button class="modifyBtn btn">수정</button>
                             <button class="deleteBtn btn">삭제</button>
                         </div>
@@ -305,6 +305,11 @@
 
         <!-- Template Main JS File -->
         <script src="../resources/assets/js/main.js"></script>
+        <script type="text/javascript">
+        	function showInsertForm() {
+        		location.href="/plusA/insert.do";
+        	}
+        </script>
     </body>
 
 </html>

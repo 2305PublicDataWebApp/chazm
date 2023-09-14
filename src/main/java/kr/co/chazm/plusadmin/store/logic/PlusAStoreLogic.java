@@ -1,5 +1,11 @@
 package kr.co.chazm.plusadmin.store.logic;
 
-public class PlusAStoreLogic {
+import org.springframework.stereotype.Repository;
+
+import kr.co.chazm.plusadmin.store.PlusAStore;
+
+@Repository
+public class PlusAStoreLogic implements PlusAStore{
+	
 
 }

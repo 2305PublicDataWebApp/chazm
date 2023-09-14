@@ -1,5 +1,17 @@
 package kr.co.chazm.plusmember.service.impl;
 
-public class PlusMBoardServiceImpl {
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import kr.co.chazm.plusmember.service.PlusMBoardService;
+import kr.co.chazm.plusmember.store.PlusMBoardStore;
+
+@Service
+public class PlusMBoardServiceImpl implements PlusMBoardService{
+
+	@Autowired
+	private SqlSession sqlSession;
+	@Autowired
+	private PlusMBoardStore plusMBoardStore;
 }

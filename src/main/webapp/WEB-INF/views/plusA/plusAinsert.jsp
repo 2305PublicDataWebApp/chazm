@@ -69,18 +69,18 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
-                        <form action="" method="" role="form" class="form text-left">
+                        <form action="/plusA/insert.do" method="POST" role="form" class="form text-left">
                             <div class="form-group col-md-12">
-                                <label for="plusMTitle"><i class="bi bi-card-heading"></i></label>
-                                <input type="text" class="form-control" name="plusMTitle" id="plusMTitle" placeholder="제목을 입력하세요." required>
+                                <label for="plusATitle"><i class="bi bi-card-heading"></i></label>
+                                <input type="text" class="form-control" name="plusATitle" id="plusATitle" placeholder="제목을 입력하세요." required>
                             </div>
                             <div class="form-group col-md-12"  style="margin-bottom: 40px;">
-                                    <label for="plusMDntPlace"><i class="bi bi-house-heart"></i></label>
-                                    <input type="text" class="form-control" name="plusMDntPlace" id="plusMDntPlace" placeholder="기부처를 입력하세요." required>
+                                    <label for="plusADntPlace"><i class="bi bi-house-heart"></i></label>
+                                    <input type="text" class="form-control" name="plusADntPlace" id="plusADntPlace" placeholder="기부처를 입력하세요." required>
                             </div>
                             <div class="form-group col-md-12">
-                                <!-- <label for="plusMContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="editordata" id="plusMContent" cols="30" rows="10"></textarea>
+                                <!-- <label for="plusAContent">내용</label> -->
+                                <textarea class="form-control" id="summernote" name="editordata" id="plusAContent" cols="30" rows="10"></textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
                                 <button type="submit">등록</button>
@@ -136,15 +136,15 @@
                     fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
             });
         });
-        $('#plusMStartDate').val(new Date().toISOString().substring(0, 10));
-        $("#plusMStartDate, #plusMEndDate").on("change", function() {
-            var startDate = new Date($("#plusMStartDate").val());
-            var endDate = new Date($("#plusMEndDate").val());
+        $('#plusAStartDate').val(new Date().toISOString().substring(0, 10));
+        $("#plusAStartDate, #plusAEndDate").on("change", function() {
+            var startDate = new Date($("#plusAStartDate").val());
+            var endDate = new Date($("#plusAEndDate").val());
 
             // 종료일이 시작일보다 과거이거나 같은 경우 유효성 체크 메시지 표시
             if (endDate <= startDate) {
                 $("#validationMessage").text("종료일은 시작일보다 미래 날짜여야 합니다.");
-                $("#plusMEndDate").style.outline("red");
+                $("#plusAEndDate").style.outline("red");
             } else {
                 // 유효성 체크 메시지를 지움
                 $("#validationMessage").text("");
