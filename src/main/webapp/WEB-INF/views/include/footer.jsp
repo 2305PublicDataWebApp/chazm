@@ -35,9 +35,9 @@
                         <h4>서비스</h4>
                         <ul>
                             <li><a href="/chazmInfo/chazmInfo.do">찾음이란?</a></li>
-                            <li><a href="/lost/list.do">찾아주세요</a></li>
-                            <li><a href="/find/list.do">주인을 찾아요</a></li>
-                            <li><a href="/plusA/list.do">찾음+</a></li>
+                            <li><a href="/lostBoard/list.do">찾아주세요</a></li>
+                            <li><a href="/findBoard/list.do">주인을 찾아요</a></li>
+							<li><a href="/plusABoard/list.do">찾음이 기부해요</a></li>
                         </ul>
                     </div>
 
