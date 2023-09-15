@@ -26,6 +26,18 @@ public class PlusAServiceImpl implements PlusAService{
 	}
 
 	@Override
+	public int updatePlusABoard(PlusABoard plusABoard) {
+		int result = plusAStore.updatePlusABoard(sqlSession, plusABoard);
+		return result;
+	}
+
+	@Override
+	public int deletePlusABoard(int plusANo) {
+		int result = plusAStore.deletePlusABoard(sqlSession, plusANo);
+		return result;
+	}
+
+	@Override
 	public int getListCount() {
 		int result = plusAStore.getListCount(sqlSession);
 		return result;

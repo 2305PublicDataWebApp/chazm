@@ -16,6 +16,12 @@
 	<insert id="insertPlusABoard">
 		INSERT INTO PLUS_A_BOARD_TBL VALUES(SEQ_PLUS_A_NO.NEXTVAL, #{plusATitle}, #{plusAContent}, '관리자', #{plusADntPlace}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	<update id="updatePlusABoard">
+		UPDATE PLUS_A_BOARD_TBL SET PLUS_A_TITLE = #{plusATitle}, PLUS_A_CONTENT = #{plusAContent}, PLUS_A_DNT_PLACE = #{plusADntPlace}, PLUS_A_UPDATE_DATE = DEFAULT WHERE PLUS_A_NO = #{plusANo}
+	</update>
+	<update id="deletePlusABoard">
+		UPDATE PLUS_A_BOARD_TBL SET PLUS_A_STATE_YN = 'N' WHERE PLUS_A_NO = #{plusANo}
+	</update>
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM PLUS_A_BOARD_TBL WHERE PLUS_A_STATE_YN = 'Y'
 	</select>

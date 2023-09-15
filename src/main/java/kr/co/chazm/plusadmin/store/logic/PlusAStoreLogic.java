@@ -20,6 +20,18 @@ public class PlusAStoreLogic implements PlusAStore {
 	}
 
 	@Override
+	public int updatePlusABoard(SqlSession sqlSession, PlusABoard plusABoard) {
+		int result = sqlSession.update("PlusABoardMapper.updatePlusABoard", plusABoard);
+		return result;
+	}
+
+	@Override
+	public int deletePlusABoard(SqlSession sqlSession, int plusANo) {
+		int result = sqlSession.update("PlusABoardMapper.deletePlusABoard", plusANo);
+		return result;
+	}
+
+	@Override
 	public int getListCount(SqlSession sqlSession) {
 		int result = sqlSession.selectOne("PlusABoardMapper.getListCount");
 		return result;
@@ -28,7 +40,8 @@ public class PlusAStoreLogic implements PlusAStore {
 	@Override
 	public List<PlusABoard> selectPlusABoardList(SqlSession sqlSession, PageInfo pInfo) {
 		int limit = pInfo.getRecordCountPerPage();
-		int offset = (pInfo.getCurrentPage() - 1) * limit;
+		int currentPage = pInfo.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<PlusABoard> pAList = sqlSession.selectList("PlusABoardMapper.selectPlusABoardList", null, rowBounds);
 		return pAList;

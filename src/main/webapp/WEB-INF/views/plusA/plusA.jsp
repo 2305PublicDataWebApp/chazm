@@ -216,10 +216,32 @@
 	                            </tr>
                             </c:forEach>
                         </table>
+                           <div class="mt-5 d-flex justify-content-center">
+		                    <nav aria-label="Page navigation example r">
+		                        <ul class="pagination">
+		                            <c:url var="prevUrl" value="/plusA/list.do">
+		                            	<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
+		                            </c:url>
+		                            <li class="page-item">
+			                            	<a class="page-link" href="${prevUrl }"><i class="bi bi-chevron-left"></i></a>
+			                        </li>
+		                            <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+		                            	<c:url var="pageUrl" value="/plusA/list.do">
+		                            		<c:param name="page" value="${p }"></c:param>
+		                            	</c:url>
+			                            <li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
+		                            </c:forEach>
+		                            <c:url var="nextUrl" value="/plusA/list.do">
+		                            	<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+		                            </c:url>
+		                            <li class="page-item"><a class="page-link" href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
+		                        </ul>
+		                    </nav>
+		                </div>
                         <div class="btnArea justify-content-center text-center">
                             <button class="writeBtn btn" onclick="showInsertForm();">글쓰기</button>
                             <button class="modifyBtn btn" onclick="showUpdateForm();">수정</button>
-                            <button class="deleteBtn btn">삭제</button>
+                            <button class="deleteBtn btn" onclick="deletePlusABoard();">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -261,13 +283,48 @@
  				}else {
 	        		for(let i = 0; i < checked.length; i++){
 	        			if(checked[i].checked){
-	        				isChecked = true;
 	        				checkedNo = checked[i].value;
 	        			}
 	        		} 					
 	        		location.href = "/plusA/update.do?plusANo=" + checkedNo;
  				}       			
         	}
+        	function deletePlusABoard() {
+        		let checked = document.getElementsByName("checkBoard");
+        		let checkedNo;
+        		let isChecked = false;
+       			for(let i = 0; i < checked.length; i++){
+       				if(checked[i].checked){
+       					isChecked = true;
+       				}
+       			}
+ 				if(!isChecked) {
+ 					alert("삭제할 글을 선택해주세요.");
+ 				}else {
+	        		for(let i = 0; i < checked.length; i++){
+	        			if(checked[i].checked){
+	        				checkedNo = checked[i].value;
+	        			}
+	        		}
+	        		if(confirm("정말 삭제하시겠습니까?")){
+		        		location.href = "/plusA/delete.do?plusANo=" + checkedNo;	        			
+	        		}
+ 				}
+ 				
+        	}
+        	window.addEventListener('load', function() {
+                var scrollPosition = sessionStorage.getItem('scrollPosition');
+                if (scrollPosition !== null) {
+                    window.scrollTo(0, parseInt(scrollPosition));
+                    sessionStorage.removeItem('scrollPosition'); // 스크롤 위치 정보를 삭제합니다.
+                }
+            });
+
+            // 페이지 이동할 때 스크롤 위치 저장
+            window.addEventListener('beforeunload', function() {
+                var currentScrollPosition = window.scrollY;
+                sessionStorage.setItem('scrollPosition', currentScrollPosition);
+            });
         </script>
     </body>
 

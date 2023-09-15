@@ -72,6 +72,7 @@
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
                         <form action="/plusA/update.do" method="POST" role="form" class="form text-left">
+                        	<input type="hidden" name="plusANo" value="${plusABoard.plusANo }">
                             <div class="form-group col-md-12">
                                 <label for="plusATitle"><i class="bi bi-card-heading"></i></label>
                                 <input type="text" class="form-control" name="plusATitle" id="plusATitle" value="${plusABoard.plusATitle }" placeholder="제목을 입력하세요." required>
@@ -82,7 +83,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <!-- <label for="plusAContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="editordata" id="plusAContent" cols="30" rows="10">${plusABoard.plusAContent }</textarea>
+                                <textarea class="form-control" id="summernote" name="plusAContent" id="plusAContent" cols="30" rows="10">${plusABoard.plusAContent }</textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
                                 <button type="submit">수정</button>
