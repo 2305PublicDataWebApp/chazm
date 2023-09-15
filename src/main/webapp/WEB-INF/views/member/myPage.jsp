@@ -45,7 +45,6 @@
 <body>
     <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
-
     <main id="main">
 
         <!-- ======= 기부 상세조회 ======= -->
@@ -56,11 +55,11 @@
                         <div class="sidebar">
                             <div class="sidebar-item donation-info">
                                 <div class="cur-val">
-                                    <strong>Khuser01</strong>
+                                    <strong>${memberId }</strong>
                                 </div>
                                 <div class="donationBottom row">
-                                    <span>일용자님</span>
-                                    <p>3,000P</p>
+                                    <span>${memberName }</span>
+                                    <p>${memberPoint }P</p>
                                 </div>
                                 <div class="donation-btn">
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -73,7 +72,7 @@
                         </div><!-- End Blog Sidebar -->
                     </div>
                     <div class="col-lg-8">
-                        <article class="blog-details">
+                        <article class="blog-details" id="member-info">
                             <a id="about" name="about"></a>
                             <h2 class="title">
                                 회원정보
@@ -88,35 +87,44 @@
                                             style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                                             <img src="../resources/assets/img/member/IDN_MEMBER.png" alt="member"
                                                 class="img-fluid my-5" style="width: 80px;" />
-                                            <h5>개인회원</h5>
+                                            <c:if test="${memberGrade eq 1 }">
+	                                            <h5>개인회원</h5>
+                                            </c:if>
+                                            <c:if test="${memberGrade eq 2 }">
+	                                            <h5>기업회원</h5>
+                                            </c:if> 											                                           
                                             <i class="far fa-edit mb-5"></i>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body p-4">
                                                 <div class="row pt-1">
+                                                <c:if test="${member.memberGrade eq 1 }">
                                                     <div class="col-6 mb-3">
                                                         <h6>이름</h6>
-                                                        <p class="text-muted">일용자</p>
+                                                        <p class="text-muted">${member.memberName }</p>
                                                     </div>
+                                                </c:if>
+                                                <c:if test="${member.memberGrade eq 2 }">
+                                                    <div class="col-6 mb-3">
+                                                        <h6>기업명</h6>
+                                                        <p class="text-muted">${member.memberName }</p>
+                                                    </div>
+                                                </c:if>                                                        
                                                     <div class="col-6 mb-3">
                                                         <h6>핸드폰번호</h6>
-                                                        <p class="text-muted">123-456-789</p>
+                                                        <p class="text-muted">${member.memberPhone }</p>
                                                     </div>
                                                 </div>
                                                 <div>
                                                     <hr class="mt-0 mb-4">
-                                                    <h6>업체명</h6>
-                                                    <p class="text-muted">KH정보교육원</p>
+                                                    <h6>이메일</h6>
+                                                    <p class="text-muted">${member.memberEmail }</p>
                                                 </div>
 
                                                 <div class="row pt-1">
                                                     <div class="col-6 mb-3">
                                                         <h6>주소</h6>
-                                                        <p class="text-muted">서울시 중구</p>
-                                                    </div>
-                                                    <div class="col-6 mb-3">
-                                                        <h6>이메일</h6>
-                                                        <p class="text-muted">khuser01@gmail.com</p>
+                                                        <p class="text-muted">${member.memberAddress }</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex justify-content-start">
@@ -137,7 +145,7 @@
                             </div><!-- End post content -->
                         </article><!-- End blog post -->
 
-                        <article class="blog-details">
+                        <article class="blog-details" id="member-write">
                             <h2 class="title">
                                 내가 쓴 글
                             </h2>
@@ -174,7 +182,7 @@
                             </div>
                         </article>
 
-                        <article class="blog-details">
+                        <article class="blog-details" id="member-donation">
                             <h2 class="title">
                                 기부 내역
                             </h2>
@@ -208,8 +216,8 @@
                                 </div>
                             </div>                            
                         </article>
-
-                        <article class="blog-details">
+                    
+                        <article class="blog-details" id="member-pointAmount">
                             <h2 class="title">
                                 포인트 내역
                             </h2>
@@ -242,7 +250,7 @@
                                     </div>
                                 </div>
                             </div>                                          
-                        </article>
+                        </article> 
                     </div>
 
                 </div>
@@ -267,10 +275,10 @@
                     <!-- 기업일 경우 -->
                     <!-- <button class="btn btn-primary">담당자 이름 변경</button>
                     <button class="btn btn-primary">기업명 변경</button> -->
-                    <form class="sign-form">
+                    <form class="sign-form" action="/member/update.do" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">아이디</label>
-                            <input type="text" class="form-control" id="username" name="username" required
+                            <input type="text" class="form-control" id="memberId" name="memberId" required
                                 placeholder="아이디를 입력해 주세요">
                             <div class="invalid-feedback">
                                 아이디가 유효하지 않습니다.
@@ -278,7 +286,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">비밀번호</label>
-                            <input type="password" class="form-control" id="password" name="password" required
+                            <input type="password" class="form-control" id="memberPw" name="memberPw" required
                                 placeholder="비밀번호를 입력해 주세요">
                             <div class="invalid-feedback">
                                 비밀번호가 유효하지 않습니다.
@@ -294,13 +302,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">이름</label>
-                            <input type="text" class="form-control" id="name" name="name" required
+                            <input type="text" class="form-control" id="memberName" name="memberName" required
                                 placeholder="이름을 입력해 주세요">
                         </div>
                         <div class="mb-3 custom-input">
                             <label for="phone" class="form-label">핸드폰번호</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="phone" name="phone" required
+                                <input type="text" class="form-control" id="memberPhone" name="memberPhone" required
                                     placeholder="핸드폰 번호를 입력해 주세요">
                                 <button class="btn btn-outline-secondary" type="button" id="verifyPhone">인증</button>
                             </div>
@@ -309,7 +317,7 @@
                         <div class="mb-3 custom-input">
                             <label for="email" class="form-label">이메일</label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="email" name="email" required
+                                <input type="email" class="form-control" id="memberEmail" name="memberEmail" required
                                     placeholder="이메일을 입력해 주세요">
                                 <button class="btn btn-outline-secondary" type="button" id="verifyEmail">인증</button>
                             </div>
@@ -317,23 +325,23 @@
                         <div class="mb-3">
                             <label for="postalCode" class="form-label">주소</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="postalCode" name="postalCode" required
+                                <input type="text" class="form-control" id="memberPostCode" name="memberPostCode" required
                                     placeholder="우편 번호">
                                 <button class="btn btn-outline-secondary" type="button" id="searchPostalCode">우편번호
                                     검색</button>
                             </div>
-                            <input type="text" class="form-control" id="address" name="address" required
+                            <input type="text" class="form-control" id="memberAddress" name="memberAddress" required
                                 placeholder="주소(우편 번호 검색 시 자동 입력됩니다.)">
                             <input type="text" class="form-control" id="detailAddress" name="detailAddress"
                                 placeholder="상세주소를 입력해 주세요">
                         </div>
-                    </form>
                     <!--2안  -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary">수정완료</button>
-                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	                    <button type="submit" class="btn btn-primary">수정완료</button>
+	                </div>
+                </form>
             </div>
         </div>
     </div>

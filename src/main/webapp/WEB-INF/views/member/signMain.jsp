@@ -75,7 +75,7 @@
             <div class="container text-center mt-5">
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-sm-8">
-                        <a href="./signIDNMember.html">
+                        <a href="/member/insertIDN.do">
                             <button class="btn btn-light icon-button" style="width: 250px; height: 350px;">
                                 <img src="../resources/assets/img/member/IDN_MEMBER.png" alt="개인회원" width="100" height="100">
                                 <br><br><br>
@@ -86,7 +86,7 @@
                         <p class="member-info">분실물을 등록 희망하는 개인 회원 </p>    
                     </div>
                     <div class="col-md-6 col-sm-8">
-                        <a href="./signCORMember.html">
+                        <a href="/member/insertCOR.do">
                         <button class="btn btn-light icon-button" style="width: 250px; height: 350px;">
                                 <svg width="100" height="100" viewBox="0 0 137 137" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <rect width="137" height="137" fill="url(#pattern0)"/>
