@@ -2,3 +2,46 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lostBoardMapper">
+	<resultMap type="lostBoard" id="lostBoardResultMap">
+		<id property="lostNo"              column="LOST_NO"/>
+		<result property="lostTitle"       column="LOST_TITLE"/>
+		<result property="lostContent"     column="LOST_CONTENT"/>
+		<result property="lostWriter"      column="LOST_WRITER"/>
+		<result property="lostFilename"    column="LOST_FILENAME"/>
+		<result property="lostFilerename"  column="LOST_FILERENAME"/>
+		<result property="lostFilepath"    column="LOST_FILEPATH"/>
+		<result property="lostCategory"    column="LOST_CATEGORY"/>
+		<result property="lostLocation"    column="LOST_LOCATION"/>
+		<result property="lostPlace"       column="LOST_PLACE"/>	
+		<result property="lostDate"        column="LOST_DATE"/>	
+		<result property="lostColor"       column="LOST_COLOR"/>	
+		<result property="lostBrand"       column="LOST_BRAND"/>	
+		<result property="lCreateDate"     column="L_CREATE_DATE"/>	
+		<result property="lUpdateDate"     column="L_UPDATE_DATE"/>
+		<result property="lStateYN"        column="L_STATE_YN"/>				
+	</resultMap>
+
+	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT (*) FROM LOST_BOARD_TBL WHERE L_STATE_YN = 'Y'
+	</select>
+
+	<select id="selectLostBoardList" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL WHERE L_STATE_YN = 'Y' ORDER BY LOST_NO DESC
+	</select>
+	
+	<select id="selectOneByNo" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL WHERE LOST_NO = #{lostNo} AND L_STATE_YN = 'Y' 
+	</select>
+	
+	<insert id="insertLostBoard">
+		INSERT INTO LOST_BOARD_TBL VALUES 
+		(SEQ_LOST_NO.NEXTVAL, #{lostTitle}, #{lostContent}, #{lostWriter}, 
+		#{lostFilename}, #{lostFilerename}, #{lostFilepath}, #{lostCategory} ,#{lostLocation} , #{lostPlace} , #{lostDate}, 
+		#{lostColor} , #{lostBrand} , DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+
+</mapper>
+ 

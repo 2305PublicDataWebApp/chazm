@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -69,331 +70,229 @@
                                 <h5>소중한물건을 잃어버리셨나요? </h5>
                             </div>
                             <div>
-                                <input type="button" value="분실물 등록">
+                                <button id="insertLostBtn" onclick="insertLostBoard();">분실물 등록</button>
                             </div>
                         </div>
-                    </div> 
-                        
-                </div>
-    
-                <div id="searchBox" class="align-self-center m-auto mb-5 p-3">
-    
-                    <div id="categoryBox" class="w-50 text-center">
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" ><div class="icon"><i class="bi bi-easel" style="color:black"></i></div>
-                            <h4 class="title">의류</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" class=" "><div class="icon"><i class="bi bi-handbag" style="color:black"></i></div>
-                            <h4 class="title">가방</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" ><div class="icon"><i class="bi bi-wallet2" style="color:black"></i></div>
-                            <h4 class="title">지갑</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" class=" "><div class="icon"><i class="bi bi-phone" style="color:black"></i></div>
-                            <h4 class="title">핸드폰</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" ><div class="icon"><i class="bi bi-smartwatch" style="color:black"></i></div>
-                            <h4 class="title">그 외</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" class=" "><div class="icon"><i class="bi bi-bus-front" style="color:black"></i></div>
-                            <h4 class="title">버스</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" ><div class="icon"><i class="bi bi-train-front" style="color:black"></i></div>
-                            <h4 class="title">지하철</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" class=" "><div class="icon"><i class="bi bi-taxi-front" style="color:black"></i></div>
-                            <h4 class="title">택시</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" ><div class="icon"><i class="bi bi-airplane" style="color:black"></i></div>
-                            <h4 class="title">공항</h4></a>
-                        </div>
-                        <div data-filter="*" class="filter-active category-icon">
-                            <a href="" class=" "><div class="icon"><i class="bi bi-building" style="color:black"></i></div>
-                            <h4 class="title">그 외</h4></a>
-                        </div>
-                    </div>
-    
-                    <div id="searchContent" class="w-50 m-2 me-5">
-                        <div id="searchWrap" class="d-flex m-2 w-100 ">
-                            <select name="lostSearchCondition" class="w-25 border-end border-dark-subtle rounded-start text-center" style="height: 40px;">
-                                <option value="lost_title">제목</option>
-                                <option value="lost_content">내용</option>
-                            </select>
-                            <div class="d-flex w-75">
-                                <input type="text" name="" class="w-100 border border-dark-subtle rounded-end " style="height: 40px;">
-                            </div>
-                        </div>
-                        
-                        <div id="lostDate" class="d-flex m-2 w-100" >
-                            <div class="w-50">
-                                <input type="date" name="lostDate"  class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
-                            </div>
-                            <div class="w-auto ms-2 me-2 d-flex align-items-center">
-                                <h5 class="text-white " > ~ </h5>
-                            </div>
-                            <div class="w-50">
-                                <input type="date" name="lostDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
-                            </div>
-                        </div>
-    
-                        <div class="d-flex m-2 w-100 justify-content-between">
-                                
-                            <div id="lostCounty" class="btn-group w-100 ">
-                                <button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; " data-bs-toggle="dropdown" aria-expanded="false">
-                                시 / 도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" >서울특별시</a></li>
-                                    <li><a class="dropdown-item" >부산광역시</a></li>
-                                    <li><a class="dropdown-item" >대구광역시</a></li>
-                                    <li><a class="dropdown-item" >인천광역시</a></li>
-                                    <li><a class="dropdown-item" >광주광역시</a></li>
-                                    <li><a class="dropdown-item" >대전광역시</a></li>
-                                    <li><a class="dropdown-item" >울산광역시</a></li>
-                                    <li><a class="dropdown-item" >세종특별자치시</a></li>
-                                    <li><a class="dropdown-item" >경기도</a></li>
-                                    <li><a class="dropdown-item" >강원도</a></li>
-                                    <li><a class="dropdown-item" >충청북도</a></li>
-                                    <li><a class="dropdown-item" >충청남도</a></li>
-                                    <li><a class="dropdown-item" >전라북도</a></li>
-                                    <li><a class="dropdown-item" >전라남도</a></li>
-                                    <li><a class="dropdown-item" >경상북도</a></li>
-                                    <li><a class="dropdown-item" >경상남도</a></li>
-                                    <li><a class="dropdown-item" >제주특별자치도</a></li>
-                                </ul>
-                            </div>
-
-                            <!-- <div id="lost_city" class="btn-group me-3">
-                                <button type="button" class="btn dropdown-toggle text-center"  style="background-color: #fff; width: 180px; height: 40px;" data-bs-toggle="dropdown" aria-expanded="false">
-                                    시 / 군 / 구&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">서울특별시</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                            <div id="lost_village" class="btn-group">
-                                <button type="button" class="btn dropdown-toggle text-center"  style="background-color: #fff; width: 180px; height: 40px;" data-bs-toggle="dropdown" aria-expanded="false">
-                                    읍 / 면 / 동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">서울특별시</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div> -->
-                        </div>
-    
-                        <div id="colorBrand" class="d-flex justify-content-between m-2 w-100 " >
-                        
-                            <div class="btn-group me-2 w-50 ">
-                                <button type="button" class="w-100  btn dropdown-toggle border-dark-subtle"  style="background-color: #fff;" data-bs-toggle="dropdown" aria-expanded="true">
-                                색상
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">흰색</a></li>
-                                    <li><a class="dropdown-item" href="#">검정</a></li>
-                                    <li><a class="dropdown-item" href="#">빨강</a></li>
-                                    <li><a class="dropdown-item" href="#">노랑</a></li>
-                                    <li><a class="dropdown-item" href="#">초록</a></li>
-                                    <li><a class="dropdown-item" href="#">파랑</a></li>
-                                    <li><a class="dropdown-item" href="#">보라</a></li>
-                                </ul>
-                            </div>
-
-                            
-                            <div id="lostBrand" class="w-50 ">
-                                <input type="text" name="" placeholder="브랜드" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
-                            </div>
-                        </div>
-
-                        <div class="d-flex position-relative">
-                            <div class="blank w-75"></div>
-                            <div id="searchBtn" class=" d-flex justify-content-end w-25 " >
-                                <input type="submit" name="" value="검색" class="border rounded" style="background-color: aliceblue; color: #4365BC; height:50px;">
-                            </div>
-                        </div>
-                    </div>
+                    </div>      
                 </div>
             </section>
-
-
-            <!-- ======= Portfolio Section ======= -->
+            
+ 			<!-- ======= Portfolio Section ======= -->
             <section id="portfolio" class="portfolio sections-bg">
                 <div class="container " data-aos="fade-up">
 
                     <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                         data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
-                        <!-- <div>
-                            <ul class="portfolio-flters">
-                                <li data-filter="*" >All</li>
-                                <li data-filter=".filter-app">App</li>
-                                <li data-filter=".filter-product">Product</li>
-                                <li data-filter=".filter-branding">Branding</li>
-                                <li data-filter=".filter-books" class="filter-active">Books</li>
-                            </ul>
-                        </div> -->
+                        
+                        <div id="searchBox" class="align-self-center m-auto mb-5 p-3">
+                            <div id="categoryBox" class="portfolio-flters w-50 text-center">
 
-                        <div class="row gy-4 portfolio-container">
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/app-1.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/app-1.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">아이폰 14 찾아요</a></h4>
-                                        <p>2023.09.10</p><p>이*헌</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/product-1.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/product-1.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">애플워치 분실했어요ㅠㅠ</a></h4>
-                                        <p>2023.09.09</p><p>정*성</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
+	                            <ul class="portfolio-flters ">
+	                                <li data-filter=".filter-clothes" class="filter-active">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-easel" style="color:black"></i></div>
+	                                        <h4 class="title">의류</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-bag">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-handbag" style="color:black"></i></div>
+	                                        <h4 class="title">가방</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-wallet">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-wallet2" style="color:black"></i></div>
+	                                        <h4 class="title">지갑</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-phone">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-phone" style="color:black"></i></div>
+	                                        <h4 class="title">핸드폰</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-cateEtc">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-smartwatch" style="color:black"></i></div>
+	                                        <h4 class="title">그 외</h4></a>
+	                                    </div>
+	                                </li>
+	        
+	                                <li data-filter=".filter-bus">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-bus-front" style="color:black"></i></div>
+	                                        <h4 class="title">버스</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-subway">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-train-front" style="color:black"></i></div>
+	                                        <h4 class="title">지하철</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-taxi">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-taxi-front" style="color:black"></i></div>
+	                                        <h4 class="title">택시</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-air">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-airplane" style="color:black"></i></div>
+	                                        <h4 class="title">공항</h4></a>
+	                                    </div>
+	                                </li> 
+	                                <li data-filter=".filter-plcEtc">
+	                                    <div class="category-icon">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-building" style="color:black"></i></div>
+	                                        <h4 class="title">그 외</h4></a>
+	                                    </div>
+	                                </li>
+	                            </ul>
+                           	</div>
                             
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/branding-1.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/branding-1.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">화장품 파우치</a></h4>
-                                        <p>2023.09.09</p><p>채*연</p>
+                            <div id="searchContent" class="w-50 m-2 me-5">
+                                <div id="searchWrap" class="d-flex m-2 w-100 ">
+                                    <select name="lostSearchCondition" class="w-25 border-end border-dark-subtle rounded-start text-center" style="height: 40px;">
+                                        <option value="lost_title">제목</option>
+                                        <option value="lost_content">내용</option>
+                                    </select>
+                                    <div class="d-flex w-75">
+                                        <input type="text" name="" class="w-100 border border-dark-subtle rounded-end " style="height: 40px;">
                                     </div>
                                 </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/books-1.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/books-1.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
+                                
+                                <div id="lostDate" class="d-flex m-2 w-100" >
+                                    <div class="w-50">
+                                        <input type="date" name="lostDate"  class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
+                                    </div>
+                                    <div class="w-auto ms-2 me-2 d-flex align-items-center">
+                                        <h5 class="text-white " > ~ </h5>
+                                    </div>
+                                    <div class="w-50">
+                                        <input type="date" name="lostDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
                                     </div>
                                 </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/app-2.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/app-2.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
+            
+                                <div class="d-flex m-2 w-100 justify-content-between">
+                                        
+                                    <div id="lostCounty" class="btn-group w-100 ">
+                                        <button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; " data-bs-toggle="dropdown" aria-expanded="false">
+                                        시 / 도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" >서울특별시</a></li>
+                                            <li><a class="dropdown-item" >부산광역시</a></li>
+                                            <li><a class="dropdown-item" >대구광역시</a></li>
+                                            <li><a class="dropdown-item" >인천광역시</a></li>
+                                            <li><a class="dropdown-item" >광주광역시</a></li>
+                                            <li><a class="dropdown-item" >대전광역시</a></li>
+                                            <li><a class="dropdown-item" >울산광역시</a></li>
+                                            <li><a class="dropdown-item" >세종특별자치시</a></li>
+                                            <li><a class="dropdown-item" >경기도</a></li>
+                                            <li><a class="dropdown-item" >강원도</a></li>
+                                            <li><a class="dropdown-item" >충청북도</a></li>
+                                            <li><a class="dropdown-item" >충청남도</a></li>
+                                            <li><a class="dropdown-item" >전라북도</a></li>
+                                            <li><a class="dropdown-item" >전라남도</a></li>
+                                            <li><a class="dropdown-item" >경상북도</a></li>
+                                            <li><a class="dropdown-item" >경상남도</a></li>
+                                            <li><a class="dropdown-item" >제주특별자치도</a></li>
+                                        </ul>
+                                    </div>
+        
+                                    <!-- <div id="lost_city" class="btn-group me-3">
+                                        <button type="button" class="btn dropdown-toggle text-center"  style="background-color: #fff; width: 180px; height: 40px;" data-bs-toggle="dropdown" aria-expanded="false">
+                                            시 / 군 / 구&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">서울특별시</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="lost_village" class="btn-group">
+                                        <button type="button" class="btn dropdown-toggle text-center"  style="background-color: #fff; width: 180px; height: 40px;" data-bs-toggle="dropdown" aria-expanded="false">
+                                            읍 / 면 / 동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">서울특별시</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div> -->
+                                </div>
+            
+                                <div id="colorBrand" class="d-flex justify-content-between m-2 w-100 " >
+                                
+                                    <div class="btn-group me-2 w-50 ">
+                                        <button type="button" class="w-100  btn dropdown-toggle border-dark-subtle"  style="background-color: #fff;" data-bs-toggle="dropdown" aria-expanded="true">
+                                        색상
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">흰색</a></li>
+                                            <li><a class="dropdown-item" href="#">검정</a></li>
+                                            <li><a class="dropdown-item" href="#">빨강</a></li>
+                                            <li><a class="dropdown-item" href="#">노랑</a></li>
+                                            <li><a class="dropdown-item" href="#">초록</a></li>
+                                            <li><a class="dropdown-item" href="#">파랑</a></li>
+                                            <li><a class="dropdown-item" href="#">보라</a></li>
+                                        </ul>
+                                    </div>
+        
+                                    
+                                    <div id="lostBrand" class="w-50 ">
+                                        <input type="text" name="" placeholder="브랜드" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
                                     </div>
                                 </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/product-2.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/product-2.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
+        
+                                <div class="d-flex position-relative">
+                                    <div class="blank w-75"></div>
+                                    <div id="searchBtn" class=" d-flex justify-content-end w-25 " >
+                                        <input type="submit" name="" value="검색" class="border rounded" style="background-color: aliceblue; color: #4365BC; height:50px;">
                                     </div>
                                 </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/branding-2.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/branding-2.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/books-2.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/books-2.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/app-3.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/app-3.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/product-3.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/product-3.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/branding-3.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/branding-3.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                </div>
-                            </div><!-- End Portfolio Item -->
-
-                            <!-- <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-                                <div class="portfolio-wrap">
-                                    <a href="../resources/assets/img/fuploadFiles/books-3.jpg" data-gallery="portfolio-gallery-app"
-                                        class="glightbox"><img src="../resources/assets/img/fuploadFiles/books-3.jpg" class="img-fluid"
-                                            alt=""></a>
-                                    <div class="portfolio-info">
-                                        <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- End Portfolio Item -->
-                        </div><!-- End Portfolio Container -->
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    
+                    <div class="row gy-4 portfolio-container">
+
+                        <c:if test="${lList eq null}">
+			               	<div class="no-lost">
+			              	 	 	<span>${msg}</span>
+			               	</div>
+              			</c:if>
+
+						<c:forEach var="lostOne" items="${lList}">
+	                         <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+	                             <div class="portfolio-wrap">
+	                             	<c:if test="${!empty lostOne.lostFilerename }">
+		                             	<a href="../resources/assets/img/luploadFiles/${lostOne.lostFilerename}" data-gallery="portfolio-gallery-app"
+		                                     class="glightbox"><img src="../resources/assets/img/luploadFiles/${lostOne.lostFilerename} }" class="img-fluid"
+									</c:if>
+									<c:if test="${empty lostOne.lostFilerename }">
+										<a href="../resources/assets/img/noImage" data-gallery="portfolio-gallery-app"
+		                                     class="glightbox"><img src="../resources/assets/img/noImage}" class="img-fluid"
+									</c:if>
+	                                 
+	                                         alt=""></a>
+	                                 <div class="portfolio-info">
+	                                 	<c:url var="detailUrl" value="/lostBoard/detail.do">
+											<c:param name="lostNo" value="${lostOne.lostNo}"></c:param>
+										</c:url>
+	                                    <h4><a href="${detailUrl}" title="More Details">${lostOne.lostTitle}</a></h4>
+	                                    <p>${lostOne.lCreateDate}</p><p>${memberId}</p>
+	                                 </div>
+	                             </div>
+	                         </div>
+	                         <!-- End Portfolio Item -->
+                   		</c:forEach>
+                    </div>
+                    <!-- End Portfolio Container -->
+               </div>
+<!--            </div> -->
 
                 <div class="mt-5 d-flex justify-content-center">
                     <nav aria-label="Page navigation example r">
@@ -406,7 +305,7 @@
                         </ul>
                     </nav>
                 </div>
-            </section><!-- End Portfolio Section -->
+            </section>
         </main>
 
 
@@ -432,6 +331,26 @@
 
         <!-- JS파일경로-->
         <!-- <script src="./resources/js/lostBoard.js"></script> -->
+        
+        <script>
+        	function insertLostBoard(){
+        		location.href = "/lostBoard/insert.do"
+        	}
+        	
+        	
+    		document.querySelector("form").addEventListener("submit", function(event) {
+			    // 폼이 제출될 때 실행되는 함수
+	
+			    // 여기서 msg 변수를 가져와서 확인합니다.
+			  	var msg = "${msg}";
+	
+			    if (msg !== null && msg !== "") {
+			        alert(msg);
+	
+			    }
+			});
+
+        </script>
     </body>
 
 </html>

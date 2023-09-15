@@ -20,9 +20,26 @@ public class LostBoard {
 	private Date lUpdateDate;
 	private String lStateYN;
 	
+	public LostBoard() {}
 	
-	
-	
+	public LostBoard(String lostTitle, String lostContent, String lostWriter, String lostFilename,
+			String lostFilerename, String lostFilepath, String lostCategory, String lostLocation, String lostPlace,
+			Date lostDate, String lostColor, String lostBrand) {
+		super();
+		this.lostTitle = lostTitle;
+		this.lostContent = lostContent;
+		this.lostWriter = lostWriter;
+		this.lostFilename = lostFilename;
+		this.lostFilerename = lostFilerename;
+		this.lostFilepath = lostFilepath;
+		this.lostCategory = lostCategory;
+		this.lostLocation = lostLocation;
+		this.lostPlace = lostPlace;
+		this.lostDate = lostDate;
+		this.lostColor = lostColor;
+		this.lostBrand = lostBrand;
+	}
+
 	public int getLostNo() {
 		return lostNo;
 	}

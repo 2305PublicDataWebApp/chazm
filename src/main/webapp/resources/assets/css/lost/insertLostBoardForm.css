@@ -845,27 +845,6 @@ color : #fff;
     display: flex;
     flex-direction: column;
 }
-
-    .lost-title {
-        --background-color: #008d7d;
-        border : 1px solid #ccc;
-        border-radius: 10px;
-        width: 900px;
-        --width: auto;
-        height : 60px;
-        --margin-left: 5px;
-        font-size : 2em;
-        padding: 10px; 
-        --text-align: center;
-        display: flex;
-        align-items: center;
-        margin: 20px auto 0;
-    }
-    
-
-
-    
-    
     
 #mainPart1 {
     width : 1000px;
@@ -881,7 +860,7 @@ color : #fff;
 
     #picture {
         width : 80%;
-        height : 90%;
+        height : 95%;
         border : 1px solid #ccc;
         border-radius: 10px;
         position: relative;
@@ -999,50 +978,7 @@ transform : scale(1);
         width: 950px;
         margin: 10px auto;
     }
-        #hashtagContainer{    
-            min-width:400px;
-            max-width:1000px;
-            margin: 1em 0;
-            outline : none;
-        }
-    
-        .hashtag-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-    
-        .hashtag-box {
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin: 5px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            display: flex;
-            align-items: center; /* 내용을 세로 중앙 정렬 */
-        }
-    
-        .delete-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #007BFF; /* 삭제 버튼의 텍스트 색상을 파란색으로 지정 */
-            margin-left: 5px;
-        } 
-        .btn-wrap {
-            display: flex;
-            justify-content: flex-end
-            
-        } 
-        #updateBtn  {
-            width: 100px;
-            height: 45px;
-            margin-right: 15px;
-        }
-        #deleteBtn {
-            width: 100px;
-            height: 45px;
-            
-        }
+       
 /*////////////////////////////////////////////////////////////////*/
 
 
