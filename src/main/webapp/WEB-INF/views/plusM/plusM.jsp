@@ -88,34 +88,36 @@
                     <h2>찾음 모금함</h2>
                 </div>
                 <div>
-                    <div class="add-btn">
-                        <button><i class="bi bi-pencil-square"></i></button>
+                    <div class="add-btn" data-aos="fade-up" data-aos-delay="100">
+                        <button onclick="showInsertPlusMBoardForm()";><i class="bi bi-pencil-square"></i></button>
                     </div>
                 </div>
                 <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                     data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
                     <div class="row row-gy-5 gy-4 portfolio-container">
-
-                        <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-                            <div class="portfolio-wrap">
-                                <a href="../plusM/plusMdetail.html">
-                                    <img src="../resources/assets/img/children1.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <div>
-                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">App 1</a></h4>
-                                        <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    </div>
-                                    <div class="graphBar">
-                                        <span class="donationBar" style="width:8%;"></span>
-                                    </div>
-                                    <div class="donationBottom">
-                                        <strong>8%</strong>
-                                        <strong>414,500P</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+						<c:forEach items="${pMList }" var="plusMBoard">
+	                        <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+	                            <div class="portfolio-wrap">
+	                                <a href="../plusMBoard/detail.do?plusMNo=${plusMBoard.plusMNo }">
+	                                    <img src="${plusMBoard.plusMFilepath }" class="img-fluid"
+	                                        alt=""></a>
+	                                <div class="portfolio-info">
+	                                    <div>
+	                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">${plusMBoard.plusMTitle }</a></h4>
+	                                        <p>${plusMBoard.plusMDntPlace }</p>
+	                                    </div>
+	                                    <div class="graphBar">
+	                                        <span class="donationBar" style="width:${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }%;"></span>
+	                                    </div>
+	                                    <div class="donationBottom">
+	                                        <strong>${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }&#37;</strong>
+	                                        <strong>${plusMBoard.plusMCurAmount }</strong>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div><!-- End Portfolio Item -->
+							
+						</c:forEach>
 
                         <div class="col-xl-4 col-md-6 portfolio-item filter-product">
                             <div class="portfolio-wrap">
@@ -218,6 +220,28 @@
                         </div>
 
                     </div><!-- End Portfolio Container -->
+                    <div class="mt-5 d-flex justify-content-center">
+		                    <nav aria-label="Page navigation example r">
+		                        <ul class="pagination">
+		                            <c:url var="prevUrl" value="/plusMBoard/list.do">
+		                            	<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
+		                            </c:url>
+		                            <li class="page-item">
+			                            	<a class="page-link" href="${prevUrl }"><i class="bi bi-chevron-left"></i></a>
+			                        </li>
+		                            <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+		                            	<c:url var="pageUrl" value="/plusMBoard/list.do">
+		                            		<c:param name="page" value="${p }"></c:param>
+		                            	</c:url>
+			                            <li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
+		                            </c:forEach>
+		                            <c:url var="nextUrl" value="/plusMBoard/list.do">
+		                            	<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+		                            </c:url>
+		                            <li class="page-item"><a class="page-link" href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
+		                        </ul>
+		                    </nav>
+		                </div>
                 </div>
                 
             </div>
@@ -290,6 +314,32 @@
 
     <!-- Template Main JS File -->
     <script src="../resources/assets/js/main.js"></script>
+    
+    <!-- 페이지 스크립트 -->
+    <script type="text/javascript">
+    	function showInsertPlusMBoardForm() {
+    		location.href = "/plusMBoard/insert.do";
+    	}
+    	window.addEventListener('load', function() {
+    	    adjustPortfolioItemHeights();
+    	});
+
+    	function adjustPortfolioItemHeights() {
+    	    var portfolioItems = document.querySelectorAll('.portfolio-item');
+    	    var maxHeight = 0;
+
+    	    portfolioItems.forEach(function(item) {
+    	        var height = item.clientHeight;
+    	        if (height > maxHeight) {
+    	            maxHeight = height;
+    	        }
+    	    });
+
+    	    portfolioItems.forEach(function(item) {
+    	        item.style.height = maxHeight + 'px';
+    	    });
+    	}
+    </script>
 </body>
 
 </html>

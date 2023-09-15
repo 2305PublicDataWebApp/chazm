@@ -877,6 +877,9 @@ section button {
   transition: 0.3s;
   position: relative;
   z-index: 1;
+  max-height: 236px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .portfolio .portfolio-wrap .portfolio-info {

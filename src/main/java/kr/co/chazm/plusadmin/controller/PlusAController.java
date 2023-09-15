@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,13 +22,13 @@ public class PlusAController {
 	@Autowired
 	private PlusAService plusAService;
 	
-	@RequestMapping(value="/plusA/insert.do", method=RequestMethod.GET)
+	@RequestMapping(value="/plusABoard/insert.do", method=RequestMethod.GET)
 	public ModelAndView showInsertPlusAForm(ModelAndView mv) {
 		mv.setViewName("plusA/plusAinsert");
 		return mv;
 	}
 	
-	@RequestMapping(value="/plusA/insert.do",  produces="text/html;charset=UTF-8;", method=RequestMethod.POST)
+	@RequestMapping(value="/plusABoard/insert.do",  produces="text/html;charset=UTF-8;", method=RequestMethod.POST)
 	public @ResponseBody String insertPlusABoard(
 			Model model
 			, @ModelAttribute PlusABoard plusABoard
@@ -37,7 +36,7 @@ public class PlusAController {
 		try {
 			int result = plusAService.insertPlusABoard(plusABoard);
 			if(result > 0) {
-				return "<script>alert('게시글이 등록되었습니다.'); location.href='/plusA/list.do';</script>";
+				return "<script>alert('게시글이 등록되었습니다.'); location.href='/plusABoard/list.do';</script>";
 			}else {
 				return "<script>alert('게시글 등록 중 오류가 발생하였습니다.'); history.back();</script>";
 			}
@@ -46,7 +45,7 @@ public class PlusAController {
 		}
 	}
 	
-	@RequestMapping(value="/plusA/update.do", method=RequestMethod.GET)
+	@RequestMapping(value="/plusABoard/update.do", method=RequestMethod.GET)
 	public ModelAndView showUpdatePlusAForm(
 			ModelAndView mv
 			, @RequestParam("plusANo") int plusANo
@@ -57,7 +56,7 @@ public class PlusAController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/plusA/update.do", produces="text/html;charset=UTF-8;", method=RequestMethod.POST)
+	@RequestMapping(value="/plusABoard/update.do", produces="text/html;charset=UTF-8;", method=RequestMethod.POST)
 	public @ResponseBody String updatePlusABoard(
 			@ModelAttribute PlusABoard plusABoard
 			, Model model
@@ -65,7 +64,7 @@ public class PlusAController {
 		try {
 			int result = plusAService.updatePlusABoard(plusABoard);
 			if(result > 0) {
-				return "<script>alert('게시글이 정상적으로 수정되었습니다.'); location.href='/plusA/list.do';</script>";
+				return "<script>alert('게시글이 정상적으로 수정되었습니다.'); location.href='/plusABoard/list.do';</script>";
 			}else {
 				return "<script>alert('게시글 수정을 실패하였습니다.'); history.back();</script>";
 			}
@@ -74,14 +73,14 @@ public class PlusAController {
 		}
 	}
 	
-	@RequestMapping(value="/plusA/delete.do", produces="text/html;charset=UTF-8;", method=RequestMethod.GET)
+	@RequestMapping(value="/plusABoard/delete.do", produces="text/html;charset=UTF-8;", method=RequestMethod.GET)
 	public @ResponseBody String deletePlusABoard(
 			@RequestParam("plusANo") int plusANo
 			) {
 		try {
 			int result = plusAService.deletePlusABoard(plusANo);
 			if(result > 0) {
-				return "<script>alert('게시글이 삭제되었습니다.'); location.href='/plusA/list.do';</script>";
+				return "<script>alert('게시글이 삭제되었습니다.'); location.href='/plusABoard/list.do';</script>";
 			}else {
 				return "<script>alert('게시글이 삭제를 실패하였습니다.'); history.back();</script>";
 			}
@@ -90,7 +89,7 @@ public class PlusAController {
 		}
 	}
 	
-	@RequestMapping(value="/plusA/list.do", method=RequestMethod.GET)
+	@RequestMapping(value="/plusABoard/list.do", method=RequestMethod.GET)
 	public ModelAndView showPlusABoardList(
 			ModelAndView mv
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
@@ -101,7 +100,6 @@ public class PlusAController {
 		mv.addObject("pInfo", pInfo);
 		mv.addObject("pAList", pAList);
 		mv.setViewName("plusA/plusA");
-		System.out.println(pInfo.toString());
 		return mv;
 	}
 
@@ -116,6 +114,12 @@ public class PlusAController {
 			naviTotalCount = totalCount / recordCountPerPage + 1;
 		}else {
 			naviTotalCount = totalCount / recordCountPerPage;
+		}
+		if(currentPage < 1) {
+			currentPage = 1;
+		}
+		if(currentPage > naviTotalCount) {
+			currentPage = naviTotalCount;
 		}
 		startNavi = ((currentPage-1)/naviCountPerPage) * naviCountPerPage + 1;
 		endNavi = startNavi + naviCountPerPage - 1;

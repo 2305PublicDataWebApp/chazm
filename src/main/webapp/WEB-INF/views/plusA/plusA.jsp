@@ -219,19 +219,19 @@
                            <div class="mt-5 d-flex justify-content-center">
 		                    <nav aria-label="Page navigation example r">
 		                        <ul class="pagination">
-		                            <c:url var="prevUrl" value="/plusA/list.do">
+		                            <c:url var="prevUrl" value="/plusABoard/list.do">
 		                            	<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
 		                            </c:url>
 		                            <li class="page-item">
 			                            	<a class="page-link" href="${prevUrl }"><i class="bi bi-chevron-left"></i></a>
 			                        </li>
 		                            <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
-		                            	<c:url var="pageUrl" value="/plusA/list.do">
+		                            	<c:url var="pageUrl" value="/plusABoard/list.do">
 		                            		<c:param name="page" value="${p }"></c:param>
 		                            	</c:url>
 			                            <li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
 		                            </c:forEach>
-		                            <c:url var="nextUrl" value="/plusA/list.do">
+		                            <c:url var="nextUrl" value="/plusABoard/list.do">
 		                            	<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
 		                            </c:url>
 		                            <li class="page-item"><a class="page-link" href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
@@ -267,7 +267,7 @@
         <script src="../resources/assets/js/main.js"></script>
         <script type="text/javascript">
         	function showInsertForm() {
-        		location.href="/plusA/insert.do";
+        		location.href="/plusABoard/insert.do";
         	}
         	function showUpdateForm() {
         		let checked = document.getElementsByName("checkBoard");
@@ -286,7 +286,7 @@
 	        				checkedNo = checked[i].value;
 	        			}
 	        		} 					
-	        		location.href = "/plusA/update.do?plusANo=" + checkedNo;
+	        		location.href = "/plusABoard/update.do?plusANo=" + checkedNo;
  				}       			
         	}
         	function deletePlusABoard() {
@@ -307,7 +307,7 @@
 	        			}
 	        		}
 	        		if(confirm("정말 삭제하시겠습니까?")){
-		        		location.href = "/plusA/delete.do?plusANo=" + checkedNo;	        			
+		        		location.href = "/plusABoard/delete.do?plusANo=" + checkedNo;	        			
 	        		}
  				}
  				

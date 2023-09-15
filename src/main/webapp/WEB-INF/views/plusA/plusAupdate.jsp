@@ -71,7 +71,7 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
-                        <form action="/plusA/update.do" method="POST" role="form" class="form text-left">
+                        <form action="/plusABoard/update.do" method="POST" role="form" class="form text-left">
                         	<input type="hidden" name="plusANo" value="${plusABoard.plusANo }">
                             <div class="form-group col-md-12">
                                 <label for="plusATitle"><i class="bi bi-card-heading"></i></label>

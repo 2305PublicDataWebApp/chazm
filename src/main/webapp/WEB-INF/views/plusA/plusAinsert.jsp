@@ -69,7 +69,7 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
-                        <form action="/plusA/insert.do" method="POST" role="form" class="form text-left">
+                        <form action="/plusABoard/insert.do" method="POST" role="form" class="form text-left">
                             <div class="form-group col-md-12">
                                 <label for="plusATitle"><i class="bi bi-card-heading"></i></label>
                                 <input type="text" class="form-control" name="plusATitle" id="plusATitle" placeholder="제목을 입력하세요." required>

@@ -88,5 +88,5 @@ public class PageInfo {
 				+ ", naviCountPerPage=" + naviCountPerPage + ", naviTotalCount=" + naviTotalCount + ", startNavi="
 				+ startNavi + ", endNavi=" + endNavi + ", totalCount=" + totalCount + "]";
 	}
-	
+
 }

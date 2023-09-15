@@ -1354,7 +1354,25 @@ section button {
   line-height: 3;
 }
 
-.tableArea .writeBtn {
+input[type="radio"] {
+	width: 15px;
+    height: 15px;
+    /* cursor: none; */
+    appearance: none;
+    border: 1px solid #4365bc8c;
+    transition: 0.7s ease;
+    outline: none;
+    vertical-align: middle;
+}
+input[type="radio"]:checked {
+    background: #4365bc8c;
+    border: none;
+    transition: 0.7s ease;
+    outline: none;
+}
+
+
+.tableArea .btn {
   background: var(--color-primary);
   border: 0;
   padding: 14px 45px;
@@ -1371,7 +1389,7 @@ section button {
   margin-top : 30px;
 }
 
-.tableArea .writeBtn:hover {
+.tableArea .btn:hover {
   background-color: #4365bc83;
 }
 

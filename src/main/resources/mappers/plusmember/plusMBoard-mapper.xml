@@ -3,5 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PlusMBoardMapper">
-
+	<resultMap type="PlusMBoard" id="plusMBoardResultMap">
+		<id 	property="plusMNo" 			column="PLUS_M_NO"/>
+		<result property="plusMTitle" 		column="PLUS_M_TITLE"/>
+		<result property="plusMContent" 	column="PLUS_M_CONTENT"/>
+		<result property="plusMWriter" 		column="PLUS_M_WRITER"/>
+		<result property="plusMDntPlace" 	column="PLUS_M_DNT_PLACE"/>
+		<result property="plusMGoalAmount" 	column="PLUS_M_GOAL_AMOUNT"/> 
+		<result property="plusMCurAmount" 	column="PLUS_M_CUR_AMOUNT"/>
+		<result property="plusMFilename" 	column="PLUS_M_FILENAME"/>
+		<result property="plusMFilerename" 	column="PLUS_M_FILERENAME"/>
+		<result property="plusMFilepath" 	column="PLUS_M_FILEPATH"/>
+		<result property="plusMStartDate" 	column="PLUS_M_START_DATE"/>
+		<result property="plusMEndDate" 	column="PLUS_M_END_DATE"/>
+		<result property="plusMCreateDate" 	column="PLUS_M_CREATE_DATE"/>
+		<result property="plusMEndYn" 		column="PLUS_M_END_YN"/>
+	</resultMap>
+	<insert id="insertPlusMBoard">
+		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
+	</insert>
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'Y'
+	</select>
+	<select id="selectPlusMBoardList" resultMap="plusMBoardResultMap">
+		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'Y'
+	</select>
 </mapper>
