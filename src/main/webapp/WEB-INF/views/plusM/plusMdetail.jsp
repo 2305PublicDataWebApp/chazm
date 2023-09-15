@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -68,14 +69,14 @@
                         <article class="blog-details">
 
                             <h2 class="title">
-                                지역 아동센터의 급식 위기, 결식아동의 위기입니다
+                                ${plusMBoard.plusMTitle }
                             </h2>
 
                             <div class="meta-top">
                                 <ul>
-                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>관리자</li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>${plusMBoard.plusMWriter }</li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time
-                                            datetime="2020-01-01">Jan 1, 2022</time>
+                                            datetime="2020-01-01">${plusMBoard.plusMCreateDate }</time>
                                     </li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>12 Comments
                                     </li>
@@ -83,36 +84,12 @@
                             </div><!-- End meta top -->
 
                             <div class="content">
-                                <img src="../resources/assets/img/children2.jpg" alt="" style="width:70%;">
-                                <h3>지역아동센터를 다니면서 좋아진 형제의 영양상태</h3>
-                                <br>
-                                <p>
-                                    현욱, 현수 형제는 같은 지역아동센터에 다니고 있습니다. 2살 터울의 형제는 사이가 각별해 방과후 항상 손을 잡고 지역아동센터에 오곤 합니다.
-                                    오랜 지병을 앓고 있는 엄마, 돈을 버시느라 일주일에 한번 집에 오는 아빠로 인해 현욱, 현수 형제는 제대로 돌봐줄 보호자가 없는 상황입니다.
-                                    형제는 또래 아이들에 비해 마르고 키가 작아 제 나이보다 어리게 보입니다. 처음 지역아동센터에 왔을 때 형제의 영양상태는 심각한 상황이었습니다.
-                                    잘 먹지 못한데다 그마저 인스턴트 음식으로 떼우기 일쑤였고 편식도 심했습니다.
-                                    지역아동센터에서 제공하는 밥을 먹으면서 아이들은 살도 오르고 편식도 많이 줄어든 상황입니다.
-                                    가정에서 챙기기 힘든 한 끼를 선생님의 관심과 지도하에 먹으며 좋아진 탓입니다.
-                                </p>
-                                <br>
-                                <h3>치솟는 물가, 지역아동센터 급식에 찾아온 위기</h3>
-                                <p>
-                                    지역아동센터는 한부모가정, 기초생활수급자, 조손가정 등의 아이들이 대부분이고 그렇기 때문에 센터에서 아이들에게 지원해주는 간식이나 식사가 무엇보다
-                                    중요합니다.
-                                    돌아서면 배고플 나이의 아이들. 하지만 최근 치솟은 물가상승과 인건비, 공공요금 등이 차례차례 인상되면서 운영난을 겪는 센터가 많이 있습니다. 비싼
-                                    식재료 값에 전보다 현저히 부실해진 식단을 보며 센터장님의 고민도 늘어갑니다. 가끔씩 제공했던 아이들이 좋아하는 특식은 이제 꿈도 꾸지 못합니다.
-                                    돌아서면 배고플 나이의 아이들이 맛있는 거 먹고 싶다고 하소연 할 때면 그저 미안할 뿐입니다.
-                                </p>
-                                <br>
-                                <h3>아이들에게 집만큼 소중한 지역아동센터의 끼니를 걱정해 주세요~</h3>
-                                <p>
-                                    지역아동센터 아이들은 하교 후 대부분의 시간을 지역아동센터에서 보냅니다. 그렇기 때문에 아이들에게는 집만큼 소중한 공간입니다.
-                                    아이들은 지역아동센터에서 학습과 놀이, 끼니를 모두 해결하고 있습니다.
-                                    지역아동센터의 위기는 이곳을 이용하는 아이들의 위기이기도 합니다.
-                                    최근 급격한 물가상승과 인건비로 폐업을 고민하는 지역아동센터가 늘고 있다고 합니다. 우리가 생각하는 것 이상으로 결식아동은 여전히 많이 있습니다. 이
-                                    아이들을 보호하고 따뜻한 밥을 챙겨주는 지역아동센터. 이곳에서만큼은 아이들이 배고프지 않고 맛있는 음식을 먹으며 건강한 성장을 할 수 있길 바라며 이번
-                                    모금함을 개설했습니다. 아이들의 끼니를 걱정하는 마음이 곧 아이들의 환한 미소로 돌아옵니다.
-                                </p>
+                            	<div>
+	                            	<img src="${plusMBoard.plusMFilepath }" alt="${plusMBoard.plusMFilename }" style="width:70%;">                            	
+                            	</div>
+                            	<div style="margin-top:30px;">
+	                                ${plusMBoard.plusMContent }                            	
+                            	</div>
                             </div><!-- End post content -->
 
                         </article><!-- End blog post -->
@@ -275,15 +252,16 @@
                             </div>
                             <div class="sidebar-item donation-info">
                                 <div class="cur-val">
-                                    <strong>8%</strong>
+                                	<fmt:parseNumber var="percent" value="${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }" integerOnly="true" />
+                                    <strong>${percent }%</strong>
                                 </div>
                                 <div class="graphBar">
-                                    <span class="donationBar" style="width:8%;"></span>
+                                    <span class="donationBar" style="width:${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }%;"></span>
                                 </div>
                                 <div class="donationBottom row">
-                                    <span>2023/09/04 ~ 2023/11/23</span>
-                                    <p>3,456P</p>
-                                    <span>목표금액 200,000P</span>
+                                    <span>${plusMBoard.plusMStartDate } ~ ${plusMBoard.plusMEndDate }</span>
+                                    <p>${plusMBoard.plusMCurAmount }P</p>
+                                    <span>목표금액 ${plusMBoard.plusMGoalAmount }P</span>
                                 </div>
                                 <div class="donation-btn">
                                     <button class="btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#donationModal">포인트
@@ -291,7 +269,7 @@
                                 </div>
                                 <div class="dnt-place">
                                     <span>모금 단체</span>
-                                    <p>KH 아동복지회</p>
+                                    <p>${plusMBoard.plusMDntPlace }</p>
                                 </div>
                                 <div class="row admin-btn-area">
                                     <button class="col admin-btn">수정</button>

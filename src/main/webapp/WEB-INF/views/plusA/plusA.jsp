@@ -195,93 +195,53 @@
                                 <th>제목</th>
                                 <th>등록자</th>
                                 <th>등록일</th>
-                                <th><input class="form-check-input" type="checkbox" name="" id=""></th>
+                                <th> </th>
                             </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#plusA-content-5">
-                                        KH노인복지회에 00벌 기부
-                                    </button>
-                                </td>
-                                <td>관리자</td>
-                                <td>2023/09/09</td>
-                                <td><input class="form-check-input" type="checkbox" name="" id=""></td>
-                            </tr>
-                            <tr id="plusA-content-5" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-up">
-                                <td colspan="4" class="accordion-body">
-                                    KH노인복지회에 00벌 기부하였습니다.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#plusA-content-4">
-                                        KH노인복지회에 00벌 기부
-                                    </button>
-                                </td>
-                                <td>관리자</td>
-                                <td>2023/09/09</td>
-                                <td><input class="form-check-input" type="checkbox" name="" id=""></td>
-                            </tr>
-                            <tr id="plusA-content-4" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-in" data-aos-delay="100">
-                                <td colspan="4" class="accordion-body">
-                                    KH노인복지회에 00벌 기부하였습니다.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#plusA-content-3">
-                                        KH노인복지회에 00벌 기부
-                                    </button>
-                                </td>
-                                <td>관리자</td>
-                                <td>2023/09/09</td>
-                                <td><input class="form-check-input" type="checkbox" name="" id=""></td>
-                            </tr>
-                            <tr id="plusA-content-3" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-in" data-aos-delay="100">
-                                <td colspan="4" class="accordion-body">
-                                    KH노인복지회에 00벌 기부하였습니다.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#plusA-content-2">
-                                        KH노인복지회에 00벌 기부
-                                    </button>
-                                </td>
-                                <td>관리자</td>
-                                <td>2023/09/09</td>
-                                <td><input class="form-check-input" type="checkbox" name="" id=""></td>
-                            </tr>
-                            <tr id="plusA-content-2" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-in" data-aos-delay="100">
-                                <td colspan="4" class="accordion-body">
-                                    KH노인복지회에 00벌 기부하였습니다.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#plusA-content-1">
-                                        KH노인복지회에 00벌 기부
-                                    </button>
-                                </td>
-                                <td>관리자</td>
-                                <td>2023/09/09</td>
-                                <td><input class="form-check-input" type="checkbox" name="" id=""></td>
-                            </tr>
-                            <tr id="plusA-content-1" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-in" data-aos-delay="100">
-                                <td colspan="4" class="accordion-body">
-                                    KH노인복지회에 00벌 기부하였습니다.
-                                </td>
-                            </tr>
+                            <c:forEach items="${pAList }" var="plusABoard">
+	                            <tr>
+	                                <td>${plusABoard.plusANo }</td>
+	                                <td>
+	                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#plusA-content-${plusABoard.plusANo }">
+	                                        ${plusABoard.plusATitle }
+	                                    </button>
+	                                </td>
+	                                <td>${plusABoard.plusAWriter }</td>
+	                                <td>${plusABoard.plusACreateDate }</td>
+	                                <td><input class="form-check-input" type="radio" name="checkBoard" id="" value=${plusABoard.plusANo }></td>
+	                            </tr>
+	                            <tr id="plusA-content-${plusABoard.plusANo }" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-up">
+	                                <td colspan="4" class="accordion-body">
+	                                    ${plusABoard.plusAContent }
+	                                </td>
+	                            </tr>
+                            </c:forEach>
                         </table>
+                           <div class="mt-5 d-flex justify-content-center">
+		                    <nav aria-label="Page navigation example r">
+		                        <ul class="pagination">
+		                            <c:url var="prevUrl" value="/plusABoard/list.do">
+		                            	<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
+		                            </c:url>
+		                            <li class="page-item">
+			                            	<a class="page-link" href="${prevUrl }"><i class="bi bi-chevron-left"></i></a>
+			                        </li>
+		                            <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+		                            	<c:url var="pageUrl" value="/plusABoard/list.do">
+		                            		<c:param name="page" value="${p }"></c:param>
+		                            	</c:url>
+			                            <li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
+		                            </c:forEach>
+		                            <c:url var="nextUrl" value="/plusABoard/list.do">
+		                            	<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+		                            </c:url>
+		                            <li class="page-item"><a class="page-link" href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
+		                        </ul>
+		                    </nav>
+		                </div>
                         <div class="btnArea justify-content-center text-center">
-                            <button class="writeBtn btn">글쓰기</button>
-                            <button class="modifyBtn btn">수정</button>
-                            <button class="deleteBtn btn">삭제</button>
+                            <button class="writeBtn btn" onclick="showInsertForm();">글쓰기</button>
+                            <button class="modifyBtn btn" onclick="showUpdateForm();">수정</button>
+                            <button class="deleteBtn btn" onclick="deletePlusABoard();">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -305,6 +265,67 @@
 
         <!-- Template Main JS File -->
         <script src="../resources/assets/js/main.js"></script>
+        <script type="text/javascript">
+        	function showInsertForm() {
+        		location.href="/plusABoard/insert.do";
+        	}
+        	function showUpdateForm() {
+        		let checked = document.getElementsByName("checkBoard");
+        		let checkedNo;
+        		let isChecked = false;
+       			for(let i = 0; i < checked.length; i++){
+       				if(checked[i].checked){
+       					isChecked = true;
+       				}
+       			}
+ 				if(!isChecked) {
+ 					alert("수정할 글을 선택해주세요.");
+ 				}else {
+	        		for(let i = 0; i < checked.length; i++){
+	        			if(checked[i].checked){
+	        				checkedNo = checked[i].value;
+	        			}
+	        		} 					
+	        		location.href = "/plusABoard/update.do?plusANo=" + checkedNo;
+ 				}       			
+        	}
+        	function deletePlusABoard() {
+        		let checked = document.getElementsByName("checkBoard");
+        		let checkedNo;
+        		let isChecked = false;
+       			for(let i = 0; i < checked.length; i++){
+       				if(checked[i].checked){
+       					isChecked = true;
+       				}
+       			}
+ 				if(!isChecked) {
+ 					alert("삭제할 글을 선택해주세요.");
+ 				}else {
+	        		for(let i = 0; i < checked.length; i++){
+	        			if(checked[i].checked){
+	        				checkedNo = checked[i].value;
+	        			}
+	        		}
+	        		if(confirm("정말 삭제하시겠습니까?")){
+		        		location.href = "/plusABoard/delete.do?plusANo=" + checkedNo;	        			
+	        		}
+ 				}
+ 				
+        	}
+        	window.addEventListener('load', function() {
+                var scrollPosition = sessionStorage.getItem('scrollPosition');
+                if (scrollPosition !== null) {
+                    window.scrollTo(0, parseInt(scrollPosition));
+                    sessionStorage.removeItem('scrollPosition'); // 스크롤 위치 정보를 삭제합니다.
+                }
+            });
+
+            // 페이지 이동할 때 스크롤 위치 저장
+            window.addEventListener('beforeunload', function() {
+                var currentScrollPosition = window.scrollY;
+                sessionStorage.setItem('scrollPosition', currentScrollPosition);
+            });
+        </script>
     </body>
 
 </html>
