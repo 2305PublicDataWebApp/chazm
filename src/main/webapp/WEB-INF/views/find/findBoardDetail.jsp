@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h2 class="title">
-                                        시계 보관 중입니다. 
+                                        ${findBoard.findTitle } 
                                     </h2>
                                     <div class="sidebar-item like">
                                         <button class="heart-button">
@@ -82,8 +82,8 @@
 
                                 <div class="meta-top">
                                     <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>작성자</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time datetime="2020-01-01">Jan 1, 2022</time>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>${findBoard.findWriter }</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time datetime="2020-01-01">${findBoard.fCreateDate }</time>
                                         </li>
                                         <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>12 Comments</li>
                                     </ul>
@@ -91,7 +91,7 @@
 
                                 <div class="content">
                                     <div class="content-img">
-                                        <img src="../resources/assets/img/fuploadFiles/product-1.jpg">
+                                         <img src="../resources/fuploadFiles/${findBoard.findFilerename }">	
                                     </div>
                                     <div class="infoWrap">
                                         <div class="d-flex justify-content-start">
@@ -100,19 +100,24 @@
                                                     <div class="icon"> <img src="../resources/assets/img/wallet.png"
                                                         style="width : 40px;
                                                         height : 40px;"></div>
-                                                    <h5 class="icon-title">지갑</h5>
+                                                    <h5 class="icon-title">${findBoard.findCategory }</h5>
                                                 </div>
                                                 <div class="filter-active category_icon">
                                                     <div class="icon"><img src="../resources/assets/img/taxi.png"
                                                         style="width : 40px;
                                                         height : 40px;"></div>
-                                                    <h5 class="icon-title">택시</h5>
+                                                    <h5 class="icon-title">${findBoard.findPlace }</h5>
                                                 </div>
                                             </div>
                                             <div class="find-info">
                                                 <ul class="find-info">
-                                                    <li><p class="find01">색상</p><p class="find02">빨간색</p></li>
-                                                    <li><p class="find01">브랜드</p><p class="find02">카시오</p></li>
+                                                    <li><p class="find01">색상</p><p class="find02">${findBoard.findColor }</p></li>
+                                                    <c:if test="${findBoard.findBrand ne null}">
+	                                                    <li><p class="find01">브랜드</p><p class="find02">${findBoard.findBrand }</p></li>
+                                                    </c:if>
+                                                    <c:if test="${findBoard.findBrand eq null}">
+	                                                    <li><p class="find01">브랜드</p><p class="find02">X</p></li>
+                                                    </c:if>
                                                 </ul>
                                             </div>
                                         </div>
@@ -121,11 +126,14 @@
                                         </div>
                                         <div class="find-info">
                                             <ul class="find-info">
-                                                <li><p class="find01">보관 장소</p><p class="find02">개인택시</p></li>
-                                                <li><p class="find01">습득일</p><p class="find02">2023-09-11</p></li>
-                                                <li><p class="find01">유실물 상태</p><p class="find02">보관중</p></li>
-                                                <li></li>
-                                                <li></li>
+                                                <li><p class="find01">보관 장소</p><p class="find02">${findBoard.getPlace }</p></li>
+                                                <li><p class="find01">습득일자</p><p class="find02">${findBoard.findDate }</p></li>
+	                                                <li><p class="find01">유실물 상태</p><p class="find02">보관중</p></li>
+<%--                                                 <c:if test="${findBoard.fStateYn == 'Y'}"}> --%>
+<%--                                                 </c:if> --%>
+<%--                                                 <c:if test="${findBoard.fStateYn == 'N'}"> --%>
+<!-- 	                                                <li><p class="find01">유실물 상태</p><p class="find02">인계완료</p></li> -->
+<%--                                                 </c:if> --%>
                                             </ul>
                                         </div>
                                         <!-- <div id="find_location" style="background-color: blue; width:100%; height:50px;">
@@ -147,8 +155,8 @@
                                         <button type="button" class="btn" style="background-color: gold; color:#fff;">인계완료</button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn" style="background-color: #4365BC; color:#fff">수정하기</button>
-                                        <button type="button" class="btn" style="background-color: #818181; color:#fff">삭제하기</button>
+                                        <button type="button" class="btn" style="background-color: #4365BC; color:#fff" onclick="showUpdateFindBoardForm();">수정하기</button>
+                                        <button type="button" class="btn" style="background-color: #818181; color:#fff" onclick="checkDelete();">삭제하기</button>
                                     </div>
                                 </div>
                                 <!-- 댓글창 -->
@@ -325,6 +333,18 @@
 
         <!-- Template Main JS File -->
         <script src="../resources/assets/js/main.js"></script>
+        <script>
+        	function showUpdateFindBoardForm() {
+        		const findNo = '${findBoard.findNo}';
+        		location.href = "/findBoard/update.do?findNo=" + findNo;
+        	}
+	        function checkDelete() {
+				const findNo = '${findBoard.findNo}';
+				if(confirm("삭제하시겠습니까?")){
+					location.href = "/findBoard/delete.do?findNo=" + findNo;
+				}
+			}
+        </script>
     </body>
 
 </html>
