@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -103,14 +105,15 @@
 	                                        alt=""></a>
 	                                <div class="portfolio-info">
 	                                    <div>
-	                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">${plusMBoard.plusMTitle }</a></h4>
+	                                        <h4><a href="../plusMBoard/plusMdetail.html" title="More Details">${plusMBoard.plusMTitle }</a></h4>
 	                                        <p>${plusMBoard.plusMDntPlace }</p>
 	                                    </div>
 	                                    <div class="graphBar">
 	                                        <span class="donationBar" style="width:${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }%;"></span>
 	                                    </div>
 	                                    <div class="donationBottom">
-	                                        <strong>${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }&#37;</strong>
+	                                    	<fmt:parseNumber var="percent" value="${(plusMBoard.plusMCurAmount / plusMBoard.plusMGoalAmount) * 100 }" integerOnly="true" />
+	                                        <strong>${percent}%</strong>
 	                                        <strong>${plusMBoard.plusMCurAmount }</strong>
 	                                    </div>
 	                                </div>
@@ -121,11 +124,11 @@
 
                         <div class="col-xl-4 col-md-6 portfolio-item filter-product">
                             <div class="portfolio-wrap">
-                                <a href="../plusM/plusMdetail.html"><img src="../resources/assets/img/children2.jpg" class="img-fluid"
+                                <a href="../plusMBoard/plusMdetail.html"><img src="../resources/assets/img/children2.jpg" class="img-fluid"
                                         alt=""></a>
                                 <div class="portfolio-info">
                                     <div>
-                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">App 1</a></h4>
+                                        <h4><a href="../plusMBoard/plusMdetail.html" title="More Details">App 1</a></h4>
                                         <p>Lorem ipsum, dolor sit amet consectetur</p>
                                     </div>
                                     <div class="graphBar">
@@ -141,11 +144,11 @@
 
                         <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
                             <div class="portfolio-wrap">
-                                <a href="../plusM/plusMdetail.html"><img src="../resources/assets/img/plusM1.jpg" class="img-fluid"
+                                <a href="../plusMBoard/plusMdetail.html"><img src="../resources/assets/img/plusM1.jpg" class="img-fluid"
                                         alt=""></a>
                                 <div class="portfolio-info">
                                     <div>
-                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">App 1</a></h4>
+                                        <h4><a href="../plusMBoard/plusMdetail.html" title="More Details">App 1</a></h4>
                                         <p>Lorem ipsum, dolor sit amet consectetur</p>
                                     </div>
                                     <div class="graphBar">
@@ -161,11 +164,11 @@
 
                         <div class="col-xl-4 col-md-6 portfolio-item filter-books">
                             <div class="portfolio-wrap">
-                                <a href="../plusM/plusMdetail.html"><img src="../resources/assets/img/plusM2.jpg" class="img-fluid"
+                                <a href="../plusMBoard/plusMdetail.html"><img src="../resources/assets/img/plusM2.jpg" class="img-fluid"
                                         alt=""></a>
                                 <div class="portfolio-info">
                                     <div>
-                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">App 1</a></h4>
+                                        <h4><a href="../plusMBoard/plusMdetail.html" title="More Details">App 1</a></h4>
                                         <p>Lorem ipsum, dolor sit amet consectetur</p>
                                     </div>
                                     <div class="graphBar">
@@ -181,11 +184,11 @@
 
                         <div class="col-xl-4 col-md-6 portfolio-item filter-app">
                             <div class="portfolio-wrap">
-                                <a href="../plusM/plusMdetail.html"><img src="../resources/assets/img/plusM3.jpg" class="img-fluid"
+                                <a href="../plusMBoard/plusMdetail.html"><img src="../resources/assets/img/plusM3.jpg" class="img-fluid"
                                         alt=""></a>
                                 <div class="portfolio-info">
                                     <div>
-                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">App 1</a></h4>
+                                        <h4><a href="../plusMBoard/plusMdetail.html" title="More Details">App 1</a></h4>
                                         <p>Lorem ipsum, dolor sit amet consectetur</p>
                                     </div>
                                     <div class="graphBar">
@@ -201,11 +204,11 @@
 
                         <div class="col-xl-4 col-md-6 portfolio-item filter-product">
                             <div class="portfolio-wrap">
-                                <a href="../plusM/plusMdetail.html"><img src="../resources/assets/img/plusM4.jpg" class="img-fluid"
+                                <a href="../plusMBoard/plusMdetail.html"><img src="../resources/assets/img/plusM4.jpg" class="img-fluid"
                                         alt=""></a>
                                 <div class="portfolio-info">
                                     <div>
-                                        <h4><a href="../plusM/plusMdetail.html" title="More Details">App 1</a></h4>
+                                        <h4><a href="../plusMBoard/plusMdetail.html" title="More Details">App 1</a></h4>
                                         <p>Lorem ipsum, dolor sit amet consectetur</p>
                                     </div>
                                     <div class="graphBar">
