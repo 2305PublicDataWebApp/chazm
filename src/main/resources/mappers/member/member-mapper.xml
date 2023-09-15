@@ -2,3 +2,35 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	<resultMap type="Member" id="memberResultMap">
+		<id property="memberId" column="MEMBER_ID"/>
+		<result property="memberPw" column="MEMBER_PW"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPostCode" column="MEMBER_POSTCODE"/>
+		<result property="memberAddress" column="MEMBER_ADDRESS"/>
+		<result property="memberDetailAddress" column="MEMBER_DETAILADDRESS"/>
+		<result property="memberPoint" column="MEMBER_POINT"/>
+		<result property="mStatusYn" column="M_STATUS_YN"/>
+		<result property="businessNo" column="BUSINESS_NO"/>
+		<result property="memberGrade" column="MEMBER_GRADE"/>
+	</resultMap>
+	
+	<insert id="insertIDNMember">
+		INSERT INTO MEMBER_TBL VALUES(#{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberEmail}, #{memberPostCode}, #{memberAddress}, #{memberDetailAddress}, DEFAULT, DEFAULT, DEFAULT, 1)
+	</insert>
+	
+	<insert id="insertCORMember">
+		INSERT INTO MEMBER_TBL VALUES(#{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberEmail}, #{memberPostCode}, #{memberAddress}, #{memberDetailAddress}, DEFAULT, DEFAULT, #{businessNo}, 2)	
+	</insert>
+	
+	<select id="selectCheckLogin" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId} AND MEMBER_PW=#{memberPw}
+	</select>
+	
+	<select id="selectOneById" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId}
+	</select>
+</mapper>
