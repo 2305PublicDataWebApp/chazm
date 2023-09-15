@@ -47,5 +47,5 @@
 	<select id="selectFindBoardByNo" resultMap="FindBoardResultMap">
 		SELECT * FROM FIND_BOARD_TBL WHERE FIND_NO = #{findNo}
 	</select>
-	
+
 </mapper>
