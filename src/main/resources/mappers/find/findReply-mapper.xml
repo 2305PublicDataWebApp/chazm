@@ -2,3 +2,24 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FindReplyMapper">
+	<resultMap type="FIndReply" id="FindReplyResultMap">
+		<id 	property="findRNo" 		   column="FIND_R_NO"/>
+		<result property="refFindNo" 	   column="REF_FIND_NO"/>
+		<result property="findRWriter" 	   column="FIND_R_WRITER"/>
+		<result property="findRContent"    column="FIND_R_CONTENT"/>
+		<result property="findRCreateDate" column="FIND_R_CREATE_DATE"/>
+		<result property="findRUpdateDate" column="FIND_R_UPDATE_DATE"/>
+		<result property="findRStateYn"    column="FIND_R_STATE_YN"/>
+		<result property="findRParentNo"   column="FIND_R_PARENT_NO"/>
+	</resultMap>
+	<insert id="insertFindReply">
+		INSERT INTO FIND_REPLY_TBL VALUES(SEQ_FIND_R_NO.NEXTVAL, #{refFindNo}, #{findRWriter}, #{findRContent}, DEFAULT, DEFAULT, DEFAULT, #{findRParentNo})
+	</insert>
+	<update id="updateFindReply">
+		UPDATE FIND_REPLY_TBL SET FIND_R_CONTENT = #{findRContent}, FIND_R_UPDATE_DATE = DEFAULT WHERE FIND_R_NO = #{findRNo}
+	</update>
+	<update id="deleteFindReply">
+		
+	</update>
+</mapper>

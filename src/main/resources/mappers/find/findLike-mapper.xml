@@ -2,3 +2,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FindLikeMapper">
+	<resultMap type="FindLike" id="FindLikeResultMap">
+		<id 	property="findLikeNo" column="FIND_LIKE_NO"/>
+		<result property="refFindNo"  column="REF_FIND_NO"/>
+		<result property="memberId"   column="MEMBER_ID"/>
+	</resultMap>
+	<insert id="insertFindLike">
+		INSERT INTO FIND_LIKE_TBL VALUES(SEQ_FIND_L_NO.NEXTVAL, #{refFindNo}, #{memberId});
+	</insert>
+	<delete id="deleteFindLike">
+		DELETE FROM FIND_LIKE_TBL WHERE FIND_LIKE_NO = #{findLikeNo}
+	</delete>
+	<select id="selectOneByNo">
+		SELECT * FROM FIND_LIKE_TBL WHERE FIND_LIKE_NO = #{findLikeNo}
+	</select>
+</mapper>
