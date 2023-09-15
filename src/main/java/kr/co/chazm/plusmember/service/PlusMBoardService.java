@@ -27,4 +27,11 @@ public interface PlusMBoardService {
 	 */
 	List<PlusMBoard> selectPlusMBoardList(PageInfo pInfo);
 
+	/**
+	 * 포인트로 기부해요 게시글 상세 조회 Service
+	 * @param plusMNo
+	 * @return PlusMBoard
+	 */
+	PlusMBoard selectOneByNo(int plusMNo);
+
 }

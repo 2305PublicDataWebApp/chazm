@@ -32,4 +32,12 @@ public interface PlusMBoardStore {
 	 */
 	List<PlusMBoard> selectPlusMBoardList(SqlSession sqlSession, PageInfo pInfo);
 
+	/**
+	 * 포인트로 기부해요 게시글 상세 조회 Store
+	 * @param sqlSession
+	 * @param plusMNo
+	 * @return PlusMBoard
+	 */
+	PlusMBoard selectOneByNo(SqlSession sqlSession, int plusMNo);
+
 }

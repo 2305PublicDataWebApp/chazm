@@ -1,7 +1,6 @@
 package kr.co.chazm.plusmember.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,45 +28,38 @@ public class PlusMBoardController {
 
 	@Autowired
 	private PlusMBoardService plusMBoardService;
-	
-	@RequestMapping(value="/plusMBoard/insert.do", method=RequestMethod.GET)
-	public ModelAndView showInsertPlusMBoardForm(
-			ModelAndView mv
-			) {
+
+	@RequestMapping(value = "/plusMBoard/insert.do", method = RequestMethod.GET)
+	public ModelAndView showInsertPlusMBoardForm(ModelAndView mv) {
 		mv.setViewName("plusM/plusMinsert");
 		return mv;
 	}
-	
-	
-	@RequestMapping(value="/plusMBoard/insert.do",  produces="text/html;charset=UTF-8;", method=RequestMethod.POST)
-	public @ResponseBody String insertPlusMBoard(
-			@ModelAttribute PlusMBoard plusMBoard
-			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
-			, HttpServletRequest request
-			) {
+
+	@RequestMapping(value = "/plusMBoard/insert.do", produces = "text/html;charset=UTF-8;", method = RequestMethod.POST)
+	public @ResponseBody String insertPlusMBoard(@ModelAttribute PlusMBoard plusMBoard,
+			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
+			HttpServletRequest request) {
 		try {
-			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+			if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
 				Map<String, Object> pMap = this.saveFile(request, uploadFile);
-				plusMBoard.setPlusMFilename((String)pMap.get("fileName"));
-				plusMBoard.setPlusMFilerename((String)pMap.get("fileRename"));
-				plusMBoard.setPlusMFilepath((String)pMap.get("filePath"));
+				plusMBoard.setPlusMFilename((String) pMap.get("fileName"));
+				plusMBoard.setPlusMFilerename((String) pMap.get("fileRename"));
+				plusMBoard.setPlusMFilepath((String) pMap.get("filePath"));
 			}
 			int result = plusMBoardService.insertPlusMBoard(plusMBoard);
-			if(result > 0) {
+			if (result > 0) {
 				return "<script>alert('게시글이 등록되었습니다.'); location.href='/plusMBoard/list.do';</script>";
-			}else {
+			} else {
 				return "<script>alert('게시글이 등록을 실패하였습니다.'); history.back();</script>";
 			}
 		} catch (Exception e) {
 			return "<script>alert('게시글 등록 중 오류가 발생하였습니다.'); history.back();</script>";
 		}
 	}
-	
-	@RequestMapping(value="/plusMBoard/list.do", method=RequestMethod.GET)
-	public ModelAndView showPlusMBoardList(
-			ModelAndView mv
-			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
-			) {
+
+	@RequestMapping(value = "/plusMBoard/list.do", method = RequestMethod.GET)
+	public ModelAndView showPlusMBoardList(ModelAndView mv,
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage) {
 		Integer totalCount = plusMBoardService.getListCount();
 		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 		List<PlusMBoard> pMList = plusMBoardService.selectPlusMBoardList(pInfo);
@@ -77,6 +69,15 @@ public class PlusMBoardController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/plusMBoard/detail.do", method = RequestMethod.GET)
+	public ModelAndView showPlusMBoardDetail(ModelAndView mv, @RequestParam("plusMNo") int plusMNo) {
+		PlusMBoard plusMBoard = plusMBoardService.selectOneByNo(plusMNo);
+		if (plusMBoard != null) {
+			mv.addObject("plusMBoard", plusMBoard);
+			mv.setViewName("plusM/plusMdetail");
+		}
+		return mv;
+	}
 
 	private PageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		PageInfo pInfo = null;
@@ -85,26 +86,26 @@ public class PlusMBoardController {
 		int naviTotalCount;
 		int startNavi;
 		int endNavi;
-		if(totalCount % recordCountPerPage > 0) {
+		if (totalCount % recordCountPerPage > 0) {
 			naviTotalCount = totalCount / recordCountPerPage + 1;
-		}else {
+		} else {
 			naviTotalCount = totalCount / recordCountPerPage;
 		}
-		if(currentPage < 1) {
+		if (currentPage < 1) {
 			currentPage = 1;
 		}
-		if(currentPage > naviTotalCount) {
+		if (currentPage > naviTotalCount) {
 			currentPage = naviTotalCount;
 		}
-		startNavi = ((currentPage-1)/naviCountPerPage) * naviCountPerPage + 1;
+		startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
 		endNavi = startNavi + naviCountPerPage - 1;
-		if(endNavi > naviTotalCount) {
+		if (endNavi > naviTotalCount) {
 			endNavi = naviTotalCount;
 		}
-		pInfo = new PageInfo(currentPage, recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi, totalCount);
+		pInfo = new PageInfo(currentPage, recordCountPerPage, naviCountPerPage, naviTotalCount, startNavi, endNavi,
+				totalCount);
 		return pInfo;
 	}
-
 
 	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
 		Map<String, Object> fileMap = new HashMap<String, Object>();
@@ -116,14 +117,14 @@ public class PlusMBoardController {
 		String saveFolder = root + "\\puploadFiles";
 		// 파일 저장 전 폴더 만들기
 		File folder = new File(saveFolder);
-		if(!folder.exists()) {
+		if (!folder.exists()) {
 			folder.mkdir();
 		}
 		// 파일 확장자 구하기
-		String extension = fileName.substring(fileName.lastIndexOf(".")+1);
+		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
 		// 시간으로 파일 리네임 하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String fileRename = sdf.format(new Date(System.currentTimeMillis()))+"."+extension;
+		String fileRename = sdf.format(new Date(System.currentTimeMillis())) + "." + extension;
 		// 파일 저장
 		String savePath = saveFolder + "\\" + fileRename;
 		File file = new File(savePath);
@@ -131,9 +132,9 @@ public class PlusMBoardController {
 		// Map에 넣어주기
 		fileMap.put("fileName", fileName);
 		fileMap.put("fileRename", fileRename);
-		fileMap.put("filePath", "../resources/puploadFiles/"+fileRename);
+		fileMap.put("filePath", "../resources/puploadFiles/" + fileRename);
 		// Map 리턴
 		return fileMap;
 	}
-	
+
 }

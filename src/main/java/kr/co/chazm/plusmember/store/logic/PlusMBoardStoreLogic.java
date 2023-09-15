@@ -35,4 +35,10 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 		return pMList;
 	}
 
+	@Override
+	public PlusMBoard selectOneByNo(SqlSession sqlSession, int plusMNo) {
+		PlusMBoard plusMBoard = sqlSession.selectOne("PlusMBoardMapper.selectOneByNo", plusMNo);
+		return plusMBoard;
+	}
+
 }

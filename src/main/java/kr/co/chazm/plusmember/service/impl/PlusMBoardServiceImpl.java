@@ -36,6 +36,12 @@ public class PlusMBoardServiceImpl implements PlusMBoardService{
 		List<PlusMBoard> pMList = plusMBoardStore.selectPlusMBoardList(sqlSession, pInfo);
 		return pMList;
 	}
+
+	@Override
+	public PlusMBoard selectOneByNo(int plusMNo) {
+		PlusMBoard plusMBoard = plusMBoardStore.selectOneByNo(sqlSession, plusMNo);
+		return plusMBoard;
+	}
 	
 	
 }

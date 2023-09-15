@@ -23,9 +23,12 @@
 		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
 	</insert>
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*) FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'Y'
+		SELECT COUNT(*) FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N'
 	</select>
 	<select id="selectPlusMBoardList" resultMap="plusMBoardResultMap">
-		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'Y'
+		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N'
+	</select>
+	<select id="selectOneByNo" resultMap="plusMBoardResultMap">
+		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_NO = #{plusMNo} AND PLUS_M_END_YN = 'N'
 	</select>
 </mapper>
