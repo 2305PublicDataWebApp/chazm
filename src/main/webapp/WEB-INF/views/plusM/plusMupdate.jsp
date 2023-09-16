@@ -71,39 +71,48 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
-                        <form action="" method="" role="form" class="form text-left">
+                        <form action="/plusMBoard/update.do" method="post" role="form" class="form text-left" enctype="multipart/form-data">
+                        	<input type="hidden" value="${plusMBoard.plusMNo }" name="plusMNo">
                             <div class="form-group col-md-12">
                                 <label for="plusMTitle"><i class="bi bi-card-heading"></i></label>
-                                <input type="text" class="form-control" name="plusMTitle" id="plusMTitle" placeholder="제목을 입력하세요." required>
+                                <input type="text" class="form-control" name="plusMTitle" id="plusMTitle" value="${plusMBoard.plusMTitle }" placeholder="제목을 입력하세요." required>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="plusMDntPlace"><i class="bi bi-house-heart"></i></label>
-                                    <input type="text" class="form-control" name="plusMDntPlace" id="plusMDntPlace" placeholder="기부처를 입력하세요." required>
+                                    <input type="text" class="form-control" name="plusMDntPlace" id="plusMDntPlace" value="${plusMBoard.plusMDntPlace }" placeholder="기부처를 입력하세요." required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="plusMGoalAmount"><i class="bi bi-cash-coin"></i></label>
-                                    <input type="number" class="form-control" name="plusMGoalAmount" id="plusMGoalAmount" placeholder="목표 금액" required>
+                                    <input type="number" class="form-control" name="plusMGoalAmount" id="plusMGoalAmount" value="${plusMBoard.plusMGoalAmount }" placeholder="목표 금액" required>
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label for="uploadFile"><i class="bi bi-card-image"></i></label>
-                                <input type="file" id="uploadFile" class="form-control" placeholder="파일을 선택하세요." required>
+                            <div class="row form-group">
+	                            <div class="form-group col-md-6">
+	                                <label for="uploadFile"><i class="bi bi-card-image"></i></label>
+	                                <input type="file" id="uploadFile" name="uploadFile" class="form-control" placeholder="파일을 선택하세요." required>
+	                            </div>
+	                            <div class="form-group col-md-6">
+	                            	<label for="prevFile"><i class="bi bi-download"></i></label><br>
+	                            	<button class="form-control">
+		                            	<a href="../resources/puploadFiles/${plusMBoard.plusMFilerename }" download>${plusMBoard.plusMFilename }</a>	                            	
+	                            	</button>
+	                            </div>       
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label for="plusMStartDate"><i class="bi bi-calendar"></i></label>
-                                    <input type="date" class="form-control" name="plusMStartDate" id="plusMStartDate" placeholder="모금 시작일 :&nbsp;" readonly>
+                                    <input type="date" class="form-control" name="plusMStartDate" id="plusMStartDate" placeholder="모금 시작일 :&nbsp;" value="${plusMBoard.plusMStartDate }" readonly>
                                 </div>
                                 <div class="col-md-6" style="margin-bottom: 40px;">
                                     <label for="plusMEndDate"><i class="bi bi-calendar-fill"></i></label>
-                                    <input type="date" class="form-control" name="plusMEndDate" id="plusMEndDate" placeholder="모금 종료일 :&nbsp;" required>
+                                    <input type="date" class="form-control" name="plusMEndDate" id="plusMEndDate" placeholder="모금 종료일 :&nbsp;" value="${plusMBoard.plusMEndDate }" required>
                                     <div id="validationMessage" style="color: red; font-size: 12px;"></div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <!-- <label for="plusMContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="editordata" id="plusMContent" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" id="summernote" name="plusMContent" id="plusMContent" cols="30" rows="10">${plusMBoard.plusMContent }</textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
                                 <button type="submit">수정</button>

@@ -18,6 +18,14 @@ public interface PlusMBoardStore {
 	int insertPlusMBoard(SqlSession sqlSession, PlusMBoard plusMBoard);
 
 	/**
+	 * 포인트로 기부해요 게시글 수정 Store
+	 * @param sqlSession
+	 * @param plusMBoard
+	 * @return int
+	 */
+	int updatePlusMBoard(SqlSession sqlSession, PlusMBoard plusMBoard);
+
+	/**
 	 * 포인트로 기부해요 게시글 전체 갯수 조회 Store
 	 * @param sqlSession
 	 * @return

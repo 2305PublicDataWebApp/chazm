@@ -272,8 +272,8 @@
                                     <p>${plusMBoard.plusMDntPlace }</p>
                                 </div>
                                 <div class="row admin-btn-area">
-                                    <button class="col admin-btn">수정</button>
-                                    <button class="col admin-btn">삭제</button>
+                                    <button class="col admin-btn" onclick="updatePlusMBoard();">수정</button>
+                                    <button class="col admin-btn" onclick="deletePlusMBoard();">삭제</button>
                                 </div>
                             </div><!-- End sidebar search formn-->
 
@@ -335,7 +335,12 @@
     <!-- Template Main JS File -->
     <script src="../resources/assets/js/main.js"></script>
     <script src="../resources/assets/js/confetti_v2.js"></script>
-
+	<script type="text/javascript">
+		function updatePlusMBoard() {
+			const plusMNo = '${plusMBoard.plusMNo}';
+			location.href = "/plusMBoard/update.do?plusMNo=" + plusMNo;
+		}
+	</script>
 </body>
 
 </html>

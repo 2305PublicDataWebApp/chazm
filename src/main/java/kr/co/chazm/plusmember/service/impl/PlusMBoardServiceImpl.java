@@ -26,6 +26,12 @@ public class PlusMBoardServiceImpl implements PlusMBoardService{
 	}
 
 	@Override
+	public int updatePlusMBoard(PlusMBoard plusMBoard) {
+		int result = plusMBoardStore.updatePlusMBoard(sqlSession, plusMBoard);
+		return result;
+	}
+
+	@Override
 	public int getListCount() {
 		int result = plusMBoardStore.getListCount(sqlSession);
 		return result;

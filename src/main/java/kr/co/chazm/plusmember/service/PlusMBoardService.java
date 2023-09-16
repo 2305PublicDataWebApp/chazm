@@ -15,6 +15,13 @@ public interface PlusMBoardService {
 	int insertPlusMBoard(PlusMBoard plusMBoard);
 
 	/**
+	 * 포인트로 기부해요 게시글 수정 Service
+	 * @param plusMBoard
+	 * @return int
+	 */
+	int updatePlusMBoard(PlusMBoard plusMBoard);
+
+	/**
 	 * 포인트로 기부해요 게시글 전체 갯수 조회 Service
 	 * @return Integer
 	 */

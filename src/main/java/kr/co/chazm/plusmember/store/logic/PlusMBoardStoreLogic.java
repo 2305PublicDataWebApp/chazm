@@ -20,6 +20,12 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	}
 
 	@Override
+	public int updatePlusMBoard(SqlSession sqlSession, PlusMBoard plusMBoard) {
+		int result = sqlSession.update("PlusMBoardMapper.updatePlusMBoard", plusMBoard);
+		return result;
+	}
+
+	@Override
 	public int getListCount(SqlSession sqlSession) {
 		int result = sqlSession.selectOne("PlusMBoardMapper.getListCount");
 		return result;

@@ -57,6 +57,43 @@ public class PlusMBoardController {
 		}
 	}
 
+	@RequestMapping(value="/plusMBoard/update.do", method=RequestMethod.GET)
+	public ModelAndView showUpdatePlusMBoardForm(ModelAndView mv,
+			@RequestParam("plusMNo") int plusMNo) {
+		PlusMBoard plusMBoard = plusMBoardService.selectOneByNo(plusMNo);
+		mv.addObject("plusMBoard", plusMBoard);
+		mv.setViewName("plusM/plusMupdate");
+		return mv;
+	}
+	
+	@RequestMapping(value="/plusMBoard/update.do", produces = "text/html;charset=UTF-8;", method=RequestMethod.POST)
+	public @ResponseBody String updatePlusMBoard(
+			@ModelAttribute PlusMBoard plusMBoard
+			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			, HttpServletRequest request
+			) {
+		try {
+			if(uploadFile != null && !uploadFile.isEmpty()) {
+				String fileRename = plusMBoard.getPlusMFilerename();
+				if(fileRename != null) {
+					this.deleteFile(request, fileRename);
+				}
+				Map<String, Object> pMap = this.saveFile(request, uploadFile);
+				plusMBoard.setPlusMFilename((String)pMap.get("fileName"));
+				plusMBoard.setPlusMFilerename((String) pMap.get("fileRename"));
+				plusMBoard.setPlusMFilepath((String) pMap.get("filePath"));
+			}
+			int result = plusMBoardService.updatePlusMBoard(plusMBoard);
+			if(result > 0) {
+				return "<script>alert('게시글이 정상적으로 수정되었습니다.'); location.href='/plusMBoard/detail.do?plusMNo="+plusMBoard.getPlusMNo()+"';</script>";
+			}else {
+				return "<script>alert('게시글 수정을 실패하였습니다.'); history.back();</script>";
+			}
+		} catch (Exception e) {
+			return "<script>alert('게시글 수정 도중 오류가 발생하였습니다.'); history.back();</script>";
+		}
+	}
+
 	@RequestMapping(value = "/plusMBoard/list.do", method = RequestMethod.GET)
 	public ModelAndView showPlusMBoardList(ModelAndView mv,
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage) {
@@ -135,6 +172,16 @@ public class PlusMBoardController {
 		fileMap.put("filePath", "../resources/puploadFiles/" + fileRename);
 		// Map 리턴
 		return fileMap;
+	}
+
+	private void deleteFile(HttpServletRequest request, String fileRename) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String delFilepath = root+"\\puploadFiles\\"+fileRename;
+		File file = new File(delFilepath);
+		if(file.exists()) {
+			file.delete();
+		}
+		
 	}
 
 }
