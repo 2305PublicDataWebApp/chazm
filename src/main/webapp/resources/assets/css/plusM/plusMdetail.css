@@ -2185,17 +2185,8 @@ section button {
 .heart-button i {
   font-size : 30px;
 }
-.heart-button .hover-image {
-  display: none; /* 초기에 숨김 */
-  color : red;
-}
-
-.heart-button:hover .hover-image {
-  display: inline-block; /* hover 상태에서 보이게 함 */
-}
-
-.heart-button:hover .like-img {
-  display: none; /* hover 상태에서 첫 번째 이미지 숨김 */
+.bi-suit-heart-fill {
+	color : red;
 }
 
 .cur-val {

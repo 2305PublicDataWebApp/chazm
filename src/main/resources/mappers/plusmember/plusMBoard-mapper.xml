@@ -25,6 +25,9 @@
 	<update id="updatePlusMBoard">
 		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_TITLE = #{plusMTitle}, PLUS_M_CONTENT = #{plusMContent}, PLUS_M_DNT_PLACE = #{plusMDntPlace}, PLUS_M_GOAL_AMOUNT = #{plusMGoalAmount}, PLUS_M_FILENAME = #{plusMFilename}, PLUS_M_FILERENAME = #{plusMFilerename}, PLUS_M_FILEPATH = #{plusMFilepath}, PLUS_M_END_DATE = #{plusMEndDate} WHERE PLUS_M_NO = #{plusMNo}
 	</update>
+	<update id="deletePlusMBoard">
+		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_END_YN = 'Y' WHERE PLUS_M_NO = #{plusMNo}
+	</update>
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N'
 	</select>

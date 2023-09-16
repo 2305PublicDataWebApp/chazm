@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.chazm.plusmember.domain.PageInfo;
 import kr.co.chazm.plusmember.domain.PlusMBoard;
+import kr.co.chazm.plusmember.domain.PlusMLike;
 import kr.co.chazm.plusmember.store.PlusMBoardStore;
 
 @Repository
@@ -20,8 +21,26 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	}
 
 	@Override
+	public int insertPlusMLike(SqlSession sqlSession, PlusMLike plusMLike) {
+		int result = sqlSession.insert("PlusMLikeMapper.insertPlusMLike", plusMLike);
+		return result;
+	}
+
+	@Override
 	public int updatePlusMBoard(SqlSession sqlSession, PlusMBoard plusMBoard) {
 		int result = sqlSession.update("PlusMBoardMapper.updatePlusMBoard", plusMBoard);
+		return result;
+	}
+
+	@Override
+	public int deletePlusMBoard(SqlSession sqlSession, int plusMNo) {
+		int result = sqlSession.update("PlusMBoardMapper.deletePlusMBoard", plusMNo);
+		return result;
+	}
+
+	@Override
+	public int deletePlusMLike(SqlSession sqlSession, PlusMLike plusMLike) {
+		int result = sqlSession.delete("PlusMLikeMapper.deletePlusMLike", plusMLike);
 		return result;
 	}
 
@@ -45,6 +64,12 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	public PlusMBoard selectOneByNo(SqlSession sqlSession, int plusMNo) {
 		PlusMBoard plusMBoard = sqlSession.selectOne("PlusMBoardMapper.selectOneByNo", plusMNo);
 		return plusMBoard;
+	}
+
+	@Override
+	public int selectLikeYn(SqlSession sqlSession, PlusMLike plusMLike) {
+		int result = sqlSession.selectOne("PlusMLikeMapper.selectLikeYn", plusMLike);
+		return result;
 	}
 
 }
