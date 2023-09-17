@@ -9,7 +9,7 @@
 	<title>찾음 : 분실물 통합 포털</title>
 	<meta content="" name="description">
 	<meta content="" name="keywords">
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- Favicons -->
 	<link href="../resources/assets/img/light.png" rel="icon">
 	<link href="../resources/assets/img/apple-touch-icon.png"

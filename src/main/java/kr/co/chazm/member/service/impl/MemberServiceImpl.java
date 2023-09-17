@@ -36,6 +36,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public int updateMemberPw(Member member) {
+		int result = mStore.updateMemberPw(sqlSession, member);
+		return result;
+	}
+
+	@Override
 	public int deleteMember(Member member) {
 		int result = mStore.deleteMember(sqlSession, member);
 		return result;

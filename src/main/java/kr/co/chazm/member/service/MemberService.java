@@ -26,6 +26,13 @@ public interface MemberService {
 	int updateMember(Member member);
 
 	/**
+	 * 비밀번호 변경 Service
+	 * @param member
+	 * @return
+	 */
+	int updateMemberPw(Member member);
+
+	/**
 	 * 회원정보 탈퇴
 	 * @param member
 	 * @return

@@ -295,6 +295,31 @@ public class MemberController {
 		return mv;
 	}
 	
+	//비밀번호 변경 기능
+	@RequestMapping(value="/member/updatePw.do", method=RequestMethod.POST)
+	public ModelAndView updateMemberPw(ModelAndView mv
+			, HttpSession session
+			, @ModelAttribute Member member) {
+		
+		try {
+			int result = mService.updateMemberPw(member);
+			if(result>0){
+				mv.addObject("msg", "비밀번호 변경이 완료되었습니다.");
+				mv.addObject("url", "/member/login.do");
+				mv.setViewName("common/message");
+			} else {
+				mv.addObject("msg", "비밀번호 변경이 완료되지 않았습니다.");
+				mv.addObject("url", "/member/login.do");
+				mv.setViewName("common/message");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", "관리자에게 문의 바랍니다.");
+			mv.addObject("url", "/member/myPage.do");
+			mv.setViewName("common/message");
+		}
+		return mv;
+	}
 	
 	//아이디 중복체크(개인회원)
 	@RequestMapping(value="/member/checkIDN.do", method=RequestMethod.GET)

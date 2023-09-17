@@ -28,6 +28,12 @@ public class MemberStoreLogic implements MemberStore {
 	}
 
 	@Override
+	public int updateMemberPw(SqlSession sqlSession, Member member) {
+		int result = sqlSession.update("MemberMapper.updateMemberPw", member);
+		return result;
+	}
+
+	@Override
 	public int deleteMember(SqlSession sqlSession, Member member) {
 		int result = sqlSession.update("MemberMapper.deleteMember", member);
 		return result;

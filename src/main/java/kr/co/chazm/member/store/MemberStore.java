@@ -31,6 +31,14 @@ public interface MemberStore {
 	int updateMember(SqlSession sqlSession, Member member);
 
 	/**
+	 * 비밀번호 변경 Store
+	 * @param sqlSession
+	 * @param member
+	 * @return int
+	 */
+	int updateMemberPw(SqlSession sqlSession, Member member);
+
+	/**
 	 * 회원 탈퇴 Store
 	 * @param sqlSession
 	 * @param member
