@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.chazm.plusmember.domain.Donation;
 import kr.co.chazm.plusmember.domain.PageInfo;
 import kr.co.chazm.plusmember.domain.PlusMBoard;
 import kr.co.chazm.plusmember.domain.PlusMLike;
@@ -33,8 +34,26 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 	}
 
 	@Override
+	public int insertDonation(Donation donation) {
+		int result = plusMBoardStore.insertDonation(sqlSession, donation);
+		return result;
+	}
+
+	@Override
 	public int updatePlusMBoard(PlusMBoard plusMBoard) {
 		int result = plusMBoardStore.updatePlusMBoard(sqlSession, plusMBoard);
+		return result;
+	}
+
+	@Override
+	public int updatePlusMCurVal(Donation donation) {
+		int result = plusMBoardStore.updatePlusMCurVal(sqlSession, donation);
+		return result;
+	}
+
+	@Override
+	public int updateMemberPoint(Donation donation) {
+		int result = plusMBoardStore.updateMemberPoint(sqlSession, donation);
 		return result;
 	}
 
@@ -71,6 +90,30 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 	@Override
 	public int selectLikeYn(PlusMLike plusMLike) {
 		int result = plusMBoardStore.selectLikeYn(sqlSession, plusMLike);
+		return result;
+	}
+
+	@Override
+	public int selectDntListCount() {
+		int result = plusMBoardStore.selectDntListCount(sqlSession);
+		return result;
+	}
+
+	@Override
+	public int selectAllDntAmount() {
+		int result = plusMBoardStore.selectAllDntAmount(sqlSession);
+		return result;
+	}
+
+	@Override
+	public int selectDntYn(Donation donation) {
+		int result = plusMBoardStore.selectDntYn(sqlSession, donation);
+		return result;
+	}
+
+	@Override
+	public int selectMemberPoint(String memberId) {
+		int result = plusMBoardStore.selectMemberPoint(sqlSession, memberId);
 		return result;
 	}
 

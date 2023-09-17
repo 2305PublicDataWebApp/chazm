@@ -2,6 +2,8 @@ package kr.co.chazm.plusadmin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +26,15 @@ public class PlusAController {
 
 	// 게시글 등록 폼
 	@RequestMapping(value = "/plusABoard/insert.do", method = RequestMethod.GET)
-	public ModelAndView showInsertPlusAForm(ModelAndView mv) {
-		mv.setViewName("plusA/plusAinsert");
+	public ModelAndView showInsertPlusAForm(ModelAndView mv, HttpSession session) {
+		Integer memberGrade = (Integer) session.getAttribute("memberGrade");
+		if(memberGrade == null || memberGrade != 3) {
+			mv.addObject("msg", "접근 권한이 없습니다.");
+			mv.addObject("url", "/");
+			mv.setViewName("common/message");
+		}else {
+			mv.setViewName("plusA/plusAinsert");			
+		}
 		return mv;
 	}
 
@@ -53,10 +62,17 @@ public class PlusAController {
 
 	// 게시글 수정 폼
 	@RequestMapping(value = "/plusABoard/update.do", method = RequestMethod.GET)
-	public ModelAndView showUpdatePlusAForm(ModelAndView mv, @RequestParam("plusANo") int plusANo) {
-		PlusABoard plusABoard = plusAService.selectOneByNo(plusANo);
-		mv.addObject("plusABoard", plusABoard);
-		mv.setViewName("plusA/plusAupdate");
+	public ModelAndView showUpdatePlusAForm(ModelAndView mv, @RequestParam("plusANo") int plusANo, HttpSession session) {
+		Integer memberGrade = (Integer) session.getAttribute("memberGrade");
+		if(memberGrade == null || memberGrade != 3) {
+			mv.addObject("msg", "접근 권한이 없습니다.");
+			mv.addObject("url", "/");
+			mv.setViewName("common/message");
+		}else {
+			PlusABoard plusABoard = plusAService.selectOneByNo(plusANo);
+			mv.addObject("plusABoard", plusABoard);
+			mv.setViewName("plusA/plusAupdate");			
+		}
 		return mv;
 	}
 
@@ -83,18 +99,25 @@ public class PlusAController {
 	}
 
 	// 게시글 삭제
-	@RequestMapping(value = "/plusABoard/delete.do", produces = "text/html;charset=UTF-8;", method = RequestMethod.GET)
-	public ModelAndView deletePlusABoard(ModelAndView mv, @RequestParam("plusANo") int plusANo) {
+	@RequestMapping(value = "/plusABoard/delete.do", method = RequestMethod.GET)
+	public ModelAndView deletePlusABoard(ModelAndView mv, @RequestParam("plusANo") int plusANo, HttpSession session) {
 		try {
-			int result = plusAService.deletePlusABoard(plusANo);
-			if (result > 0) {
-				mv.addObject("msg", "게시글이 삭제되었습니다.");
-				mv.addObject("url", "/plusABoard/list.do");
+			Integer memberGrade = (Integer) session.getAttribute("memberGrade");
+			if(memberGrade == null || memberGrade != 3) {
+				mv.addObject("msg", "접근 권한이 없습니다.");
+				mv.addObject("url", "/");
 				mv.setViewName("common/message");
-			} else {
-				mv.addObject("msg", "게시글 삭제를 실패하였습니다.");
-				mv.addObject("url", "/plusABoard/list.do");
-				mv.setViewName("common/message");
+			}else {
+				int result = plusAService.deletePlusABoard(plusANo);
+				if (result > 0) {
+					mv.addObject("msg", "게시글이 삭제되었습니다.");
+					mv.addObject("url", "/plusABoard/list.do");
+					mv.setViewName("common/message");
+				} else {
+					mv.addObject("msg", "게시글 삭제를 실패하였습니다.");
+					mv.addObject("url", "/plusABoard/list.do");
+					mv.setViewName("common/message");
+				}
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "게시글이 삭제 도중 오류가 발생하였습니다.");

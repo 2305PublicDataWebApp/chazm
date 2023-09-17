@@ -2443,7 +2443,7 @@ section button {
   margin-bottom: 25px;
 }
 
-.blog .comments .reply-form .btn-primary {
+.blog .comments .reply-form .btn-primary, .edit-form .btn-primary {
   margin-left: 10px;
   text-align: center;
   border-radius: 25px;
@@ -2453,7 +2453,7 @@ section button {
   color : var(--color-primary)
 }
 
-.blog .comments .reply-form .btn-primary:hover {
+.blog .comments .reply-form .btn-primary:hover, .edit-form .btn-primary:hover {
   background-color: #4365BC;
   color : #fff;
 }

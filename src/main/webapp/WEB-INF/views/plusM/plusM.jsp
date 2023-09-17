@@ -96,11 +96,13 @@
 					<h2>찾음 모금함</h2>
 				</div>
 				<div>
-					<div class="add-btn" data-aos="fade-up" data-aos-delay="100">
-						<button onclick="showInsertPlusMBoardForm()";>
-							<i class="bi bi-pencil-square"></i>
-						</button>
-					</div>
+					<c:if test="${memberGrade == 3 }">
+						<div class="add-btn" data-aos="fade-up" data-aos-delay="100">
+							<button onclick="showInsertPlusMBoardForm()";>
+								<i class="bi bi-pencil-square"></i>
+							</button>
+						</div>					
+					</c:if>
 				</div>
 				<div class="portfolio-isotope" data-portfolio-filter="*"
 					data-portfolio-layout="masonry"
@@ -187,7 +189,7 @@
 							style="margin-left: 150px;">
 							<div class="col col-title">기부 참여</div>
 							<div class="col d-flex align-items-center">
-								<span data-purecounter-start="0" data-purecounter-end="5136"
+								<span data-purecounter-start="0" data-purecounter-end="${dntPeople }"
 									data-purecounter-duration="1" class="purecounter"></span> <strong>명</strong>
 							</div>
 						</div>
@@ -197,7 +199,7 @@
 							style="margin-left: 150px;">
 							<div class="col col-title">기부 포인트</div>
 							<div class="col d-flex align-items-center">
-								<span data-purecounter-start="0" data-purecounter-end="5537"
+								<span data-purecounter-start="0" data-purecounter-end="${dntAmount }"
 									data-purecounter-duration="1" class="purecounter"></span> <strong>P</strong>
 							</div>
 

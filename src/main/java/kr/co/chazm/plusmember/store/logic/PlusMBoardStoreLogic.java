@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.chazm.plusmember.domain.Donation;
 import kr.co.chazm.plusmember.domain.PageInfo;
 import kr.co.chazm.plusmember.domain.PlusMBoard;
 import kr.co.chazm.plusmember.domain.PlusMLike;
@@ -27,8 +28,26 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	}
 
 	@Override
+	public int insertDonation(SqlSession sqlSession, Donation donation) {
+		int result = sqlSession.insert("PlusMBoardMapper.insertDonation", donation);
+		return result;
+	}
+
+	@Override
 	public int updatePlusMBoard(SqlSession sqlSession, PlusMBoard plusMBoard) {
 		int result = sqlSession.update("PlusMBoardMapper.updatePlusMBoard", plusMBoard);
+		return result;
+	}
+
+	@Override
+	public int updatePlusMCurVal(SqlSession sqlSession, Donation donation) {
+		int result = sqlSession.update("PlusMBoardMapper.updatePlusMCurVal", donation);
+		return result;
+	}
+
+	@Override
+	public int updateMemberPoint(SqlSession sqlSession, Donation donation) {
+		int result = sqlSession.update("PlusMBoardMapper.updateMemberPoint", donation);
 		return result;
 	}
 
@@ -69,6 +88,30 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	@Override
 	public int selectLikeYn(SqlSession sqlSession, PlusMLike plusMLike) {
 		int result = sqlSession.selectOne("PlusMLikeMapper.selectLikeYn", plusMLike);
+		return result;
+	}
+
+	@Override
+	public int selectDntListCount(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.selectDntListCount");
+		return result;
+	}
+
+	@Override
+	public int selectAllDntAmount(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.selectAllDntAmount");
+		return result;
+	}
+
+	@Override
+	public int selectDntYn(SqlSession sqlSession, Donation donation) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.selectDntYn", donation);
+		return result;
+	}
+
+	@Override
+	public int selectMemberPoint(SqlSession sqlSession, String memberId) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.selectMemberPoint", memberId);
 		return result;
 	}
 

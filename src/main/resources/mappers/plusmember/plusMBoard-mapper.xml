@@ -22,8 +22,17 @@
 	<insert id="insertPlusMBoard">
 		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
 	</insert>
+	<insert id="insertDonation">
+		INSERT INTO DONATION_TBL VALUES(SEQ_DONATION_NO.NEXTVAL, #{refPlusMNo}, #{memberId}, #{dntPoint}, DEFAULT)
+	</insert>
 	<update id="updatePlusMBoard">
 		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_TITLE = #{plusMTitle}, PLUS_M_CONTENT = #{plusMContent}, PLUS_M_DNT_PLACE = #{plusMDntPlace}, PLUS_M_GOAL_AMOUNT = #{plusMGoalAmount}, PLUS_M_FILENAME = #{plusMFilename}, PLUS_M_FILERENAME = #{plusMFilerename}, PLUS_M_FILEPATH = #{plusMFilepath}, PLUS_M_END_DATE = #{plusMEndDate} WHERE PLUS_M_NO = #{plusMNo}
+	</update>
+	<update id="updatePlusMCurVal">
+		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_CUR_AMOUNT = PLUS_M_CUR_AMOUNT + #{dntPoint} WHERE PLUS_M_NO = #{refPlusMNo} 
+	</update>
+	<update id="updateMemberPoint">
+		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT - #{dntPoint} WHERE MEMBER_ID = #{memberId}
 	</update>
 	<update id="deletePlusMBoard">
 		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_END_YN = 'Y' WHERE PLUS_M_NO = #{plusMNo}
@@ -36,5 +45,17 @@
 	</select>
 	<select id="selectOneByNo" resultMap="plusMBoardResultMap">
 		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_NO = #{plusMNo} AND PLUS_M_END_YN = 'N'
+	</select>
+	<select id="selectDntListCount" resultType="_int">
+		SELECT COUNT(*) FROM DONATION_TBL
+	</select>
+	<select id="selectAllDntAmount" resultType="_int">
+		SELECT SUM(DNT_POINT) FROM DONATION_TBL
+	</select>
+	<select id="selectDntYn" resultType="_int">
+		SELECT COUNT(*) FROM DONATION_TBL WHERE REF_PLUS_M_NO = #{refPlusMNo} AND MEMBER_ID = #{memberId}
+	</select>
+	<select id="selectMemberPoint" resultType="_int">
+		SELECT MEMBER_POINT FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
 	</select>
 </mapper>

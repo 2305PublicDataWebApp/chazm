@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.chazm.member.service.MemberService;
+import kr.co.chazm.plusmember.domain.Donation;
 import kr.co.chazm.plusmember.domain.PageInfo;
 import kr.co.chazm.plusmember.domain.PlusMBoard;
 import kr.co.chazm.plusmember.domain.PlusMLike;
@@ -33,11 +35,20 @@ public class PlusMBoardController {
 	private PlusMBoardService plusMBoardService;
 	@Autowired
 	private PlusMReplyService plusMReplyService;
+	@Autowired
+	private MemberService memberService;
 
 	// 게시글 등록 폼
 	@RequestMapping(value = "/plusMBoard/insert.do", method = RequestMethod.GET)
-	public ModelAndView showInsertPlusMBoardForm(ModelAndView mv) {
-		mv.setViewName("plusM/plusMinsert");
+	public ModelAndView showInsertPlusMBoardForm(ModelAndView mv, HttpSession session) {
+		Integer memberGrade = (Integer) session.getAttribute("memberGrade");
+		if (memberGrade == null || memberGrade != 3) {
+			mv.addObject("msg", "접근 권한이 없습니다.");
+			mv.addObject("url", "/");
+			mv.setViewName("common/message");
+		} else {
+			mv.setViewName("plusM/plusMinsert");
+		}
 		return mv;
 	}
 
@@ -56,7 +67,7 @@ public class PlusMBoardController {
 			int result = plusMBoardService.insertPlusMBoard(plusMBoard);
 			if (result > 0) {
 				mv.addObject("msg", "게시글이 등록되었습니다.");
-				mv.addObject("url", "/pluMBoard/list.do");
+				mv.addObject("url", "/plusMBoard/list.do");
 				mv.setViewName("common/message");
 			} else {
 				mv.addObject("msg", "게시글 등록을 실패하였습니다.");
@@ -88,12 +99,51 @@ public class PlusMBoardController {
 		return mv;
 	}
 
+	// 기부 등록
+	@RequestMapping(value = "/donation/insert.do", method = RequestMethod.POST)
+	public ModelAndView insertDonation(ModelAndView mv, @ModelAttribute Donation donation, HttpSession session) {
+		try {
+			String memberId = (String) session.getAttribute("memberId");
+			donation.setMemberId(memberId);
+			int result = plusMBoardService.insertDonation(donation);
+			result += plusMBoardService.updateMemberPoint(donation);
+			result += plusMBoardService.updatePlusMCurVal(donation);
+			if (result >= 3) {
+				PlusMReply plusMReply = new PlusMReply();
+				plusMReply.setRefPlusMNo(donation.getRefPlusMNo());
+				plusMReply.setPlusMRContent(donation.getDntPoint() + "P 참여");
+				plusMReply.setPlusMRWriter(donation.getMemberId());
+				plusMReplyService.insertPlusMReply(plusMReply);
+				mv.addObject("msg", "기부가 완료되었습니다. 감사합니다.");
+				mv.addObject("url", "/plusMBoard/detail.do?plusMNo=" + donation.getRefPlusMNo());
+				mv.setViewName("common/message");
+			} else {
+				mv.addObject("msg", "기부를 실패하였습니다.");
+				mv.addObject("url", "/plusMBoard/detail.do?plusMNo=" + donation.getRefPlusMNo());
+				mv.setViewName("common/message");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", "기부 도중 오류가 발생하였습니다.");
+			mv.addObject("url", "/plusMBoard/detail.do?plusMNo=" + donation.getRefPlusMNo());
+			mv.setViewName("common/message");
+		}
+		return mv;
+	}
+
 	// 게시글 수정 폼
 	@RequestMapping(value = "/plusMBoard/update.do", method = RequestMethod.GET)
-	public ModelAndView showUpdatePlusMBoardForm(ModelAndView mv, @RequestParam("plusMNo") int plusMNo) {
-		PlusMBoard plusMBoard = plusMBoardService.selectOneByNo(plusMNo);
-		mv.addObject("plusMBoard", plusMBoard);
-		mv.setViewName("plusM/plusMupdate");
+	public ModelAndView showUpdatePlusMBoardForm(ModelAndView mv, @RequestParam("plusMNo") int plusMNo,
+			HttpSession session) {
+		Integer memberGrade = (Integer) session.getAttribute("memberGrade");
+		if (memberGrade == null || memberGrade != 3) {
+			mv.addObject("msg", "접근 권한이 없습니다.");
+			mv.addObject("url", "/");
+			mv.setViewName("common/message");
+		} else {
+			PlusMBoard plusMBoard = plusMBoardService.selectOneByNo(plusMNo);
+			mv.addObject("plusMBoard", plusMBoard);
+			mv.setViewName("plusM/plusMupdate");
+		}
 		return mv;
 	}
 
@@ -133,17 +183,24 @@ public class PlusMBoardController {
 
 	// 게시글 삭제
 	@RequestMapping(value = "/plusMBoard/delete.do", method = RequestMethod.GET)
-	public ModelAndView deletePlusMBoard(ModelAndView mv, @RequestParam("plusMNo") int plusMNo) {
+	public ModelAndView deletePlusMBoard(ModelAndView mv, @RequestParam("plusMNo") int plusMNo, HttpSession session) {
 		try {
-			int result = plusMBoardService.deletePlusMBoard(plusMNo);
-			if (result > 0) {
-				mv.addObject("msg", "게시글이 삭제되었습니다.");
-				mv.addObject("url", "/plusMBoard/list.do");
+			Integer memberGrade = (Integer) session.getAttribute("memberGrade");
+			if (memberGrade == null || memberGrade != 3) {
+				mv.addObject("msg", "접근 권한이 없습니다.");
+				mv.addObject("url", "/");
 				mv.setViewName("common/message");
 			} else {
-				mv.addObject("msg", "게시글 삭제를 실패하였습니다.");
-				mv.addObject("url", "/plusMBoard/detail.do?plusMNo=" + plusMNo);
-				mv.setViewName("common/message");
+				int result = plusMBoardService.deletePlusMBoard(plusMNo);
+				if (result > 0) {
+					mv.addObject("msg", "게시글이 삭제되었습니다.");
+					mv.addObject("url", "/plusMBoard/list.do");
+					mv.setViewName("common/message");
+				} else {
+					mv.addObject("msg", "게시글 삭제를 실패하였습니다.");
+					mv.addObject("url", "/plusMBoard/detail.do?plusMNo=" + plusMNo);
+					mv.setViewName("common/message");
+				}
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "게시글 삭제 도중 오류가 발생하였습니다.");
@@ -183,8 +240,12 @@ public class PlusMBoardController {
 		Integer totalCount = plusMBoardService.getListCount();
 		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 		List<PlusMBoard> pMList = plusMBoardService.selectPlusMBoardList(pInfo);
+		int dntPeople = plusMBoardService.selectDntListCount();
+		int dntAmount = plusMBoardService.selectAllDntAmount();
 		mv.addObject("pInfo", pInfo);
 		mv.addObject("pMList", pMList);
+		mv.addObject("dntPeople", dntPeople);
+		mv.addObject("dntAmount", dntAmount);
 		mv.setViewName("plusM/plusM");
 		return mv;
 	}
@@ -200,7 +261,10 @@ public class PlusMBoardController {
 			mv.setViewName("common/message");
 		} else {
 			PlusMLike plusMLike = new PlusMLike(plusMNo, memberId);
-			int likeYn = plusMBoardService.selectLikeYn(plusMLike);
+			int likeYn = plusMBoardService.selectLikeYn(plusMLike); // 좋아요 여부 1:o, 2:x
+			Donation donation = new Donation(plusMNo, memberId);
+			int dntYn = plusMBoardService.selectDntYn(donation);
+			int memberCurPoint = plusMBoardService.selectMemberPoint(memberId);
 			PlusMBoard plusMBoard = plusMBoardService.selectOneByNo(plusMNo);
 			Integer totalCount = plusMReplyService.getListCount(plusMNo);
 			PageInfo pInfo = this.getReplyPageInfo(currentPage, totalCount);
@@ -209,8 +273,9 @@ public class PlusMBoardController {
 			mv.addObject("pInfo", pInfo);
 			mv.addObject("pMRList", pMRList);
 			mv.addObject("likeYn", likeYn);
+			mv.addObject("dntYn", dntYn);
+			mv.addObject("memberCurPoint", memberCurPoint);
 			mv.setViewName("plusM/plusMdetail");
-
 		}
 		return mv;
 	}

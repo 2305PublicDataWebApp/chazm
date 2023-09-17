@@ -106,23 +106,23 @@
 
 							<h4 class="comments-count">댓글</h4>
 							<hr>
-							<div class="reply-form">
-								<form action="/plusMReply/insert.do" method="post">
-									<input type="hidden" name="refPlusMNo"
-										value="${plusMBoard.plusMNo }">
-									<div class="row">
-										<div class="col input-area align-items-center">
-											<textarea class="form-control" name="plusMRContent"
-												placeholder="응원의 댓글을 남겨주세요."></textarea>
-											<button type="submit" class="btn btn-primary">
-												<i class="bi bi-send"></i>
-											</button>
+							<c:if test="${dntYn != 0 }">
+								<div class="reply-form">
+									<form action="/plusMReply/insert.do" method="post">
+										<input type="hidden" name="refPlusMNo"
+											value="${plusMBoard.plusMNo }">
+										<div class="row">
+											<div class="col input-area align-items-center">
+												<textarea class="form-control" name="plusMRContent"
+													placeholder="응원의 댓글을 남겨주세요."></textarea>
+												<button type="submit" class="btn btn-primary">
+													<i class="bi bi-send"></i>
+												</button>
+											</div>
 										</div>
-									</div>
-
-								</form>
-
-							</div>
+									</form>
+								</div>
+							</c:if>
 							<c:forEach items="${pMRList }" var="plusMReply">
 								<div id="comment-${plusMReply.plusMRNo }" class="comment">
 									<div class="d-flex">
@@ -146,7 +146,7 @@
 										</div>
 									</div>
 								</div>
-								<div id="edit-form-${plusMReply.plusMRNo}"
+								<div id="edit-form-${plusMReply.plusMRNo}" class="edit-form"
 									style="display: none;">
 									<!-- 수정 폼의 내용을 입력하세요. -->
 									<form action="/plusMReply/update.do" method="post">
@@ -242,10 +242,12 @@
 									<span>모금 단체</span>
 									<p>${plusMBoard.plusMDntPlace }</p>
 								</div>
-								<div class="row admin-btn-area">
-									<button class="col admin-btn" onclick="updatePlusMBoard();">수정</button>
-									<button class="col admin-btn" onclick="deletePlusMBoard();">삭제</button>
-								</div>
+								<c:if test="${memberGrade == 3 }">
+									<div class="row admin-btn-area">
+										<button class="col admin-btn" onclick="updatePlusMBoard();">수정</button>
+										<button class="col admin-btn" onclick="deletePlusMBoard();">삭제</button>
+									</div>								
+								</c:if>
 							</div>
 							<!-- End sidebar search formn-->
 
@@ -268,25 +270,29 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-					<form action="" method="">
+					<form id="dnt-form" action="/donation/insert.do" method="post">
+						<input type="hidden" name="refPlusMNo" value="${plusMBoard.plusMNo }">
 						<div class="modal-body justify-content-center">
 							<div class="mb-3">
-								<span>보유 포인트 : </span> <span>1000P</span>
+								<span>보유 포인트 : </span> <span id="memberPoint">${memberCurPoint }</span><span>P</span>
 							</div>
 							<div class="mb-3">
-								<input type="number" id="inputPoint"
+								<input type="number" id="dntPoint" name="dntPoint"
 									placeholder="기부할 포인트를 입력하세요" style="width: 80%;"> <label
 									for="inputPoint"> P </label>
 							</div>
+							<div>
+								<span id="dnt-msg" style="color:red;"></span>							
+							</div>
 							<div class="mb-3">
-								<input type="checkbox" name="" id="dntAgree" required> <label
+								<input type="checkbox" name="" id="dntAgree"> <label
 									for="dntAgree">기부한 포인트는 취소할 수 없습니다.</label>
 							</div>
 						</div>
 						<div class="modal-footer d-flex justify-content-center">
 							<button type="button" id="close" class="btn btn-secondary"
 								data-bs-dismiss="modal">닫기</button>
-							<button type="button" id="dntBtn" class="btn btn-primary">기부하기</button>
+							<button type="submit" id="dntBtn" class="btn btn-primary">기부하기</button>
 						</div>
 					</form>
 				</div>
@@ -348,7 +354,7 @@
 			}
 		}
 
-		// 좋아요 hover
+		/* // 좋아요 hover
 		function toggleIcon(button) {
 			const icon = button.querySelector('i');
 
@@ -356,8 +362,11 @@
 			if (icon.classList.contains('bi-suit-heart')) {
 				icon.classList.remove('bi-suit-heart');
 				icon.classList.add('bi-suit-heart-fill');
+			}else {
+				icon.classList.remove('bi-suit-heart-fill');
+				icon.classList.add('bi-suit-heart');
 			}
-		}
+		} */
 		
 		// 좋아요 클릭
 		function likeBtn() {
@@ -372,6 +381,27 @@
 				location.href = "/plusMLike/insert.do?refPlusMNo=" + plusMNo;
 			}
 		}
+		
+		// 기부 폼 유효성 체크
+		document.querySelector("#dnt-form").addEventListener("submit", (e) => {
+			const memberPoint = document.querySelector("#memberPoint").innerText;
+			const inputPoint = document.querySelector("#dntPoint").value;
+			const msg = document.querySelector("#dnt-msg");
+			const dntAgree = document.querySelector("#dntAgree");
+			if(isNaN(parseInt(inputPoint)) || parseInt(inputPoint) <= 0) {
+				e.preventDefault();
+				msg.innerText = "기부할 포인트를 입력하세요.";
+			}else if(parseInt(inputPoint) > parseInt(memberPoint)) {
+				e.preventDefault();
+				msg.innerText = "입력한 포인트가 보유한 포인트보다 큽니다.";
+			}else if (!dntAgree.checked) {
+				e.preventDefault();
+				msg.innerText = "포인트 취소 불가 동의 후 기부 가능합니다.";
+			}else {
+				msg.innerText = "";
+				submit();
+			}
+		});
 	</script>
 </body>
 

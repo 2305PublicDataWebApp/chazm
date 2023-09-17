@@ -2,6 +2,7 @@ package kr.co.chazm.plusmember.service;
 
 import java.util.List;
 
+import kr.co.chazm.plusmember.domain.Donation;
 import kr.co.chazm.plusmember.domain.PageInfo;
 import kr.co.chazm.plusmember.domain.PlusMBoard;
 import kr.co.chazm.plusmember.domain.PlusMLike;
@@ -25,12 +26,37 @@ public interface PlusMBoardService {
 	int insertPlusMLike(PlusMLike plusMLike);
 
 	/**
+	 * 포인트로 기부해요 기부 등록 Service
+	 * 
+	 * @param donation
+	 * @return int
+	 */
+	int insertDonation(Donation donation);
+
+	/**
 	 * 포인트로 기부해요 게시글 수정 Service
 	 * 
 	 * @param plusMBoard
 	 * @return int
 	 */
 	int updatePlusMBoard(PlusMBoard plusMBoard);
+
+	/**
+	 * 포인트로 기부해요 기부 금액 업데이트 Service
+	 * 
+	 * @param plusAmount
+	 * @param plusMNo
+	 * @return
+	 */
+	int updatePlusMCurVal(Donation donation);
+
+	/**
+	 * 포인트로 기부해요 기부 후 멤버 포인트 업데이트 Service
+	 * 
+	 * @param donation
+	 * @return int
+	 */
+	int updateMemberPoint(Donation donation);
 
 	/**
 	 * 포인트로 기부해요 게시글 삭제 Service
@@ -73,9 +99,40 @@ public interface PlusMBoardService {
 
 	/**
 	 * 아이디별 게시글 좋아요 여부 조회 Service
+	 * 
 	 * @param plusMLike
 	 * @return int
 	 */
 	int selectLikeYn(PlusMLike plusMLike);
+
+	/**
+	 * 총 기부 참여 명수 조회 Service
+	 * 
+	 * @return int
+	 */
+	int selectDntListCount();
+
+	/**
+	 * 총 기부 참여 금액 조회 Service
+	 * 
+	 * @return int
+	 */
+	int selectAllDntAmount();
+
+	/**
+	 * 게시글별 기부 여부 조회 Service
+	 * 
+	 * @param donation
+	 * @return int
+	 */
+	int selectDntYn(Donation donation);
+
+	/**
+	 * 멤버 포인트 조회 Service
+	 * 
+	 * @param memberId
+	 * @return int
+	 */
+	int selectMemberPoint(String memberId);
 
 }

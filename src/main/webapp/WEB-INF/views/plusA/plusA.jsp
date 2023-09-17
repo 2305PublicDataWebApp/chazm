@@ -238,11 +238,13 @@
 		                        </ul>
 		                    </nav>
 		                </div>
-                        <div class="btnArea justify-content-center text-center">
-                            <button class="writeBtn btn" onclick="showInsertForm();">글쓰기</button>
-                            <button class="modifyBtn btn" onclick="showUpdateForm();">수정</button>
-                            <button class="deleteBtn btn" onclick="deletePlusABoard();">삭제</button>
-                        </div>
+		                <c:if test="${memberGrade == 3 }">
+	                        <div class="btnArea justify-content-center text-center">
+	                            <button class="writeBtn btn" onclick="showInsertForm();">글쓰기</button>
+	                            <button class="modifyBtn btn" onclick="showUpdateForm();">수정</button>
+	                            <button class="deleteBtn btn" onclick="deletePlusABoard();">삭제</button>
+	                        </div>		                
+		                </c:if>
                     </div>
                 </div>
             </section>
