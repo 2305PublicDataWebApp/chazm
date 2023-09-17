@@ -19,6 +19,20 @@ public interface MemberService {
 	int insertCORMember(Member member);
 
 	/**
+	 * 회원정보 수정 Service
+	 * @param member
+	 * @return int
+	 */
+	int updateMember(Member member);
+
+	/**
+	 * 회원정보 탈퇴
+	 * @param member
+	 * @return
+	 */
+	int deleteMember(Member member);
+
+	/**
 	 * 로그인 Service
 	 * @param member 
 	 * @return member
@@ -31,5 +45,26 @@ public interface MemberService {
 	 * @return member
 	 */
 	Member selectOneById(String memberId);
+
+	/**
+	 * 이메일로 아이디 찾기 Service
+	 * @param member
+	 * @return member
+	 */
+	Member selectOneByEmail(Member member);
+
+	/**
+	 * 번호로 아이디 찾기 Service
+	 * @param member
+	 * @return member
+	 */
+	Member selectOneByPhone(Member member);
+
+	/**
+	 * 아이디 중복 체크 Service
+	 * @param memberId
+	 * @return int
+	 */
+	int selectCheckById(String memberId);
 
 }

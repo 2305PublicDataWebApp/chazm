@@ -30,6 +30,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public int updateMember(Member member) {
+		int result = mStore.updateMember(sqlSession, member);
+		return result;
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		int result = mStore.deleteMember(sqlSession, member);
+		return result;
+	}
+
+	@Override
 	public Member selectCheckLogin(Member member) {
 		Member mOne = mStore.selectCheckLogin(sqlSession, member);
 		return mOne;
@@ -39,6 +51,24 @@ public class MemberServiceImpl implements MemberService{
 	public Member selectOneById(String memberId) {
 		Member mOne = mStore.selectOneById(sqlSession, memberId);
 		return mOne;
+	}
+
+	@Override
+	public Member selectOneByEmail(Member member) {
+		Member mOne = mStore.selectOneByEmail(sqlSession, member);
+		return mOne;
+	}
+
+	@Override
+	public Member selectOneByPhone(Member member) {
+		Member mOne = mStore.selectOneByPhone(sqlSession, member);
+		return mOne;
+	}
+
+	@Override
+	public int selectCheckById(String memberId) {
+		int result = mStore.selectCheckById(sqlSession, memberId);
+		return result;
 	}
 
 }

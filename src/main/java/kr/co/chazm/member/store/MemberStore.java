@@ -23,6 +23,22 @@ public interface MemberStore {
 	int insertCORMember(SqlSession sqlSession, Member member);
 
 	/**
+	 * 회원정보 수정 Store
+	 * @param sqlSession
+	 * @param member
+	 * @return
+	 */
+	int updateMember(SqlSession sqlSession, Member member);
+
+	/**
+	 * 회원 탈퇴 Store
+	 * @param sqlSession
+	 * @param member
+	 * @return
+	 */
+	int deleteMember(SqlSession sqlSession, Member member);
+
+	/**
 	 * 로그인 Store
 	 * @param sqlSession
 	 * @param member
@@ -37,5 +53,29 @@ public interface MemberStore {
 	 * @return member
 	 */
 	Member selectOneById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 이메일로 아이디찾기 Store
+	 * @param sqlSession
+	 * @param member
+	 * @return
+	 */
+	Member selectOneByEmail(SqlSession sqlSession, Member member);
+
+	/**
+	 * 번호로 아이디찾기 Store
+	 * @param sqlSession
+	 * @param member
+	 * @return member
+	 */
+	Member selectOneByPhone(SqlSession sqlSession, Member member);
+
+	/**
+	 * 아이디 중복체크 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int selectCheckById(SqlSession sqlSession, String memberId);
 
 }
