@@ -2,3 +2,50 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FindBoardMapper">
+	<resultMap type="FindBoard" id="FindBoardResultMap">
+		<id 	property="findNo" 		  column="FIND_NO"/>
+		<result property="findTitle" 	  column="FIND_TITLE"/>
+		<result property="findContent" 	  column="FIND_CONTENT"/>
+		<result property="findWriter" 	  column="FIND_WRITER"/>
+		<result property="memberName" 	  column="MEMBER_NAME"/>
+		<result property="findFilename"   column="FIND_FILENAME"/>
+		<result property="findFilerename" column="FIND_FILERENAME"/>
+		<result property="findFilepath"   column="FIND_FILEPATH"/>
+		<result property="findCategory"   column="FIND_CATEGORY"/>
+		<result property="findLocation"   column="FIND_LOCATION"/>
+		<result property="findPlace" 	  column="FIND_PLACE"/>
+		<result property="findDate" 	  column="FIND_DATE"/>
+		<result property="findColor" 	  column="FIND_COLOR"/>
+		<result property="findBrand" 	  column="FIND_BRAND"/>
+		<result property="getPlace" 	  column="GET_PLACE"/>
+		<result property="getDate" 		  column="GET_DATE"/>
+		<result property="fCreateDate" 	  column="F_CREATE_DATE"/>
+		<result property="fUpdateDate" 	  column="F_UPDATE_DATE"/>
+		<result property="fStateYn" 	  column="F_STATE_YN"/>
+	</resultMap>
+	
+	<insert id="insertFindBoard">
+		INSERT INTO FIND_BOARD_TBL VALUES(SEQ_FIND_B_NO.NEXTVAL, #{findTitle}, #{findContent}, #{findWriter}, #{memberName}, #{findFilename}, #{findFilerename}, #{findFilepath}
+		, #{findCategory}, #{findLocation}, #{findPlace}, #{findDate}, #{findColor}, #{findBrand}, #{getPlace}, NULL, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="updateFindBoard">
+		UPDATE FIND_BOARD_TBL SET FIND_TITLE = #{findTitle}, FIND_CONTENT = #{findContent}, FIND_FILENAME = #{findFilename}, FIND_FILERENAME = #{findFilerename}, FIND_FILEPATH = #{findFilepath}
+		, FIND_CATEGORY = #{findCategory}, FIND_LOCATION = #{findLocation}, FIND_PLACE = #{findPlace}, FIND_COLOR = #{findColor}, FIND_BRAND = #{findBrand}, F_UPDATE_DATE = #{fUpdateDate}
+		WHERE FIND_NO = #{findNo}
+	</update>
+	
+	<update id="updateGetDate">
+		UPDATE FIND_BOARD_TBL SET GET_DATE = SYSDATE, F_STATE_YN = 'N' WHERE FIND_NO = #{findNo}
+	</update>
+	
+	<update id="deleteFindBoard">
+		UPDATE FIND_BOARD_TBL SET F_STATE_YN = 'N' WHERE FIND_NO = #{findNo}
+	</update>
+	
+	<select id="selectFindBoardByNo" resultMap="FindBoardResultMap">
+		SELECT * FROM FIND_BOARD_TBL WHERE FIND_NO = #{findNo}
+	</select>
+	
+</mapper>

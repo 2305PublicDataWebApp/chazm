@@ -10,6 +10,14 @@ public class Donation {
 	private int dntPoint;
 	private Timestamp dntDate;
 
+	public Donation() {}
+	
+	public Donation(int refPlusMNo, String memberId) {
+		super();
+		this.refPlusMNo = refPlusMNo;
+		this.memberId = memberId;
+	}
+
 	public int getDonationNo() {
 		return donationNo;
 	}

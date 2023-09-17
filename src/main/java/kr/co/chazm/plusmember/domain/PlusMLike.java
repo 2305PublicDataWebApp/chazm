@@ -6,6 +6,16 @@ public class PlusMLike {
 	private int refPlusMNo;
 	private String memberId;
 
+	public PlusMLike() {
+		super();
+	}
+
+	public PlusMLike(int refPlusMNo, String memberId) {
+		super();
+		this.refPlusMNo = refPlusMNo;
+		this.memberId = memberId;
+	}
+
 	public int getLikeNo() {
 		return likeNo;
 	}
@@ -32,7 +42,7 @@ public class PlusMLike {
 
 	@Override
 	public String toString() {
-		return "PlusMLike [likeNo=" + likeNo + ", refPlusMNo=" + refPlusMNo + ", memberId=" + memberId + "]";
+		return "기부좋아요 [좋아요번호=" + likeNo + ", 글번호=" + refPlusMNo + ", 아이디=" + memberId + "]";
 	}
 
 }
