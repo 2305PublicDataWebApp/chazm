@@ -2,3 +2,91 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PlusMBoardMapper">
+	<resultMap type="PlusMBoard" id="plusMBoardResultMap">
+		<id 	property="plusMNo" 			column="PLUS_M_NO"/>
+		<result property="plusMTitle" 		column="PLUS_M_TITLE"/>
+		<result property="plusMContent" 	column="PLUS_M_CONTENT"/>
+		<result property="plusMWriter" 		column="PLUS_M_WRITER"/>
+		<result property="plusMDntPlace" 	column="PLUS_M_DNT_PLACE"/>
+		<result property="plusMGoalAmount" 	column="PLUS_M_GOAL_AMOUNT"/> 
+		<result property="plusMCurAmount" 	column="PLUS_M_CUR_AMOUNT"/>
+		<result property="plusMFilename" 	column="PLUS_M_FILENAME"/>
+		<result property="plusMFilerename" 	column="PLUS_M_FILERENAME"/>
+		<result property="plusMFilepath" 	column="PLUS_M_FILEPATH"/>
+		<result property="plusMStartDate" 	column="PLUS_M_START_DATE"/>
+		<result property="plusMEndDate" 	column="PLUS_M_END_DATE"/>
+		<result property="plusMCreateDate" 	column="PLUS_M_CREATE_DATE"/>
+		<result property="plusMEndYn" 		column="PLUS_M_END_YN"/>
+	</resultMap>
+	<resultMap type="PlusMLike" id="plusMLikeResultMap">
+		<id 	property="likeNo" column="PLUS_M_LIKE_NO"/>
+		<result property="refPlusMNo" column="REF_PLUS_M_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
+	<insert id="insertPlusMBoard">
+		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
+	</insert>
+	<insert id="insertDonation">
+		INSERT INTO DONATION_TBL VALUES(SEQ_DONATION_NO.NEXTVAL, #{refPlusMNo}, #{memberId}, #{dntPoint}, DEFAULT)
+	</insert>
+	<insert id="insertPoint" parameterType="map">
+		INSERT INTO POINT_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{memberId}, '-'||#{pointAmount}, #{pointDetail}, DEFAULT)
+	</insert>
+	<update id="updatePlusMBoard">
+		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_TITLE = #{plusMTitle}, PLUS_M_CONTENT = #{plusMContent}, PLUS_M_DNT_PLACE = #{plusMDntPlace}, PLUS_M_GOAL_AMOUNT = #{plusMGoalAmount}, PLUS_M_FILENAME = #{plusMFilename}, PLUS_M_FILERENAME = #{plusMFilerename}, PLUS_M_FILEPATH = #{plusMFilepath}, PLUS_M_END_DATE = #{plusMEndDate} WHERE PLUS_M_NO = #{plusMNo}
+	</update>
+	<update id="updatePlusMCurVal">
+		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_CUR_AMOUNT = PLUS_M_CUR_AMOUNT + #{dntPoint} WHERE PLUS_M_NO = #{refPlusMNo} 
+	</update>
+	<update id="updateMemberPoint">
+		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT - #{dntPoint} WHERE MEMBER_ID = #{memberId}
+	</update>
+	<update id="deletePlusMBoard">
+		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_END_YN = 'Y' WHERE PLUS_M_NO = #{plusMNo}
+	</update>
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N'
+	</select>
+	<select id="selectPlusMBoardList" resultMap="plusMBoardResultMap">
+		<choose>
+			<when test="orderBy == 'latest'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_NO DESC
+			</when>
+			<when test="orderBy == 'likes'">
+				SELECT b.*, likes.NUM_LIKES
+				FROM PLUS_M_BOARD_TBL b
+				LEFT JOIN (
+				    SELECT REF_PLUS_M_NO, COUNT(*) AS NUM_LIKES
+				    FROM PLUS_M_LIKE_TBL
+				    GROUP BY REF_PLUS_M_NO
+				) likes ON b.PLUS_M_NO = likes.REF_PLUS_M_NO
+				ORDER BY likes.NUM_LIKES DESC NULLS LAST
+			</when>
+			<when test="orderBy == 'dntHigh'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_CUR_AMOUNT DESC
+			</when>
+			<when test="orderBy == 'dntLow'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_CUR_AMOUNT ASC
+			</when>
+			<when test="orderBy == 'deadline'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_END_DATE ASC
+			</when>
+		</choose>
+	</select>
+	<select id="selectOneByNo" resultMap="plusMBoardResultMap">
+		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_NO = #{plusMNo} AND PLUS_M_END_YN = 'N'
+	</select>
+	<select id="selectDntListCount" resultType="_int">
+		SELECT COUNT(*) FROM DONATION_TBL
+	</select>
+	<select id="selectAllDntAmount" resultType="_int">
+		SELECT SUM(DNT_POINT) FROM DONATION_TBL
+	</select>
+	<select id="selectDntYn" resultType="_int">
+		SELECT COUNT(*) FROM DONATION_TBL WHERE REF_PLUS_M_NO = #{refPlusMNo} AND MEMBER_ID = #{memberId}
+	</select>
+	<select id="selectMemberPoint" resultType="_int">
+		SELECT MEMBER_POINT FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
+	</select>
+</mapper>

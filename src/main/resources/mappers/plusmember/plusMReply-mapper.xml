@@ -2,3 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PlusMReplyMapper">
+	<resultMap type="PlusMReply" id="plusMReplyResultMap">
+		<id 	property="plusMRNo" 		column="PLUS_M_R_NO"/>
+		<result property="refPlusMNo" 		column="REF_PLUS_M_NO"/>
+		<result property="plusMRContent" 	column="PLUS_M_R_CONTENT"/>
+		<result property="plusMRWriter" 	column="PLUS_M_R_WRITER"/>
+		<result property="plusMRCreateDate" column="PLUS_M_R_CREATE_DATE"/>
+		<result property="plusMRUpdateDate" column="PLUS_M_R_UPDATE_DATE"/>
+		<result property="plusMRStateYn" 	column="PLUS_M_R_STATE_YN"/>
+	</resultMap>
+	<insert id="insertPlusMReply">
+		INSERT INTO PLUS_M_REPLY_TBL VALUES(SEQ_PLUS_M_R_NO.NEXTVAL, #{refPlusMNo}, #{plusMRContent}, #{plusMRWriter}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	<update id="updatePlusMReply">
+		UPDATE PLUS_M_REPLY_TBL SET PLUS_M_R_CONTENT = #{plusMRContent}, PLUS_M_R_UPDATE_DATE = DEFAULT WHERE PLUS_M_R_NO = #{plusMRNo}
+	</update>
+	<update id="deletePlusMReply">
+		UPDATE PLUS_M_REPLY_TBL SET PLUS_M_R_STATE_YN = 'N' WHERE PLUS_M_R_NO = #{plusMRNo}
+	</update>
+	<select id="selectPlusMReplyList" resultMap="plusMReplyResultMap">
+		SELECT * FROM PLUS_M_REPLY_TBL WHERE REF_PLUS_M_NO = #{plusMNo} AND PLUS_M_R_STATE_YN = 'Y' ORDER BY PLUS_M_R_NO DESC
+	</select>
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM PLUS_M_REPLY_TBL WHERE REF_PLUS_M_NO = #{plusMNo} AND PLUS_M_R_STATE_YN = 'Y'
+	</select>
+</mapper>

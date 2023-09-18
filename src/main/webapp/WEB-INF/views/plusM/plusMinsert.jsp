@@ -71,7 +71,7 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
-                        <form action="" method="" role="form" class="form text-left">
+                        <form action="/plusMBoard/insert.do" method="post" role="form" class="form text-left" enctype="multipart/form-data"> 
                             <div class="form-group col-md-12">
                                 <label for="plusMTitle"><i class="bi bi-card-heading"></i></label>
                                 <input type="text" class="form-control" name="plusMTitle" id="plusMTitle" placeholder="제목을 입력하세요." required>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="uploadFile"><i class="bi bi-card-image"></i></label>
-                                <input type="file" id="uploadFile" class="form-control" placeholder="파일을 선택하세요." required>
+                                <input type="file" id="uploadFile" name="uploadFile" class="form-control" placeholder="파일을 선택하세요." required>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-6">
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-12">
                                 <!-- <label for="plusMContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="editordata" id="plusMContent" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" id="summernote" name="plusMContent" id="plusMContent" cols="30" rows="10"></textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
                                 <button type="submit">등록</button>
