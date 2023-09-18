@@ -47,7 +47,6 @@ public class FindReplyController {
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", url);
 			mv.setViewName("common/message");
 		}
@@ -102,12 +101,12 @@ public class FindReplyController {
 				} else {
 					mv.addObject("msg", "댓글 삭제 실패");
 					mv.addObject("url", "/findBoard/list.do");
-					mv.setViewName("common/errorPage");
+					mv.setViewName("common/message");
 				}
 			} catch (Exception e) {
 				mv.addObject("msg", "관리자에게 문의하세요.");
 				mv.addObject("url", url);
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/message");
 			}
 			return mv;
 		}

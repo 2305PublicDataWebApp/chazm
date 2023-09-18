@@ -78,9 +78,8 @@ public class FindBoardController {
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/findBoard/insert.do");
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -115,9 +114,8 @@ public class FindBoardController {
 			} 
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/findBoard/update.do?findNo="+findBoard.getFindNo());
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -139,9 +137,8 @@ public class FindBoardController {
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/findBoard/detail.do?findNo="+findNo);
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -192,15 +189,13 @@ public class FindBoardController {
 				mv.setViewName("find/findBoardUpdate");
 			} else {
 				mv.addObject("msg", "데이터 조회가 완료되지 않았습니다.");
-				mv.addObject("error", "데이터 조회 실패");
 				mv.addObject("url", "/index.jsp");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/index.jsp");
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -219,16 +214,13 @@ public class FindBoardController {
 				mv.addObject("pInfo", pInfo).addObject("fBList", fBList).setViewName("find/findBoardList");
 			} else {
 				mv.addObject("msg", "게시글 목록 조회가 완료되지 않았습니다.");
-				mv.addObject("error", "게시글 목록 조회 실패");
 				mv.addObject("url", "/index.jsp");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
-			mv.addObject("msg", "게시글 목록 조회가 완료되지 않았습니다.");
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/index.jsp");
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -258,15 +250,13 @@ public class FindBoardController {
 				mv.setViewName("find/findBoardDetail");
 			} else {
 				mv.addObject("msg", "게시글 조회가 완료되지 않았습니다.");
-				mv.addObject("error", "게시글 상세 조회 실패");
 				mv.addObject("url", "/findBoard/list.do");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/findBoard/list.do");
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -281,12 +271,7 @@ public class FindBoardController {
             , @ModelAttribute FindBoard findBoard
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 			, ModelAndView mv) {
-		// searchFindByKeyword
 		Map<String, String> paramMap = new HashMap<String, String>();
-//		paramMap.put("findSearchCondition", findSearchCondition);
-//		paramMap.put("findSearchKeyword", findSearchKeyword);
-//		paramMap.put("findDateStart", findDateStart);
-//		paramMap.put("findDateEnd", findDateEnd);
 		// 검색 파라미터가 존재하는 경우에만 paramMap에 추가
 	    if (findDateStart != null && !findDateStart.isEmpty()) {
 	        paramMap.put("findDateStart", findDateStart);
@@ -348,15 +333,13 @@ public class FindBoardController {
 				mv.setViewName("redirect:/findBoard/detail.do?findNo=" + refFindNo);
 			} else {
 				mv.addObject("msg", "좋아요 등록에 실패했습니다.");
-				mv.addObject("error", "좋아요 등록 실패");
 				mv.addObject("url", "/findBoard/detail.do?findNo=" + refFindNo);
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "좋아요 등록 중 오류가 발생하였습니다.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/findBoard/detail.do?findNo=" + refFindNo);
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -376,15 +359,13 @@ public class FindBoardController {
 				mv.setViewName("redirect:/findBoard/detail.do?findNo=" + refFindNo);
 			} else {
 				mv.addObject("msg", "좋아요 삭제에 실패했습니다.");
-				mv.addObject("error", "좋아요 삭제 실패");
 				mv.addObject("url", "/findBoard/detail.do?findNo=" + refFindNo);
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "좋아요 삭제 중 오류가 발생하였습니다.");
-			mv.addObject("error", e.getMessage());
 			mv.addObject("url", "/findBoard/detail.do?findNo=" + refFindNo);
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}

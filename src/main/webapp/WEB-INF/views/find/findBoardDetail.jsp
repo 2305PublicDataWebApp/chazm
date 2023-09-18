@@ -116,7 +116,7 @@
 								<div class="content-img">
 									<img
 										src="../resources/fuploadFiles/${findBoard.findFilerename }"
-										onerror="this.src='../resources/assets/img/noimage.jpg'">
+										onerror="this.src='../resources/assets/img/no-image.jpg'">
 								</div>
 								<div class="infoWrap">
 									<div class="d-flex justify-content-start">
