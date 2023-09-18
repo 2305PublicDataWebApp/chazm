@@ -80,7 +80,7 @@
 		       </div>
 		       <button class=" btn btn-lg login-button" type="submit">로그인</button>
 		       <div class="links text-center">
-		           <a href="memberId" class="login-bottm">아이디 찾기</a> | <a href="memberPw" class="login-bottm">비밀번호 찾기</a> | <a href="/member/insertMain.do" class="login-bottm">회원가입</a>
+		           <a href="/member/findId.do" class="login-bottm">아이디 찾기</a> | <a href="/member/findPw.do" class="login-bottm">비밀번호 찾기</a> | <a href="/member/insertMain.do" class="login-bottm">회원가입</a>
 		       </div>
 		       </form>
 		       <br><br>

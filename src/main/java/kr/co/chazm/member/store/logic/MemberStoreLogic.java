@@ -22,6 +22,24 @@ public class MemberStoreLogic implements MemberStore {
 	}
 
 	@Override
+	public int updateMember(SqlSession sqlSession, Member member) {
+		int result = sqlSession.update("MemberMapper.updateMember", member);
+		return result;
+	}
+
+	@Override
+	public int updateMemberPw(SqlSession sqlSession, Member member) {
+		int result = sqlSession.update("MemberMapper.updateMemberPw", member);
+		return result;
+	}
+
+	@Override
+	public int deleteMember(SqlSession sqlSession, Member member) {
+		int result = sqlSession.update("MemberMapper.deleteMember", member);
+		return result;
+	}
+
+	@Override
 	public Member selectCheckLogin(SqlSession sqlSession, Member member) {
 		Member mOne = sqlSession.selectOne("MemberMapper.selectCheckLogin", member);
 		return mOne;
@@ -31,6 +49,24 @@ public class MemberStoreLogic implements MemberStore {
 	public Member selectOneById(SqlSession sqlSession, String memberId) {
 		Member mOne = sqlSession.selectOne("MemberMapper.selectOneById", memberId);
 		return mOne;
+	}
+
+	@Override
+	public Member selectOneByEmail(SqlSession sqlSession, Member member) {
+		Member mOne = sqlSession.selectOne("MemberMapper.selectOneByEmail", member);
+		return mOne;
+	}
+
+	@Override
+	public Member selectOneByPhone(SqlSession sqlSession, Member member) {
+		Member mOne = sqlSession.selectOne("MemberMapper.selectOneByPhone", member);
+		return mOne;
+	}
+
+	@Override
+	public int selectCheckById(SqlSession sqlSession, String memberId) {
+		int result = sqlSession.selectOne("MemberMapper.selectCheckById", memberId);
+		return result;
 	}
 
 }

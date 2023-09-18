@@ -4,43 +4,43 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>찾음 : 분실물 통합 포털</title>
-	<meta content="" name="description">
-	<meta content="" name="keywords">
-	<!-- Favicons -->
-	<link href="../resources/assets/img/light.png" rel="icon">
-	<link href="../resources/assets/img/apple-touch-icon.png"
-		rel="apple-touch-icon">
-	
-	<!-- Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-		rel="stylesheet">
-	
-	<!-- Vendor CSS Files -->
-	<link href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css"
-		rel="stylesheet">
-	<link
-		href="../resources/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-		rel="stylesheet">
-	<link href="../resources/assets/vendor/aos/aos.css" rel="stylesheet">
-	<link href="../resources/assets/vendor/glightbox/css/glightbox.min.css"
-		rel="stylesheet">
-	<link href="../resources/assets/vendor/swiper/swiper-bundle.min.css"
-		rel="stylesheet">
-	
-	<!-- Template Main CSS File -->
-	<link href="../resources/assets/css/index.css" rel="stylesheet">
-	
-	<link href="../resources/assets/css/member/signMember.css"
-		rel="stylesheet">
-	<link rel="stylesheet" href="../resources/assets/css/common/header.css">
-	<link rel="stylesheet" href="../resources/assets/css/common/footer.css">
-	
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>찾음 : 분실물 통합 포털</title>
+		<meta content="" name="description">
+		<meta content="" name="keywords">
+		<!-- Favicons -->
+		<link href="../resources/assets/img/light.png" rel="icon">
+		<link href="../resources/assets/img/apple-touch-icon.png"
+			rel="apple-touch-icon">
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+			rel="stylesheet">
+		
+		<!-- Vendor CSS Files -->
+		<link href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css"
+			rel="stylesheet">
+		<link
+			href="../resources/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+			rel="stylesheet">
+		<link href="../resources/assets/vendor/aos/aos.css" rel="stylesheet">
+		<link href="../resources/assets/vendor/glightbox/css/glightbox.min.css"
+			rel="stylesheet">
+		<link href="../resources/assets/vendor/swiper/swiper-bundle.min.css"
+			rel="stylesheet">
+		
+		<!-- Template Main CSS File -->
+		<link href="../resources/assets/css/index.css" rel="stylesheet">
+		
+		<link href="../resources/assets/css/member/signMember.css"
+			rel="stylesheet">
+		<link rel="stylesheet" href="../resources/assets/css/common/header.css">
+		<link rel="stylesheet" href="../resources/assets/css/common/footer.css">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- =======================================================
 	        * Template Name: Impact
 	        * Updated: Jul 27 2023 with Bootstrap v5.3.1
@@ -79,10 +79,21 @@
 							<div class="card-body">
 								<form class="sign-form" action="/member/insertIDN.do" method="post">
 									<div class="mb-2">
-										<label for="memberId" class="form-label">아이디</label> <input
-											type="text" class="form-control" id="memberId" name="memberId"
-											required placeholder="아이디를 입력해 주세요">
-										<div id="memberIdError" class="validation"></div>
+										<label for="memberId" class="form-label">아이디</label>
+										<div class="input-group">
+											<input type="text" class="form-control" id="memberId"
+												name="memberId" required placeholder="아이디를 입력해 주세요" value="${inputId}">
+											<button class="btn btn-outline-secondary" type="button"
+												id="verifyId" onclick="checkId();">중복 확인</button>
+										</div>									
+											<div id="memberIdError" class="validation">
+									        <c:if test="${idCheckResult > 0}">
+									            <span style="color: red;">이미 사용 중인 아이디입니다.</span>
+									        </c:if>
+									        <c:if test="${idCheckResult == 0}">
+									            <span style="color: green;">사용 가능한 아이디입니다.</span>
+									        </c:if>											
+											</div>
 									</div>
 									<div class="mb-2">
 										<label for="memberPw" class="form-label">비밀번호</label> <input
@@ -149,8 +160,56 @@
 					</div>
 				</div>
 			</div>
-	
+		<!-- 핸드폰 인증 모달  -->
+		<div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="verificationModalLabel">핸드폰 인증</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <!-- 인증번호 입력 폼 -->
+		        <div class="mb-3">
+		          <label for="verificationCode" class="form-label">인증번호 입력</label>
+		          <input type="text" class="form-control" id="verificationCode" required>
+		        </div>
+		        <div id="verificationError" class="validation"></div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary" id="verifyVerificationCode">인증 완료</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+		
+		<!-- 이메일 인증 모달 -->
+		<div class="modal fade" id="emailVerificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="verificationModalLabel">이메일 인증</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <!-- 인증번호 입력 폼 -->
+		        <div class="mb-3">
+		          <label for="verificationCode" class="form-label">인증번호 입력</label>
+		          <input type="text" class="form-control" id="emailVerificationCode" required>
+		        </div>
+		        <div id="emailVerificationError" class="validation"></div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary" id="emailVerifyVerificationCode">인증 완료</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+		
 		</main>
+		
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- End Header -->
 		<!-- Vendor JS Files -->
@@ -170,19 +229,17 @@
 	
 		<script
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		<script>	
-			document.querySelector("form.sign-form").addEventListener("submit", function(event) {
-			    // 폼이 제출될 때 실행되는 함수
-	
-			    // 여기서 msg 변수를 가져와서 확인합니다.
-			  	var msg = "${msg}";
-	
-			    if (msg !== null && msg !== "") {
-			        alert(msg);
-	
-			    }
-			});
-	        
+		<script>
+			function checkId(){
+	        	const memberId = document.querySelector("#memberId").value;
+	        	if(memberId === "" || memberId === null){
+	                alert("아이디를 입력하세요.");
+	                return;
+	        	}
+	        	
+				location.href="/member/checkIDN.do?memberId="+memberId;		
+				
+	        }		
 			window.addEventListener("load", function() {
 			    // 페이지가 로드되면 아이디 입력 필드에 자동으로 포커스를 설정합니다.
 			    document.getElementById("memberId").focus();
@@ -207,7 +264,30 @@
 						} else {
 							memberIdError.textContent = "";
 						}
-					});
+						
+						$.ajax({
+						      url: "/member/checkDuplicateId.do", // 서버의 아이디 중복 확인 요청을 처리하는 URL
+						      type: "POST",
+						      data: { memberId: memberId },
+						      success: function (data) {
+						        if (data === "duplicate") {
+						          // 중복된 아이디일 경우 메시지를 표시하고 폼 전송을 막습니다.
+						          memberIdError.text("이미 사용 중인 아이디입니다.");
+						          $("form.sign-form").off("submit").submit(function (e) {
+						            e.preventDefault(); // 폼 전송 막음
+						          });
+						        } else {
+						          $("form.sign-form").off("submit"); // 이벤트 리스너 해제
+						        }
+						      },
+						      error: function () {
+						        $("form.sign-form").off("submit").submit(function (e) {
+						          e.preventDefault(); // 폼 전송 막음
+						        });
+						      },
+						    });						
+						
+			});
 	
 			// 비밀번호 유효성 검사
 			document
@@ -346,7 +426,77 @@
 							}
 						}).open();
 			}
+			// 랜덤 인증번호 생성 함수
+			function generateRandomCode() {
+			  return Math.floor(1000 + Math.random() * 9000); // 1000부터 9999까지의 랜덤 숫자 생성
+			}
+
+			document.getElementById("verifyPhone").addEventListener("click", function () {
+			  // 핸드폰 번호 유효성 검사 (핸드폰 번호 입력 필드의 id를 확인해주세요)
+			  const memberPhone = document.getElementById("memberPhone").value;
+			  const memberPhoneError = document.getElementById("memberPhoneError");
+
+			  if (memberPhone.length === 0) {
+			    memberPhoneError.textContent = "핸드폰 번호를 입력하세요.";
+			    return;
+			  }
+
+			  // 핸드폰 번호가 유효하다고 가정하고, 랜덤 인증번호 생성
+			  const verificationCode = generateRandomCode();
+
+			  // 생성된 인증번호를 alert 창에 표시
+			  alert("인증번호가 발송되었습니다. 인증번호: " + verificationCode);
+
+			  // 모달 창 열기
+			  $("#verificationModal").modal("show");
+
+			  // 인증번호 확인 버튼 리스너
+			  document.getElementById("verifyVerificationCode").addEventListener("click", function () {
+			    const enteredCode = document.getElementById("verificationCode").value;
+			    const verificationError = document.getElementById("verificationError");
+
+			    if (enteredCode === verificationCode.toString()) {
+			      alert("인증이 완료되었습니다.");
+			      $("#verificationModal").modal("hide"); // 모달 창 닫기
+			    } else {
+			      verificationError.textContent = "인증번호가 일치하지 않습니다.";
+			    }
+			  });
+			});
 			
+			document.getElementById("verifyEmail").addEventListener("click", function () {
+			    const memberEmail = document.getElementById("memberEmail").value;
+				
+			    $.ajax({
+			        url: "/confirmMail.do", 
+			        type: "POST", 
+			        data: { memberEmail: memberEmail },
+			        success: function (emailCode) {
+			        	console.log(memberEmail);
+			            const serverVerificationCode = emailCode;
+						console.log(serverVerificationCode);
+			            alert("이메일이 발송되었습니다. 인증 코드를 확인하세요.");
+			            $("#emailVerificationModal").modal("show");
+			
+			            document.getElementById("emailVerifyVerificationCode").addEventListener("click", function () {
+			                const enteredCode = document.getElementById("emailVerificationCode").value;
+			                const verificationError = document.getElementById("emailVerificationError");
+
+			                if (enteredCode == serverVerificationCode) {
+			                    alert("이메일 인증이 완료되었습니다.");
+			                    $("#emailVerificationModal").modal("hide"); 
+			                } else {
+			                    verificationError.textContent = "인증번호가 일치하지 않습니다.";
+			                }
+			            });
+			        },
+			        error: function () {
+			            alert("이메일 발송 중 오류가 발생했습니다.");
+			        }
+			    });
+			});		
+			
+	
 		</script>
 		
 	</body>
