@@ -5,6 +5,14 @@ public class FindLike {
 	private int refFindNo;
 	private String memberId;
 	
+	public FindLike() {}
+	
+	public FindLike(int refFindNo, String memberId) {
+		super();
+		this.refFindNo = refFindNo;
+		this.memberId = memberId;
+	}
+
 	public int getLikeNo() {
 		return likeNo;
 	}

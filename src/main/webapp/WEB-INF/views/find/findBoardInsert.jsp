@@ -88,18 +88,20 @@
                 <div class="container" data-aos="fade-up">
                     <div class="row g-5">
                         <div class="col-lg-12">
-                        	<form action="/findBoard/insert.do" method="post" enctype="multipart/form-data">
+                        	<form action="/findBoard/insert.do" method="post" enctype="multipart/form-data" onsubmit="insert();">
 	                            <article class="blog-details">
 	                                <div class="content">
 	                                    <div id="main_part1" class="d-flex">
 	                                        <div id="picture_wrap">
 	                                            <div id="picture" >
-	                                                <img id="imagePreview" src="#" onerror="this.style.display='none'">
+	                                                <img id="imagePreview" src="../resources/assets/img/noimage.jpg">
 	                                            </div>
 	                                        </div>
 	                                        <div id="find_info_wrap">
 	                                                <div id="find_title" class="">
-	                                                    <input type="text" name="findTitle" placeholder="제목(습득물명)을 입력해주세요." class="w-100 m-2 p-3 border border-dark-subtle rounded text-md-start ">
+	                                                    <input type="text" id="findTitle" name="findTitle" placeholder="제목(습득물명)을 입력해주세요." 
+	                                                    class="w-100 m-2 p-3 border border-dark-subtle rounded text-md-start"
+	                                                    oninvalid="this.setCustomValidity('제목을 입력하세요.')">
 	                                                </div>
 	                
 	                                                <div id="find_category" class="">
@@ -108,14 +110,16 @@
 	                                                            <span id="selectedCategory">습득물 종류</span>
 	                                                        </button>
 	                                                        <ul class="dropdown-menu">
-	                                                            <li><a class="dropdown-item dd-category" data-value="의류">의류</a></li>
-	                                                            <li><a class="dropdown-item dd-category" data-value="가방">가방</a></li>
 	                                                            <li><a class="dropdown-item dd-category" data-value="지갑">지갑</a></li>
+	                                                            <li><a class="dropdown-item dd-category" data-value="가방">가방</a></li>
 	                                                            <li><a class="dropdown-item dd-category" data-value="핸드폰">핸드폰</a></li>
-	                                                            <li><a class="dropdown-item dd-category" data-value="그 외">그 외</a></li>
+	                                                            <li><a class="dropdown-item dd-category" data-value="의류">의류</a></li>
+	                                                            <li><a class="dropdown-item dd-category" data-value="기타">기타</a></li>
 	                                                        </ul>
 	                                                    </div>
-	                                                    <input type="hidden" name="findCategory" id="selectedCategoryInput" value="">
+	                                                    <input type="hidden" name="findCategory" id="selectedCategoryInput" value=""
+	                                                    oninvalid="this.setCustomValidity('종류를 선택하세요.')">
+	                                                    
 	                                                </div>
 	                
 	                                                <div id="find_location" class="">
@@ -146,7 +150,8 @@
 	                                                            </ul>
 	                                                        </div>
 	                                                    </div>
-	                                                    <input type="hidden" name="findLocation" id="selectedLocationInput" value="">
+	                                                    <input type="hidden" name="findLocation" id="selectedLocationInput" value=""
+	                                                    oninvalid="this.setCustomValidity('지역을 선택하세요.')" >
 	                                                </div>
 	                
 	                                                <div id="find_place">
@@ -159,14 +164,16 @@
 	                                                            <li><a class="dropdown-item dd-place" data-value="지하철">지하철</a></li>
 	                                                            <li><a class="dropdown-item dd-place" data-value="택시">택시</a></li>
 	                                                            <li><a class="dropdown-item dd-place" data-value="공항">공항</a></li>
-	                                                            <li><a class="dropdown-item dd-place" data-value="그 외">그 외</a></li>
+	                                                            <li><a class="dropdown-item dd-place" data-value="음식점">음식점</a></li>
 	                                                        </ul>
 	                                                    </div>
-	                                                    <input type="hidden" name="findPlace" id="selectedPlaceInput" value="">
+	                                                    <input type="hidden" name="findPlace" id="selectedPlaceInput" value=""
+	                                                    oninvalid="this.setCustomValidity('장소를 선택하세요.')" >
 	                                                </div>
 	                
 	                                                <div id="find_date" class="d-flex m-2 w-100" >
-	                                                    <input type="date" name="findDate" class="p-1 w-100 border border-dark-subtle rounded text-center" style="height: 48px;"> 
+	                                                    <input type="date" name="findDate" id="findDate" class="p-1 w-100 border border-dark-subtle rounded text-center" style="height: 48px;"
+	                                                    oninvalid="this.setCustomValidity('습득일자를 선택하세요.')" > 
 	                                                </div>
 	                
 	                                                <div id="colorBrand" class="d-flex justify-content-between m-2 w-100 " >
@@ -182,23 +189,27 @@
 	                                                            <li><a class="dropdown-item dd-color" data-value="초록">초록</a></li>
 	                                                            <li><a class="dropdown-item dd-color" data-value="파랑">파랑</a></li>
 	                                                            <li><a class="dropdown-item dd-color" data-value="보라">보라</a></li>
+	                                                            <li><a class="dropdown-item dd-color" data-value="분홍">분홍</a></li>
 	                                                        </ul>
 	                                                    </div>
-	                                                    <input type="hidden" name="findColor" id="selectedColorInput" value="">
+	                                                    <input type="hidden" name="findColor" id="selectedColorInput" value=""
+	                                                    oninvalid="this.setCustomValidity('색상을 선택하세요.')" >
 	                                                    <div id="find_brand" class="w-50">
 	                                                        <input type="text" name="findBrand" placeholder="브랜드" class="w-100 p-3 border border-dark-subtle rounded" style="height:48px;">
 	                                                    </div>
 	                                                </div>
 	            
 	                                                <div class="input-group m-2 w-100">
-	                                                    <input type="file" class="form-control border-dark-subtle rounded" id="imageUpload" name="uploadFile" accept="image/*" onchange="setThumbnail(event);">
+	                                                    <input type="file" class="form-control border-dark-subtle rounded" id="imageUpload" name="uploadFile" accept="image/*" 
+	                                                    onchange="setThumbnail(event);" oninvalid="this.setCustomValidity('이미지를 선택하세요.')" >
 	                                                </div>
 	                                        </div>
 	                                    </div>
 	                                </div><!-- End post content -->
 	                                <hr>
 	                                <div id="container" class="d-flex justify-content-center flex-column">
-	                                    <textarea id="summernote" name="findContent" spellcheck="false"></textarea>
+	                                    <textarea id="summernote" name="findContent" spellcheck="false"
+	                                    oninvalid="this.setCustomValidity('내용을 입력하세요.')" ></textarea>
 	                                    <!-- <input type="text" id="hashtagInput" placeholder="키워드 입력 후 엔터 키 누르기"> -->
 	                                    <div id="hashtagContainer" class="hashtag-container"></div> 
 	                                </div>
@@ -240,6 +251,42 @@
         
 
         <script>
+        	<!-- 글 등록 유효성 체크 -->
+        	function insert() {
+        		const findTitle = document.querySelector("#findTitle");
+        		const findContent = document.querySelector("#summernote");
+        		const findCategory = document.querySelector("#selectedCategoryInput");
+        		const findPlace = document.querySelector("#selectedPlaceInput");
+        		const findLocation = document.querySelector("#selectedLocationInput");
+        		const findDate = document.querySelector("#findDate");
+        		const findColor = document.querySelector("#selectedColorInput");
+        		const file = document.querySelector("#imageUpload");
+        		
+        		if (!findTitle.checkValidity()) {
+        	          return alert('제목을 입력하세요');
+       	        }
+        		if (!findContent.checkValidity()) {
+        	          return alert(findContent.validationMessage);
+       	        }
+        		if (!findCategory.checkValidity()) {
+        	          return alert(findCategory.validationMessage);
+       	        }
+        		if (!findPlace.checkValidity()) {
+        	          return alert(findPlace.validationMessage);
+       	        }
+        		if (!findLocation.checkValidity()) {
+        	          return alert(findLocation.validationMessage);
+       	        }
+        		if (!findDate.checkValidity()) {
+        	          return alert(findDate.validationMessage);
+       	        }
+        		if (!findColor.checkValidity()) {
+        	          return alert(findColor.validationMessage);
+       	        }
+        		if (!file.checkValidity()) {
+        	          return alert(file.validationMessage);
+       	        }
+        	};
     	    <!-- summernote -->
             $(document).ready(function() {  
                 //여기 아래 부분
@@ -247,11 +294,10 @@
                     height: 200,                 // 에디터 높이
                     minHeight: null,             // 최소 높이
                     maxHeight: null,             // 최대 높이
-                    focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+                    focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
                     lang: "ko-KR",				// 한글 설정
                     placeholder: '습득물의 특징이나 추가 물품 등을 자세하게 적어주세요.',	//placeholder 설정
                     toolbar: [
-                        // [groupName, [list of button]]
                         ['fontname', ['fontname']],
                         ['fontsize', ['fontsize']],
                         ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
@@ -296,24 +342,16 @@
                 });
             });
             <!-- 이미지 업로드 미리보기 -->
-            const imageUpload = document.getElementById('imageUpload');
-            const imagePreview = document.getElementById('imagePreview');
-
-            imageUpload.addEventListener('change', function () {
-                const file = this.files[0];
-
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.addEventListener('load', function () {
-                        imagePreview.src = reader.result;
-                    });
-
-                    reader.readAsDataURL(file);
-                } else {
-                    imagePreview.src = '#'; // 기본 이미지 경로 설정
+            function setThumbnail(event){
+                for(const image of event.target.files){
+                   const reader = new FileReader();
+                   reader.onload = function(event){
+                      const img = document.getElementById("imagePreview");
+                      img.src = event.target.result;
+                   }
+                   reader.readAsDataURL(image);
                 }
-            });
+          }   
             
         </script>
 
