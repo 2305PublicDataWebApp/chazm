@@ -2623,6 +2623,7 @@ color : #fff;
 
 .content-img {
     width:50%;
+    height : 500px;
     border: 1px solid #ccc;
     border-radius: 10px;
     margin: 20px;
@@ -2658,3 +2659,6 @@ color : #fff;
     height: 30px;
 }
 
+.findContent p {
+	padding : 30px;
+}

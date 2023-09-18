@@ -79,17 +79,17 @@ section h3 {
   font-size : 24px;
 }
 
-section form {
-  width : 90%;
-  margin-top : 15px;
-  border-radius: 6px;
-  display : flex;
-  justify-content: space-between;
-  font-family : var(--font-default);
-  font-size : 20px;
-  font-weight: 600;
-  background-color: rgb(255, 255, 255);
-}
+/* section form { */
+/*   --width : 90%; */
+/*   margin-top : 15px; */
+/*   border-radius: 6px; */
+/*   display : flex; */
+/*   --justify-content: space-between; */
+/*   font-family : var(--font-default); */
+/*   font-size : 20px; */
+/*   font-weight: 600; */
+/*   background-color: rgb(255, 255, 255); */
+/* } */
 
 section input[type="text"] {
   height: 48px;
