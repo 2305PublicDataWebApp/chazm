@@ -243,9 +243,7 @@ public class FindBoardController {
 				List<FindReply> fRList = findReplyService.selectFindReplyList(pInfo, findNo);
 				List<FindReply> fRRList = findReplyService.selectFindReReplyList(pInfo, findNo);
 				mv.addObject("findBoard", findBoard);
-				mv.addObject("pInfo", pInfo);
-				mv.addObject("fRList", fRList);
-				mv.addObject("fRRList", fRRList);
+				mv.addObject("pInfo", pInfo).addObject("fRList", fRList).addObject("fRRList", fRRList).addObject("totalCount", totalCount);
 				mv.addObject("likeYn", likeYn);
 				mv.setViewName("find/findBoardDetail");
 			} else {

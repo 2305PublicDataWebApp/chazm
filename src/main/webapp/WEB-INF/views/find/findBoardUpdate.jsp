@@ -36,18 +36,11 @@
         <link rel="stylesheet" href="../resources/assets/css/common/header.css">
         <link rel="stylesheet" href="../resources/assets/css/common/footer.css">
 
-        <!-- include libraries(jQuery, bootstrap) -->
         
-        <!-- 이걸 두면 헤더 css가 망가짐 ㅠㅠ 수정할 방법 찾기 -->
-        <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
-        
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
         <!-- include summernote css/js -->
-        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-        <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
         <!-- =======================================================
@@ -220,7 +213,6 @@
 	                                <div id="buttons" class="d-flex justify-content-end">   
 	                                    <div>
 	                                        <button type="submit" class="btn" style="background-color: #4365BC; color:#fff">수정하기</button>
-	                                        <button type="reset" class="btn" style="background-color: #818181; color:#fff">취소하기</button>
 	                                    </div>
 	                                </div>
 	                                
@@ -258,7 +250,7 @@
 	        $(document).ready(function() {  
 	            //여기 아래 부분
 	            $('#summernote').summernote({
-	                height: 200,                 // 에디터 높이
+	                height: 300,                 // 에디터 높이
 	                minHeight: null,             // 최소 높이
 	                maxHeight: null,             // 최대 높이
 	                focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부

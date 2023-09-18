@@ -266,25 +266,20 @@
     
                     <div class="mt-5 d-flex justify-content-center">
                         <nav aria-label="Page navigation exampler">
-                        	<c:if test="${pInfo.startNavi ne '1' }">
-		                    	<a href="/findBoard/list.do?page=${pInfo.startNavi-1 }" class="first">Prev&nbsp;&nbsp;&nbsp;</a>
-		                    </c:if>
-		                    <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
-								<c:url var="pageUrl" value="/findBoard/list.do">
-									<c:param name="page" value="${p }"></c:param>
-								</c:url>
-								<a href="${pageUrl }">${p }</a>&nbsp;
-							</c:forEach>
-							<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
-								<a href="/findBoard/list.do?page=${pInfo.endNavi+1 }" class="last">Next</a>
-							</c:if>
-<!--                             <ul class="pagination"> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">Prev</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
-<!--                             </ul> -->
+                            <ul class="pagination">
+	                        	<c:if test="${pInfo.startNavi ne '1' }">
+	                        		<li class="page-item"><a class="page-link" href="/findBoard/list.do?page=${pInfo.startNavi-1 }" class="first"><i class="bi bi-chevron-left"></i></a></li>
+			                    </c:if>
+			                    <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+									<c:url var="pageUrl" value="/findBoard/list.do">
+										<c:param name="page" value="${p }"></c:param>
+									</c:url>
+									<li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
+								</c:forEach>
+								<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
+									<li class="page-item"><a class="page-link" href="/findBoard/list.do?page=${pInfo.endNavi+1 }" class="last"><i class="bi bi-chevron-right"></i></a></li>
+								</c:if>
+                            </ul>
                         </nav>
                     </div>
             </section><!-- End Portfolio Section -->
