@@ -94,7 +94,7 @@
 	                                    <div id="main_part1" class="d-flex">
 	                                        <div id="picture_wrap">
 	                                            <div id="picture" >
-	                                                <img id="imagePreview" src="../resources/assets/img/noimage.jpg">
+	                                                <img id="imagePreview" src="../resources/assets/img/no-image.jpg">
 	                                            </div>
 	                                        </div>
 	                                        <div id="find_info_wrap">
