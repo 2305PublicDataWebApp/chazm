@@ -2,3 +2,38 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LostReplyMapper">
+	<resultMap type="LostReply" id="LostReplyResultMap">
+		<id property="lostRNo"              column="LOST_R_NO"/>
+		<result property="refLostNo"        column="REF_LOST_NO"/>
+		<result property="lostRContent"     column="LOST_R_CONTENT"/>
+		<result property="lostRWriter"      column="LOST_R_WRITER"/>
+		<result property="lostRCreateDate"  column="LOST_R_CREATE_DATE"/>
+		<result property="lostRUpdateDate"  column="LOST_R_UPDATE_DATE"/>
+		<result property="lostRStateYn"     column="LOST_R_STATE_YN"/>
+		<result property="lostRParentNo"    column="LOST_R_PARENT_NO"/>
+	</resultMap>
+	
+	<select id="getReplyListCount" resultType="_int">
+		SELECT COUNT (*) FROM LOST_REPLY_TBL WHERE LOST_R_STATE_YN = 'Y'
+	</select>
+
+	<select id="selectReplyList" resultMap="LostReplyResultMap">
+		SELECT * FROM LOST_REPLY_TBL WHERE REF_LOST_NO = #{refLostNo} AND LOST_R_STATE_YN = 'Y'
+	</select>
+	
+	<insert id="insertLostReply">
+		INSERT INTO LOST_REPLY_TBL VALUES(SEQ_LOST_R_NO.NEXTVAL,#{refLostNo},#{lostRContent},#{lostRWriter},DEFAULT, DEFAULT, DEFAULT, #{lostRParentNo})
+	</insert>
+	
+	<update id="deleteLostReply">
+	 	UPDATE LOST_REPLY_TBL SET LOST_R_STATE_YN = 'N' WHERE LOST_R_NO =  #{lostRNo} 
+	</update>
+	
+	<update id="updateLostReply">
+	 	UPDATE LOST_REPLY_TBL SET LOST_R_CONTENT = #{lostRContent}, LOST_R_UPDATE_DATE = DEFAULT WHERE LOST_R_NO = #{lostRNo}
+	</update>
+	
+	
+</mapper>

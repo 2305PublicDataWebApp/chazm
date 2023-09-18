@@ -38,7 +38,7 @@
 
         <!-- CSS -->
         <!-- <link href="../resources/assets/css/plusMdetail.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="../resources/assets/css/lost/insertLostBoardForm.css">
+        <link rel="stylesheet" href="../resources/assets/css/lost/updateLostBoardForm.css">
         <link rel="stylesheet" href="../resources/assets/css/common/header.css">
         <link rel="stylesheet" href="../resources/assets/css/common/footer.css">
    
@@ -79,19 +79,25 @@
                     <div class="row g-5">
                         <div class="col-lg-12">
                             <div class="sidebar">
-                            	<form action="/lostBoard/insert.do" method="post" enctype="multipart/form-data">
+                            	<form action="/lostBoard/update.do" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="lostNo" value="${lostBoard.lostNo}">
+								<!-- 기존 업로드 파일 체크-->
+								<input type="hidden" name="lostFilename" value="${lostBoard.lostFilename }">
+								<input type="hidden" name="lostFilerename" value="${lostBoard.lostFilerename }">
+								<input type="hidden" name="lostFilepath" value="${lostBoard.lostFilepath }">
+								
 								<div id="mainPart1" class="d-flex">
 									<!-- 사진 -->
 									<div id="pictureWrap">
 										<div id="picture" >
-											<img src="../resources/assets/img/noImage.jpg" id="thumbnail">
-										</div>
+	                                   		<img src="../resources/assets/img/luploadFiles/${lostBoard.lostFilerename}" id="thumbnail"></a>
+	                                    </div>
 									</div>
 									
 									<div id="infoWrap">
 										<!--제목 -->
 										<div id="lostTitle" >
-											<input type="text" name="lostTitle" placeholder="제목을 입력해주세요." class="w-100 p-3 border border-dark-subtle rounded text-md-start" style="height : 50px">
+											<input type="text" name="lostTitle" class="w-100 p-3 border border-dark-subtle rounded text-md-start" style="height : 50px" value="${lostBoard.lostTitle }">
 										</div>
 										
 										<div id="wrap" class="mt-2">
@@ -100,7 +106,7 @@
 												<button type="button" 
 												class="w-100 btn btn-danger dropdown-toggle filter-active category-icon-select" 
 												style="border: none; color:#fff;" data-bs-toggle="dropdown" >
-													<h5 style="display: inline;" id="selectedCategory">무엇을 잃어버렸나요?</h5>
+													<h5 style="display: inline;" id="selectedCategory">${lostBoard.lostCategory }</h5>
 												</button>
 												<ul class="dropdown-menu ">
 													<div class="d-flex">
@@ -133,12 +139,13 @@
 													</div>
 												</ul>
 											</div>
+											
 											<!--분실장소-->                    
 											<div class="btn-group w-100">
 												<button type="button"  
 												class="w-100 btn btn-danger dropdown-toggle filter-active category-icon-select" 
 												style="border: none;" data-bs-toggle="dropdown" aria-expanded="false">
-													<h5 style="display: inline;">어디서 잃어버렸나요?</h5>
+													<h5 style="display: inline;">${lostBoard.lostPlace }</h5>
 												</button>
 												<ul class="dropdown-menu ">
 													<div class="d-flex">
@@ -173,7 +180,7 @@
 										<div class="d-flex mt-2 w-100 justify-content-between">
 											<div id="lostLocation" class="btn-group w-100 ">
 												<button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; height : 40px;" data-bs-toggle="dropdown" aria-expanded="false">
-													<span id="selectedLocation">분실지역(시 / 도)</span>
+													<span id="selectedLocation">${lostBoard.lostLocation }</span>
 												</button>
 												<ul class="dropdown-menu w-100">
 	                                            	<li><a class="dropdown-item dd-location" data-value="seoul">서울특별시</a></li>
@@ -202,37 +209,36 @@
 										<!--분실일자-->
 										<div id="lostDate" class="d-flex mt-2 w-100" >
 											<div class="w-50">
-												<input type="date" name="lostStartDate" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
+												<input type="date" name="lostStartDate" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;" value="${lostBoard.lostStartDate }"> 
 											</div>
 											<div class="w-auto ms-2 me-2 d-flex align-items-center">
 												<h5 class="text-black " > ~ </h5>
 											</div>
 											<div class="w-50">
-												<input type="date" name="lostEndDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
+												<input type="date" name="lostEndDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;" value="${lostBoard.lostStartDate }">
 											</div>
 										</div>
 					
 										<!--분실물 색, 브랜드-->
 										<div id="colorBrand" class="d-flex mt-2 w-100" >
 											<div class="btn-group w-50 ">
-												<button id="selectedColor" type="button" class="btn dropdown-toggle border-dark-subtle"  style="background-color: #fff; height: 40px;" data-bs-toggle="dropdown" aria-expanded="true">
-													<span >색상</span>
+												<button id="lostColor" type="button" class="btn dropdown-toggle border-dark-subtle"  style="background-color: #fff; height: 40px;" data-bs-toggle="dropdown" aria-expanded="true">
+													<span id="selectedColor">${lostBoard.lostColor }</span>
 												</button>
 												<ul class="dropdown-menu">
-													<li class="dropdown-item dd-color" data-value="white">흰색</li>
-													<li class="dropdown-item dd-color" data-value="black">검정</li>
-													<li class="dropdown-item dd-color" data-value="red">빨강</li>
-													<li class="dropdown-item dd-color" data-value="yellow">노랑</li>
-													<li class="dropdown-item dd-color" data-value="green">초록</li>
-													<li class="dropdown-item dd-color" data-value="blue">파랑</li>
-													<li class="dropdown-item dd-color" data-value="purple">보라</li>
-													<input type="hidden" name="lostColor" id="selectedColorInput" value="">
+													<li><a class="dropdown-item dd-color" data-value="white">흰색</a></li>
+													<li><a class="dropdown-item dd-color" data-value="black">검정</a></li>
+													<li><a class="dropdown-item dd-color" data-value="red">빨강</a></li>
+													<li><a class="dropdown-item dd-color" data-value="yellow">노랑</a></li>
+													<li><a class="dropdown-item dd-color" data-value="green">초록</a></li>
+													<li><a class="dropdown-item dd-color" data-value="blue">파랑</a></li>
+													<li><a class="dropdown-item dd-color" data-value="purple">보라</a></li>
 												</ul>
 											</div>
-											
+											<input type="hidden" name="lostColor" id="selectedColorInput" value="">
 											
 											<div id="lostBrand" class="w-50">
-												<input type="text" name="lostBrand" placeholder="브랜드" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
+												<input type="text" name="lostBrand" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;" value="${lostBoard.lostBrand }">
 											</div>
 										</div>
 										<!--사진첨부-->
@@ -242,12 +248,12 @@
                                     
                                 <hr>
                                 <div id="mainPart2" class="d-flex justify-content-center flex-column">
-                                    <textarea id="summernote" name="lostContent" spellcheck="false"></textarea>
+                                    <textarea id="summernote" name="lostContent" spellcheck="false">${lostBoard.lostContent }</textarea>
                                 </div>
-                                <hr>
+                               
                                 <div id="mainPart3" class="d-flex justify-content-end">   
                                     <div>
-                                        <button type="submit" class="btn" style="background-color: #4365BC; color:#fff">등록하기</button>
+                                        <button type="submit" class="btn" style="background-color: #4365BC; color:#fff">수정완료</button>
                                         <button type="reset" class="btn" style="background-color: #818181; color:#fff">취소하기</button>
                                     </div>
                                 </div>
@@ -304,38 +310,14 @@
                 icon.addEventListener("click", function (event) {
                     const container = this.closest(".btn-group");                    
                     container.querySelector(".category-icon-select").innerHTML = this.innerText;
+                   
                 });
             });  
             
             
-         <!--선택한 종류, 장소 데이터베이스에 보내기-->
-//          document.querySelector("form").addEventListener("submit", function(event) {
-//          	let items = document.querySelectorAll(".category-icon");
-//          	items.forEach(item => {
-//                 item.addEventListener('click', function (event) {
-//                     const selectedValue = this.getAttribute('value');
-				
-// //                     console.log('Selected Value:', selectedValue);
-//                 });
-//             });
-        	 
-//          });
 
 
-		 <!-- 드롭다운 값 입력 -->
-// 		 var categoryIcons = document.querySelectorAll(".dd-category");
-// 	        var selectedCategory = document.getElementById("selectedCategory");
-// 	        var selectedCategoryInput = document.getElementById("selectedCategoryInput");
-
-// 	        categoryIcons.forEach(function (icon) {
-// 	            icon.addEventListener("click", function () {
-// 	                var selectedValue = icon.getAttribute("data-value");
-// 	                selectedCategory.textContent = selectedValue;
-// 	                selectedCategoryInput.value = selectedValue;
-// 	            });
-// 	        });
-		        
-	        
+		 	<!-- 드롭다운 값 입력, DB에 보내기 -->
 	        $(document).ready(function () {
                 $(".dd-category").click(function () {
                     var selectedCategory = $(this).data("value");
@@ -343,13 +325,13 @@
                     $("#selectedCategoryInput").val(selectedCategory);
                 });
             });
-            $(document).ready(function () {
-                $(".dd-location").click(function () {
-                    var selectedLocation = $(this).data("value");
-                    $("#selectedLocation").text(selectedLocation);
-                    $("#selectedLocationInput").val(selectedLocation);
-                });
-            });
+//             $(document).ready(function () {
+//                 $(".dd-location").click(function () {
+//                     var selectedLocation = $(this).data("value");
+//                     $("#selectedLocation").text(selectedLocation);
+//                     $("#selectedLocationInput").val(selectedLocation);
+//                 });
+//             });
             $(document).ready(function () {
                 $(".dd-place").click(function () {
                     var selectedPlace = $(this).data("value");
@@ -365,19 +347,28 @@
 //                 });
 //             });
             
+            //색상
             let colors = document.querySelectorAll(".dd-color");
             const selectedColor = document.querySelector("#selectedColor");
             colors.forEach(color => {
             	color.addEventListener("click", function (event) {
-                    const selectedColor = this.closest(".btn-group");                    
-                    selectedColor.querySelector("#selectedColor").innerHTML = this.innerText;
-                    document.querySelector("#selectedColorInput").value = this.innerText;
+                    let selectedColor = this.closest(".btn-group");  
+                    document.getElementById("selectedColor").innerHTML = this.innerText;
+                    document.getElementById("selectedColorInput").value = this.getAttribute("value");
                 });
             });
+
+            //지역
+            let locations = document.querySelectorAll(".dd-location");
+            const selectedLocation = document.querySelector("#selectedLocation");
+            locations.forEach(location => {
+            	location.addEventListener("click", function (event) {
+            		let selectedLocation = this.closest(".btn-group");                    
+                    selectedLocation.querySelector("#selectedLocation").innerHTML = this.innerText;
+                    selectedLocationInput.querySelector("#selectedLocationInput").innerValue = this.innerText;
+                });
+            });	
 		        
-            
-            
-            
 		        
 		        
 
@@ -411,16 +402,6 @@
             
             
 
-  
-			document.querySelector("form").addEventListener("submit", function(event) {
-			  	var warn = "${warn}";
-			    if (warn !== null && warn !== "") {
-			        alert(warn);
-			    }
-			});
-			
-		
-			
 			
 			//첨부파일 미리보기
 			inputGroupFile02.addEventListener('change', (event) => {

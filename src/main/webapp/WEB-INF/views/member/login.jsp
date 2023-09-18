@@ -63,16 +63,16 @@
 		
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		   <main class="form-signin">
-		       <form action="login.jsp" method="post">
+		       <form action="/member/login.do" method="post">
 		
 		       <h1 class="h3 mb-3 fw-normal text-center" style="color: #4365BC; font-size: 40px;">로그인
 		           <img src="../resources/assets/img/light.png" alt="" style="width:10%; padding-bottom: 5px;"></h1>
 		       <div class="form-floating">
-		           <input type="text" class="form-control" id="id" placeholder="아이디 입력...">
+		           <input type="text" class="form-control" id="memberID" name="memberId" placeholder="아이디 입력...">
 		           <label for="id">아이디</label>
 		       </div>
 		       <div class="form-floating">
-		           <input type="password" class="form-control" id="pwd" placeholder="Password">
+		           <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="Password">
 		           <label for="pwd">비밀번호</label>
 		       </div>
 		       
@@ -80,7 +80,7 @@
 		       </div>
 		       <button class=" btn btn-lg login-button" type="submit">로그인</button>
 		       <div class="links text-center">
-		           <a href="memberId" class="login-bottm">아이디 찾기</a> | <a href="memberPw" class="login-bottm">비밀번호 찾기</a> | <a href="../member/signMain.html" class="login-bottm">회원가입</a>
+		           <a href="memberId" class="login-bottm">아이디 찾기</a> | <a href="memberPw" class="login-bottm">비밀번호 찾기</a> | <a href="/member/insertMain.do" class="login-bottm">회원가입</a>
 		       </div>
 		       </form>
 		       <br><br>

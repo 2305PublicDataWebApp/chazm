@@ -3,19 +3,20 @@ package kr.co.chazm.lost.domain;
 import java.sql.Timestamp;
 
 public class LostReply {
-	private int replyNo;
+	private int lostRNo;
 	private int refLostNo;
-	private String lostRWriter;
 	private String lostRContent;
+	private String lostRWriter;
 	private Timestamp lostRCreateDate;
 	private Timestamp lostRUpdateDate;
 	private String lostRStateYn;
 	private int lostRParentNo;
-	public int getReplyNo() {
-		return replyNo;
+	
+	public int getLostRNo() {
+		return lostRNo;
 	}
-	public void setReplyNo(int replyNo) {
-		this.replyNo = replyNo;
+	public void setLostRNo(int lostRNo) {
+		this.lostRNo = lostRNo;
 	}
 	public int getRefLostNo() {
 		return refLostNo;
@@ -62,7 +63,7 @@ public class LostReply {
 	
 	@Override
 	public String toString() {
-		return "분실물게시판댓글 [댓글번호=" + replyNo + ", 글번호=" + refLostNo + ", 작성자=" + lostRWriter
+		return "분실물게시판댓글 [댓글번호=" + lostRNo + ", 글번호=" + refLostNo + ", 작성자=" + lostRWriter
 				+ ", 내용=" + lostRContent + ", 작성일자=" + lostRCreateDate + ", 수정일자="
 				+ lostRUpdateDate + ", 사용여부=" + lostRStateYn + ", 부모댓글번호=" + lostRParentNo + "]";
 	}

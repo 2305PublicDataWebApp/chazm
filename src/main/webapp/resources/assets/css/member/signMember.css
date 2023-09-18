@@ -84,3 +84,11 @@ background-color: #3553a0;
 color: #ccc; 
 }
 
+.validation {
+	font-size: 11px;
+    color: red;
+    display: inline-block; 
+}
+
+
+
