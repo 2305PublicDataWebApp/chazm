@@ -83,7 +83,8 @@
 										class="bi bi-clock"></i> <time datetime="2020-01-01">${plusMBoard.plusMCreateDate }</time>
 									</li>
 									<li class="d-flex align-items-center"><i
-										class="bi bi-chat-dots"></i>${pInfo.totalCount } Comments</li>
+										class="bi bi-chat-dots"></i>${pInfo.totalCount } 댓글</li>
+									<li class="d-flex align-items-center"><i class="bi bi-hand-thumbs-up"></i>${likeCount } 좋아요</li>
 								</ul>
 							</div>
 							<!-- End meta top -->
@@ -203,7 +204,7 @@
 						<div class="sidebar">
 							<div class="sidebar-item like">
 								<button class="heart-button" id="like"
-									onmouseover="toggleIcon(this)" onclick="likeBtn();">
+									onclick="likeBtn();">
 									<c:if test="${likeYn == 1 }">
 										<i class="bi-suit-heart-fill like-img"></i>
 									</c:if>
@@ -272,6 +273,7 @@
 					</div>
 					<form id="dnt-form" action="/donation/insert.do" method="post">
 						<input type="hidden" name="refPlusMNo" value="${plusMBoard.plusMNo }">
+						<input type="hidden" name="dntPlace" value="${plusMBoard.plusMDntPlace }">
 						<div class="modal-body justify-content-center">
 							<div class="mb-3">
 								<span>보유 포인트 : </span> <span id="memberPoint">${memberCurPoint }</span><span>P</span>

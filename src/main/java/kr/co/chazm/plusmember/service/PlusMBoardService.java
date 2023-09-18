@@ -1,6 +1,7 @@
 package kr.co.chazm.plusmember.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.chazm.plusmember.domain.Donation;
 import kr.co.chazm.plusmember.domain.PageInfo;
@@ -32,6 +33,14 @@ public interface PlusMBoardService {
 	 * @return int
 	 */
 	int insertDonation(Donation donation);
+
+	/**
+	 * 포인트로 기부해요 기부시 포인트 내역 추가 Service
+	 * 
+	 * @param dntMap
+	 * @return int
+	 */
+	int insertPoint(Map<String, Object> dntMap);
 
 	/**
 	 * 포인트로 기부해요 게시글 수정 Service
@@ -85,9 +94,10 @@ public interface PlusMBoardService {
 	 * 포인트로 기부해요 게시글 전체 조회 Service
 	 * 
 	 * @param pInfo
+	 * @param orderBy 
 	 * @return List<PlusMBoard>
 	 */
-	List<PlusMBoard> selectPlusMBoardList(PageInfo pInfo);
+	List<PlusMBoard> selectPlusMBoardList(PageInfo pInfo, String orderBy);
 
 	/**
 	 * 포인트로 기부해요 게시글 상세 조회 Service
@@ -134,5 +144,13 @@ public interface PlusMBoardService {
 	 * @return int
 	 */
 	int selectMemberPoint(String memberId);
+
+	/**
+	 * 게시글 별 좋아요 갯수 카운트 Service
+	 * 
+	 * @param plusMNo
+	 * @return int
+	 */
+	int selectLikeCount(int plusMNo);
 
 }

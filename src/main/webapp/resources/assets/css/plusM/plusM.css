@@ -835,7 +835,7 @@ section button {
   text-align: center;
 }
 
-.portfolio .portfolio-flters li {
+.portfolio .portfolio-flters li{
   cursor: pointer;
   display: inline-block;
   padding: 0;
@@ -845,9 +845,13 @@ section button {
   line-height: 1;
   transition: all 0.3s ease-in-out;
 }
+.portfolio .portfolio-flters li a{
+	color : #ccc;
+}
 
-.portfolio .portfolio-flters li:hover,
-.portfolio .portfolio-flters li.filter-active {
+
+.portfolio .portfolio-flters li a:hover,
+.portfolio .portfolio-flters li a.filter-active {
   color: var(--color-primary);
 }
 

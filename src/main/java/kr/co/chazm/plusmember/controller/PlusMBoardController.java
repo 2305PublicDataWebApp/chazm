@@ -101,14 +101,20 @@ public class PlusMBoardController {
 
 	// 기부 등록
 	@RequestMapping(value = "/donation/insert.do", method = RequestMethod.POST)
-	public ModelAndView insertDonation(ModelAndView mv, @ModelAttribute Donation donation, HttpSession session) {
+	public ModelAndView insertDonation(ModelAndView mv, @ModelAttribute Donation donation, HttpSession session, @RequestParam("dntPlace") String dntPlace) {
 		try {
 			String memberId = (String) session.getAttribute("memberId");
 			donation.setMemberId(memberId);
 			int result = plusMBoardService.insertDonation(donation);
 			result += plusMBoardService.updateMemberPoint(donation);
 			result += plusMBoardService.updatePlusMCurVal(donation);
-			if (result >= 3) {
+			Map<String, Object> dntMap = new HashMap<String, Object>();
+			dntMap.put("memberId", donation.getMemberId());
+			dntMap.put("pointAmount", donation.getDntPoint());
+			dntMap.put("pointDetail", dntPlace);
+			result += plusMBoardService.insertPoint(dntMap);
+			System.out.println("result : " + result);
+			if (result >= 4) {
 				PlusMReply plusMReply = new PlusMReply();
 				plusMReply.setRefPlusMNo(donation.getRefPlusMNo());
 				plusMReply.setPlusMRContent(donation.getDntPoint() + "P 참여");
@@ -236,10 +242,11 @@ public class PlusMBoardController {
 	// 게시글 전체 리스트 조회
 	@RequestMapping(value = "/plusMBoard/list.do", method = RequestMethod.GET)
 	public ModelAndView showPlusMBoardList(ModelAndView mv,
-			@RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage) {
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "orderBy", required = false, defaultValue = "latest") String orderBy) {
 		Integer totalCount = plusMBoardService.getListCount();
 		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
-		List<PlusMBoard> pMList = plusMBoardService.selectPlusMBoardList(pInfo);
+		List<PlusMBoard> pMList = plusMBoardService.selectPlusMBoardList(pInfo, orderBy);
 		int dntPeople = plusMBoardService.selectDntListCount();
 		int dntAmount = plusMBoardService.selectAllDntAmount();
 		mv.addObject("pInfo", pInfo);
@@ -265,6 +272,7 @@ public class PlusMBoardController {
 			Donation donation = new Donation(plusMNo, memberId);
 			int dntYn = plusMBoardService.selectDntYn(donation);
 			int memberCurPoint = plusMBoardService.selectMemberPoint(memberId);
+			int likeCount = plusMBoardService.selectLikeCount(plusMNo);
 			PlusMBoard plusMBoard = plusMBoardService.selectOneByNo(plusMNo);
 			Integer totalCount = plusMReplyService.getListCount(plusMNo);
 			PageInfo pInfo = this.getReplyPageInfo(currentPage, totalCount);
@@ -275,6 +283,7 @@ public class PlusMBoardController {
 			mv.addObject("likeYn", likeYn);
 			mv.addObject("dntYn", dntYn);
 			mv.addObject("memberCurPoint", memberCurPoint);
+			mv.addObject("likeCount", likeCount);
 			mv.setViewName("plusM/plusMdetail");
 		}
 		return mv;

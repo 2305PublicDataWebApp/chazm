@@ -1,6 +1,7 @@
 package kr.co.chazm.plusmember.store;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -37,6 +38,14 @@ public interface PlusMBoardStore {
 	 * @return int
 	 */
 	int insertDonation(SqlSession sqlSession, Donation donation);
+
+	/**
+	 * 포인트로 기부해요 기부시 포인트 내역 추가 Store
+	 * @param sqlSession
+	 * @param dntMap
+	 * @return int
+	 */
+	int insertPoint(SqlSession sqlSession, Map<String, Object> dntMap);
 
 	/**
 	 * 포인트로 기부해요 게시글 수정 Store
@@ -97,9 +106,10 @@ public interface PlusMBoardStore {
 	 * 
 	 * @param sqlSession
 	 * @param pInfo
+	 * @param orderBy 
 	 * @return List<PlusMBoard>
 	 */
-	List<PlusMBoard> selectPlusMBoardList(SqlSession sqlSession, PageInfo pInfo);
+	List<PlusMBoard> selectPlusMBoardList(SqlSession sqlSession, PageInfo pInfo, String orderBy);
 
 	/**
 	 * 포인트로 기부해요 게시글 상세 조회 Store
@@ -152,5 +162,14 @@ public interface PlusMBoardStore {
 	 * @return int
 	 */
 	int selectMemberPoint(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 게시글 별 좋아요 갯수 카운트 Service
+	 * 
+	 * @param sqlSession
+	 * @param plusMNo
+	 * @return
+	 */
+	int selectLikeCount(SqlSession sqlSession, int plusMNo);
 
 }

@@ -95,6 +95,15 @@
 				<div class="section-header">
 					<h2>찾음 모금함</h2>
 				</div>
+				<div class="d-flex align-items-center justify-content-center">
+					<ul class="portfolio-flters">
+						<li><a href="/plusMBoard/list.do?orderBy=latest" data-order-by="latest" id="basic">최신순</a></li>
+						<li><a href="/plusMBoard/list.do?orderBy=likes" data-order-by="likes">좋아요순</a></li>
+						<li><a href="/plusMBoard/list.do?orderBy=dntHigh" data-order-by="dntHigh">높은 기부금액순</a></li>
+						<li><a href="/plusMBoard/list.do?orderBy=dntLow" data-order-by="dntLow">낮은 기부금액순</a></li>
+						<li><a href="/plusMBoard/list.do?orderBy=deadline" data-order-by="deadline">마감순</a></li>
+					</ul>
+				</div>
 				<div>
 					<c:if test="${memberGrade == 3 }">
 						<div class="add-btn" data-aos="fade-up" data-aos-delay="100">
@@ -171,6 +180,7 @@
 						</nav>
 					</div>
 				</div>
+			</div>
 		</section>
 		<!-- End Portfolio Section -->
 
@@ -269,6 +279,23 @@
 			var currentScrollPosition = window.scrollY;
 			sessionStorage.setItem('scrollPosition', currentScrollPosition);
 		});
+
+		var urlParams = new URLSearchParams(window.location.search);
+		var orderBy = urlParams.get("orderBy");
+
+		// 모든 li 요소를 가져옵니다.
+		var liElements = document.querySelectorAll('.portfolio-flters li');
+		// 각 li 요소에 클릭 이벤트 리스너를 추가하고, orderBy 값을 비교하여 active 클래스를 추가합니다.
+		liElements.forEach(function(li) {
+			var link = li.querySelector('a');
+			var linkOrderBy = link.getAttribute('data-order-by');
+			if(orderBy === "" || orderBy === null) {
+				document.querySelector("#basic").style.color = "var(--color-primary)";
+			}
+			if(orderBy === linkOrderBy) {
+				link.style.color = "var(--color-primary)";
+			}
+		})
 	</script>
 </body>
 

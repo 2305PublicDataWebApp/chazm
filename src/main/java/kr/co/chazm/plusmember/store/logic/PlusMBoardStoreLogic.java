@@ -1,6 +1,7 @@
 package kr.co.chazm.plusmember.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -30,6 +31,12 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	@Override
 	public int insertDonation(SqlSession sqlSession, Donation donation) {
 		int result = sqlSession.insert("PlusMBoardMapper.insertDonation", donation);
+		return result;
+	}
+
+	@Override
+	public int insertPoint(SqlSession sqlSession, Map<String, Object> dntMap) {
+		int result = sqlSession.insert("PlusMBoardMapper.insertPoint", dntMap);
 		return result;
 	}
 
@@ -70,12 +77,12 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	}
 
 	@Override
-	public List<PlusMBoard> selectPlusMBoardList(SqlSession sqlSession, PageInfo pInfo) {
+	public List<PlusMBoard> selectPlusMBoardList(SqlSession sqlSession, PageInfo pInfo, String orderBy) {
 		int limit = pInfo.getRecordCountPerPage();
 		int currentPage = pInfo.getCurrentPage();
 		int offset = (currentPage - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<PlusMBoard> pMList = sqlSession.selectList("PlusMBoardMapper.selectPlusMBoardList", null, rowBounds);
+		List<PlusMBoard> pMList = sqlSession.selectList("PlusMBoardMapper.selectPlusMBoardList", orderBy, rowBounds);
 		return pMList;
 	}
 
@@ -112,6 +119,12 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	@Override
 	public int selectMemberPoint(SqlSession sqlSession, String memberId) {
 		int result = sqlSession.selectOne("PlusMBoardMapper.selectMemberPoint", memberId);
+		return result;
+	}
+
+	@Override
+	public int selectLikeCount(SqlSession sqlSession, int plusMNo) {
+		int result = sqlSession.selectOne("PlusMLikeMapper.selectLikeCount", plusMNo);
 		return result;
 	}
 

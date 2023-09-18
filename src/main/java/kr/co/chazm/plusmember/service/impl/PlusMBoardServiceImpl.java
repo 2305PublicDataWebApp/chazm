@@ -1,6 +1,7 @@
 package kr.co.chazm.plusmember.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 	@Override
 	public int insertDonation(Donation donation) {
 		int result = plusMBoardStore.insertDonation(sqlSession, donation);
+		return result;
+	}
+
+	@Override
+	public int insertPoint(Map<String, Object> dntMap) {
+		int result = plusMBoardStore.insertPoint(sqlSession, dntMap);
 		return result;
 	}
 
@@ -76,8 +83,8 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 	}
 
 	@Override
-	public List<PlusMBoard> selectPlusMBoardList(PageInfo pInfo) {
-		List<PlusMBoard> pMList = plusMBoardStore.selectPlusMBoardList(sqlSession, pInfo);
+	public List<PlusMBoard> selectPlusMBoardList(PageInfo pInfo, String orderBy) {
+		List<PlusMBoard> pMList = plusMBoardStore.selectPlusMBoardList(sqlSession, pInfo, orderBy);
 		return pMList;
 	}
 
@@ -114,6 +121,12 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 	@Override
 	public int selectMemberPoint(String memberId) {
 		int result = plusMBoardStore.selectMemberPoint(sqlSession, memberId);
+		return result;
+	}
+
+	@Override
+	public int selectLikeCount(int plusMNo) {
+		int result = plusMBoardStore.selectLikeCount(sqlSession, plusMNo);
 		return result;
 	}
 

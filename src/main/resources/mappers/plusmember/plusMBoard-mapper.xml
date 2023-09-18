@@ -19,11 +19,19 @@
 		<result property="plusMCreateDate" 	column="PLUS_M_CREATE_DATE"/>
 		<result property="plusMEndYn" 		column="PLUS_M_END_YN"/>
 	</resultMap>
+	<resultMap type="PlusMLike" id="plusMLikeResultMap">
+		<id 	property="likeNo" column="PLUS_M_LIKE_NO"/>
+		<result property="refPlusMNo" column="REF_PLUS_M_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
 	<insert id="insertPlusMBoard">
 		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
 	</insert>
 	<insert id="insertDonation">
 		INSERT INTO DONATION_TBL VALUES(SEQ_DONATION_NO.NEXTVAL, #{refPlusMNo}, #{memberId}, #{dntPoint}, DEFAULT)
+	</insert>
+	<insert id="insertPoint" parameterType="map">
+		INSERT INTO POINT_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{memberId}, '-'||#{pointAmount}, #{pointDetail}, DEFAULT)
 	</insert>
 	<update id="updatePlusMBoard">
 		UPDATE PLUS_M_BOARD_TBL SET PLUS_M_TITLE = #{plusMTitle}, PLUS_M_CONTENT = #{plusMContent}, PLUS_M_DNT_PLACE = #{plusMDntPlace}, PLUS_M_GOAL_AMOUNT = #{plusMGoalAmount}, PLUS_M_FILENAME = #{plusMFilename}, PLUS_M_FILERENAME = #{plusMFilerename}, PLUS_M_FILEPATH = #{plusMFilepath}, PLUS_M_END_DATE = #{plusMEndDate} WHERE PLUS_M_NO = #{plusMNo}
@@ -41,7 +49,30 @@
 		SELECT COUNT(*) FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N'
 	</select>
 	<select id="selectPlusMBoardList" resultMap="plusMBoardResultMap">
-		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_NO DESC
+		<choose>
+			<when test="orderBy == 'latest'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_NO DESC
+			</when>
+			<when test="orderBy == 'likes'">
+				SELECT b.*, likes.NUM_LIKES
+				FROM PLUS_M_BOARD_TBL b
+				LEFT JOIN (
+				    SELECT REF_PLUS_M_NO, COUNT(*) AS NUM_LIKES
+				    FROM PLUS_M_LIKE_TBL
+				    GROUP BY REF_PLUS_M_NO
+				) likes ON b.PLUS_M_NO = likes.REF_PLUS_M_NO
+				ORDER BY likes.NUM_LIKES DESC NULLS LAST
+			</when>
+			<when test="orderBy == 'dntHigh'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_CUR_AMOUNT DESC
+			</when>
+			<when test="orderBy == 'dntLow'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_CUR_AMOUNT ASC
+			</when>
+			<when test="orderBy == 'deadline'">
+				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_END_DATE ASC
+			</when>
+		</choose>
 	</select>
 	<select id="selectOneByNo" resultMap="plusMBoardResultMap">
 		SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_NO = #{plusMNo} AND PLUS_M_END_YN = 'N'
