@@ -74,71 +74,81 @@
             </section>
     
             <!-- ======= 습득물 검색 ======= -->
-            <form action="/findBoard/search.do" method="post">
+            <form action="/findBoard/search.do" method="post" >
 	            <div id="searchBox" class="section align-self-center m-auto mb-5 p-3">
 	                <div id="category_box" class="w-50 text-center">
 	                
-	                	<input type="hidden" name="findCategory" id="selectedCategoryInput" value="">
-	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="지갑">
+	                	<input type="hidden" name="findCategory" id="selectedCategoryInput" value="${paramMap.findCategory}">
+	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="지갑"
+	                    <c:if test="${paramMap.findCategory == '지갑' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/wallet.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">지갑</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="가방">
+	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="가방"
+	                    <c:if test="${paramMap.findCategory == '가방' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/bag.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">가방</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="핸드폰">
+	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="핸드폰"
+	                    <c:if test="${paramMap.findCategory == '핸드폰' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/phone.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">핸드폰</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="의류">
+	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="의류"
+	                    <c:if test="${paramMap.findCategory == '의류' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/clothes.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">의류</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="기타">
+	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="기타"
+	                    <c:if test="${paramMap.findCategory == '기타' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/others.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">기타</h4></a>
 	                    </div>
 	                    
-	                    <input type="hidden" name="findPlace" id="selectedPlaceInput" value="">
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="버스">
+	                    <input type="hidden" name="findPlace" id="selectedPlaceInput" value="${paramMap.findPlace}">
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="버스"
+	                    <c:if test="${paramMap.findPlace == '버스' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/bus.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">버스</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="지하철">
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="지하철"
+	                    <c:if test="${paramMap.findPlace == '지하철' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/train.png"
     	                                                    style="width : 40px;
-	                                                        height : 40px;"></i></div>
+	                                                        height : 40px;"></div>
 	                        <h4 class="title">지하철</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="택시">
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="택시"
+	                    <c:if test="${paramMap.findPlace == '택시' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/taxi.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">택시</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="공항">
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="공항"
+	                    <c:if test="${paramMap.findPlace == '공항' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/airplane.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">공항</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="음식점">
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="음식점"
+	                    <c:if test="${paramMap.findPlace == '음식점' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/restaurant.png"
     	                                                    style="width : 40px;
-	                                                        height : 40px;"></div>
+	                                                        height : 40px;"></i></div>
 	                        <h4 class="title">음식점</h4></a>
 	                    </div>
 	                </div>
@@ -148,31 +158,34 @@
 	    
 	                    <div id="search_wrap" class="d-flex m-2 w-100 ">
 	                        <select name="findSearchCondition" class="w-25 border-end border-dark-subtle rounded-start text-center" style="height: 40px;">
-	                        	<option value="all">전체</option>
-	                            <option value="title">제목</option>
-	                            <option value="content">내용</option>
+	                        	<option value="all" <c:if test="${paramMap.findSearchCondition == 'all' }">selected</c:if>>전체</option>
+	                            <option value="title" <c:if test="${paramMap.findSearchCondition == 'title' }">selected</c:if>>제목</option>
+	                            <option value="content" <c:if test="${paramMap.findSearchCondition == 'content' }">selected</c:if>>내용</option>
 	                        </select>
 	                        <div class="d-flex w-75">
-	                            <input type="text" name="findSearchKeyword" class="w-100 border border-dark-subtle rounded-end " style="height: 40px;">
+	                            <input type="text" name="findSearchKeyword" value="${paramMap.findSearchKeyword }" class="w-100 border border-dark-subtle rounded-end " style="height: 40px;">
 	                        </div>
 	                    </div>
 	                    
 	                    <div id="find_date" class="d-flex m-2 w-100" >
 	                        <div class="w-50">
-	                            <input type="date" name="findDateStart"  class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
+	                            <input type="date" name="findDateStart" value="${paramMap.findDateStart }" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
 	                        </div>
 	                        <div class="w-auto ms-2 me-2 d-flex align-items-center">
 	                            <h5 class="text-white " > ~ </h5>
 	                        </div>
 	                        <div class="w-50">
-	                            <input type="date" name="findDateEnd" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
+	                            <input type="date" name="findDateEnd" value="${paramMap.findDateEnd }" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
 	                        </div>
 	                    </div>
 	    
 	                    <div class="d-flex m-2 w-100 justify-content-between">
 	                        <div id="find_location" class="btn-group w-100 ">
 	                            <button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; " data-bs-toggle="dropdown" aria-expanded="false">
-	                            	<span id="selectedLocation">습득지역(시 / 도)</span>
+	                            	<span id="selectedLocation">
+	                            		<c:if test="${paramMap.findLocation eq null}">습득지역(시 / 도)</c:if>
+	                            		<c:if test="${paramMap.findLocation ne null}">${paramMap.findLocation}</c:if>
+	                            	</span>
 	                            </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item dd-location" data-value="서울특별시">서울특별시</a></li>
@@ -200,7 +213,10 @@
 	                    <div id="colorBrand" class="d-flex justify-content-between m-2 w-100 " >
 	                        <div class="btn-group me-2 w-50 ">
 	                            <button type="button" class="w-100  btn dropdown-toggle border-dark-subtle"  style="background-color: #fff;" data-bs-toggle="dropdown" aria-expanded="true">
-	                            	<span id="selectedColor">색상</span>
+	                            	<span id="selectedColor">
+	                            		<c:if test="${paramMap.findColor eq null}">색상</c:if>
+	                            		<c:if test="${paramMap.findColor ne null}">${paramMap.findColor}</c:if>
+	                            	</span>
 	                            </button>
 	                            <ul class="dropdown-menu">
                                     <li><a class="dropdown-item dd-color" data-value="흰색">흰색</a></li>
@@ -248,7 +264,7 @@
                         </div> 
     
                         <div class="row gy-4 portfolio-container">
-                            <c:forEach var="findBoard" items="${ fBList }" varStatus="i">
+                            <c:forEach var="findBoard" items="${ searchList }" varStatus="i">
 	                           <div class="col-xl-4 col-md-6 portfolio-item filter-books">
 	                                <div class="portfolio-wrap">
 	                                    <a href="/findBoard/detail.do?findNo=${findBoard.findNo }" >
@@ -267,24 +283,57 @@
                     <div class="mt-5 d-flex justify-content-center">
                         <nav aria-label="Page navigation exampler">
                         	<c:if test="${pInfo.startNavi ne '1' }">
-		                    	<a href="/findBoard/list.do?page=${pInfo.startNavi-1 }" class="first">Prev&nbsp;&nbsp;&nbsp;</a>
+                        		 <c:url var="prevPageUrl" value="/findBoard/search.do">
+							        <c:param name="page" value="${pInfo.startNavi-1 }"></c:param>
+							        <c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
+									<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
+									<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
+									<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
+									<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
+									<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
+									<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
+									<c:param name="findColor" value="${paramMap.findColor }"></c:param>
+									<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
+							    </c:url>
+							     <form action="${prevPageUrl}" method="post" style="float:left;">
+							        <button class="page" style="float:left;">Prev&nbsp;&nbsp;&nbsp;</button>
+							    </form>
+<%-- 		                    	<a href="/findBoard/search.do?page=${pInfo.startNavi-1 }" class="first">Prev&nbsp;&nbsp;&nbsp;</a> --%>
 		                    </c:if>
 		                    <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
-								<c:url var="pageUrl" value="/findBoard/list.do">
+								<c:url var="pageUrl" value="/findBoard/search.do">
 									<c:param name="page" value="${p }"></c:param>
+									<c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
+									<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
+									<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
+									<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
+									<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
+									<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
+									<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
+									<c:param name="findColor" value="${paramMap.findColor }"></c:param>
+									<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
 								</c:url>
-								<a href="${pageUrl }">${p }</a>&nbsp;
+								<form action="${pageUrl }" method="post" style="float:left;">
+									 <a href="javascript:void(0);" class="page" style="float:left;" onclick="submitForm(${p});">${p}</a>&nbsp;
+								</form>
 							</c:forEach>
 							<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
-								<a href="/findBoard/list.do?page=${pInfo.endNavi+1 }" class="last">Next</a>
+								<c:url var="nextPageUrl" value="/findBoard/search.do">
+							        <c:param name="page" value="${pInfo.endNavi+1 }"></c:param>
+							        <c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
+									<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
+									<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
+									<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
+									<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
+									<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
+									<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
+									<c:param name="findColor" value="${paramMap.findColor }"></c:param>
+									<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
+							    </c:url>
+							     <form action="${nextPageUrl}" method="post" style="float:left;">
+							        <button class="page" style="float:left;">Next</button>
+							    </form>
 							</c:if>
-<!--                             <ul class="pagination"> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">Prev</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!--                                 <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
-<!--                             </ul> -->
                         </nav>
                     </div>
             </section><!-- End Portfolio Section -->
@@ -309,55 +358,68 @@
         <script src="../resources/assets/js/main.js"></script>
         
         <script>
-	        <!-- 드롭다운 값 입력 -->
-	        $(document).ready(function () {
-	            $(".dd-location").click(function () {
-	                var selectedLocation = $(this).data("value");
-	                $("#selectedLocation").text(selectedLocation);
-	                $("#selectedLocationInput").val(selectedLocation);
-	            });
-	        });
-	        $(document).ready(function () {
-	            $(".dd-color").click(function () {
-	                var selectedColor = $(this).data("value");
-	                $("#selectedColor").text(selectedColor);
-	                $("#selectedColorInput").val(selectedColor);
-	            });
-	        });
-	        <!-- 종류, 장소 클릭 시 그 div의 backgroud-color변경과 input hidden에 값 담기, -->
-	        <!-- 재클릭 시 background-color 원래대로 돌리고 input 값 빼기 -->
-	        $(document).ready(function () {
-	            $(".findCategory").click(function () {
-	                var selectedCategory = $(this).data("value");
-	                var $selectedElement = $(this);
-	                if(!$selectedElement.hasClass("selected")) {
-	                	$(".findCategory").removeClass("selected").css("background-color", "aliceblue");
-	                    $selectedElement.addClass("selected").css("background-color", "#ffc107");
-	                    $("#selectedCategoryInput").val(selectedCategory);
-	                    console.log($("#selectedCategoryInput").val());
-	                } else {
-	                	$selectedElement.removeClass("selected").css("background-color", "aliceblue");
-	                    $("#selectedCategoryInput").val(""); 
-	                    console.log($("#selectedCategoryInput").val());
-	                }
-	            });
-	        });
-	        $(document).ready(function () {
-	            $(".findPlace").click(function () {
-	                var selectedPlace = $(this).data("value");
-	                var $selectedElement = $(this);
-	                if(!$selectedElement.hasClass("selected")) {
-	                	$(".findPlace").removeClass("selected").css("background-color", "aliceblue");
-	                	$selectedElement.addClass("selected").css("background-color", "#ffc107");
-		                $("#selectedPlaceInput").val(selectedPlace);
-		                console.log($("#selectedPlaceInput").val());
-	                } else {
-	                	$selectedElement.removeClass("selected").css("background-color", "aliceblue");
-	                    $("#selectedPlaceInput").val(""); 
-		                console.log($("#selectedPlaceInput").val());
-	                }
-	            });
-	        });
+        <!-- ㅇ -->
+        function submitForm(pageNumber) {
+            // 숨겨진 input 요소를 생성하여 페이지 번호를 설정
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "page";
+            input.value = pageNumber;
+
+            // form 요소에 input 요소를 추가하고 폼을 제출
+            var form = document.forms[0]; 
+            form.appendChild(input);
+            form.submit();
+        }
+        <!-- 드롭다운 값 입력 -->
+        $(document).ready(function () {
+            $(".dd-location").click(function () {
+                var selectedLocation = $(this).data("value");
+                $("#selectedLocation").text(selectedLocation);
+                $("#selectedLocationInput").val(selectedLocation);
+            });
+        });
+        $(document).ready(function () {
+            $(".dd-color").click(function () {
+                var selectedColor = $(this).data("value");
+                $("#selectedColor").text(selectedColor);
+                $("#selectedColorInput").val(selectedColor);
+            });
+        });
+        <!-- 종류, 장소 클릭 시 그 div의 backgroud-color변경과 input hidden에 값 담기, -->
+        <!-- 재클릭 시 background-color 원래대로 돌리고 input 값 빼기 -->
+        $(document).ready(function () {
+            $(".findCategory").click(function () {
+                var selectedCategory = $(this).data("value");
+                var $selectedElement = $(this);
+                if(!$selectedElement.hasClass("selected")) {
+                	$(".findCategory").removeClass("selected").css("background-color", "aliceblue");
+                    $selectedElement.addClass("selected").css("background-color", "#ffc107");
+                    $("#selectedCategoryInput").val(selectedCategory);
+                    console.log($("#selectedCategoryInput").val());
+                } else {
+                	$selectedElement.removeClass("selected").css("background-color", "aliceblue");
+                    $("#selectedCategoryInput").val(""); 
+                    console.log($("#selectedCategoryInput").val());
+                }
+            });
+        });
+        $(document).ready(function () {
+            $(".findPlace").click(function () {
+                var selectedPlace = $(this).data("value");
+                var $selectedElement = $(this);
+                if(!$selectedElement.hasClass("selected")) {
+                	$(".findPlace").removeClass("selected").css("background-color", "aliceblue");
+                	$selectedElement.addClass("selected").css("background-color", "#ffc107");
+	                $("#selectedPlaceInput").val(selectedPlace);
+	                console.log($("#selectedPlaceInput").val());
+                } else {
+                	$selectedElement.removeClass("selected").css("background-color", "aliceblue");
+                    $("#selectedPlaceInput").val(""); 
+	                console.log($("#selectedPlaceInput").val());
+                }
+            });
+        });
         </script>
         
     </body>

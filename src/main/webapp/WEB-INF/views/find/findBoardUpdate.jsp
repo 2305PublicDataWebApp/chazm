@@ -89,18 +89,19 @@
                     <div class="row g-5">
                         <div class="col-lg-12">
                         	<form action="/findBoard/update.do" method="post" enctype="multipart/form-data">
+                        		<input type="hidden" name="findNo" value="${findBoard.findNo }">
 	                            <article class="blog-details">
 	                                <div class="content">
 	                                    <div id="main_part1" class="d-flex">
 	                                        <div id="picture_wrap">
 	                                            <div id="picture" >
-	                                                <img src="../resources/fuploadFiles/${findBoard.findFilerename }">
+	                                                <img id="imagePreview" src="../resources/fuploadFiles/${findBoard.findFilerename }">
 	                                            </div>
 	                                        </div>
 	                                        
 	                                        <div id="find_info_wrap">
 	                                                <div id="find_title" class="">
-	                                                    <input type="text" name="" value="${findBoard.findTitle }" class="w-100 m-2 p-3 border border-dark-subtle rounded text-md-start ">
+	                                                    <input type="text" name="findTitle" value="${findBoard.findTitle }" class="w-100 m-2 p-3 border border-dark-subtle rounded text-md-start ">
 	                                                </div>
 	                
 	                                                <div id="find_category" class="">
@@ -109,11 +110,11 @@
 	                                                            <span id="selectedCategory">${findBoard.findCategory }</span>
 	                                                        </button>
 	                                                        <ul class="dropdown-menu">
-	                                                            <li><a class="dropdown-item dd-category" data-value="의류">의류</a></li>
-	                                                            <li><a class="dropdown-item dd-category" data-value="가방">가방</a></li>
 	                                                            <li><a class="dropdown-item dd-category" data-value="지갑">지갑</a></li>
+	                                                            <li><a class="dropdown-item dd-category" data-value="가방">가방</a></li>
 	                                                            <li><a class="dropdown-item dd-category" data-value="핸드폰">핸드폰</a></li>
-	                                                            <li><a class="dropdown-item dd-category" data-value="그 외">그 외</a></li>
+	                                                            <li><a class="dropdown-item dd-category" data-value="의류">의류</a></li>
+	                                                            <li><a class="dropdown-item dd-category" data-value="기타">기타</a></li>
 	                                                        </ul>
 	                                                    </div>
 	                                                    <input type="hidden" name="findCategory" id="selectedCategoryInput" value="${findBoard.findCategory }">
@@ -160,7 +161,7 @@
 	                                                            <li><a class="dropdown-item dd-place" data-value="지하철">지하철</a></li>
 	                                                            <li><a class="dropdown-item dd-place" data-value="택시">택시</a></li>
 	                                                            <li><a class="dropdown-item dd-place" data-value="공항">공항</a></li>
-	                                                            <li><a class="dropdown-item dd-place" data-value="그 외">그 외</a></li>
+	                                                            <li><a class="dropdown-item dd-place" data-value="음식점">음식점</a></li>
 	                                                        </ul>
 	                                                    </div>
 	                                                    <input type="hidden" name="findPlace" id="selectedPlaceInput" value="${findBoard.findPlace }">
@@ -183,6 +184,7 @@
 	                                                            <li><a class="dropdown-item dd-color" data-value="초록">초록</a></li>
 	                                                            <li><a class="dropdown-item dd-color" data-value="파랑">파랑</a></li>
 	                                                            <li><a class="dropdown-item dd-color" data-value="보라">보라</a></li>
+	                                                            <li><a class="dropdown-item dd-color" data-value="분홍">분홍</a></li>
 	                                                        </ul>
 	                                                    </div>
 	                                                    <input type="hidden" name="findColor" id="selectedColorInput" value="${findBoard.findColor }">
@@ -200,17 +202,13 @@
 	                                                	<p>등록된 이미지 : <a href="../resources/fuploadFiles/${findBoard.findFilerename }" download>${findBoard.findFilename }</a></p>
 	                                                </div>
 	                                                <div class="input-group m-2 w-100">
-	                                                    <input type="file" class="form-control border-dark-subtle rounded" id="imageUpload"  name="uploadFile" accept="image/*" onchange="setThumbnail(event);">
+	                                                    <input type="file" class="form-control border-dark-subtle rounded" id="imageUpload" value="../resources/fuploadFiles/${findBoard.findFilerename }" name="uploadFile" accept="image/*" onchange="setThumbnail(event);">
+	                                                    <input type="hidden" name="findFilename" value="${findBoard.findFilename }">
+	                                                    <input type="hidden" name="findFilerename" value="${findBoard.findFilerename }">
+	                                                    <input type="hidden" name="findFilepath" value="${findBoard.findFilepath }">
 	                                                </div>
-	                                                
-	                                                
-	            
 	                                        </div>
 	                                    </div>
-	                                    
-	                                        
-	                                        
-	                                        
 	                                </div><!-- End post content -->
 	                                <hr>
 	                                <div id="container" class="d-flex justify-content-center flex-column">
@@ -263,11 +261,10 @@
 	                height: 200,                 // 에디터 높이
 	                minHeight: null,             // 최소 높이
 	                maxHeight: null,             // 최대 높이
-	                focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+	                focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
 	                lang: "ko-KR",				// 한글 설정
 	                placeholder: '습득물의 특징이나 추가 물품 등을 자세하게 적어주세요.',	//placeholder 설정
 	                toolbar: [
-	                    // [groupName, [list of button]]
 	                    ['fontname', ['fontname']],
 	                    ['fontsize', ['fontsize']],
 	                    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
@@ -311,18 +308,19 @@
 	                $("#selectedColorInput").val(selectedColor);
 	            });
 	        });
+	        
 	        <!-- 이미지 업로드 미리보기 -->
-	        function setThumbnail(event) {
-	            var reader = new FileReader();
-	
-	            reader.onload = function(event) {
-	              var img = document.createElement("img");
-	              img.setAttribute("src", event.target.result);
-	              document.querySelector("div#picture").appendChild(img);
-	            };
-	
-	            reader.readAsDataURL(event.target.files[0]);
-	          }
+	        function setThumbnail(event){
+                for(const image of event.target.files){
+                   const reader = new FileReader();
+                   reader.onload = function(event){
+                      const img = document.getElementById("imagePreview");
+                      img.src = event.target.result;
+                   }
+                   reader.readAsDataURL(image);
+                }
+          }   
+            
         </script>
 
 

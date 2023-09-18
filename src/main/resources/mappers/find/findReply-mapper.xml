@@ -14,12 +14,22 @@
 		<result property="findRParentNo"   column="FIND_R_PARENT_NO"/>
 	</resultMap>
 	<insert id="insertFindReply">
-		INSERT INTO FIND_REPLY_TBL VALUES(SEQ_FIND_R_NO.NEXTVAL, #{refFindNo}, #{findRWriter}, #{findRContent}, DEFAULT, DEFAULT, DEFAULT, #{findRParentNo})
+		INSERT INTO FIND_REPLY_TBL VALUES(SEQ_FIND_R_NO.NEXTVAL, #{refFindNo}, #{findRContent}, #{findRWriter}, DEFAULT, DEFAULT, DEFAULT, #{findRParentNo})
 	</insert>
 	<update id="updateFindReply">
 		UPDATE FIND_REPLY_TBL SET FIND_R_CONTENT = #{findRContent}, FIND_R_UPDATE_DATE = DEFAULT WHERE FIND_R_NO = #{findRNo}
 	</update>
 	<update id="deleteFindReply">
-		
+		UPDATE FIND_REPLY_TBL SET FIND_R_STATE_YN = 'N' WHERE FIND_R_NO = #{findRNo}
 	</update>
+	
+	<select id="selectFindReplyList" resultMap="FindReplyResultMap">
+		SELECT * FROM FIND_REPLY_TBL WHERE REF_FIND_NO = #{refFindNo} AND FIND_R_STATE_YN = 'Y' AND FIND_R_PARENT_NO = 0 ORDER BY FIND_R_NO DESC
+	</select>
+	<select id="selectFindReReplyList" resultMap="FindReplyResultMap">
+		SELECT * FROM FIND_REPLY_TBL WHERE REF_FIND_NO = #{refFindNo} AND FIND_R_STATE_YN = 'Y' AND FIND_R_PARENT_NO != 0 ORDER BY FIND_R_NO DESC
+	</select>
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM FIND_REPLY_TBL WHERE REF_FIND_NO = #{refFindNo} AND FIND_R_STATE_YN = 'Y'
+	</select>
 </mapper>
