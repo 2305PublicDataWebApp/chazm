@@ -26,7 +26,7 @@ import kr.co.chazm.plusmember.domain.PlusMBoard;
 import kr.co.chazm.plusmember.domain.PlusMLike;
 import kr.co.chazm.plusmember.domain.PlusMReply;
 import kr.co.chazm.plusmember.service.PlusMBoardService;
-import kr.co.chazm.plusmember.service.PlusMReplyService;
+import kr.co.chazm.plusmember.service.PlusMReplyService; 
 
 @Controller
 public class PlusMBoardController {
