@@ -64,14 +64,14 @@
     
                 <div class="d-flex me-5 mb-4"> 
                     <div class="wrap">
-                        <div class="blank "></div>
+                        <div class="blank w-75"></div>
                         <div id="insertBtn" class="" >
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-end w-25">
                                 <h5>소중한물건을 잃어버리셨나요? </h5>
                             </div>
                             <div>
-                                <button id="insertLostBtn" onclick="insertLostBoard('${memberId}');">분실물 등록</button>
-
+                                <button id="insertLostBtn" onclick="insertLostBoard();">분실물 등록</button>
+<!--                                  -->
                             </div>
                         </div>
                     </div>      
@@ -155,14 +155,14 @@
                            	</div>
                             
                             <div id="searchContent" class="w-50 m-2 me-5">
-                            <form action="/lostBoard/search.do" method="get" onsubmit="return boardSearch();">
+                            <form action="/lostBoard/search.do" method="get">
                                 <div id="searchWrap" class="d-flex m-2 w-100 ">
                                     <select name="lostSearchCondition" class="w-25 border-end border-dark-subtle rounded-start text-center" style="height: 40px;">
-                                        <option value="lostTitle">제목</option>
-                                        <option value="lostContent">내용</option>
+                                        <option value="lostTitle" <c:if test="${lostSearchCondition eq 'lostTitle'}">selected</c:if>>제목</option>
+                                        <option value="lostContent" <c:if test="${lostSearchCondition eq 'lostContent'}">selected</c:if>>내용</option>
                                     </select>
                                     <div class="d-flex w-75">
-                                        <input type="text" name="lostSearchKeyword" class="w-100 border border-dark-subtle rounded-end " style="height: 40px;" placeholder="검색어를 입력하세요">
+                                        <input type="text" name="lostSearchKeyword" class="w-100 border border-dark-subtle rounded-end " style="height: 40px;" value="${lostSearchKeyword }">
                                     </div>
                                 </div>
                                 
@@ -182,26 +182,26 @@
                                         
                                     <div id="lostCounty" class="btn-group w-100 ">
                                         <button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; " data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span id="selectedLocation">분실지역(시 / 도)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        시 / 도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </button>
                                         <ul class="dropdown-menu w-75 text-center">
-                                            <li><a class="dropdown-item dd-location" value="seoul">서울특별시</a></li>
-											<li class="dropdown-item dd-location" value="busan">부산광역시</li>
-											<li class="dropdown-item dd-location" value="daegu">대구광역시</li>
-											<li class="dropdown-item dd-location" value="incheon">인천광역시</li>
-											<li class="dropdown-item dd-location" value="gwanju">광주광역시</li>
-											<li class="dropdown-item dd-location" value="daejeon">대전광역시</li>
-											<li class="dropdown-item dd-location" value="ulsan">울산광역시</li>
-											<li class="dropdown-item dd-location" value="sejong">세종특별자치시</li>
-											<li class="dropdown-item dd-location" value="gyeonggi">경기도</li>
-											<li class="dropdown-item dd-location" value="gangwon">강원도</li>
-											<li class="dropdown-item dd-location" value="chungbuk">충청북도</li>
-											<li class="dropdown-item dd-location" value="chungnam">충청남도</li>
-											<li class="dropdown-item dd-location" value="jeonbuk">전라북도</li>
-											<li class="dropdown-item dd-location" value="jeonnam">전라남도</li>
-											<li class="dropdown-item dd-location" value="gyeongbuk">경상북도</li>
-											<li class="dropdown-item dd-location" value="gyeongnam">경상남도</li>
-											<li class="dropdown-item dd-location" value="jeju">제주특별자치도</li>
+                                            <li><a class="dropdown-item dd-location" data-value="seoul">서울특별시</a></li>
+											<li class="dropdown-item dd-location" data-value="busan">부산광역시</li>
+											<li class="dropdown-item dd-location" data-value="daegu">대구광역시</li>
+											<li class="dropdown-item dd-location" data-value="incheon">인천광역시</li>
+											<li class="dropdown-item dd-location" data-value="gwanju">광주광역시</li>
+											<li class="dropdown-item dd-location" data-value="daejeon">대전광역시</li>
+											<li class="dropdown-item dd-location" data-value="ulsan">울산광역시</li>
+											<li class="dropdown-item dd-location" data-value="sejong">세종특별자치시</li>
+											<li class="dropdown-item dd-location" data-value="gyeonggi">경기도</li>
+											<li class="dropdown-item dd-location" data-value="gangwon">강원도</li>
+											<li class="dropdown-item dd-location" data-value="chungbuk">충청북도</li>
+											<li class="dropdown-item dd-location" data-value="chungnam">충청남도</li>
+											<li class="dropdown-item dd-location" data-value="jeonbuk">전라북도</li>
+											<li class="dropdown-item dd-location" data-value="jeonnam">전라남도</li>
+											<li class="dropdown-item dd-location" data-value="gyeongbuk">경상북도</li>
+											<li class="dropdown-item dd-location" data-value="gyeongnam">경상남도</li>
+											<li class="dropdown-item dd-location" data-value="jeju">제주특별자치도</li>
 											<input type="hidden" name="lostLocation" id="selectedLocationInput" value="">
                                         </ul>
                                     </div>
@@ -232,22 +232,22 @@
                                 
                                     <div class="btn-group me-2 w-50 ">
                                         <button type="button" class="w-100  btn dropdown-toggle border-dark-subtle"  style="background-color: #fff;" data-bs-toggle="dropdown" aria-expanded="true">
-                                        <span id="selectedColor">색상</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        ${lostColor }
                                         </button>
                                         <ul class="dropdown-menu">
-	                                        <li class="dropdown-item dd-color" value="white">흰색</li>
-											<li class="dropdown-item dd-color" value="black">검정</li>
-											<li class="dropdown-item dd-color" value="red">빨강</li>
-											<li class="dropdown-item dd-color" value="yellow">노랑</li>
-											<li class="dropdown-item dd-color" value="green">초록</li>
-											<li class="dropdown-item dd-color" value="blue">파랑</li>
-											<li class="dropdown-item dd-color" value="purple">보라</li>
+	                                        <li class="dropdown-item dd-color" data-value="white">흰색</li>
+											<li class="dropdown-item dd-color" data-value="black">검정</li>
+											<li class="dropdown-item dd-color" data-value="red">빨강</li>
+											<li class="dropdown-item dd-color" data-value="yellow">노랑</li>
+											<li class="dropdown-item dd-color" data-value="green">초록</li>
+											<li class="dropdown-item dd-color" data-value="blue">파랑</li>
+											<li class="dropdown-item dd-color" data-value="purple">보라</li>
 											<input type="hidden" name="lostColor" id="selectedColorInput" value="">
                                         </ul>
                                     </div>
         
                                     <div id="lostBrand" class="w-50 ">
-                                        <input type="text" name="lostBrand" placeholder="브랜드" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
+                                        <input type="text" name="lostBrand" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;" placeholder="브랜드" value="${lostBrand }">
                                     </div>
                                 </div>
         
@@ -263,24 +263,21 @@
                         <!-- 상단 서치박스 -->
                     </div>
                     
-                    
-                    <!-- 게시물 리스트 -->
                     <div class="row gy-4 portfolio-container">
 
-                        <c:if test="${lList eq null}">
+                        <c:if test="${searchLostList eq null}">
 			               	<div class="no-lost">
 			              	<span>${msg}</span>
 			               	</div>
               			</c:if>
 
-						<c:forEach var="lostOne" items="${lList}">
-							
-	                         <div class="col-xl-4 col-md-6 portfolio-item filter-${lostOne.lostCategory} filter-${lostOne.lostPlace}">
+						<c:forEach var="searchLostOne" items="${searchLostList}">
+	                         <div class="col-xl-4 col-md-6 portfolio-item filter-${searchLostOne.lostCategory} filter-${searchLostOne.lostPlace}">
 	                             <div class="portfolio-wrap">
 	                             	<c:url var="detailUrl" value="/lostBoard/detail.do">
 										  <c:param name="lostNo" value="${lostOne.lostNo}"></c:param>
 									</c:url>
-	                             	<c:if test="${!empty lostOne.lostFilerename }">  <!-- 첨부이미지가 있을때 -->
+									<c:if test="${!empty lostOne.lostFilerename }">  <!-- 첨부이미지가 있을때 -->
 	                             		<a href="${detailUrl}" >
 	                             			<img src="../resources/assets/img/luploadFiles/${lostOne.lostFilerename}" class="img-fluid"  alt="#">
 	                             		</a>
@@ -292,44 +289,55 @@
 									</c:if>
 	                                  
 	                                 <div class="portfolio-info">
-	                                    <h4><a href="${detailUrl}" title="More Details">${lostOne.lostTitle}</a></h4>
-	                                    <p>${lostOne.lCreateDate}</p><p>${lostOne.lostWriter}</p>
+	                                    <h4><a href="${detailUrl}" title="More Details">${searchLostOne.lostTitle}</a></h4>
+	                                    <p>${searchLostOne.lCreateDate}</p><p>${searchLostOne.lostWriter}</p>
 	                                 </div>
 	                             </div>
 	                         </div>
+	                         <!-- End Portfolio Item -->
                    		</c:forEach>
                     </div>
+                    <!-- End Portfolio Container -->
                </div>
-               <!-- End Portfolio Container -->
+               
                
 				<!-- 페이지 네비게이션 -->
                 <div class="mt-5 d-flex justify-content-center">
                     <nav aria-label="Page navigation example r">
                         <ul class="pagination">
 	                        <c:if test="${pInfo.startNavi != 1}">
-								<c:url var="prevUrl" value="/lostBoard/list.do" >  
-									<c:param name="page" value="${pInfo.startNavi -1 }"></c:param> 								
+								<c:url var="prevUrl" value="/lostBoard/search.do" >  
+									<c:param name="page" value="${pInfo.startNavi -1 }"></c:param>
+									<c:param name="lostSearchCondition" value="${lostSearchCondition}"></c:param>
+									<c:param name="lostSearchKeyword" value="${lostSearchKeyword}"></c:param>
+									<c:param name="lostBrand" value="${lostBrand}"></c:param>		 								
 								</c:url>
 								<li class="page-item"><a href="${prevUrl}" class="page-link">Prev</a></li>
 							</c:if>
                             
                             <c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}"  var="p">
-								<c:url var="pageUrl" value="/lostBoard/list.do" >  
-									<c:param name="page" value="${p}"></c:param> 								
+								<c:url var="pageUrl" value="/lostBoard/search.do" >  
+									<c:param name="page" value="${p}"></c:param> 	
+									<c:param name="lostSearchCondition" value="${lostSearchCondition}"></c:param>
+									<c:param name="lostSearchKeyword" value="${lostSearchKeyword}"></c:param>				
+									<c:param name="lostBrand" value="${lostBrand}"></c:param>
 								</c:url>
-								 <c:choose>
-				                    <c:when test="${p == pInfo.currentPage}">
-				                        <li class="page-item active" ><a href="${pageUrl}" class="page-link" style="background-color: #4365BC">${p}</a></li>
-				                    </c:when>
-				                    <c:otherwise>
-				                        <li class="page-item"><a href="${pageUrl}" class="page-link">${p}</a></li>
-				                    </c:otherwise>
+								<c:choose>
+				                   <c:when test="${p == pInfo.currentPage}">
+				                       <li class="page-item active" ><a href="${pageUrl}" class="page-link" style="background-color: #4365BC">${p}</a></li>
+				                   </c:when>
+				                   <c:otherwise>
+				                       <li class="page-item"><a href="${pageUrl}" class="page-link">${p}</a></li>
+				                   </c:otherwise>
 				                </c:choose>
 							</c:forEach>
 
 	                        <c:if test="${pInfo.endNavi != pInfo.naviTotalCount}">
-								<c:url var="nextUrl" value="/lostBoard/list.do" >  
+								<c:url var="nextUrl" value="/lostBoard/search.do" >  
 									<c:param name="page" value="${pInfo.endNavi + 1}"></c:param> 								
+									<c:param name="lostSearchCondition" value="${lostSearchCondition}"></c:param>
+									<c:param name="lostSearchKeyword" value="${lostSearchKeyword}"></c:param>	
+									<c:param name="lostBrand" value="${lostBrand}"></c:param>
 								</c:url>
 								<li class="page-item"><a href="${nextUrl}" class="page-link">Next</a></li>
 							</c:if>
@@ -367,44 +375,43 @@
  
         
         <script>
-
+ 
+   		
     		<!--로그인 한 경우에만 글쓰기 진입 가능하도록  -->
-    		//분실물등록 페이지이동
-    		function insertLostBoard (memberId){
-    			if(memberId != null && memberId != ""){
-    				location.href = "/lostBoard/insert.do"
-    			}else {
-    				alert("로그인해야 글 등록이 가능합니다")
-    			}
-    		}
+//     		document.querySelector("#insertLostBtn").addEventListener("click" , click{
+// 				alert("ss");
+// 			});
 				
+<%-- 				var lostWriter = '<%= session.getAttribute("memberId") %>'; --%>
+// 				function insertLostBoard (){
+// 					if(lostWriter!= null && !lostWriter.equals("")) {
+						
+// 			        	location.href = "/lostBoard/insert.do"
+// 					}else {
+// 					    alert("로그인 후에 글을 작성할 수 있습니다.");
+// 					  }
+// 				}
 
-
-
-			//드롭다운 밸류값 삽입+DB전달 
+			//분실물등록 페이지이동
+			function insertLostBoard (){
+				location.href = "/lostBoard/insert.do"
+			}
+			
+			
+			//드롭다운 밸류값 삽입 
 			//색상
-			let colors = document.querySelectorAll(".dd-color");
+			 let colors = document.querySelectorAll(".dd-color");
             const selectedColor = document.querySelector("#selectedColor");
             colors.forEach(color => {
             	color.addEventListener("click", function (event) {
-                    let selectedColor = this.closest(".btn-group");  
-                    document.getElementById("selectedColor").innerHTML = this.innerText;
-                    document.getElementById("selectedColorInput").value = this.getAttribute("value");
+                    const selectedColor = this.closest(".btn-group");                    
+                    selectedColor.querySelector("#selectedColor").innerHTML = this.innerText;
+                    document.querySelector("#selectedColorInput").value = this.innerText;
                 });
             });
-
-            //지역
-            let locations = document.querySelectorAll(".dd-location");
-            const selectedLocation = document.querySelector("#selectedLocation");
-            locations.forEach(location => {
-            	location.addEventListener("click", function (event) {
-            		let selectedLocation = this.closest(".btn-group");                    
-                    selectedLocation.querySelector("#selectedLocation").innerHTML = this.innerText;
-                    selectedLocationInput.querySelector("#selectedLocationInput").innerValue = this.innerText;
-                });
-            });			
-            
-            //기간
+		        
+			
+		
 
         </script>
     </body>

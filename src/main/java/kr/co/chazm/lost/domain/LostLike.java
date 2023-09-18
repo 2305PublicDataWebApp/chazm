@@ -1,18 +1,18 @@
 package kr.co.chazm.lost.domain;
 
 public class LostLike {
-	private int likeNo;
+	private int lostLikeNo;
 	private int refLostNo;
 	private String memberId;
 	
 	
 	
 	
-	public int getLikeNo() {
-		return likeNo;
+	public int getLostLikeNo() {
+		return lostLikeNo;
 	}
-	public void setLikeNo(int likeNo) {
-		this.likeNo = likeNo;
+	public void setLostLikeNo(int lostLikeNo) {
+		this.lostLikeNo = lostLikeNo;
 	}
 	public int getRefLostNo() {
 		return refLostNo;
@@ -29,7 +29,7 @@ public class LostLike {
 	
 	@Override
 	public String toString() {
-		return "LostLike [likeNo=" + likeNo + ", refLostNo=" + refLostNo + ", memberId=" + memberId + "]";
+		return "분실물좋아요 [좋아요번호=" + lostLikeNo + ", 게시판번호=" + refLostNo + ", 회원아이디=" + memberId + "]";
 	}
 	
 	

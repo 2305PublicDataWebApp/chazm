@@ -566,15 +566,21 @@ margin-top: 20px;
 }
 
 
-.like button {
+.heart-button {
 /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); */
 --background-color: #006459;
-width : 50px;
+width : 45px;
 height : 50px;
 
 
 }
-.heart-button i {
+
+#likeForm {
+	width : 45px;
+    margin-top : 0px;
+}
+
+.heart-button i  {
 --font-size : 45px;
 font-size : 40px;
 margin: 0;
@@ -585,6 +591,13 @@ display: none; /* 초기에 숨김 */
 color : red;
 }
 
+.bi-suit-heart-fill{
+	display: none; /* 초기에 숨김 */
+	color : red;
+}
+
+
+
 
 .heart-button:hover .hover-image {
 display: inline-block; /* hover 상태에서 보이게 함 */
@@ -593,6 +606,8 @@ display: inline-block; /* hover 상태에서 보이게 함 */
 .heart-button:hover .like-img {
 display: none; /* hover 상태에서 첫 번째 이미지 숨김 */
 }
+
+
 
 .cur-val {
 font-size : 40px;
@@ -793,7 +808,8 @@ align-items: flex-start;
 
 .input-area .textarea {
 flex: 1; /* textarea가 남은 공간을 모두 차지하도록 설정 */
-margin-right: 10px; /* 버튼과의 간격을 조절할 수 있습니다. */
+margin-right: 10px; /* 버튼과의 간격을 조절 */
+
 }
 
 .blog .comments .comment h5 .reply i {
@@ -812,8 +828,9 @@ padding-left: 40px;
 }
 
 .blog .comments .reply-form {
-margin-top: 30px;
-padding: 30px;
+--margin-top: 30px;
+--padding: 30px;
+padding: 15px;
 box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 border-radius: 10px;
 }
@@ -842,6 +859,7 @@ border-color: rgba(0, 131, 116, 0.8);
 border-radius: 4px;
 padding: 10px 10px;
 font-size: 14px;
+
 }
 
 .blog .comments .reply-form textarea:focus {
@@ -883,10 +901,9 @@ color : #fff;
         --background-color: #008d7d;
         --border : 1px solid #ccc;
         border-radius: 10px;
-        --width: 880px;
-        width: auto;
-        height : 60px;
-        margin-left: 5px;
+        width: 830px;
+    	height: 60px;
+    	margin-left: 15px;
         font-size : 2em;
         padding: 10px; 
         --text-align: center;
@@ -966,15 +983,15 @@ color : #fff;
     align-items: center;
 }
 
-.map {
-    --background-color: #4365BC;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 410px;
-    height: 175px;
-    margin : 10px auto 0;
+/* .map { */
+/*     --background-color: #4365BC; */
+/*     border: 1px solid #ccc; */
+/*     border-radius: 5px; */
+/*     width: 410px; */
+/*     height: 175px; */
+/*     margin : 10px auto 0; */
 
-    }
+/*     } */
     
 
 input[type=text] {
@@ -1008,35 +1025,7 @@ transform : scale(1);
         width: 950px;
         margin: 10px auto;
     }
-        #hashtagContainer{    
-            min-width:400px;
-            max-width:1000px;
-            margin: 1em 0;
-            outline : none;
-        }
-    
-        .hashtag-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-    
-        .hashtag-box {
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin: 5px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            display: flex;
-            align-items: center; /* 내용을 세로 중앙 정렬 */
-        }
-    
-        .delete-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #007BFF; /* 삭제 버튼의 텍스트 색상을 파란색으로 지정 */
-            margin-left: 5px;
-        } 
+       
         .btn-wrap {
             display: flex;
             justify-content: flex-end
@@ -1052,6 +1041,15 @@ transform : scale(1);
             height: 45px;
             
         }
+        
+.no-lost{
+	--border-top : 1px dotted #ccc;
+	--border-bottom : 1px dotted #ccc;
+	padding: 10px;
+	text-align : center;
+	color : #c0c0c0;
+	
+}
 /*////////////////////////////////////////////////////////////////*/
 
 

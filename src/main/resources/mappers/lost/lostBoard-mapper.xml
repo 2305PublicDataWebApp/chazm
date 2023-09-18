@@ -2,3 +2,99 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lostBoardMapper">
+	<resultMap type="lostBoard" id="lostBoardResultMap">
+		<id property="lostNo"              column="LOST_NO"/>
+		<result property="lostTitle"       column="LOST_TITLE"/>
+		<result property="lostContent"     column="LOST_CONTENT"/>
+		<result property="lostWriter"      column="LOST_WRITER"/>
+		<result property="lostFilename"    column="LOST_FILENAME"/>
+		<result property="lostFilerename"  column="LOST_FILERENAME"/>
+		<result property="lostFilepath"    column="LOST_FILEPATH"/>
+		<result property="lostCategory"    column="LOST_CATEGORY"/>
+		<result property="lostLocation"    column="LOST_LOCATION"/>
+		<result property="lostPlace"       column="LOST_PLACE"/>	
+		<result property="lostStartDate"   column="LOST_START_DATE"/>
+		<result property="lostEndDate"     column="LOST_END_DATE"/>		
+		<result property="lostColor"       column="LOST_COLOR"/>	
+		<result property="lostBrand"       column="LOST_BRAND"/>	
+		<result property="lCreateDate"     column="L_CREATE_DATE"/>	
+		<result property="lUpdateDate"     column="L_UPDATE_DATE"/>
+		<result property="lStateYN"        column="L_STATE_YN"/>				
+	</resultMap>
+
+	<!-- 게시물 총 개수 구하기 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT (*) FROM LOST_BOARD_TBL WHERE L_STATE_YN = 'Y'
+	</select>
+
+	<!-- 분실물 게시판 목록조회 -->
+	<select id="selectLostBoardList" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL WHERE L_STATE_YN = 'Y' ORDER BY LOST_NO DESC
+	</select>
+	
+	<!-- 글상세보기 -->
+	<select id="selectOneByNo" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL WHERE LOST_NO = #{lostNo} AND L_STATE_YN = 'Y' 
+	</select>
+	
+	<!-- 분실물 등록 -->
+	<insert id="insertLostBoard">
+		INSERT INTO LOST_BOARD_TBL VALUES 
+		(SEQ_LOST_NO.NEXTVAL, #{lostTitle}, #{lostContent}, #{lostWriter}, 
+		#{lostFilename}, #{lostFilerename}, #{lostFilepath}, #{lostCategory} ,#{lostLocation} , #{lostPlace} , #{lostStartDate},  #{lostEndDate}, 
+		#{lostColor} , #{lostBrand} , DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<!-- 분실물게시판 글 수정 -->
+	<update id="updateLostBoard">
+		UPDATE LOST_BOARD_TBL 
+		SET LOST_TITLE= #{lostTitle}, LOST_CONTENT= #{lostContent}
+		, LOST_FILENAME= #{lostFilename},LOST_FILERENAME = #{lostFilerename}, LOST_FILEPATH = #{lostFilepath}
+		, LOST_CATEGORY= #{lostCategory}, LOST_LOCATION= #{lostLocation}, LOST_PLACE= #{lostPlace}, LOST_START_DATE=#{lostStartDate}, LOST_END_DATE= #{lostEndDate} 
+		, L_UPDATE_DATE = DEFAULT 
+		WHERE LOST_NO = #{lostNo} AND LOST_WRITER = #{lostWriter} AND L_STATE_YN = 'Y' 
+	</update>
+	
+	<!-- 분실물게시판 글 삭제(비공개) -->
+	<update id="deleteLostBoard">
+		UPDATE LOST_BOARD_TBL SET L_STATE_YN = 'N' WHERE LOST_NO = #{lostNo} AND LOST_WRITER = #{lostWriter}
+	</update>
+
+	<!-- 검색페이지 총 게시물 수  -->
+	<select id="searchGetListCount" resultType="_int">
+		SELECT COUNT (*) FROM LOST_BOARD_TBL
+		<if test="lostSearchCondition == 'lostTitle'">
+			WHERE LOST_TITLE LIKE '%'||#{lostSearchKeyword}||'%'
+		</if>
+		<if test="lostSearchCondition == 'lostContent'">
+			WHERE LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
+		</if> 
+		AND LOST_BRAND LIKE '%'||#{lostBrand}||'%'
+ 		AND LOST_COLOR = '%'||#{lostColor}||'%'
+<!-- 		AND LOST_CATEGORY = #{lostCategory} AND LOST_LOCATION = #{lostLocation} AND LOST_PLACE = #{lostPlace}  -->
+<!-- 		 -->
+	</select>
+	
+	<!-- 동적쿼리를 이용한 통합검색 -->
+	<select id="searchLostByKeyword" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL 
+		<if test="lostSearchCondition == 'lostTitle'">
+			WHERE LOST_TITLE LIKE '%'||#{lostSearchKeyword}||'%'
+		</if>
+		<if test="lostSearchCondition == 'lostContent'">
+			WHERE LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
+		</if> 
+		AND LOST_BRAND LIKE '%'||#{lostBrand}||'%' 
+		AND LOST_COLOR = '%'||#{lostColor}||'%'
+		ORDER BY LOST_NO DESC
+<!-- 		AND LOST_CATEGORY = #{lostCategory} AND LOST_LOCATION = #{lostLocation} AND LOST_PLACE = #{lostPlace}  -->
+
+		
+	</select>
+	
+
+
+</mapper>
+ 
