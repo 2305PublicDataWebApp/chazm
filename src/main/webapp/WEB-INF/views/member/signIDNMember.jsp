@@ -160,6 +160,7 @@
 					</div>
 				</div>
 			</div>
+		<!-- 핸드폰 인증 모달  -->
 		<div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -182,6 +183,31 @@
 		    </div>
 		  </div>
 		</div>	
+		
+		<!-- 이메일 인증 모달 -->
+		<div class="modal fade" id="emailVerificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="verificationModalLabel">이메일 인증</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <!-- 인증번호 입력 폼 -->
+		        <div class="mb-3">
+		          <label for="verificationCode" class="form-label">인증번호 입력</label>
+		          <input type="text" class="form-control" id="emailVerificationCode" required>
+		        </div>
+		        <div id="emailVerificationError" class="validation"></div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary" id="emailVerifyVerificationCode">인증 완료</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+		
 		</main>
 		
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
@@ -251,14 +277,10 @@
 						            e.preventDefault(); // 폼 전송 막음
 						          });
 						        } else {
-						          // 중복되지 않은 아이디일 경우 메시지를 비우고 폼 전송을 허용합니다.
-						          memberIdError.text("");
 						          $("form.sign-form").off("submit"); // 이벤트 리스너 해제
 						        }
 						      },
 						      error: function () {
-						        // 에러가 발생한 경우 메시지를 표시하고 폼 전송을 막습니다.
-						        memberIdError.text("서버 오류가 발생했습니다.");
 						        $("form.sign-form").off("submit").submit(function (e) {
 						          e.preventDefault(); // 폼 전송 막음
 						        });
@@ -441,8 +463,40 @@
 			    }
 			  });
 			});
-
 			
+			document.getElementById("verifyEmail").addEventListener("click", function () {
+			    const memberEmail = document.getElementById("memberEmail").value;
+				
+			    $.ajax({
+			        url: "/confirmMail.do", 
+			        type: "POST", 
+			        data: { memberEmail: memberEmail },
+			        success: function (emailCode) {
+			        	console.log(memberEmail);
+			            const serverVerificationCode = emailCode;
+						console.log(serverVerificationCode);
+			            alert("이메일이 발송되었습니다. 인증 코드를 확인하세요.");
+			            $("#emailVerificationModal").modal("show");
+			
+			            document.getElementById("emailVerifyVerificationCode").addEventListener("click", function () {
+			                const enteredCode = document.getElementById("emailVerificationCode").value;
+			                const verificationError = document.getElementById("emailVerificationError");
+
+			                if (enteredCode == serverVerificationCode) {
+			                    alert("이메일 인증이 완료되었습니다.");
+			                    $("#emailVerificationModal").modal("hide"); 
+			                } else {
+			                    verificationError.textContent = "인증번호가 일치하지 않습니다.";
+			                }
+			            });
+			        },
+			        error: function () {
+			            alert("이메일 발송 중 오류가 발생했습니다.");
+			        }
+			    });
+			});		
+			
+	
 		</script>
 		
 	</body>

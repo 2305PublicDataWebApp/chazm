@@ -56,5 +56,6 @@
 	
  	<select id="selectCheckById" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId}
- 	</select>			
+ 	</select>
+ 			
 </mapper>

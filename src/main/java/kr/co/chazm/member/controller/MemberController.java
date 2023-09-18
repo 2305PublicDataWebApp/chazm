@@ -6,20 +6,30 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.chazm.lost.domain.LostBoard;
+import kr.co.chazm.lost.service.LostBoardService;
 import kr.co.chazm.member.domain.Member;
 import kr.co.chazm.member.service.MemberService;
+import kr.co.chazm.member.service.impl.MailServiceImpl;
 
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberService mService;
+
+    @Autowired
+    MailServiceImpl registerMail;
+    
+//	@Autowired
+//	private LostBoardService lostBoardService;
 
 	// 회원분류 페이지 진입
 	@RequestMapping(value = "/member/insertMain.do", method = RequestMethod.GET)
@@ -37,13 +47,12 @@ public class MemberController {
 
 	// 개인회원가입 폼
 	@RequestMapping(value = "/member/insertIDN.do", method = RequestMethod.POST)
-	public ModelAndView insertIDNMember(ModelAndView mv
-			, @ModelAttribute Member member) {
+	public ModelAndView insertIDNMember(ModelAndView mv, @ModelAttribute Member member) {
 
 		try {
 			int result = mService.insertIDNMember(member);
 			if (result > 0) {
-				mv.setViewName("redirect:/member/login.do");				
+				mv.setViewName("redirect:/member/login.do");
 			} else {
 				mv.addObject("msg", "회원가입에 실패했습니다.");
 				mv.setViewName("member/signIDNMember");
@@ -62,16 +71,15 @@ public class MemberController {
 		mv.setViewName("member/signCORMember");
 		return mv;
 	}
-	
+
 	// 기업회원가입 폼
 	@RequestMapping(value = "/member/insertCOR.do", method = RequestMethod.POST)
-	public ModelAndView insertCORMember(ModelAndView mv
-			, @ModelAttribute Member member) {
+	public ModelAndView insertCORMember(ModelAndView mv, @ModelAttribute Member member) {
 
 		try {
 			int result = mService.insertCORMember(member);
 			if (result > 0) {
-				mv.setViewName("redirect:/member/login.do");				
+				mv.setViewName("redirect:/member/login.do");
 			} else {
 				mv.addObject("msg", "회원가입에 실패했습니다.");
 				mv.setViewName("member/signCORMember");
@@ -83,35 +91,32 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//로그인 폼
-	@RequestMapping(value="/member/login.do", method=RequestMethod.GET)
+
+	// 로그인 폼
+	@RequestMapping(value = "/member/login.do", method = RequestMethod.GET)
 	public ModelAndView showLoginForm(ModelAndView mv) {
 		mv.setViewName("member/login");
 		return mv;
 	}
-	
+
 	// 로그인 기능
-	@RequestMapping(value= "/member/login.do", method=RequestMethod.POST)
-	public ModelAndView memberLogin(ModelAndView mv
-			, HttpSession session
-			, HttpServletRequest request
-			, @ModelAttribute Member member) {
-		
+	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
+	public ModelAndView memberLogin(ModelAndView mv, HttpSession session, HttpServletRequest request,
+			@ModelAttribute Member member) {
+
 		try {
 			Member mOne = mService.selectCheckLogin(member);
-			if(mOne!=null) {
+			if (mOne != null) {
 				session = request.getSession();
 				session.setAttribute("memberId", mOne.getMemberId());
 				session.setAttribute("memberGrade", mOne.getMemberGrade());
 				session.setAttribute("memberName", mOne.getMemberName());
-				session.setAttribute("memberPoint", mOne.getMemberPoint());
 				mv.setViewName("redirect:/index.jsp");
 			} else {
 				mv.addObject("msg", "로그인에 실패했습니다.");
 				mv.addObject("url", "/member/login.do");
 				mv.setViewName("common/message");
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
@@ -120,15 +125,13 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//로그아웃 기능
-	@RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
-	public ModelAndView memberLogout(ModelAndView mv
-			, HttpSession session
-			, @ModelAttribute Member member) {
-		
+
+	// 로그아웃 기능
+	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
+	public ModelAndView memberLogout(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
+
 		try {
-			if(session != null) {
+			if (session != null) {
 				session.invalidate();
 				mv.setViewName("redirect:/index.jsp");
 			} else {
@@ -136,7 +139,7 @@ public class MemberController {
 				mv.addObject("url", "/index.jsp");
 				mv.setViewName("common/message");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
@@ -145,19 +148,17 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//마이페이지 조회
-	@RequestMapping(value="/member/myPage.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView memberInfo(ModelAndView mv
-			,HttpSession session
-			,@ModelAttribute Member member) {
+
+	// 마이페이지 조회
+	@RequestMapping(value = "/member/myPage.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView memberInfo(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
 		try {
-			String memberId = (String)session.getAttribute("memberId");
+			String memberId = (String) session.getAttribute("memberId");
 			Member mOne = null;
-			if(memberId != "" & memberId !=null) {
-				mOne = mService.selectOneById(memberId);				
+			if (memberId != "" & memberId != null) {
+				mOne = mService.selectOneById(memberId);
 			}
-			if(mOne!=null) {
+			if (mOne != null) {
 				mv.addObject("member", mOne);
 				mv.setViewName("member/myPage");
 			} else {
@@ -174,15 +175,13 @@ public class MemberController {
 		return mv;
 	}
 
-	//회원정보 수정
-	@RequestMapping(value="/member/update.do", method=RequestMethod.POST)
-	public ModelAndView updateMember(ModelAndView mv
-			, HttpSession session
-			, @ModelAttribute Member member) {
-		
+	// 회원정보 수정
+	@RequestMapping(value = "/member/update.do", method = RequestMethod.POST)
+	public ModelAndView updateMember(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
+
 		try {
 			int result = mService.updateMember(member);
-			if(result>0){
+			if (result > 0) {
 				mv.addObject("msg", "회원정보 수정이 완료되었습니다.");
 				mv.addObject("url", "/member/myPage.do");
 				mv.setViewName("common/message");
@@ -199,16 +198,14 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//회원 탈퇴
-	@RequestMapping(value="/member/delete.do", method=RequestMethod.GET)
-	public ModelAndView deleteMember(ModelAndView mv
-			, HttpSession session
-			, @ModelAttribute Member member) {
+
+	// 회원 탈퇴
+	@RequestMapping(value = "/member/delete.do", method = RequestMethod.GET)
+	public ModelAndView deleteMember(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
 		try {
 			int result = mService.deleteMember(member);
-			if(result>0) {
-				mv.setViewName( "redirect:/member/logout.do");
+			if (result > 0) {
+				mv.setViewName("redirect:/member/logout.do");
 			} else {
 				mv.addObject("msg", "회원탈퇴를 완료하지 못했습니다.");
 				mv.addObject("url", "/member/myPage.do");
@@ -222,88 +219,84 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//아이디 찾기 페이지 진입
-	@RequestMapping(value="/member/findId.do", method=RequestMethod.GET)
+
+	// 아이디 찾기 페이지 진입
+	@RequestMapping(value = "/member/findId.do", method = RequestMethod.GET)
 	public ModelAndView findMemberId(ModelAndView mv) {
 		mv.setViewName("member/findId");
 		return mv;
 	}
-	
-	//아이디 찾기 기능(이메일)
-	@RequestMapping(value="/member/findIdByEmail.do", method=RequestMethod.POST)
-	public ModelAndView findMemberIdByEmail(ModelAndView mv
-			, @ModelAttribute Member member) {
-	    try {
-	        Member mOne = mService.selectOneByEmail(member);
-	        
-	        if(mOne != null) {
-	            // 아이디를 찾은 경우
-	            mv.addObject("member", mOne); // 모델에 아이디를 추가합니다.
-	            // 모달 창을 열도록 JavaScript 함수를 호출하는 스크립트 추가
-	            mv.addObject("msg", "회원님의 아이디는 " + mOne.getMemberId() + "입니다.");
+
+	// 아이디 찾기 기능(이메일)
+	@RequestMapping(value = "/member/findIdByEmail.do", method = RequestMethod.POST)
+	public ModelAndView findMemberIdByEmail(ModelAndView mv, @ModelAttribute Member member) {
+		try {
+			Member mOne = mService.selectOneByEmail(member);
+
+			if (mOne != null) {
+				// 아이디를 찾은 경우
+				mv.addObject("member", mOne); // 모델에 아이디를 추가합니다.
+				// 모달 창을 열도록 JavaScript 함수를 호출하는 스크립트 추가
+				mv.addObject("msg", "회원님의 아이디는 " + mOne.getMemberId() + "입니다.");
 				mv.addObject("url", "/member/findId.do");
 				mv.setViewName("common/message");
-	        } else {
-	            mv.addObject("msg", "입력하신 메일로 아이디를 찾지 못했습니다.");
+			} else {
+				mv.addObject("msg", "입력하신 메일로 아이디를 찾지 못했습니다.");
 				mv.addObject("url", "/member/findId.do");
 				mv.setViewName("common/message");
-	        }
-	    } catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
 			mv.addObject("url", "/index.jsp");
 			mv.setViewName("common/message");
-	    }
-	    
-	    return mv;
+		}
+
+		return mv;
 	}
-	
-	//아이디 찾기 기능(핸드폰)
-	@RequestMapping(value="/member/findIdByPhone.do", method=RequestMethod.POST)
-	public ModelAndView findMemberIdByPhone(ModelAndView mv
-			, @ModelAttribute Member member) {
-	    try {
-	        Member mOne = mService.selectOneByPhone(member);
-	        
-	        if(mOne != null) {
-	            // 아이디를 찾은 경우
-	            mv.addObject("member", mOne); // 모델에 아이디를 추가합니다.
-	            // 모달 창을 열도록 JavaScript 함수를 호출하는 스크립트 추가
-	            mv.addObject("msg", "회원님의 아이디는 " + mOne.getMemberId() + "입니다.");
+
+	// 아이디 찾기 기능(핸드폰)
+	@RequestMapping(value = "/member/findIdByPhone.do", method = RequestMethod.POST)
+	public ModelAndView findMemberIdByPhone(ModelAndView mv, @ModelAttribute Member member) {
+		try {
+			Member mOne = mService.selectOneByPhone(member);
+
+			if (mOne != null) {
+				// 아이디를 찾은 경우
+				mv.addObject("member", mOne); // 모델에 아이디를 추가합니다.
+				// 모달 창을 열도록 JavaScript 함수를 호출하는 스크립트 추가
+				mv.addObject("msg", "회원님의 아이디는 " + mOne.getMemberId() + "입니다.");
 				mv.addObject("url", "/member/findId.do");
 				mv.setViewName("common/message");
-	        } else {
-	            mv.addObject("msg", "입력하신 핸드폰으로 등록된 아이디를 찾지 못했습니다.");
+			} else {
+				mv.addObject("msg", "입력하신 핸드폰으로 등록된 아이디를 찾지 못했습니다.");
 				mv.addObject("url", "/member/findId.do");
 				mv.setViewName("common/message");
-	        }
-	    } catch (Exception e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
 			mv.addObject("url", "/index.jsp");
 			mv.setViewName("common/message");
-	    }
-	    
-	    return mv;
-	}	
-	
-	//비밀번호 찾기 페이지 진입
-	@RequestMapping(value="/member/findPw.do", method=RequestMethod.GET)
+		}
+
+		return mv;
+	}
+
+	// 비밀번호 찾기 페이지 진입
+	@RequestMapping(value = "/member/findPw.do", method = RequestMethod.GET)
 	public ModelAndView findMemberPw(ModelAndView mv) {
 		mv.setViewName("member/findPw");
 		return mv;
 	}
-	
-	//비밀번호 변경 기능
-	@RequestMapping(value="/member/updatePw.do", method=RequestMethod.POST)
-	public ModelAndView updateMemberPw(ModelAndView mv
-			, HttpSession session
-			, @ModelAttribute Member member) {
-		
+
+	// 비밀번호 변경 기능
+	@RequestMapping(value = "/member/updatePw.do", method = RequestMethod.POST)
+	public ModelAndView updateMemberPw(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
+
 		try {
 			int result = mService.updateMemberPw(member);
-			if(result>0){
+			if (result > 0) {
 				mv.addObject("msg", "비밀번호 변경이 완료되었습니다.");
 				mv.addObject("url", "/member/login.do");
 				mv.setViewName("common/message");
@@ -320,24 +313,22 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//아이디 중복체크(개인회원)
-	@RequestMapping(value="/member/checkIDN.do", method=RequestMethod.GET)
-	public ModelAndView checkIDNMemberId(ModelAndView mv
-			, @RequestParam("memberId") String memberId
-			) {
-		//SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID =?
-		
-		try {        
+
+	// 아이디 중복체크(개인회원)
+	@RequestMapping(value = "/member/checkIDN.do", method = RequestMethod.GET)
+	public ModelAndView checkIDNMemberId(ModelAndView mv, @RequestParam("memberId") String memberId) {
+		// SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID =?
+
+		try {
 			int result = mService.selectCheckById(memberId);
-			if(result>0) {
-                mv.addObject("idCheckResult", result);
-                mv.setViewName("member/signIDNMember");
+			if (result > 0) {
+				mv.addObject("idCheckResult", result);
+				mv.setViewName("member/signIDNMember");
 			} else {
-                mv.addObject("idCheckResult", result);
-                mv.addObject("inputId", memberId);
-                mv.setViewName("member/signIDNMember");
-			}			
+				mv.addObject("idCheckResult", result);
+				mv.addObject("inputId", memberId);
+				mv.setViewName("member/signIDNMember");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
@@ -345,26 +336,24 @@ public class MemberController {
 			mv.setViewName("common/message");
 		}
 		return mv;
-		
+
 	}
-	
-	//아이디 중복체크(기업회원)
-	@RequestMapping(value="/member/checkCOR.do", method=RequestMethod.GET)
-	public ModelAndView checkCORMemberId(ModelAndView mv
-			, @RequestParam("memberId") String memberId
-			) {
-		//SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID =?
-		
-		try {        
+
+	// 아이디 중복체크(기업회원)
+	@RequestMapping(value = "/member/checkCOR.do", method = RequestMethod.GET)
+	public ModelAndView checkCORMemberId(ModelAndView mv, @RequestParam("memberId") String memberId) {
+		// SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID =?
+
+		try {
 			int result = mService.selectCheckById(memberId);
-			if(result>0) {
-                mv.addObject("idCheckResult", result);
-                mv.setViewName("member/signCORMember");
+			if (result > 0) {
+				mv.addObject("idCheckResult", result);
+				mv.setViewName("member/signCORMember");
 			} else {
-                mv.addObject("idCheckResult", result);
-                mv.addObject("inputId", memberId);
-                mv.setViewName("member/signCORMember");
-			}			
+				mv.addObject("idCheckResult", result);
+				mv.addObject("inputId", memberId);
+				mv.setViewName("member/signCORMember");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
@@ -372,8 +361,39 @@ public class MemberController {
 			mv.setViewName("common/message");
 		}
 		return mv;
-		
+
 	}
 	
 
+	// 마이페이지 게시글 리스트(분실물)
+
+	// 마이페이지 게시글 개수(습득물)
+//	public ModelAndView countfindBoardById(ModelAndView mv, @ModelAttribute LostBoard lostBoard) {
+//		// SELECT COUNT(*) FROM FIND_BOARD_TBL WHERE FIND_WRITER = ?
+//		try {
+//		} catch (Exception e) {
+//
+//		}
+//		return mv;
+//	}
+
+	// 마이페이지 게시글 리스트(습득물)
+
+	// 마이페이지 기부 횟수(기부)
+
+	// 마이페이지 기부내역 조회 리스트(기부)
+
+
+    
+    @RequestMapping(value="/confirmMail.do", method= RequestMethod.POST)
+    public ModelAndView mailConfirm(@RequestParam("memberEmail") String memberEmail
+    		, ModelAndView mv) throws Exception {
+        String code = registerMail.sendSimpleMessage(memberEmail);
+        System.out.println("사용자에게 발송한 인증코드 ==> " + code);
+        if(code !=null) {
+        	mv.addObject("emailCode", code);
+        	mv.setViewName("member/signIDNMember");        	
+        } 
+        return mv;
+    }
 }

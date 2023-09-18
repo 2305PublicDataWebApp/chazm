@@ -64,7 +64,12 @@
 									</div>
 									<div class="donationBottom row">
 										<span>${memberName }</span>
+									<c:if test="${memberPoint eq null}">
+										<p>0P</p>
+									</c:if>
+									<c:if test="${memberPoint ne null}">
 										<p>${memberPoint }P</p>
+									</c:if>									
 									</div>
 									<div class="donation-btn">
 										<button type="button" data-bs-toggle="modal"
@@ -92,12 +97,12 @@
 												<c:if test="${memberGrade eq 1 }">
 													<img src="../resources/assets/img/member/IDN_MEMBER.png"
 														alt="member" class="img-fluid my-5" style="width: 80px;" />
-													<h5>개인회원</h5>
+													<h5 style="margin-top:50px">개인회원</h5>
 												</c:if>
 												<c:if test="${memberGrade eq 2 }">
 													<image id="image0_2_131" width="100" height="100"
 														xlink:href="data:image/png;base64,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" />
-													<h5>기업회원</h5>
+													<h5 style="margin-top:50px">기업회원</h5>
 												</c:if>
 												<i class="far fa-edit mb-5"></i>
 											</div>
@@ -287,71 +292,70 @@
 											</div>
 										</div>
 									</div>
-									<div>
-										<table class="table accordion accordion-flush text-center"
-											id="plusAlist" data-aos="fade-up" data-aos-delay="100">
-											<colgroup>
-												<col width="10%" />
-												<col width="55%" />
-												<col width="10%" />
-												<col width="15%" />
-												<col width="10%" />
-											</colgroup>
-											<tr>
-												<th>#</th>
-												<th>제목</th>
-												<th>등록자</th>
-												<th>등록일</th>
-												<th></th>
-											</tr>
-											<c:forEach items="${pAList }" var="plusABoard">
+<div>
+											<table class="table accordion accordion-flush text-center"
+												id="plusAlist" data-aos="fade-up" data-aos-delay="100">
+												<colgroup>
+													<col width="10%" />
+													<col width="55%" />
+													<col width="10%" />
+													<col width="15%" />
+													<col width="10%" />
+												</colgroup>
 												<tr>
-													<td>${plusABoard.plusANo }</td>
-													<td>
-														<button class="accordion-button collapsed" type="button"
-															data-bs-toggle="collapse"
-															data-bs-target="#plusA-content-${plusABoard.plusANo }">
-															${plusABoard.plusATitle }</button>
-													</td>
-													<td>${plusABoard.plusAWriter }</td>
-													<td>${plusABoard.plusACreateDate }</td>
-													<td><input class="form-check-input" type="radio"
-														name="checkBoard" id="" value=${plusABoard.plusANo }></td>
+													<th>#</th>
+													<th>제목</th>
+													<th>등록자</th>
+													<th>등록일</th>
+													<th></th>
 												</tr>
-												<tr id="plusA-content-${plusABoard.plusANo }"
-													class="accordion-collapse collapse"
-													data-bs-parent="#plusAlist" data-aos="fade-up">
-													<td colspan="4" class="accordion-body">
-														${plusABoard.plusAContent }</td>
-												</tr>
-											</c:forEach>
-										</table>
-										<div class="mt-5 d-flex justify-content-center">
-											<nav aria-label="Page navigation example r">
-												<ul class="pagination">
-													<c:url var="prevUrl" value="/plusA/list.do">
-														<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${prevUrl }"><i class="bi bi-chevron-left"></i></a></li>
-													<c:forEach begin="${pInfo.startNavi }"
-														end="${pInfo.endNavi }" var="p">
-														<c:url var="pageUrl" value="/plusA/list.do">
-															<c:param name="page" value="${p }"></c:param>
+												<c:forEach items="${pAList }" var="plusABoard">
+													<tr>
+														<td>${plusABoard.plusANo }</td>
+														<td>
+															<button class="accordion-button collapsed" type="button"
+																data-bs-toggle="collapse"
+																data-bs-target="#plusA-content-${plusABoard.plusANo }">
+																${plusABoard.plusATitle }</button>
+														</td>
+														<td>${plusABoard.plusAWriter }</td>
+														<td>${plusABoard.plusACreateDate }</td>
+														<td><input class="form-check-input" type="radio"
+															name="checkBoard" id="" value=${plusABoard.plusANo }></td>
+													</tr>
+													<tr id="plusA-content-${plusABoard.plusANo }"
+														class="accordion-collapse collapse"
+														data-bs-parent="#plusAlist" data-aos="fade-up">
+														<td colspan="4" class="accordion-body">
+															${plusABoard.plusAContent }</td>
+													</tr>
+												</c:forEach>
+											</table>
+											<div class="mt-5 d-flex justify-content-center">
+												<nav aria-label="Page navigation example r">
+													<ul class="pagination">
+														<c:url var="prevUrl" value="/plusA/list.do">
+															<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
 														</c:url>
 														<li class="page-item"><a class="page-link"
-															href="${pageUrl }">${p }</a></li>
-													</c:forEach>
-													<c:url var="nextUrl" value="/plusA/list.do">
-														<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
-												</ul>
-											</nav>
-										</div>
-									</div>
-								</div>
+															href="${prevUrl }"><i class="bi bi-chevron-left"></i></a>
+														</li>
+														<c:forEach begin="${pInfo.startNavi }"
+															end="${pInfo.endNavi }" var="p">
+															<c:url var="pageUrl" value="/plusA/list.do">
+																<c:param name="page" value="${p }"></c:param>
+															</c:url>
+															<li class="page-item"><a class="page-link"
+																href="${pageUrl }">${p }</a></li>
+														</c:forEach>
+														<c:url var="nextUrl" value="/plusA/list.do">
+															<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+														</c:url>
+														<li class="page-item"><a class="page-link"
+															href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
+													</ul>
+												</nav>
+											</div>
 							</article>
 	
 							<article class="blog-details" id="member-pointAmount">
@@ -385,6 +389,70 @@
 										</div>
 									</div>
 								</div>
+								<div>
+											<table class="table accordion accordion-flush text-center"
+												id="plusAlist" data-aos="fade-up" data-aos-delay="100">
+												<colgroup>
+													<col width="10%" />
+													<col width="55%" />
+													<col width="10%" />
+													<col width="15%" />
+													<col width="10%" />
+												</colgroup>
+												<tr>
+													<th>#</th>
+													<th>제목</th>
+													<th>등록자</th>
+													<th>등록일</th>
+													<th></th>
+												</tr>
+												<c:forEach items="${pAList }" var="plusABoard">
+													<tr>
+														<td>${plusABoard.plusANo }</td>
+														<td>
+															<button class="accordion-button collapsed" type="button"
+																data-bs-toggle="collapse"
+																data-bs-target="#plusA-content-${plusABoard.plusANo }">
+																${plusABoard.plusATitle }</button>
+														</td>
+														<td>${plusABoard.plusAWriter }</td>
+														<td>${plusABoard.plusACreateDate }</td>
+														<td><input class="form-check-input" type="radio"
+															name="checkBoard" id="" value=${plusABoard.plusANo }></td>
+													</tr>
+													<tr id="plusA-content-${plusABoard.plusANo }"
+														class="accordion-collapse collapse"
+														data-bs-parent="#plusAlist" data-aos="fade-up">
+														<td colspan="4" class="accordion-body">
+															${plusABoard.plusAContent }</td>
+													</tr>
+												</c:forEach>
+											</table>
+											<div class="mt-5 d-flex justify-content-center">
+												<nav aria-label="Page navigation example r">
+													<ul class="pagination">
+														<c:url var="prevUrl" value="/plusA/list.do">
+															<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
+														</c:url>
+														<li class="page-item"><a class="page-link"
+															href="${prevUrl }"><i class="bi bi-chevron-left"></i></a>
+														</li>
+														<c:forEach begin="${pInfo.startNavi }"
+															end="${pInfo.endNavi }" var="p">
+															<c:url var="pageUrl" value="/plusA/list.do">
+																<c:param name="page" value="${p }"></c:param>
+															</c:url>
+															<li class="page-item"><a class="page-link"
+																href="${pageUrl }">${p }</a></li>
+														</c:forEach>
+														<c:url var="nextUrl" value="/plusA/list.do">
+															<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+														</c:url>
+														<li class="page-item"><a class="page-link"
+															href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
+													</ul>
+												</nav>
+											</div>
 							</article>
 						</div>
 	
