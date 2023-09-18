@@ -9,27 +9,34 @@
     </settings>
     <typeAliases>
     	<typeAlias type="kr.co.chazm.member.domain.Member" alias="Member"/>
-    	
-    	<typeAlias type="kr.co.chazm.lost.domain.LostBoard" alias="LostBoard"/>
-		<!-- 각자 추가 -->
-		
+    	<typeAlias type="kr.co.chazm.member.domain.Point" alias="Point"/>
+		<typeAlias type="kr.co.chazm.plusadmin.domain.PlusABoard" alias="PlusABoard"/>
+		<typeAlias type="kr.co.chazm.plusmember.domain.PlusMBoard" alias="PlusMBoard"/>
+		<typeAlias type="kr.co.chazm.plusmember.domain.PlusMLike" alias="PlusMLike"/>
+		<typeAlias type="kr.co.chazm.plusmember.domain.PlusMReply" alias="PlusMReply"/>
+		<typeAlias type="kr.co.chazm.lost.domain.LostBoard" alias="LostBoard"/>
+		<typeAlias type="kr.co.chazm.lost.domain.LostReply" alias="LostReply"/>
+		<typeAlias type="kr.co.chazm.lost.domain.LostLike" alias="LostLike"/>		
+		<typeAlias type="kr.co.chazm.find.domain.FindBoard" alias="FindBoard"/>
+		<typeAlias type="kr.co.chazm.find.domain.FindReply" alias="FindReply"/>
+		<typeAlias type="kr.co.chazm.find.domain.FindLike" alias="FindLike"/>				    	
     </typeAliases>
     <mappers>
-    <mapper resource="mappers/lost/lostBoard-mapper.xml"/>
-<!-- 		<mapper resource="mappers/find/findBoard-mapper.xml"/>
+		<mapper resource="mappers/member/member-mapper.xml"/>
+	
+		<mapper resource="mappers/find/findBoard-mapper.xml"/>
 		<mapper resource="mappers/find/findLike-mapper.xml"/>
 		<mapper resource="mappers/find/findReply-mapper.xml"/>
 		
-		
+		<mapper resource="mappers/lost/lostBoard-mapper.xml"/>
 		<mapper resource="mappers/lost/lostLike-mapper.xml"/>
 		<mapper resource="mappers/lost/lostReply-mapper.xml"/>
 		
-		<mapper resource="mappers/member/member-mapper.xml"/>
-		
+
 		<mapper resource="mappers/plusadmin/plusABoard-mapper.xml"/>
 		
 		<mapper resource="mappers/plusmember/plusMBoard-mapper.xml"/>
 		<mapper resource="mappers/plusmember/plusMLike-mapper.xml"/>
-		<mapper resource="mappers/plusmember/plusMReply-mapper.xml"/> -->
+		<mapper resource="mappers/plusmember/plusMReply-mapper.xml"/>
     </mappers>
 </configuration>
