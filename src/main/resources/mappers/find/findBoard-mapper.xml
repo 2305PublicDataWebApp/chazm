@@ -32,11 +32,11 @@
 	
 	<update id="updateFindBoard">
 		UPDATE FIND_BOARD_TBL SET FIND_TITLE = #{findTitle}, FIND_CONTENT = #{findContent}, FIND_FILENAME = #{findFilename}, FIND_FILERENAME = #{findFilerename}, FIND_FILEPATH = #{findFilepath}
-		, FIND_CATEGORY = #{findCategory}, FIND_LOCATION = #{findLocation}, FIND_PLACE = #{findPlace}, FIND_COLOR = #{findColor}, FIND_BRAND = #{findBrand}, F_UPDATE_DATE = #{fUpdateDate}
+		, FIND_CATEGORY = #{findCategory}, FIND_LOCATION = #{findLocation}, FIND_PLACE = #{findPlace}, FIND_COLOR = #{findColor}, FIND_BRAND = #{findBrand}, F_UPDATE_DATE = DEFAULT
 		WHERE FIND_NO = #{findNo}
 	</update>
 	
-	<update id="updateGetDate">
+	<update id="findComplete">
 		UPDATE FIND_BOARD_TBL SET GET_DATE = SYSDATE, F_STATE_YN = 'N' WHERE FIND_NO = #{findNo}
 	</update>
 	
@@ -44,8 +44,95 @@
 		UPDATE FIND_BOARD_TBL SET F_STATE_YN = 'N' WHERE FIND_NO = #{findNo}
 	</update>
 	
+	
 	<select id="selectFindBoardByNo" resultMap="FindBoardResultMap">
 		SELECT * FROM FIND_BOARD_TBL WHERE FIND_NO = #{findNo}
 	</select>
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM FIND_BOARD_TBL WHERE F_STATE_YN = 'Y'
+	</select>
+	<select id="selectFindBoardList" resultMap="FindBoardResultMap">
+		SELECT * FROM FIND_BOARD_TBL WHERE F_STATE_YN = 'Y' ORDER BY FIND_NO DESC
+	</select>
+	
+	
+	
+	<select id="searchFindByKeywordCount" resultType="_int">
+		SELECT COUNT(*) FROM FIND_BOARD_TBL 
+	    <where>
+	        <if test="findSearchKeyword != null and !findSearchKeyword.isEmpty()">
+	            <choose>
+	                <when test="findSearchCondition == 'title'">
+	                    FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%'
+	                </when>
+	                <when test="findSearchCondition == 'content'">
+	                    FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%'
+	                </when>
+	                <otherwise>
+	                    (FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%' OR FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%')
+	                </otherwise>
+	            </choose>
+	        </if>
+	        <if test="findDateStart != null and findDateEnd != null">
+	            AND FIND_DATE BETWEEN TO_DATE(#{findDateStart}, 'YYYY-MM-DD') AND TO_DATE(#{findDateEnd}, 'YYYY-MM-DD')
+	        </if>
+	        <if test="findCategory != null">
+	            AND FIND_CATEGORY = #{findCategory}
+	        </if>
+	        <if test="findLocation != null">
+	            AND FIND_LOCATION = #{findLocation}
+	        </if>
+	        <if test="findPlace != null">
+	            AND FIND_PLACE = #{findPlace}
+	        </if>
+	        <if test="findColor != null">
+	            AND FIND_COLOR = #{findColor}
+	        </if>
+	        <if test="findBrand != null">
+	            AND FIND_BRAND = #{findBrand}
+	        </if>
+	        AND F_STATE_YN = 'Y'
+	    </where>
+	</select>
+	
+	<select id="searchFindByKeyword" resultMap="FindBoardResultMap">
+	    SELECT * FROM FIND_BOARD_TBL 
+	    <where>
+	        <if test="findSearchKeyword != null and !findSearchKeyword.isEmpty()">
+	            <choose>
+	                <when test="findSearchCondition == 'all'">
+	                    FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%' OR FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%'
+	                </when>
+	                <when test="findSearchCondition == 'title'">
+	                    FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%'
+	                </when>
+	                <when test="findSearchCondition == 'content'">
+	                    FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%'
+	                </when>
+	            </choose>
+	        </if>
+	        <if test="findDateStart != null and findDateEnd != null">
+	            AND FIND_DATE BETWEEN TO_DATE(#{findDateStart}, 'YYYY-MM-DD') AND TO_DATE(#{findDateEnd}, 'YYYY-MM-DD')
+	        </if>
+	        <if test="findCategory != null">
+	            AND FIND_CATEGORY = #{findCategory}
+	        </if>
+	        <if test="findLocation != null">
+	            AND FIND_LOCATION = #{findLocation}
+	        </if>
+	        <if test="findPlace != null">
+	            AND FIND_PLACE = #{findPlace}
+	        </if>
+	        <if test="findColor != null">
+	            AND FIND_COLOR = #{findColor}
+	        </if>
+	        <if test="findBrand != null">
+	            AND FIND_BRAND = #{findBrand}
+	        </if>
+	        AND F_STATE_YN = 'Y' ORDER BY FIND_NO DESC
+	    </where>
+	</select>
+	
 	
 </mapper>
