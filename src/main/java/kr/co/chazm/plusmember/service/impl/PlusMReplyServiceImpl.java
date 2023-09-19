@@ -38,6 +38,12 @@ public class PlusMReplyServiceImpl implements PlusMReplyService {
 	}
 
 	@Override
+	public int deleteRefPlusMReply(int plusMNo) {
+		int result = plusMReplyStore.deleteRefPlusMReply(sqlSession, plusMNo);
+		return result;
+	}
+
+	@Override
 	public List<PlusMReply> selectPlusMReplyList(PageInfo pInfo, int plusMNo) {
 		List<PlusMReply> pMRList = plusMReplyStore.selectPlusMReplyList(sqlSession, pInfo, plusMNo);
 		return pMRList;

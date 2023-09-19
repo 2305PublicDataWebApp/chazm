@@ -32,6 +32,12 @@ public class PlusMReplyStoreLogic implements PlusMReplyStore {
 	}
 
 	@Override
+	public int deleteRefPlusMReply(SqlSession sqlSession, int plusMNo) {
+		int result = sqlSession.update("PlusMReplyMapper.deleteRefPlusMReply", plusMNo);
+		return result;
+	}
+
+	@Override
 	public List<PlusMReply> selectPlusMReplyList(SqlSession sqlSession, PageInfo pInfo, int plusMNo) {
 		int limit = pInfo.getRecordCountPerPage();
 		int currentPage = pInfo.getCurrentPage();

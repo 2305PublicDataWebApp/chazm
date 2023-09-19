@@ -32,6 +32,14 @@ public interface PlusMReplyService {
 	int deletePlusMReply(int plusMRNo);
 
 	/**
+	 * 포인트로 기부해요 게시글 삭제시 댓글 함께 삭제 Service
+	 * 
+	 * @param plusMNo
+	 * @return
+	 */
+	int deleteRefPlusMReply(int plusMNo);
+
+	/**
 	 * 포인트로 기부해요 게시글별 댓글 조회 Service
 	 * @param pInfo 
 	 * 

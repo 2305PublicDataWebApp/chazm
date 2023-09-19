@@ -198,6 +198,7 @@ public class PlusMBoardController {
 				mv.setViewName("common/message");
 			} else {
 				int result = plusMBoardService.deletePlusMBoard(plusMNo);
+				result += plusMReplyService.deleteRefPlusMReply(plusMNo);
 				if (result > 0) {
 					mv.addObject("msg", "게시글이 삭제되었습니다.");
 					mv.addObject("url", "/plusMBoard/list.do");
@@ -253,6 +254,7 @@ public class PlusMBoardController {
 		mv.addObject("pMList", pMList);
 		mv.addObject("dntPeople", dntPeople);
 		mv.addObject("dntAmount", dntAmount);
+		mv.addObject("orderBy", orderBy);
 		mv.setViewName("plusM/plusM");
 		return mv;
 	}

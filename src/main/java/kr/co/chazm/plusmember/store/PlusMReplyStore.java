@@ -37,6 +37,14 @@ public interface PlusMReplyStore {
 	int deletePlusMReply(SqlSession sqlSession, int plusMRNo);
 
 	/**
+	 * 포인트로 기부해요 게시글 삭제시 댓글 함께 삭제 Store
+	 * 
+	 * @param plusMNo
+	 * @return int
+	 */
+	int deleteRefPlusMReply(SqlSession sqlSession, int plusMNo);
+
+	/**
 	 * 포인트로 기부해요 게시글별 댓글 조회 Store
 	 * 
 	 * @param sqlSession

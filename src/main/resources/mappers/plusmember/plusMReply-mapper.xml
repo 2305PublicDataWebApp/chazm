@@ -21,6 +21,9 @@
 	<update id="deletePlusMReply">
 		UPDATE PLUS_M_REPLY_TBL SET PLUS_M_R_STATE_YN = 'N' WHERE PLUS_M_R_NO = #{plusMRNo}
 	</update>
+	<update id="deleteRefPlusMReply">
+		UPDATE PLUS_M_REPLY_TBL SET PLUS_M_R_STATE_YN = 'N' WHERE REF_PLUS_M_NO = #{plusMNo}
+	</update>
 	<select id="selectPlusMReplyList" resultMap="plusMReplyResultMap">
 		SELECT * FROM PLUS_M_REPLY_TBL WHERE REF_PLUS_M_NO = #{plusMNo} AND PLUS_M_R_STATE_YN = 'Y' ORDER BY PLUS_M_R_NO DESC
 	</select>

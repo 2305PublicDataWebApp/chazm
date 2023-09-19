@@ -78,7 +78,7 @@
 							<div class="meta-top">
 								<ul>
 									<li class="d-flex align-items-center"><i
-										class="bi bi-person"></i>${plusMBoard.plusMWriter }</li>
+										class="bi bi-person"></i> <c:if test="${plusMBoard.plusMWriter eq 'admin' }">관리자</c:if> </li>
 									<li class="d-flex align-items-center"><i
 										class="bi bi-clock"></i> <time datetime="2020-01-01">${plusMBoard.plusMCreateDate }</time>
 									</li>

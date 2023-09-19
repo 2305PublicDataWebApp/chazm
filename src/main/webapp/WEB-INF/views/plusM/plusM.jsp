@@ -160,6 +160,7 @@
 							<ul class="pagination">
 								<c:url var="prevUrl" value="/plusMBoard/list.do">
 									<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
+									<c:param name="orderBy" value="${orderBy }"></c:param>
 								</c:url>
 								<li class="page-item"><a class="page-link"
 									href="${prevUrl }"><i class="bi bi-chevron-left"></i></a></li>
@@ -167,12 +168,14 @@
 									var="p">
 									<c:url var="pageUrl" value="/plusMBoard/list.do">
 										<c:param name="page" value="${p }"></c:param>
+										<c:param name="orderBy" value="${orderBy }"></c:param>
 									</c:url>
 									<li class="page-item"><a class="page-link"
 										href="${pageUrl }">${p }</a></li>
 								</c:forEach>
 								<c:url var="nextUrl" value="/plusMBoard/list.do">
 									<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+									<c:param name="orderBy" value="${orderBy }"></c:param>
 								</c:url>
 								<li class="page-item"><a class="page-link"
 									href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
