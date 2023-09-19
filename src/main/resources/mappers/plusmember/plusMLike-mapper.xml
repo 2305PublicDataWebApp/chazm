@@ -9,6 +9,9 @@
 	<delete id="deletePlusMLike">
 		DELETE FROM PLUS_M_LIKE_TBL WHERE REF_PLUS_M_NO = #{refPlusMNo} AND MEMBER_ID = #{memberId}
 	</delete>
+	<delete id="deletePlusMLikeByNo">
+		DELETE FROM PLUS_M_LIKE_TBL WHERE REF_PLUS_M_NO = #{plusMNo}
+	</delete>
 	<select id="selectLikeYn" resultType="_int">
 		SELECT COUNT(*) FROM PLUS_M_LIKE_TBL WHERE REF_PLUS_M_NO = #{refPlusMNo} AND MEMBER_ID = #{memberId}
 	</select>

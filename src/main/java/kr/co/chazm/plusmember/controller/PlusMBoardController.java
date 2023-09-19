@@ -35,8 +35,6 @@ public class PlusMBoardController {
 	private PlusMBoardService plusMBoardService;
 	@Autowired
 	private PlusMReplyService plusMReplyService;
-	@Autowired
-	private MemberService memberService;
 
 	// 게시글 등록 폼
 	@RequestMapping(value = "/plusMBoard/insert.do", method = RequestMethod.GET)
@@ -197,9 +195,10 @@ public class PlusMBoardController {
 				mv.addObject("url", "/");
 				mv.setViewName("common/message");
 			} else {
-				int result = plusMBoardService.deletePlusMBoard(plusMNo);
-				result += plusMReplyService.deleteRefPlusMReply(plusMNo);
-				if (result > 0) {
+				int result = plusMBoardService.deletePlusMBoard(plusMNo);	// 게시글 삭제 endYn - y
+				result += plusMReplyService.deleteRefPlusMReply(plusMNo);	// 포함된 댓글 status - n으로 바꾸기
+				result += plusMBoardService.deletePlusMLikeByNo(plusMNo);	// 포함된 좋아요 삭제
+				if (result >= 3) {
 					mv.addObject("msg", "게시글이 삭제되었습니다.");
 					mv.addObject("url", "/plusMBoard/list.do");
 					mv.setViewName("common/message");

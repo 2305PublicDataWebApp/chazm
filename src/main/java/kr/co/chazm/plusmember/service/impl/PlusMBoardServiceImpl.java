@@ -77,6 +77,12 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 	}
 
 	@Override
+	public int deletePlusMLikeByNo(int plusMNo) {
+		int result = plusMBoardStore.deletePlusMLikeByNo(sqlSession, plusMNo);
+		return result;
+	}
+
+	@Override
 	public int getListCount() {
 		int result = plusMBoardStore.getListCount(sqlSession);
 		return result;

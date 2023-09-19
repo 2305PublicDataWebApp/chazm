@@ -41,6 +41,7 @@ public interface PlusMBoardStore {
 
 	/**
 	 * 포인트로 기부해요 기부시 포인트 내역 추가 Store
+	 * 
 	 * @param sqlSession
 	 * @param dntMap
 	 * @return int
@@ -94,6 +95,14 @@ public interface PlusMBoardStore {
 	int deletePlusMLike(SqlSession sqlSession, PlusMLike plusMLike);
 
 	/**
+	 * 포인트로 기부해요 게시글 삭제 후 포함된 좋아요 삭제 Store
+	 * 
+	 * @param plusMNo
+	 * @return
+	 */
+	int deletePlusMLikeByNo(SqlSession sqlSession, int plusMNo);
+
+	/**
 	 * 포인트로 기부해요 게시글 전체 갯수 조회 Store
 	 * 
 	 * @param sqlSession
@@ -106,7 +115,7 @@ public interface PlusMBoardStore {
 	 * 
 	 * @param sqlSession
 	 * @param pInfo
-	 * @param orderBy 
+	 * @param orderBy
 	 * @return List<PlusMBoard>
 	 */
 	List<PlusMBoard> selectPlusMBoardList(SqlSession sqlSession, PageInfo pInfo, String orderBy);
@@ -146,7 +155,7 @@ public interface PlusMBoardStore {
 	int selectAllDntAmount(SqlSession sqlSession);
 
 	/**
-	 * 게시글 별 기부 여부 조회 Service
+	 * 게시글 별 기부 여부 조회 Store
 	 * 
 	 * @param sqlSession
 	 * @param donation
@@ -155,7 +164,7 @@ public interface PlusMBoardStore {
 	int selectDntYn(SqlSession sqlSession, Donation donation);
 
 	/**
-	 * 멤버 포인트 조회 Service
+	 * 멤버 포인트 조회 Store
 	 * 
 	 * @param sqlSession
 	 * @param memberId
@@ -164,7 +173,7 @@ public interface PlusMBoardStore {
 	int selectMemberPoint(SqlSession sqlSession, String memberId);
 
 	/**
-	 * 게시글 별 좋아요 갯수 카운트 Service
+	 * 게시글 별 좋아요 갯수 카운트 Store
 	 * 
 	 * @param sqlSession
 	 * @param plusMNo

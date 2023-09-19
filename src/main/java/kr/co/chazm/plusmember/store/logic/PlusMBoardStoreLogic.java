@@ -71,6 +71,12 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 	}
 
 	@Override
+	public int deletePlusMLikeByNo(SqlSession sqlSession, int plusMNo) {
+		int result = sqlSession.delete("PlusMLikeMapper.deletePlusMLikeByNo", plusMNo);
+		return result;
+	}
+
+	@Override
 	public int getListCount(SqlSession sqlSession) {
 		int result = sqlSession.selectOne("PlusMBoardMapper.getListCount");
 		return result;

@@ -84,6 +84,14 @@ public interface PlusMBoardService {
 	int deletePlusMLike(PlusMLike plusMLike);
 
 	/**
+	 * 포인트로 기부해요 게시글 삭제 후 포함된 좋아요 삭제 Service
+	 * 
+	 * @param plusMNo
+	 * @return int
+	 */
+	int deletePlusMLikeByNo(int plusMNo);
+
+	/**
 	 * 포인트로 기부해요 게시글 전체 갯수 조회 Service
 	 * 
 	 * @return Integer
