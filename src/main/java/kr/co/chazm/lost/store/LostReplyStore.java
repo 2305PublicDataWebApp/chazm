@@ -18,6 +18,8 @@ public interface LostReplyStore {
 
 	public Integer updateLostReply(SqlSession session, LostReply lostReply);
 
+	public Integer getReplyListCount(SqlSession session, Integer refLostNo);
+
 	
 
 	

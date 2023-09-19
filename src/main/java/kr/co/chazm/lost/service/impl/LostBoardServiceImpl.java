@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.chazm.find.domain.FindBoard;
 import kr.co.chazm.lost.domain.LostBoard;
 import kr.co.chazm.lost.domain.LostLike;
 import kr.co.chazm.lost.domain.PageInfo;
@@ -70,16 +71,59 @@ public class LostBoardServiceImpl implements LostBoardService{
 	
 //좋아요////////////////////////////////////////////////////////////
 	@Override
-	public Integer pushLostLike(LostLike lostLike) {
-		Integer result = lostBoardStore.pushLostLike(session, lostLike);
+	public Integer checkLikeYn(LostLike lostLike) {
+		Integer result = lostBoardStore.checkLikeYn(session, lostLike);
+		return result;
+	}
+	
+	@Override
+	public Integer insertLostLike(LostLike lostLike) {
+		Integer result = lostBoardStore.insertLostLike(session, lostLike);
 		return result;
 	}
 
 	@Override
-	public Integer deleteLostLike(LostLike lostLike) {
+	public int deleteLostLike(LostLike lostLike) {
 		Integer result = lostBoardStore.deleteLostLike(session, lostLike);
 		return result;
 	}
+	
+//통합검색////////////////////////////////////////////////////////////	
+	@Override
+	public Integer totalSearchFindCount(String totalSearchKeyword) {
+		Integer result = lostBoardStore.totalSearchFindCount(session, totalSearchKeyword);
+		return result;
+	}
+	
+	@Override
+	public List<FindBoard> totalSearchFindByKeyword(PageInfo fPInfo, String totalSearchKeyword) {
+		List<FindBoard>searchFindList = lostBoardStore.totalSearchFindByKeyword(session, fPInfo, totalSearchKeyword);
+		return searchFindList;
+	}
+	
+	@Override
+	public Integer totalSearchLostCount(String totalSearchKeyword) {
+		Integer result = lostBoardStore.totalSearchLostCount(session, totalSearchKeyword);
+		return result;
+	}
+
+	@Override
+	public List<LostBoard> totalSearchLostByKeyword(PageInfo lPInfo, String totalSearchKeyword) {
+		List<LostBoard>searchLostList = lostBoardStore.totalSearchLostByKeyword(session, lPInfo, totalSearchKeyword);
+		return searchLostList;
+	}
+
+	
+
+
+
+
+
+
+
+	
+
+	
 
 	
 	

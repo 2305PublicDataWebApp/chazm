@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<select id="getReplyListCount" resultType="_int">
-		SELECT COUNT (*) FROM LOST_REPLY_TBL WHERE LOST_R_STATE_YN = 'Y'
+		SELECT COUNT (*) FROM LOST_REPLY_TBL WHERE LOST_R_STATE_YN = 'Y' AND REF_LOST_NO = #{refLostNo}
 	</select>
 
 	<select id="selectReplyList" resultMap="LostReplyResultMap">

@@ -16,6 +16,11 @@ public interface LostReplyService {
 
 	public Integer updateLostReply(LostReply lostReply);
 
+	public Integer getReplyListCount(Integer refLostNo);
+
+
+
+
 	
 
 	

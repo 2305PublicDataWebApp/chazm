@@ -3,6 +3,7 @@ package kr.co.chazm.lost.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.chazm.find.domain.FindBoard;
 import kr.co.chazm.lost.domain.LostBoard;
 import kr.co.chazm.lost.domain.LostLike;
 import kr.co.chazm.lost.domain.PageInfo;
@@ -42,10 +43,35 @@ public interface LostBoardService {
 	
 	//좋아요//////////////////////////////////////////////////////////////////////////
 	
+	public Integer checkLikeYn(LostLike lostLike);
+	
+	public Integer insertLostLike(LostLike lostLike);
 
-	public Integer pushLostLike(LostLike lostLike);
+	public int deleteLostLike(LostLike lostLike);
 
-	public Integer deleteLostLike(LostLike lostLike);
+	//통합검색//////////////////////////////////////////////////////////////////////////
+	public Integer totalSearchFindCount(String totalSearchKeyword);
+
+	public List<FindBoard> totalSearchFindByKeyword(PageInfo fPInfo, String totalSearchKeyword);
+	
+	public Integer totalSearchLostCount(String totalSearchKeyword);
+	
+	public List<LostBoard> totalSearchLostByKeyword(PageInfo lPInfo, String totalSearchKeyword);
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+	
+
 
 	
 

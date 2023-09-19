@@ -40,6 +40,10 @@ public class LostBoard {
 		this.lostColor = lostColor;
 		this.lostBrand = lostBrand;
 	}
+	
+	
+
+
 
 	public int getLostNo() {
 		return lostNo;

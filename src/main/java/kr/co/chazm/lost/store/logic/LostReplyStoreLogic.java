@@ -41,6 +41,12 @@ public class LostReplyStoreLogic implements LostReplyStore{
 		return result;
 	}
 
+	@Override
+	public Integer getReplyListCount(SqlSession session, Integer refLostNo) {
+		Integer result = session.selectOne("LostReplyMapper.getReplyListCount", refLostNo);
+		return result;
+	}
+
 	
 
 	

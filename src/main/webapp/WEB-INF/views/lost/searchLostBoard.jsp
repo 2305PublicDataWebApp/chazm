@@ -38,7 +38,7 @@
         <!-- <link href="../resources/assets/css/main.css" rel="stylesheet"> -->
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../resources/assets/css/lost/lostBoard.css">
+        <link rel="stylesheet" href="../resources/assets/css/lost/searchLostBoard.css">
         <link rel="stylesheet" href="../resources/assets/css/common/header.css">
         <link rel="stylesheet" href="../resources/assets/css/common/footer.css">
 
@@ -56,7 +56,7 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- *****MAIN************************************************************************************ -->
         <main id="main">
-            <section id="mainTop" class="sections-bg">
+            <section id="mainTop" class="">
                 <div class="section-header ">
                     <h2>찾아주세요</h2>
                     <p>물건을 습득하셨나요? 분실물 목록에서 주운 물건이 있는지 찾아보세요!</p>
@@ -79,7 +79,7 @@
             </section>
             
  			<!-- ======= Portfolio Section ======= -->
-            <section id="portfolio" class="portfolio sections-bg">
+            <section id="portfolio" class="portfolio ">
                 <div class="container " data-aos="fade-up">
 
                     <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
@@ -88,67 +88,85 @@
                         <!-- 상단서치박스 -->
                         <div id="searchBox" class="align-self-center m-auto mb-5 p-3">
                             <div id="categoryBox" class="portfolio-flters w-50 text-center">
-
 	                            <ul class="portfolio-flters ">
-	                                <li data-filter=".filter-clothes" class="filter-active">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-easel" style="color:black"></i></div>
-	                                        <h4 class="title">의류</h4></a>
-	                                    </div>
-	                                </li>
-	                                <li data-filter=".filter-bag">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-handbag" style="color:black"></i></div>
-	                                        <h4 class="title">가방</h4></a>
-	                                    </div>
-	                                </li>
-	                                <li data-filter=".filter-wallet">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-wallet2" style="color:black"></i></div>
+	                                <li data-filter=".filter-지갑">
+	                                    <div class="category-icon dd-category">
+	                                        <a href="javascript:void(0)" ><div class="icon">
+	                                        <img src="../resources/assets/img/wallet.png" class="testimonial-img flex-shrink-0" alt=""></div>
 	                                        <h4 class="title">지갑</h4></a>
 	                                    </div>
 	                                </li>
-	                                <li data-filter=".filter-phone">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-phone" style="color:black"></i></div>
+	                                <li data-filter=".filter-가방">
+	                                    <div class="category-icon dd-category">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon">
+	                                        <img src="../resources/assets/img/bag.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
+	                                        <h4 class="title">가방</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-핸드폰">
+	                                    <div class="category-icon dd-category">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon">
+	                                        <img src="../resources/assets/img/phone.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
 	                                        <h4 class="title">핸드폰</h4></a>
 	                                    </div>
 	                                </li>
-	                                <li data-filter=".filter-cateEtc">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-smartwatch" style="color:black"></i></div>
-	                                        <h4 class="title">그 외</h4></a>
+	                                <li data-filter=".filter-의류" class="filter-active">
+	                                    <div class="category-icon dd-category">
+	                                        <a href="javascript:void(0)" ><div class="icon">
+	                                        <img src="../resources/assets/img/clothes.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
+	                                        <h4 class="title">의류</h4></a>
+	                                    </div>
+	                                </li>
+	                                <li data-filter=".filter-기타">
+	                                    <div class="category-icon dd-category">
+	                                        <a href="javascript:void(0)" ><div class="icon">
+	                                        <img src="../resources/assets/img/others.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
+	                                        <h4 class="title">기타</h4></a>
 	                                    </div>
 	                                </li>
 	        
-	                                <li data-filter=".filter-bus">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-bus-front" style="color:black"></i></div>
+	                                <li data-filter=".filter-버스">
+	                                    <div class="category-icon dd-place">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon">
+	                                        <img src="../resources/assets/img/bus.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
 	                                        <h4 class="title">버스</h4></a>
 	                                    </div>
 	                                </li>
-	                                <li data-filter=".filter-subway">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-train-front" style="color:black"></i></div>
+	                                <li data-filter=".filter-지하철">
+	                                    <div class="category-icon dd-place">
+	                                        <a href="javascript:void(0)" ><div class="icon">
+	                                        <img src="../resources/assets/img/train.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
 	                                        <h4 class="title">지하철</h4></a>
 	                                    </div>
 	                                </li>
-	                                <li data-filter=".filter-taxi">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-taxi-front" style="color:black"></i></div>
+	                                <li data-filter=".filter-택시">
+	                                    <div class="category-icon dd-place">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon">
+	                                        <img src="../resources/assets/img/taxi.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
 	                                        <h4 class="title">택시</h4></a>
 	                                    </div>
 	                                </li>
-	                                <li data-filter=".filter-air">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" ><div class="icon"><i class="bi bi-airplane" style="color:black"></i></div>
+	                                <li data-filter=".filter-공항">
+	                                    <div class="category-icon dd-place">
+	                                        <a href="javascript:void(0)" ><div class="icon">
+	                                        <img src="../resources/assets/img/airplane.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
 	                                        <h4 class="title">공항</h4></a>
 	                                    </div>
 	                                </li> 
-	                                <li data-filter=".filter-plcEtc">
-	                                    <div class="category-icon">
-	                                        <a href="javascript:void(0)" class=" "><div class="icon"><i class="bi bi-building" style="color:black"></i></div>
-	                                        <h4 class="title">그 외</h4></a>
+	                                <li data-filter=".filter-기타">
+	                                    <div class="category-icon dd-place">
+	                                        <a href="javascript:void(0)" class=" "><div class="icon">
+	                                        <img src="../resources/assets/img/restaurant.png"
+                                                    class="testimonial-img flex-shrink-0" alt=""></div>
+	                                        <h4 class="title">기타</h4></a>
 	                                    </div>
 	                                </li>
 	                            </ul>
@@ -178,34 +196,33 @@
                                     </div>
                                 </div>
             
-                                <div class="d-flex m-2 w-100 justify-content-between">
-                                        
+                                <div class="d-flex m-2 w-100 justify-content-between">  
                                     <div id="lostCounty" class="btn-group w-100 ">
                                         <button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; " data-bs-toggle="dropdown" aria-expanded="false">
-                                        시 / 도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span id="selectedLocation">${lostLocation }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </button>
                                         <ul class="dropdown-menu w-75 text-center">
-                                            <li><a class="dropdown-item dd-location" data-value="seoul">서울특별시</a></li>
-											<li class="dropdown-item dd-location" data-value="busan">부산광역시</li>
-											<li class="dropdown-item dd-location" data-value="daegu">대구광역시</li>
-											<li class="dropdown-item dd-location" data-value="incheon">인천광역시</li>
-											<li class="dropdown-item dd-location" data-value="gwanju">광주광역시</li>
-											<li class="dropdown-item dd-location" data-value="daejeon">대전광역시</li>
-											<li class="dropdown-item dd-location" data-value="ulsan">울산광역시</li>
-											<li class="dropdown-item dd-location" data-value="sejong">세종특별자치시</li>
-											<li class="dropdown-item dd-location" data-value="gyeonggi">경기도</li>
-											<li class="dropdown-item dd-location" data-value="gangwon">강원도</li>
-											<li class="dropdown-item dd-location" data-value="chungbuk">충청북도</li>
-											<li class="dropdown-item dd-location" data-value="chungnam">충청남도</li>
-											<li class="dropdown-item dd-location" data-value="jeonbuk">전라북도</li>
-											<li class="dropdown-item dd-location" data-value="jeonnam">전라남도</li>
-											<li class="dropdown-item dd-location" data-value="gyeongbuk">경상북도</li>
-											<li class="dropdown-item dd-location" data-value="gyeongnam">경상남도</li>
-											<li class="dropdown-item dd-location" data-value="jeju">제주특별자치도</li>
-											<input type="hidden" name="lostLocation" id="selectedLocationInput" value="">
+                                            <li class="dropdown-item dd-location" value="서울특별시">서울특별시</a></li>
+											<li class="dropdown-item dd-location" value="부산광역시">부산광역시</li>
+											<li class="dropdown-item dd-location" value="대구광역시">대구광역시</li>
+											<li class="dropdown-item dd-location" value="인천광역시">인천광역시</li>
+											<li class="dropdown-item dd-location" value="광주광역시">광주광역시</li>
+											<li class="dropdown-item dd-location" value="대전광역시">대전광역시</li>
+											<li class="dropdown-item dd-location" value="울산광역시">울산광역시</li>
+											<li class="dropdown-item dd-location" value="세종특별자치시">세종특별자치시</li>
+											<li class="dropdown-item dd-location" value="경기도">경기도</li>
+											<li class="dropdown-item dd-location" value="강원도">강원도</li>
+											<li class="dropdown-item dd-location" value="충청북도">충청북도</li>
+											<li class="dropdown-item dd-location" value="충청남도">충청남도</li>
+											<li class="dropdown-item dd-location" value="전라북도">전라북도</li>
+											<li class="dropdown-item dd-location" value="전라남도">전라남도</li>
+											<li class="dropdown-item dd-location" value="경상북도">경상북도</li>
+											<li class="dropdown-item dd-location" value="경상남도">경상남도</li>
+											<li class="dropdown-item dd-location" value="제주특별자치도">제주특별자치도</li>
+											<input type="hidden" name="lostLocation" id="selectedLocationInput" value="${lostLocation }">
                                         </ul>
                                     </div>
-        
+         						</div>
                                     <!-- <div id="lost_city" class="btn-group me-3">
                                         <button type="button" class="btn dropdown-toggle text-center"  style="background-color: #fff; width: 180px; height: 40px;" data-bs-toggle="dropdown" aria-expanded="false">
                                             시 / 군 / 구&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -226,28 +243,28 @@
                                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                                         </ul>
                                     </div> -->
-                                </div>
+                               
             
                                 <div id="colorBrand" class="d-flex justify-content-between m-2 w-100 " >
                                 
                                     <div class="btn-group me-2 w-50 ">
                                         <button type="button" class="w-100  btn dropdown-toggle border-dark-subtle"  style="background-color: #fff;" data-bs-toggle="dropdown" aria-expanded="true">
-                                        ${lostColor }
+                                        <span id="selectedColor">${lostColor }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </button>
                                         <ul class="dropdown-menu">
-	                                        <li class="dropdown-item dd-color" data-value="white">흰색</li>
-											<li class="dropdown-item dd-color" data-value="black">검정</li>
-											<li class="dropdown-item dd-color" data-value="red">빨강</li>
-											<li class="dropdown-item dd-color" data-value="yellow">노랑</li>
-											<li class="dropdown-item dd-color" data-value="green">초록</li>
-											<li class="dropdown-item dd-color" data-value="blue">파랑</li>
-											<li class="dropdown-item dd-color" data-value="purple">보라</li>
-											<input type="hidden" name="lostColor" id="selectedColorInput" value="">
+	                                        <li class="dropdown-item dd-color" value="흰색">흰색</li>
+											<li class="dropdown-item dd-color" value="검정">검정</li>
+											<li class="dropdown-item dd-color" value="빨강">빨강</li>
+											<li class="dropdown-item dd-color" value="노랑">노랑</li>
+											<li class="dropdown-item dd-color" value="초록">초록</li>
+											<li class="dropdown-item dd-color" value="파랑">파랑</li>
+											<li class="dropdown-item dd-color" value="보라">보라</li>
+											<input type="hidden" name="lostColor" id="selectedColorInput" value="${lostColor }">
                                         </ul>
                                     </div>
         
                                     <div id="lostBrand" class="w-50 ">
-                                        <input type="text" name="lostBrand" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;" placeholder="브랜드" value="${lostBrand }">
+                                        <input type="text" name="lostBrand" value="${lostBrand }" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
                                     </div>
                                 </div>
         
@@ -275,14 +292,14 @@
 	                         <div class="col-xl-4 col-md-6 portfolio-item filter-${searchLostOne.lostCategory} filter-${searchLostOne.lostPlace}">
 	                             <div class="portfolio-wrap">
 	                             	<c:url var="detailUrl" value="/lostBoard/detail.do">
-										  <c:param name="lostNo" value="${lostOne.lostNo}"></c:param>
+										  <c:param name="lostNo" value="${searchLostOne.lostNo}"></c:param>
 									</c:url>
-									<c:if test="${!empty lostOne.lostFilerename }">  <!-- 첨부이미지가 있을때 -->
+									<c:if test="${!empty searchLostOne.lostFilerename }">  <!-- 첨부이미지가 있을때 -->
 	                             		<a href="${detailUrl}" >
-	                             			<img src="../resources/assets/img/luploadFiles/${lostOne.lostFilerename}" class="img-fluid"  alt="#">
+	                             			<img src="../resources/assets/img/luploadFiles/${searchLostOne.lostFilerename}" class="img-fluid"  alt="#">
 	                             		</a>
 									</c:if>
-									<c:if test="${empty lostOne.lostFilerename }"> <!-- 첨부이미지가 없을때 -->
+									<c:if test="${empty searchLostOne.lostFilerename }"> <!-- 첨부이미지가 없을때 -->
 										<a href="${detailUrl}" >
 											<img src="../resources/assets/img/noImage.jpg" class="img-fluid" alt="#">
 										</a>
@@ -377,36 +394,36 @@
         <script>
  
    		
-    		<!--로그인 한 경우에만 글쓰기 진입 가능하도록  -->
-//     		document.querySelector("#insertLostBtn").addEventListener("click" , click{
-// 				alert("ss");
-// 			});
-				
-<%-- 				var lostWriter = '<%= session.getAttribute("memberId") %>'; --%>
-// 				function insertLostBoard (){
-// 					if(lostWriter!= null && !lostWriter.equals("")) {
-						
-// 			        	location.href = "/lostBoard/insert.do"
-// 					}else {
-// 					    alert("로그인 후에 글을 작성할 수 있습니다.");
-// 					  }
-// 				}
-
-			//분실물등록 페이지이동
-			function insertLostBoard (){
-				location.href = "/lostBoard/insert.do"
+		<!--로그인 한 경우에만 글쓰기 진입 가능하도록  -->
+		//분실물등록 페이지이동
+			function insertLostBoard (memberId){
+				if(memberId != null && memberId != ""){
+					location.href = "/lostBoard/insert.do"
+				}else {
+					alert("로그인해야 글 등록이 가능합니다")
+				}
 			}
-			
-			
-			//드롭다운 밸류값 삽입 
+
+			//드롭다운 밸류값 삽입+DB전달
+	        //지역
+            let locations = document.querySelectorAll(".dd-location");
+            const selectedLocation = document.querySelector("#selectedLocation");
+            locations.forEach(location => {
+            	location.addEventListener("click", function (event) {
+                    const selectedLocation = this.closest(".btn-group");  
+                    selectedLocation.querySelector("#selectedLocation").innerHTML = this.innerText;
+                    document.getElementById("selectedLocationInput").value = this.getAttribute("value"); //인풋히든 밸류에 값 넣기 
+                });
+            });
+            
 			//색상
-			 let colors = document.querySelectorAll(".dd-color");
+			let colors = document.querySelectorAll(".dd-color");
             const selectedColor = document.querySelector("#selectedColor");
             colors.forEach(color => {
             	color.addEventListener("click", function (event) {
-                    const selectedColor = this.closest(".btn-group");                    
+                    const selectedColor = this.closest(".btn-group");  
                     selectedColor.querySelector("#selectedColor").innerHTML = this.innerText;
-                    document.querySelector("#selectedColorInput").value = this.innerText;
+                    document.getElementById("selectedColorInput").value = this.getAttribute("value"); //인풋히든 밸류에 값 넣기 
                 });
             });
 		        

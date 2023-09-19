@@ -23,6 +23,18 @@
 		<result property="lUpdateDate"     column="L_UPDATE_DATE"/>
 		<result property="lStateYN"        column="L_STATE_YN"/>				
 	</resultMap>
+	
+	
+	<resultMap type="FindBoard" id="FindBoardResultMap">
+		<id 	property="findNo" 		  column="FIND_NO"/>
+		<result property="findTitle" 	  column="FIND_TITLE"/>
+		<result property="findContent" 	  column="FIND_CONTENT"/>
+		<result property="findPlace" 	  column="FIND_PLACE"/>
+		<result property="findColor" 	  column="FIND_COLOR"/>
+		<result property="findBrand" 	  column="FIND_BRAND"/>
+		<result property="getPlace" 	  column="GET_PLACE"/>
+		<result property="fStateYn" 	  column="F_STATE_YN"/>
+	</resultMap>
 
 	<!-- 게시물 총 개수 구하기 -->
 	<select id="getListCount" resultType="_int">
@@ -62,7 +74,7 @@
 		UPDATE LOST_BOARD_TBL SET L_STATE_YN = 'N' WHERE LOST_NO = #{lostNo} AND LOST_WRITER = #{lostWriter}
 	</update>
 
-	<!-- 검색페이지 총 게시물 수  -->
+	<!-- 분실물게시판 검색페이지 총 게시물 수  -->
 	<select id="searchGetListCount" resultType="_int">
 		SELECT COUNT (*) FROM LOST_BOARD_TBL
 		<if test="lostSearchCondition == 'lostTitle'">
@@ -71,13 +83,19 @@
 		<if test="lostSearchCondition == 'lostContent'">
 			WHERE LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
 		</if> 
-		AND LOST_BRAND LIKE '%'||#{lostBrand}||'%'
- 		AND LOST_COLOR = '%'||#{lostColor}||'%'
-<!-- 		AND LOST_CATEGORY = #{lostCategory} AND LOST_LOCATION = #{lostLocation} AND LOST_PLACE = #{lostPlace}  -->
-<!-- 		 -->
+		<if test="lostLocation != ''"> <!-- 입력을 하면 동작 -->
+			AND LOST_LOCATION LIKE '%'||#{lostLocation}||'%' 		
+		</if>
+		<if test="lostBrand != ''"> 
+			AND LOST_BRAND LIKE '%'||#{lostBrand}||'%' 		
+		</if>
+ 		<if test="lostColor != ''"> 
+			AND LOST_COLOR LIKE '%'||#{lostColor}||'%'
+		</if>
+ 		AND L_STATE_YN = 'Y'
 	</select>
 	
-	<!-- 동적쿼리를 이용한 통합검색 -->
+	<!-- 동적쿼리를 이용한 분실물검색 -->
 	<select id="searchLostByKeyword" resultMap="lostBoardResultMap">
 		SELECT * FROM LOST_BOARD_TBL 
 		<if test="lostSearchCondition == 'lostTitle'">
@@ -85,13 +103,67 @@
 		</if>
 		<if test="lostSearchCondition == 'lostContent'">
 			WHERE LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
-		</if> 
-		AND LOST_BRAND LIKE '%'||#{lostBrand}||'%' 
-		AND LOST_COLOR = '%'||#{lostColor}||'%'
+		</if>
+		<if test="lostLocation != ''"> <!-- 입력을 하면 동작 -->
+			AND LOST_LOCATION LIKE '%'||#{lostLocation}||'%' 		
+		</if>
+		<if test="lostBrand != '' "> 
+			AND LOST_BRAND LIKE '%'||#{lostBrand}||'%' 		
+		</if>
+		<if test="lostColor != ''"> 
+			AND LOST_COLOR LIKE '%'||#{lostColor}||'%'
+		</if>
+		AND L_STATE_YN = 'Y'
 		ORDER BY LOST_NO DESC
-<!-- 		AND LOST_CATEGORY = #{lostCategory} AND LOST_LOCATION = #{lostLocation} AND LOST_PLACE = #{lostPlace}  -->
+	</select>
+	
+	<!-- 분실물게시판 통합검색 총 게시물 수  -->
+	<select id="totalSearchFindCount" resultType="_int">
+		SELECT COUNT (*) FROM FIND_BOARD_TBL
+		WHERE (FIND_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
+		AND F_STATE_YN = 'Y'
+	</select>
+	
+	<!-- 동적쿼리를 이용한 습득물검색 -->
+	<select id="totalSearchFindByKeyword" resultMap="FindBoardResultMap">
+		SELECT * FROM FIND_BOARD_TBL 
+		WHERE (FIND_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
+		AND F_STATE_YN = 'Y'
+		ORDER BY FIND_NO DESC
+	</select>
+	
+	
 
-		
+	
+	<!-- 분실물게시판 통합검색 총 게시물 수  -->
+	<select id="totalSearchLostCount" resultType="_int">
+		SELECT COUNT (*) FROM LOST_BOARD_TBL
+		WHERE (LOST_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
+		AND L_STATE_YN = 'Y'
+	</select>
+	
+	<!-- 동적쿼리를 이용한 분실물검색 -->
+	<select id="totalSearchLostByKeyword" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL 
+		WHERE (LOST_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
+		AND L_STATE_YN = 'Y'
+		ORDER BY LOST_NO DESC
 	</select>
 	
 
