@@ -84,7 +84,10 @@
 									</li>
 									<li class="d-flex align-items-center"><i
 										class="bi bi-chat-dots"></i>${pInfo.totalCount } 댓글</li>
-									<li class="d-flex align-items-center"><i class="bi bi-hand-thumbs-up"></i>${likeCount } 좋아요</li>
+									<li class="d-flex align-items-center">
+										<i class="bi bi-hand-thumbs-up"></i>
+										<a href="#" data-bs-toggle="modal" data-bs-target="#likeModal">${likeCount } 좋아요</a>
+									</li>
 								</ul>
 							</div>
 							<!-- End meta top -->
@@ -297,6 +300,28 @@
 							<button type="submit" id="dntBtn" class="btn btn-primary">기부하기</button>
 						</div>
 					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="likeModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h5 class="modal-title" id="exampleModalLabel">좋아요</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body text-center">
+						<c:forEach items="${likeList }" var="like" varStatus="i">
+						<div class="row">
+							<dl class="d-flex" style="justify-content:space-between;">
+								<dt class="text-center">아이디</dt>
+								<dd class="text-center">${like.memberId }</dd>
+							</dl>
+						</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>

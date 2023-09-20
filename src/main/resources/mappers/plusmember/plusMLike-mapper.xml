@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PlusMLikeMapper">
+	<resultMap type="PlusMLike" id="plusMLikeResultMap">
+		<id 	property="likeNo" 		column="PLUS_M_LIKE_NO"/>
+		<result property="refPlusMNo" 	column="REF_PLUS_M_NO"/>
+		<result property="memberId" 	column="MEMBER_ID"/>
+	</resultMap>
 	<insert id="insertPlusMLike">
 		INSERT INTO PLUS_M_LIKE_TBL VALUES(SEQ_PLUS_M_LIKE_NO.NEXTVAL, #{refPlusMNo}, #{memberId})
 	</insert>
@@ -17,5 +22,8 @@
 	</select>
 	<select id="selectLikeCount" resultType="_int">
 		SELECT COUNT(*) FROM PLUS_M_LIKE_TBL WHERE REF_PLUS_M_NO = #{plusMNo}
+	</select>
+	<select id="selectPlusMLikeList" resultMap="plusMLikeResultMap">
+		SELECT * FROM PLUS_M_LIKE_TBL WHERE REF_PLUS_M_NO = #{plusMNo}
 	</select>
 </mapper>

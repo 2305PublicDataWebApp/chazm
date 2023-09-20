@@ -70,6 +70,12 @@
 			<when test="orderBy == 'dntLow'">
 				SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_CUR_AMOUNT ASC
 			</when>
+			<when test="orderBy == dntPercent">
+				SELECT PM.*, (PLUS_M_CUR_AMOUNT / PLUS_M_GOAL_AMOUNT) * 100 AS RATE
+				FROM PLUS_M_BOARD_TBL PM
+				WHERE PLUS_M_END_YN = 'N'
+				ORDER BY RATE DESC
+			</when>
 			<when test="orderBy == 'deadline'">
 				SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_END_DATE ASC
 			</when>

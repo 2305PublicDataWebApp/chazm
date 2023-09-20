@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.chazm.plusmember.domain.PageInfo;
+import kr.co.chazm.plusmember.domain.PlusMLike;
 import kr.co.chazm.plusmember.domain.PlusMReply;
 import kr.co.chazm.plusmember.service.PlusMReplyService;
 import kr.co.chazm.plusmember.store.PlusMReplyStore;
@@ -53,6 +54,12 @@ public class PlusMReplyServiceImpl implements PlusMReplyService {
 	public int getListCount(int plusMNo) {
 		int result = plusMReplyStore.getListCount(sqlSession, plusMNo);
 		return result;
+	}
+
+	@Override
+	public List<PlusMLike> selectPlusMLikeList(int plusMNo) {
+		List<PlusMLike> likeList = plusMReplyStore.selectPlusMLikeList(sqlSession, plusMNo);
+		return likeList;
 	}
 
 }

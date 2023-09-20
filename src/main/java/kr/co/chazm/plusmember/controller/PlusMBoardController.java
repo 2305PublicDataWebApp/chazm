@@ -198,7 +198,7 @@ public class PlusMBoardController {
 				int result = plusMBoardService.deletePlusMBoard(plusMNo);	// 게시글 삭제 endYn - y
 				result += plusMReplyService.deleteRefPlusMReply(plusMNo);	// 포함된 댓글 status - n으로 바꾸기
 				result += plusMBoardService.deletePlusMLikeByNo(plusMNo);	// 포함된 좋아요 삭제
-				if (result >= 3) {
+				if (result > 0) {
 					mv.addObject("msg", "게시글이 삭제되었습니다.");
 					mv.addObject("url", "/plusMBoard/list.do");
 					mv.setViewName("common/message");
@@ -278,6 +278,7 @@ public class PlusMBoardController {
 			Integer totalCount = plusMReplyService.getListCount(plusMNo);
 			PageInfo pInfo = this.getReplyPageInfo(currentPage, totalCount);
 			List<PlusMReply> pMRList = plusMReplyService.selectPlusMReplyList(pInfo, plusMNo);
+			List<PlusMLike> likeList = plusMReplyService.selectPlusMLikeList(plusMNo);
 			mv.addObject("plusMBoard", plusMBoard);
 			mv.addObject("pInfo", pInfo);
 			mv.addObject("pMRList", pMRList);
@@ -285,6 +286,7 @@ public class PlusMBoardController {
 			mv.addObject("dntYn", dntYn);
 			mv.addObject("memberCurPoint", memberCurPoint);
 			mv.addObject("likeCount", likeCount);
+			mv.addObject("likeList", likeList);
 			mv.setViewName("plusM/plusMdetail");
 		}
 		return mv;

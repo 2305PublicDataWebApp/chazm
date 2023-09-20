@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.co.chazm.plusmember.domain.PageInfo;
+import kr.co.chazm.plusmember.domain.PlusMLike;
 import kr.co.chazm.plusmember.domain.PlusMReply;
 
 public interface PlusMReplyStore {
@@ -62,5 +63,14 @@ public interface PlusMReplyStore {
 	 * @return
 	 */
 	int getListCount(SqlSession sqlSession, int plusMNo);
+
+	/**
+	 * 포인트로 기부해요 게시글별 좋아요 ID 조회 Store
+	 * 
+	 * @param sqlSession
+	 * @param plusMNo
+	 * @return
+	 */
+	List<PlusMLike> selectPlusMLikeList(SqlSession sqlSession, int plusMNo);
 
 }

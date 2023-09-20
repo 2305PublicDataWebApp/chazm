@@ -211,7 +211,9 @@
 	                            </tr>
 	                            <tr id="plusA-content-${plusABoard.plusANo }" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-up">
 	                                <td colspan="4" class="accordion-body">
-	                                    ${plusABoard.plusAContent }
+	                                	<div>
+		                                    ${plusABoard.plusAContent }
+	                                	</div>
 	                                </td>
 	                            </tr>
                             </c:forEach>
@@ -229,7 +231,7 @@
 		                            	<c:url var="pageUrl" value="/plusABoard/list.do">
 		                            		<c:param name="page" value="${p }"></c:param>
 		                            	</c:url>
-			                            <li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
+			                            <li class="page-item page-number"><a class="page-link" href="${pageUrl }">${p }</a></li>
 		                            </c:forEach>
 		                            <c:url var="nextUrl" value="/plusABoard/list.do">
 		                            	<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
@@ -314,11 +316,17 @@
  				}
  				
         	}
+            // page active
+            var urlParams = new URLSearchParams(window.location.search);
+    		var pageUrl = urlParams.get("page");
+    		
         	window.addEventListener('load', function() {
                 var scrollPosition = sessionStorage.getItem('scrollPosition');
-                if (scrollPosition !== null) {
-                    window.scrollTo(0, parseInt(scrollPosition));
-                    sessionStorage.removeItem('scrollPosition'); // 스크롤 위치 정보를 삭제합니다.
+                if(pageUrl !== null) {
+	                if (scrollPosition !== null) {
+	                    window.scrollTo(0, parseInt(scrollPosition));
+	                    sessionStorage.removeItem('scrollPosition'); // 스크롤 위치 정보를 삭제합니다.
+	                }                	
                 }
             });
 
@@ -327,6 +335,20 @@
                 var currentScrollPosition = window.scrollY;
                 sessionStorage.setItem('scrollPosition', currentScrollPosition);
             });
+            
+
+    		// 모든 li 요소를 가져옵니다.
+    		var liElements = document.querySelectorAll('.page-number');
+    		// 각 li 요소에 클릭 이벤트 리스너를 추가하고, orderBy 값을 비교하여 active 클래스를 추가합니다.
+    		liElements.forEach(function(li) {
+    			var link = li.querySelector('a');
+    			var linkPage = link.innerText;
+    			if(pageUrl === linkPage) {
+    				console.log(linkPage);
+    				link.style.backgroundColor = "var(--color-primary)";
+    				link.style.color = "#fff";
+    			}
+    		})
         </script>
     </body>
 
