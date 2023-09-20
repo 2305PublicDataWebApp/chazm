@@ -22,6 +22,9 @@
 	<update id="deleteFindReply">
 		UPDATE FIND_REPLY_TBL SET FIND_R_STATE_YN = 'N' WHERE FIND_R_NO = #{findRNo}
 	</update>
+	<update id="deleteFindBoardReply">
+		UPDATE FIND_REPLY_TBL SET FIND_R_STATE_YN = 'N' WHERE REF_FIND_NO = #{findNo}
+	</update>
 	
 	<select id="selectFindReplyList" resultMap="FindReplyResultMap">
 		SELECT * FROM FIND_REPLY_TBL WHERE REF_FIND_NO = #{refFindNo} AND FIND_R_STATE_YN = 'Y' AND FIND_R_PARENT_NO = 0 ORDER BY FIND_R_NO DESC
@@ -29,7 +32,7 @@
 	<select id="selectFindReReplyList" resultMap="FindReplyResultMap">
 		SELECT * FROM FIND_REPLY_TBL WHERE REF_FIND_NO = #{refFindNo} AND FIND_R_STATE_YN = 'Y' AND FIND_R_PARENT_NO != 0 ORDER BY FIND_R_NO DESC
 	</select>
-	<select id="getListCount" resultType="_int">
+	<select id="getReplyCount" resultType="_int">
 		SELECT COUNT(*) FROM FIND_REPLY_TBL WHERE REF_FIND_NO = #{refFindNo} AND FIND_R_STATE_YN = 'Y'
 	</select>
 </mapper>

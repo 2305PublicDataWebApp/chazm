@@ -144,12 +144,12 @@
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">공항</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="음식점"
-	                    <c:if test="${paramMap.findPlace == '음식점' }">style="background-color: #ffc107;"</c:if>>
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="기타"
+	                    <c:if test="${paramMap.findPlace == '기타' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/restaurant.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></i></div>
-	                        <h4 class="title">음식점</h4></a>
+	                        <h4 class="title">기타</h4></a>
 	                    </div>
 	                </div>
 	    
@@ -222,11 +222,14 @@
                                     <li><a class="dropdown-item dd-color" data-value="흰색">흰색</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="검정">검정</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="빨강">빨강</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="주황">주황</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="노랑">노랑</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="초록">초록</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="파랑">파랑</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="보라">보라</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="분홍">분홍</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="갈색">갈색</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="기타">기타</a></li>
                                 </ul>
 	                        </div>
 	    					<input type="hidden" name="findColor" id="selectedColorInput" value="">
@@ -282,58 +285,60 @@
     
                     <div class="mt-5 d-flex justify-content-center">
                         <nav aria-label="Page navigation exampler">
-                        	<c:if test="${pInfo.startNavi ne '1' }">
-                        		 <c:url var="prevPageUrl" value="/findBoard/search.do">
-							        <c:param name="page" value="${pInfo.startNavi-1 }"></c:param>
-							        <c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
-									<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
-									<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
-									<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
-									<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
-									<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
-									<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
-									<c:param name="findColor" value="${paramMap.findColor }"></c:param>
-									<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
-							    </c:url>
-							     <form action="${prevPageUrl}" method="post" style="float:left;">
-							        <button class="page" style="float:left;">Prev&nbsp;&nbsp;&nbsp;</button>
-							    </form>
-<%-- 		                    	<a href="/findBoard/search.do?page=${pInfo.startNavi-1 }" class="first">Prev&nbsp;&nbsp;&nbsp;</a> --%>
-		                    </c:if>
-		                    <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
-								<c:url var="pageUrl" value="/findBoard/search.do">
-									<c:param name="page" value="${p }"></c:param>
-									<c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
-									<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
-									<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
-									<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
-									<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
-									<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
-									<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
-									<c:param name="findColor" value="${paramMap.findColor }"></c:param>
-									<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
-								</c:url>
-								<form action="${pageUrl }" method="post" style="float:left;">
-									 <a href="javascript:void(0);" class="page" style="float:left;" onclick="submitForm(${p});">${p}</a>&nbsp;
-								</form>
-							</c:forEach>
-							<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
-								<c:url var="nextPageUrl" value="/findBoard/search.do">
-							        <c:param name="page" value="${pInfo.endNavi+1 }"></c:param>
-							        <c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
-									<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
-									<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
-									<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
-									<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
-									<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
-									<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
-									<c:param name="findColor" value="${paramMap.findColor }"></c:param>
-									<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
-							    </c:url>
-							     <form action="${nextPageUrl}" method="post" style="float:left;">
-							        <button class="page" style="float:left;">Next</button>
-							    </form>
-							</c:if>
+                        	<ul class="pagination">
+	                        	<c:if test="${pInfo.startNavi ne '1' }">
+	                        		 <c:url var="prevPageUrl" value="/findBoard/search.do">
+								        <c:param name="page" value="${pInfo.startNavi-1 }"></c:param>
+								        <c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
+										<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
+										<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
+										<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
+										<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
+										<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
+										<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
+										<c:param name="findColor" value="${paramMap.findColor }"></c:param>
+										<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
+								    </c:url>
+								    <form action="${prevPageUrl}" method="post" style="float:left;">
+								        <li class="page-item"><button class="page" style="float:left;"><i class="bi bi-chevron-left"></i></button></li>
+								    </form>
+	<%-- 		                    	<a href="/findBoard/search.do?page=${pInfo.startNavi-1 }" class="first">Prev&nbsp;&nbsp;&nbsp;</a> --%>
+			                    </c:if>
+			                    <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+									<c:url var="pageUrl" value="/findBoard/search.do">
+										<c:param name="page" value="${p }"></c:param>
+										<c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
+										<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
+										<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
+										<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
+										<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
+										<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
+										<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
+										<c:param name="findColor" value="${paramMap.findColor }"></c:param>
+										<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
+									</c:url>
+									<form action="${pageUrl }" method="post" style="float:left;">
+										 <li class="page-item"><a href="javascript:void(0);" class="page-link" onclick="submitForm(${p});">${p}</a></li>
+									</form>
+								</c:forEach>
+								<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
+									<c:url var="nextPageUrl" value="/findBoard/search.do">
+								        <c:param name="page" value="${pInfo.endNavi+1 }"></c:param>
+								        <c:param name="findSearchCondition" value="${paramMap.findSearchCondition }"></c:param>
+										<c:param name="findSearchKeyword" value="${paramMap.findSearchKeyword }"></c:param>
+										<c:param name="findDateStart" value="${paramMap.findDateStart }"></c:param>
+										<c:param name="findDateEnd" value="${paramMap.findDateEnd }"></c:param>
+										<c:param name="findCategory" value="${paramMap.findCategory }"></c:param>
+										<c:param name="findLocation" value="${paramMap.findLocation }"></c:param>
+										<c:param name="findPlace" value="${paramMap.findPlace }"></c:param>
+										<c:param name="findColor" value="${paramMap.findColor }"></c:param>
+										<c:param name="findBrand" value="${paramMap.findBrand }"></c:param>
+								    </c:url>
+								     <form action="${nextPageUrl}" method="post" style="float:left;">
+								        <li class="page-item"><button class="page" style="float:left;"><i class="bi bi-chevron-right"></i></button></li>
+								    </form>
+								</c:if>
+                        	</ul>
                         </nav>
                     </div>
             </section><!-- End Portfolio Section -->

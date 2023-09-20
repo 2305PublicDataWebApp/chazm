@@ -39,20 +39,26 @@ public class FindReplyServiceImpl implements FindReplyService{
 	}
 
 	@Override
-	public int getListCount(int findNo) {
-		int result = findReplyStore.getListCount(sqlSession, findNo);
+	public int deleteFindBoardReply(int findNo) {
+		int result = findReplyStore.deleteFindBoardReply(sqlSession, findNo);
 		return result;
 	}
 
 	@Override
-	public List<FindReply> selectFindReplyList(PageInfo pInfo, int findNo) {
-		List<FindReply> fRList = findReplyStore.selectFindReplyList(sqlSession, pInfo, findNo);
+	public int getReplyCount(int findNo) {
+		int result = findReplyStore.getReplyCount(sqlSession, findNo);
+		return result;
+	}
+
+	@Override
+	public List<FindReply> selectFindReplyList(int findNo) {
+		List<FindReply> fRList = findReplyStore.selectFindReplyList(sqlSession, findNo);
 		return fRList;
 	}
 
 	@Override
-	public List<FindReply> selectFindReReplyList(PageInfo pInfo, int findNo) {
-		List<FindReply> fRList = findReplyStore.selectFindReReplyList(sqlSession, pInfo, findNo);
+	public List<FindReply> selectFindReReplyList(int findNo) {
+		List<FindReply> fRList = findReplyStore.selectFindReReplyList(sqlSession, findNo);
 		return fRList;
 	}
 	

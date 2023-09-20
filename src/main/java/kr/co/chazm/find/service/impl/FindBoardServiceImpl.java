@@ -41,6 +41,12 @@ public class FindBoardServiceImpl implements FindBoardService{
 	}
 
 	@Override
+	public int deleteFindBoardLike(int findNo) {
+		int result = findBoardStore.deleteFindBoardLike(sqlSession, findNo);
+		return result;
+	}
+
+	@Override
 	public FindBoard selectFindBoardByNo(int findNo) {
 		FindBoard findBoard = findBoardStore.selectFindBoardByNo(sqlSession, findNo);
 		return findBoard;
@@ -91,6 +97,24 @@ public class FindBoardServiceImpl implements FindBoardService{
 	@Override
 	public int findComplete(int findNo) {
 		int result = findBoardStore.findComplete(sqlSession, findNo);
+		return result;
+	}
+
+	@Override
+	public int getLikeCont(int findNo) {
+		int result = findBoardStore.getLikeCont(sqlSession, findNo);
+		return result;
+	}
+
+	@Override
+	public int insertPoint(Map<String, Object> pMap) {
+		int result = findBoardStore.insertPoint(sqlSession, pMap);
+		return result;
+	}
+
+	@Override
+	public int updateMemberPoint(Map<String, Object> pMap) {
+		int result = findBoardStore.updateMemberPoint(sqlSession, pMap);
 		return result;
 	}
 }

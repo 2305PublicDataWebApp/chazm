@@ -2168,18 +2168,7 @@ height : 50px;
 .heart-button i {
 font-size : 30px;
 }
-.heart-button .hover-image {
-display: none; /* 초기에 숨김 */
-color : red;
-}
 
-.heart-button:hover .hover-image {
-display: inline-block; /* hover 상태에서 보이게 함 */
-}
-
-.heart-button:hover .like-img {
-display: none; /* hover 상태에서 첫 번째 이미지 숨김 */
-}
 
 .cur-val {
 font-size : 40px;
@@ -2637,14 +2626,14 @@ color : #fff;
 
 .infoWrap {
     width:50%;
-    margin: 20px;   
+    margin-top : 30px;
+    margin-bottom: 20px;   
     font-size: 1.2rem;
 }
     
 .find-info {
     list-style: none;
     padding-left: 0px;
-    margin: 10px 0 0 10px;
 }
 .find-info > li {
     margin : 10px;
@@ -2661,4 +2650,9 @@ color : #fff;
 
 .findContent p {
 	padding : 30px;
+}
+
+
+.bi-suit-heart-fill {
+	color: red;
 }

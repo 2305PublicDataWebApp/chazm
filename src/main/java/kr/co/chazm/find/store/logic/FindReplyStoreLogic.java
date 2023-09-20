@@ -33,29 +33,27 @@ public class FindReplyStoreLogic implements FindReplyStore{
 	
 	
 	@Override
-	public int getListCount(SqlSession sqlSession, int findNo) {
-		int result = sqlSession.selectOne("FindReplyMapper.getListCount", findNo);
+	public int deleteFindBoardReply(SqlSession sqlSession, int findNo) {
+		int result = sqlSession.update("FindReplyMapper.deleteFindBoardReply", findNo);
 		return result;
 	}
 
 	@Override
-	public List<FindReply> selectFindReplyList(SqlSession sqlSession, PageInfo pInfo, int findNo) {
-		int limit = pInfo.getRecordCountPerPage();
-		int currentPage = pInfo.getCurrentPage();
-		int offset = (currentPage - 1) * limit;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<FindReply> fRList = sqlSession.selectList("FindReplyMapper.selectFindReplyList", findNo, rowBounds);
+	public int getReplyCount(SqlSession sqlSession, int findNo) {
+		int result = sqlSession.selectOne("FindReplyMapper.getReplyCount", findNo);
+		return result;
+	}
+
+	@Override
+	public List<FindReply> selectFindReplyList(SqlSession sqlSession, int findNo) {
+		List<FindReply> fRList = sqlSession.selectList("FindReplyMapper.selectFindReplyList", findNo);
 		return fRList;
 	}
 	
 	
 	@Override
-	public List<FindReply> selectFindReReplyList(SqlSession sqlSession, PageInfo pInfo, int findNo) {
-		int limit = pInfo.getRecordCountPerPage();
-		int currentPage = pInfo.getCurrentPage();
-		int offset = (currentPage - 1) * limit;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<FindReply> fRList = sqlSession.selectList("FindReplyMapper.selectFindReReplyList", findNo, rowBounds);
+	public List<FindReply> selectFindReReplyList(SqlSession sqlSession, int findNo) {
+		List<FindReply> fRList = sqlSession.selectList("FindReplyMapper.selectFindReReplyList", findNo);
 		return fRList;
 	}
 

@@ -34,29 +34,35 @@ public interface FindReplyStore {
 	int deleteFindReply(SqlSession sqlSession, int findRNo);
 	
 	/**
+	 * 습득물 게시판 게시글 삭제로 인한 댓글 삭제 Store
+	 * @param sqlSession
+	 * @param findNo
+	 * @return int
+	 */
+	int deleteFindBoardReply(SqlSession sqlSession, int findNo);
+
+	/**
 	 * 습득물 게시판 댓글 전체 갯수 조회 Store
 	 * @param sqlSession
 	 * @param findNo
 	 * @return int
 	 */
-	int getListCount(SqlSession sqlSession, int findNo);
+	int getReplyCount(SqlSession sqlSession, int findNo);
 
 	/**
 	 * 습득물 게시판 댓글 리스트 조회 Store
 	 * @param sqlSession
-	 * @param pInfo
 	 * @param findNo
 	 * @return List
 	 */
-	List<FindReply> selectFindReplyList(SqlSession sqlSession, PageInfo pInfo, int findNo);
+	List<FindReply> selectFindReplyList(SqlSession sqlSession, int findNo);
 
 	/**
 	 * 습득물 게시판 대댓글 리스트 조회 Store
 	 * @param sqlSession
-	 * @param pInfo
 	 * @param findNo
 	 * @return List
 	 */
-	List<FindReply> selectFindReReplyList(SqlSession sqlSession, PageInfo pInfo, int findNo);
+	List<FindReply> selectFindReReplyList(SqlSession sqlSession, int findNo);
 
 }
