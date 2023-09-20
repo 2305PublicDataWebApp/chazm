@@ -51,7 +51,7 @@
 	<select id="selectPlusMBoardList" resultMap="plusMBoardResultMap">
 		<choose>
 			<when test="orderBy == 'latest'">
-				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_NO DESC
+				SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_NO DESC
 			</when>
 			<when test="orderBy == 'likes'">
 				SELECT b.*, likes.NUM_LIKES
@@ -61,16 +61,23 @@
 				    FROM PLUS_M_LIKE_TBL
 				    GROUP BY REF_PLUS_M_NO
 				) likes ON b.PLUS_M_NO = likes.REF_PLUS_M_NO
+				WHERE PLUS_M_END_YN = 'N'
 				ORDER BY likes.NUM_LIKES DESC NULLS LAST
 			</when>
 			<when test="orderBy == 'dntHigh'">
-				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_CUR_AMOUNT DESC
+				SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_CUR_AMOUNT DESC
 			</when>
 			<when test="orderBy == 'dntLow'">
-				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_CUR_AMOUNT ASC
+				SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_CUR_AMOUNT ASC
+			</when>
+			<when test="orderBy == dntPercent">
+				SELECT PM.*, (PLUS_M_CUR_AMOUNT / PLUS_M_GOAL_AMOUNT) * 100 AS RATE
+				FROM PLUS_M_BOARD_TBL PM
+				WHERE PLUS_M_END_YN = 'N'
+				ORDER BY RATE DESC
 			</when>
 			<when test="orderBy == 'deadline'">
-				SELECT * FROM PLUS_M_BOARD_TBL ORDER BY PLUS_M_END_DATE ASC
+				SELECT * FROM PLUS_M_BOARD_TBL WHERE PLUS_M_END_YN = 'N' ORDER BY PLUS_M_END_DATE ASC
 			</when>
 		</choose>
 	</select>

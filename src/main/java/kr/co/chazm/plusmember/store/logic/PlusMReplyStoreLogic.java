@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.chazm.plusmember.domain.PageInfo;
+import kr.co.chazm.plusmember.domain.PlusMLike;
 import kr.co.chazm.plusmember.domain.PlusMReply;
 import kr.co.chazm.plusmember.store.PlusMReplyStore;
 
@@ -32,6 +33,12 @@ public class PlusMReplyStoreLogic implements PlusMReplyStore {
 	}
 
 	@Override
+	public int deleteRefPlusMReply(SqlSession sqlSession, int plusMNo) {
+		int result = sqlSession.update("PlusMReplyMapper.deleteRefPlusMReply", plusMNo);
+		return result;
+	}
+
+	@Override
 	public List<PlusMReply> selectPlusMReplyList(SqlSession sqlSession, PageInfo pInfo, int plusMNo) {
 		int limit = pInfo.getRecordCountPerPage();
 		int currentPage = pInfo.getCurrentPage();
@@ -45,6 +52,12 @@ public class PlusMReplyStoreLogic implements PlusMReplyStore {
 	public int getListCount(SqlSession sqlSession, int plusMNo) {
 		int result = sqlSession.selectOne("PlusMReplyMapper.getListCount", plusMNo);
 		return result;
+	}
+
+	@Override
+	public List<PlusMLike> selectPlusMLikeList(SqlSession sqlSession, int plusMNo) {
+		List<PlusMLike> likeList = sqlSession.selectList("PlusMLikeMapper.selectPlusMLikeList", plusMNo);
+		return likeList;
 	}
 
 }

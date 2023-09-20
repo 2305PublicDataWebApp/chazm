@@ -71,8 +71,11 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-5 gx-lg-5">
                     <div class="col-lg-12">
-                        <form action="/plusMBoard/update.do" method="post" role="form" class="form text-left" enctype="multipart/form-data">
+                        <form action="/plusMBoard/update.do" method="post" id="plusMUpdateForm" role="form" class="form text-left" enctype="multipart/form-data">
                         	<input type="hidden" value="${plusMBoard.plusMNo }" name="plusMNo">
+                        	<input type="hidden" value="${plusMBoard.plusMFilename }" name="plusMFilename">
+                        	<input type="hidden" value="${plusMBoard.plusMFilerename }" name="plusMFilerename">
+                        	<input type="hidden" value="${plusMBoard.plusMFilepath }" name="plusMFilepath">
                             <div class="form-group col-md-12">
                                 <label for="plusMTitle"><i class="bi bi-card-heading"></i></label>
                                 <input type="text" class="form-control" name="plusMTitle" id="plusMTitle" value="${plusMBoard.plusMTitle }" placeholder="제목을 입력하세요." required>
@@ -90,7 +93,7 @@
                             <div class="row form-group">
 	                            <div class="form-group col-md-6">
 	                                <label for="uploadFile"><i class="bi bi-card-image"></i></label>
-	                                <input type="file" id="uploadFile" name="uploadFile" class="form-control" placeholder="파일을 선택하세요." required>
+	                                <input type="file" id="uploadFile" name="uploadFile" class="form-control" placeholder="파일을 선택하세요.">
 	                            </div>
 	                            <div class="form-group col-md-6">
 	                            	<label for="prevFile"><i class="bi bi-download"></i></label><br>
@@ -112,9 +115,10 @@
                             </div>
                             <div class="col-md-12">
                                 <!-- <label for="plusMContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="plusMContent" id="plusMContent" cols="30" rows="10">${plusMBoard.plusMContent }</textarea>
+                                <textarea class="form-control" id="summernote" name="plusMContent" cols="30" rows="10">${plusMBoard.plusMContent }</textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
+	                            <div class="d-flex justify-content-center" id="formMessage" style="color:red; font-size:20px" ></div>
                                 <button type="submit">수정</button>
                             </div>
                         </form>
@@ -182,6 +186,44 @@
                 $("#validationMessage").text("");
             }
         });
+        $(document).ready(function() {
+            $("#plusMUpdateForm").submit(function(e) {
+                const startDate = $("#plusMStartDate").val();
+                const endDate = $("#plusMEndDate").val();
+                let pmContent = $("#summernote");
+                const msg = $("#validationMessage");
+                let regContent = pmContent.val().replace(/<[^>]*>/g, '');
+                const formMessage = $("#formMessage");
+                if (endDate <= startDate) {
+                    e.preventDefault();
+                    formMessage.text("종료일은 시작일보다 미래날짜여야 합니다.");
+                } else if (regContent === null || regContent.trim().length === 0) {
+                    e.preventDefault();
+                    formMessage.text("내용을 입력해주세요");
+                } else {
+                	formMessage.text("");
+                    submit(); // submit 함수 호출 (변경된 코드에는 없지만 필요한 경우 추가하세요)
+                }
+            });
+        });
+        /* document.querySelector("#plusMUpdateForm").addEventListener("submit", (e) => {
+        	const startDate = document.querySelector("#plusMStartDate").value;
+        	const endDate = document.querySelector("#plusMEndDate").value;
+        	let pmContent = document.querySelector("#summernote").innerText;
+        	const msg = document.querySelector("#validationMessage");
+        	const formMessage = document.querySelector("#formMessage");
+        	let regContent = pmContent.replace(/<[^>]*>/g, '');
+        	if(endDate <= startDate) {
+				e.preventDefault();
+				formMessage.innerText = "종료일은 시작일보다 미래날짜여야 합니다.";
+			}else if(regContent === null || regContent.trim.length == 0){
+				e.preventDefault();
+				formMessage.innerText = "내용을 입력해주세요.";
+			}else {
+				msg.innerText = "";
+				submit();
+			}
+        }); */
     </script>
 </body>
 

@@ -101,6 +101,7 @@
 						<li><a href="/plusMBoard/list.do?orderBy=likes" data-order-by="likes">좋아요순</a></li>
 						<li><a href="/plusMBoard/list.do?orderBy=dntHigh" data-order-by="dntHigh">높은 기부금액순</a></li>
 						<li><a href="/plusMBoard/list.do?orderBy=dntLow" data-order-by="dntLow">낮은 기부금액순</a></li>
+						<li><a href="/plusMBoard/list.do?orderBy=dntPercent" data-order-by="dntPercent">달성률순</a></li>
 						<li><a href="/plusMBoard/list.do?orderBy=deadline" data-order-by="deadline">마감순</a></li>
 					</ul>
 				</div>
@@ -160,6 +161,7 @@
 							<ul class="pagination">
 								<c:url var="prevUrl" value="/plusMBoard/list.do">
 									<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
+									<c:param name="orderBy" value="${orderBy }"></c:param>
 								</c:url>
 								<li class="page-item"><a class="page-link"
 									href="${prevUrl }"><i class="bi bi-chevron-left"></i></a></li>
@@ -167,12 +169,14 @@
 									var="p">
 									<c:url var="pageUrl" value="/plusMBoard/list.do">
 										<c:param name="page" value="${p }"></c:param>
+										<c:param name="orderBy" value="${orderBy }"></c:param>
 									</c:url>
-									<li class="page-item"><a class="page-link"
+									<li class="page-item page-number"><a class="page-link"
 										href="${pageUrl }">${p }</a></li>
 								</c:forEach>
 								<c:url var="nextUrl" value="/plusMBoard/list.do">
 									<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+									<c:param name="orderBy" value="${orderBy }"></c:param>
 								</c:url>
 								<li class="page-item"><a class="page-link"
 									href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
@@ -268,9 +272,11 @@
 		}
 		window.addEventListener('load', function() {
 			var scrollPosition = sessionStorage.getItem('scrollPosition');
-			if (scrollPosition !== null) {
-				window.scrollTo(0, parseInt(scrollPosition));
-				sessionStorage.removeItem('scrollPosition'); // 스크롤 위치 정보를 삭제합니다.
+			if (pageUrl !== null) {
+				if (scrollPosition !== null) {
+					window.scrollTo(0, parseInt(scrollPosition));
+					sessionStorage.removeItem('scrollPosition'); // 스크롤 위치 정보를 삭제합니다.
+				}				
 			}
 		});
 
@@ -294,6 +300,21 @@
 			}
 			if(orderBy === linkOrderBy) {
 				link.style.color = "var(--color-primary)";
+			}
+		})// page active
+        var urlParams = new URLSearchParams(window.location.search);
+		var pageUrl = urlParams.get("page");
+
+		// 모든 li 요소를 가져옵니다.
+		var liElements = document.querySelectorAll('.page-number');
+		// 각 li 요소에 클릭 이벤트 리스너를 추가하고, orderBy 값을 비교하여 active 클래스를 추가합니다.
+		liElements.forEach(function(li) {
+			var link = li.querySelector('a');
+			var linkPage = link.innerText;
+			if(pageUrl === linkPage) {
+				console.log(linkPage);
+				link.style.backgroundColor = "var(--color-primary)";
+				link.style.color = "#fff";
 			}
 		})
 	</script>

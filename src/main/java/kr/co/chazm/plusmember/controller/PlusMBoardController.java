@@ -26,7 +26,7 @@ import kr.co.chazm.plusmember.domain.PlusMBoard;
 import kr.co.chazm.plusmember.domain.PlusMLike;
 import kr.co.chazm.plusmember.domain.PlusMReply;
 import kr.co.chazm.plusmember.service.PlusMBoardService;
-import kr.co.chazm.plusmember.service.PlusMReplyService;
+import kr.co.chazm.plusmember.service.PlusMReplyService; 
 
 @Controller
 public class PlusMBoardController {
@@ -35,8 +35,6 @@ public class PlusMBoardController {
 	private PlusMBoardService plusMBoardService;
 	@Autowired
 	private PlusMReplyService plusMReplyService;
-	@Autowired
-	private MemberService memberService;
 
 	// 게시글 등록 폼
 	@RequestMapping(value = "/plusMBoard/insert.do", method = RequestMethod.GET)
@@ -197,7 +195,9 @@ public class PlusMBoardController {
 				mv.addObject("url", "/");
 				mv.setViewName("common/message");
 			} else {
-				int result = plusMBoardService.deletePlusMBoard(plusMNo);
+				int result = plusMBoardService.deletePlusMBoard(plusMNo);	// 게시글 삭제 endYn - y
+				result += plusMReplyService.deleteRefPlusMReply(plusMNo);	// 포함된 댓글 status - n으로 바꾸기
+				result += plusMBoardService.deletePlusMLikeByNo(plusMNo);	// 포함된 좋아요 삭제
 				if (result > 0) {
 					mv.addObject("msg", "게시글이 삭제되었습니다.");
 					mv.addObject("url", "/plusMBoard/list.do");
@@ -253,6 +253,7 @@ public class PlusMBoardController {
 		mv.addObject("pMList", pMList);
 		mv.addObject("dntPeople", dntPeople);
 		mv.addObject("dntAmount", dntAmount);
+		mv.addObject("orderBy", orderBy);
 		mv.setViewName("plusM/plusM");
 		return mv;
 	}
@@ -277,6 +278,7 @@ public class PlusMBoardController {
 			Integer totalCount = plusMReplyService.getListCount(plusMNo);
 			PageInfo pInfo = this.getReplyPageInfo(currentPage, totalCount);
 			List<PlusMReply> pMRList = plusMReplyService.selectPlusMReplyList(pInfo, plusMNo);
+			List<PlusMLike> likeList = plusMReplyService.selectPlusMLikeList(plusMNo);
 			mv.addObject("plusMBoard", plusMBoard);
 			mv.addObject("pInfo", pInfo);
 			mv.addObject("pMRList", pMRList);
@@ -284,6 +286,7 @@ public class PlusMBoardController {
 			mv.addObject("dntYn", dntYn);
 			mv.addObject("memberCurPoint", memberCurPoint);
 			mv.addObject("likeCount", likeCount);
+			mv.addObject("likeList", likeList);
 			mv.setViewName("plusM/plusMdetail");
 		}
 		return mv;
