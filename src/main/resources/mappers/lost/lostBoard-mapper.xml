@@ -21,7 +21,8 @@
 		<result property="lostBrand"       column="LOST_BRAND"/>	
 		<result property="lCreateDate"     column="L_CREATE_DATE"/>	
 		<result property="lUpdateDate"     column="L_UPDATE_DATE"/>
-		<result property="lStateYN"        column="L_STATE_YN"/>				
+		<result property="lStateYN"        column="L_STATE_YN"/>	
+		<result property="lostMaybe"        column="LOST_MAYBE"/>				
 	</resultMap>
 	
 	
@@ -56,15 +57,22 @@
 		INSERT INTO LOST_BOARD_TBL VALUES 
 		(SEQ_LOST_NO.NEXTVAL, #{lostTitle}, #{lostContent}, #{lostWriter}, 
 		#{lostFilename}, #{lostFilerename}, #{lostFilepath}, #{lostCategory} ,#{lostLocation} , #{lostPlace} , #{lostStartDate},  #{lostEndDate}, 
-		#{lostColor} , #{lostBrand} , DEFAULT, DEFAULT, DEFAULT)
+		#{lostColor} , #{lostBrand} , DEFAULT, DEFAULT, DEFAULT, #{lostMaybe})
 	</insert>
 	
 	<!-- 분실물게시판 글 수정 -->
 	<update id="updateLostBoard">
 		UPDATE LOST_BOARD_TBL 
-		SET LOST_TITLE= #{lostTitle}, LOST_CONTENT= #{lostContent}
-		, LOST_FILENAME= #{lostFilename},LOST_FILERENAME = #{lostFilerename}, LOST_FILEPATH = #{lostFilepath}
-		, LOST_CATEGORY= #{lostCategory}, LOST_LOCATION= #{lostLocation}, LOST_PLACE= #{lostPlace}, LOST_START_DATE=#{lostStartDate}, LOST_END_DATE= #{lostEndDate} 
+		SET LOST_TITLE= #{lostTitle}
+		, LOST_CONTENT= #{lostContent}
+		, LOST_FILENAME= #{lostFilename}
+		, LOST_FILERENAME = #{lostFilerename}
+		, LOST_FILEPATH = #{lostFilepath}
+		, LOST_CATEGORY= #{lostCategory}
+		, LOST_LOCATION= #{lostLocation}
+		, LOST_PLACE= #{lostPlace}
+		, LOST_START_DATE=#{lostStartDate}
+		, LOST_END_DATE= #{lostEndDate} 
 		, L_UPDATE_DATE = DEFAULT 
 		WHERE LOST_NO = #{lostNo} AND LOST_WRITER = #{lostWriter} AND L_STATE_YN = 'Y' 
 	</update>
@@ -140,8 +148,6 @@
 		ORDER BY FIND_NO DESC
 	</select>
 	
-	
-
 	
 	<!-- 분실물게시판 통합검색 총 게시물 수  -->
 	<select id="totalSearchLostCount" resultType="_int">

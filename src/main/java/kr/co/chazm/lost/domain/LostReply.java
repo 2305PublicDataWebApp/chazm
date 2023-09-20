@@ -11,6 +11,16 @@ public class LostReply {
 	private Timestamp lostRUpdateDate;
 	private String lostRStateYn;
 	private int lostRParentNo;
+	private int level;
+	
+	public LostReply() { }
+	
+	public LostReply(int lostRNo, int refLostNo, int lostRParentNo) {
+		super();
+		this.lostRNo = lostRNo;
+		this.refLostNo = refLostNo;
+		this.lostRParentNo = lostRParentNo;
+	}
 	
 	public int getLostRNo() {
 		return lostRNo;
@@ -60,7 +70,13 @@ public class LostReply {
 	public void setLostRParentNo(int lostRParentNo) {
 		this.lostRParentNo = lostRParentNo;
 	}
-	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	@Override
 	public String toString() {
 		return "분실물게시판댓글 [댓글번호=" + lostRNo + ", 글번호=" + refLostNo + ", 작성자=" + lostRWriter

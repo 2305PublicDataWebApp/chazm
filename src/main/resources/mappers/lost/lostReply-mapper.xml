@@ -13,24 +13,39 @@
 		<result property="lostRUpdateDate"  column="LOST_R_UPDATE_DATE"/>
 		<result property="lostRStateYn"     column="LOST_R_STATE_YN"/>
 		<result property="lostRParentNo"    column="LOST_R_PARENT_NO"/>
+		<result property="level"    		column="LEVEL"/>
 	</resultMap>
 	
+	<!-- 댓글 총개수 -->
 	<select id="getReplyListCount" resultType="_int">
 		SELECT COUNT (*) FROM LOST_REPLY_TBL WHERE LOST_R_STATE_YN = 'Y' AND REF_LOST_NO = #{refLostNo}
 	</select>
 
+ 	<!-- 댓글목록 -->
+<!-- 	<select id="selectReplyList" resultMap="LostReplyResultMap"> -->
+<!-- 		SELECT * FROM LOST_REPLY_TBL WHERE REF_LOST_NO = #{refLostNo} AND LOST_R_STATE_YN = 'Y' -->
+<!-- 	</select> -->
+	
+	<!-- 댓글목록(대댓글) -->
 	<select id="selectReplyList" resultMap="LostReplyResultMap">
-		SELECT * FROM LOST_REPLY_TBL WHERE REF_LOST_NO = #{refLostNo} AND LOST_R_STATE_YN = 'Y'
+<!-- 		SELECT * FROM LOST_REPLY_TBL WHERE REF_LOST_NO = #{lostRParentNo} AND LOST_R_STATE_YN = 'Y' -->
+		SELECT LEVEL, LOST_REPLY_TBL.* FROM LOST_REPLY_TBL  
+		WHERE REF_LOST_NO = #{refLostNo } AND LOST_R_STATE_YN = 'Y' 
+		START WITH LOST_R_PARENT_NO = 0 
+		CONNECT BY PRIOR LOST_R_NO = LOST_R_PARENT_NO
 	</select>
 	
+	<!-- 댓글,대댓글 등록 -->
 	<insert id="insertLostReply">
 		INSERT INTO LOST_REPLY_TBL VALUES(SEQ_LOST_R_NO.NEXTVAL,#{refLostNo},#{lostRContent},#{lostRWriter},DEFAULT, DEFAULT, DEFAULT, #{lostRParentNo})
 	</insert>
 	
+	<!-- 댓글,대댓글 삭제 -->
 	<update id="deleteLostReply">
 	 	UPDATE LOST_REPLY_TBL SET LOST_R_STATE_YN = 'N' WHERE LOST_R_NO =  #{lostRNo} 
 	</update>
 	
+	<!-- 댓글,대댓글 수정 -->
 	<update id="updateLostReply">
 	 	UPDATE LOST_REPLY_TBL SET LOST_R_CONTENT = #{lostRContent}, LOST_R_UPDATE_DATE = DEFAULT WHERE LOST_R_NO = #{lostRNo}
 	</update>

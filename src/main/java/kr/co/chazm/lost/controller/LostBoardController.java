@@ -76,6 +76,7 @@ public class LostBoardController {
 										, @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
 										, @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
 										, @RequestParam(value="lostBrand", required=false ) String lostBrand
+										, @RequestParam(value="lostMaybe", required=false ) String lostMaybe
 										, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 										, HttpSession session
 										, HttpServletRequest request) {
@@ -301,12 +302,23 @@ public class LostBoardController {
 					LostBoard lostBoard = lostBoardService.selectOneByNo(lostNo);
 					if(lostBoard != null) {	
 						LostLike lostLike = new LostLike(lostNo, memberId);
-						
 						Integer refLostNo = lostLike.getRefLostNo();
 						
+						LostReply lostReply = new LostReply();
+						Integer lostRNo = lostReply.getLostRParentNo();
 						//댓글리스트 가져오기
 						List<LostReply>lRList = lostReplyService.selectReplyList(lostNo);
-						Integer totalReplyCount = lostReplyService.getReplyListCount(refLostNo);
+						//대댓글리스트 가져오기
+//						List<LostReply>lRRList = lostReplyService.selectRReplyList(lostRNo);
+						
+						//댓글수 카운트
+						Map<String, Integer> rCountMap = new HashMap<String, Integer>();
+						rCountMap.put("lostNo",lostNo);
+						rCountMap.put("lostRNo",lostRNo);
+//						Integer totalReplyCount = lostReplyService.getReplyListCount(refLostNo);
+						Integer totalReplyCount = lostReplyService.getReplyListCount(rCountMap); 
+						
+						//좋아요눌렀는지 여부 
 						Integer likeYn = lostBoardService.checkLikeYn(lostLike); // 0:안누름 / 1:누름
 						
 						if(lRList.size() > 0) {
@@ -314,6 +326,9 @@ public class LostBoardController {
 						}else {
 							mv.addObject("msg", "등록된 댓글이 없습니다.");
 						}
+//						if(lRRList.size() > 0) {
+//							mv.addObject("lRRList", lRRList);	
+//						}
 						
 						mv.addObject("lostBoard", lostBoard);
 						mv.addObject("totalReplyCount", totalReplyCount);

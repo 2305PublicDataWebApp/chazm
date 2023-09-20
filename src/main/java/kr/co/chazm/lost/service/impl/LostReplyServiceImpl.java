@@ -1,6 +1,7 @@
 package kr.co.chazm.lost.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class LostReplyServiceImpl implements LostReplyService {
 		List<LostReply>lRList = lostReplyStore.selectReplyList(session, refLostNo);
 		return lRList;
 	}
+	
+	@Override
+	public List<LostReply> selectRReplyList(Integer lostRParentNo) {
+		List<LostReply>lRRList = lostReplyStore.selectRReplyList(session, lostRParentNo);
+		return lRRList;
+	}
 
 	@Override
 	public Integer insertLostReply(LostReply lostReply) {
@@ -47,11 +54,18 @@ public class LostReplyServiceImpl implements LostReplyService {
 		return result;
 	}
 
+//	@Override
+//	public Integer getReplyListCount(Integer refLostNo) {
+//		Integer result = lostReplyStore.getReplyListCount(session, refLostNo);
+//		return result;
+//	}
 	@Override
-	public Integer getReplyListCount(Integer refLostNo) {
-		Integer result = lostReplyStore.getReplyListCount(session, refLostNo);
+	public Integer getReplyListCount(Map<String, Integer> rCountMap) {
+		Integer result = lostReplyStore.getReplyListCount(session, rCountMap);
 		return result;
 	}
+
+	
 
 	
 

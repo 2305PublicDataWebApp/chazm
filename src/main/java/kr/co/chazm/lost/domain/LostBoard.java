@@ -20,7 +20,9 @@ public class LostBoard {
 	private Date lCreateDate;
 	private Date lUpdateDate;
 	private String lStateYN;
+	private String lostMaybe;
 	
+
 	public LostBoard() {}
 	
 	public LostBoard(String lostTitle, String lostContent, String lostFilename,
@@ -42,6 +44,13 @@ public class LostBoard {
 	}
 	
 	
+	public String getLostMaybe() {
+		return lostMaybe;
+	}
+
+	public void setLostMaybe(String lostMaybe) {
+		this.lostMaybe = lostMaybe;
+	}
 
 
 
