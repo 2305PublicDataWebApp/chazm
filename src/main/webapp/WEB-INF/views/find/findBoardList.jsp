@@ -135,11 +135,11 @@
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">공항</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="음식점">
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="기타">
 	                        <div class="icon"><img src="../resources/assets/img/restaurant.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
-	                        <h4 class="title">음식점</h4></a>
+	                        <h4 class="title">기타</h4></a>
 	                    </div>
 	                </div>
 	    
@@ -206,11 +206,14 @@
                                     <li><a class="dropdown-item dd-color" data-value="흰색">흰색</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="검정">검정</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="빨강">빨강</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="주황">주황</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="노랑">노랑</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="초록">초록</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="파랑">파랑</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="보라">보라</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="분홍">분홍</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="갈색">갈색</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="기타">기타</a></li>
                                 </ul>
 	                        </div>
 	    					<input type="hidden" name="findColor" id="selectedColorInput" value="">
@@ -252,7 +255,9 @@
 	                           <div class="col-xl-4 col-md-6 portfolio-item filter-books">
 	                                <div class="portfolio-wrap">
 	                                    <a href="/findBoard/detail.do?findNo=${findBoard.findNo }" >
-	                                        <img src="../resources/fuploadFiles/${findBoard.findFilerename }" onerror="this.src='../resources/assets/img/no-image.jpg'" class="img-fluid" style="width:450px; height:350px;"></a>
+	                                        <img src="../resources/fuploadFiles/${findBoard.findFilerename }" 
+	                                        onerror="this.src='../resources/assets/img/no-image.jpg'" 
+	                                        class="img-fluid" style="width:450px; height:350px;"></a>
 	                                    <div class="portfolio-info">
 	                                        <h4><a href="/findBoard/detail.do?findNo=${findBoard.findNo }" title="More Details">${findBoard.findTitle }</a></h4>
 	                                        <p>${findBoard.memberName }</p>

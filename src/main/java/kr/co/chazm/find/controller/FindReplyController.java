@@ -41,7 +41,7 @@ public class FindReplyController {
 					mv.setViewName("common/message");
 				}
 			} else {
-				mv.addObject("msg", "댓글 등록은 회원만 가능합니다.");
+				mv.addObject("msg", "댓글 등록은 로그인 후에 가능합니다.");
 				mv.addObject("url", "/findBoard/detail.do?findNo="+findReply.getRefFindNo());
 				mv.setViewName("common/message");
 			}
@@ -68,7 +68,6 @@ public class FindReplyController {
 				mv.addObject("msg", "댓글이 수정되었습니다.");
 				mv.addObject("url", url);
 				mv.setViewName("common/message");
-//				mv.setViewName("redirect:/findBoard/detail.do?findNo="+findReply.getRefFindNo());
 			} else {
 				mv.addObject("msg", "댓글 수정 실패");
 				mv.addObject("url", "/findBoard/list.do");
@@ -97,7 +96,6 @@ public class FindReplyController {
 					mv.addObject("msg", "댓글이 삭제되었습니다.");
 					mv.addObject("url", url);
 					mv.setViewName("common/message");
-//					mv.setViewName("redirect:/findBoard/detail.do?findNo="+refFindNo);
 				} else {
 					mv.addObject("msg", "댓글 삭제 실패");
 					mv.addObject("url", "/findBoard/list.do");

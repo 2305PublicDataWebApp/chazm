@@ -9,7 +9,13 @@
 	<delete id="deleteFindLike">
 		DELETE FROM FIND_LIKE_TBL WHERE REF_FIND_NO = #{refFindNo} AND MEMBER_ID = #{memberId}
 	</delete>
+	<delete id="deleteFindBoardLike">
+		DELETE FROM FIND_LIKE_TBL WHERE REF_FIND_NO = #{refFindNo}
+	</delete>
 	<select id="selectLikeYn" resultType="_int">
 		SELECT COUNT(*) FROM FIND_LIKE_TBL WHERE REF_FIND_NO = #{refFindNo} AND MEMBER_ID = #{memberId}
+	</select>
+	<select id="getLikeCont" resultType="_int">
+		SELECT COUNT(*) FROM FIND_LIKE_TBL WHERE REF_FIND_NO = #{refFindNo} 
 	</select>
 </mapper>

@@ -36,6 +36,14 @@ public interface FindBoardStore {
 	int deleteFindBoard(SqlSession sqlSession, int findNo);
 
 	/**
+	 * 습득물 게시판 게시글 삭제로 인한 좋아요 삭제 Store
+	 * @param sqlSession
+	 * @param findNo
+	 * @return int
+	 */
+	int deleteFindBoardLike(SqlSession sqlSession, int findNo);
+
+	/**
 	 * 습득물 게시판 게시글 상세 조회 Store
 	 * @param session
 	 * @param findNo
@@ -87,7 +95,7 @@ public interface FindBoardStore {
 	 * 습득물 게시판 게시글 좋아요 삭제 Store
 	 * @param sqlSession
 	 * @param findLike
-	 * @return
+	 * @return int
 	 */
 	int deleteFindLike(SqlSession sqlSession, FindLike findLike);
 
@@ -103,8 +111,32 @@ public interface FindBoardStore {
 	 * 습득물 게시판 게시글 인계완료 처리 Store
 	 * @param sqlSession
 	 * @param findNo
-	 * @return
+	 * @return int
 	 */
 	int findComplete(SqlSession sqlSession, int findNo);
+
+	/**
+	 * 습득물 게시판 게시글 좋아요 갯수 조회 Store
+	 * @param sqlSession
+	 * @param findNo
+	 * @return int
+	 */
+	int getLikeCont(SqlSession sqlSession, int findNo);
+
+	/**
+	 * 습득물 게시판 게시글 작성 포인트 지급(포인트) Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int insertPoint(SqlSession sqlSession, Map<String, Object> pMap);
+
+	/**
+	 * 습득물 게시판 게시글 작성 포인트 지급(멤버) Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int updateMemberPoint(SqlSession sqlSession, Map<String, Object> pMap);
 
 }

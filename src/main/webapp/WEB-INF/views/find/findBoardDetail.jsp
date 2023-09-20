@@ -80,19 +80,16 @@
 											<button class="heart-button" id="like" onclick="likeBtn();">
 												<c:if test="${likeYn != 0 }">
 													<i class="bi-suit-heart-fill like-img"></i>
-													<i class="bi-suit-heart hover-image"></i>
 												</c:if>
 												<c:if test="${likeYn == 0 }">
-													<i class="bi-suit-heart like-img"></i>
-													<i class="bi-suit-heart-fill hover-image"></i>
+													<i class="bi-suit-heart no-like-img"></i>
 												</c:if>
 											</button>
 										</c:if>
 										<c:if test="${ sessionScope.memberId eq null }">
 											<button class="heart-button" id="like"
 												onclick="showLoginAlert();">
-												<i class="bi-suit-heart like-img"></i> <i
-													class="bi-suit-heart-fill hover-image"></i>
+												<i class="bi-suit-heart no-like-img"></i>
 											</button>
 										</c:if>
 									</div>
@@ -164,7 +161,7 @@
 															<img src="../resources/assets/img/airplane.png"
 																style="width: 40px; height: 40px;">
 														</c:if>
-														<c:if test="${findBoard.findPlace eq '음식점'}">
+														<c:if test="${findBoard.findPlace eq '기타'}">
 															<img src="../resources/assets/img/restaurant.png"
 																style="width: 40px; height: 40px;">
 														</c:if>
@@ -174,6 +171,8 @@
 											</div>
 											<div class="find-info">
 												<ul class="find-info">
+													<li><p class="find01">습득 지역</p>
+														<p class="find02">${findBoard.findLocation }</p></li>
 													<li><p class="find01">색상</p>
 														<p class="find02">${findBoard.findColor }</p></li>
 													<c:if test="${findBoard.findBrand ne null}">
@@ -184,7 +183,7 @@
 														<li><p class="find01">브랜드</p>
 															<p class="find02">X</p></li>
 													</c:if>
-												</ul>
+											</ul>
 											</div>
 										</div>
 										<div id="map" class="find_location"
@@ -192,10 +191,10 @@
 											지도 공간</div>
 										<div class="find-info">
 											<ul class="find-info">
-												<li><p class="find01">보관 장소</p>
-													<p class="find02">${findBoard.getPlace }</p></li>
 												<li><p class="find01">습득일자</p>
 													<p class="find02">${findBoard.findDate }</p></li>
+												<li><p class="find01">보관 장소</p>
+													<p class="find02">${findBoard.getPlace }</p></li>
 												<li><p class="find01">유실물 상태</p>
 													<p class="find02">보관중</p></li>
 											</ul>
@@ -238,9 +237,9 @@
 												value="${findBoard.findNo}">
 											<div class="row">
 												<div class="col input-area align-items-center">
-													<textarea name="findRContent" class="form-control"
+													<textarea class="form-control" name="findRContent" id="findRContent"
 														placeholder="응원의 댓글을 남겨주세요."></textarea>
-													<button type="submit" class="btn btn-primary">
+													<button type="submit" class="btn btn-primary" onClick="return insertCheck()">
 														<i class="bi bi-send"></i>
 													</button>
 												</div>
@@ -295,7 +294,7 @@
 															type="hidden" name="refFindNo"
 															value="${findReply.refFindNo }">
 														<textarea class="form-control" name="findRContent"
-															placeholder="응원의 댓글을 남겨주세요.">${findReply.findRContent }</textarea>
+															placeholder="응원의 댓글을 남겨주세요." required>${findReply.findRContent }</textarea>
 														<button type="submit" class="btn btn-primary">
 															<i class="bi bi-send"></i>
 														</button>
@@ -304,7 +303,7 @@
 											</form>
 										</div>
 										<!-- End comment #1 -->
-										<!-- 대댓글폼 -->
+										<!-- 대댓글 입력폼-->
 										<div id="addForm-${findReply.findRNo }" style="display: none;">
 											<form action="/findReply/insert.do" method="post">
 												<div class="row">
@@ -322,9 +321,8 @@
 												</div>
 											</form>
 										</div>
-										
 										<!-- End comment #1 -->
-	
+										<!-- 대댓글 리스트-->
 										<c:forEach var="findReReply" items="${fRRList }">
 											<c:if
 												test="${findReply.findRNo eq findReReply.findRParentNo }">
@@ -383,33 +381,7 @@
 										</c:forEach>
 									</c:forEach>
 	
-									<div class="mt-5 d-flex justify-content-center">
-										<nav aria-label="Page navigation exampler">
-											<ul class="pagination">
-												<c:url var="prevUrl" value="/plusMBoard/detail.do">
-													<c:param name="page" value="${pInfo.startNavi - 1 }"></c:param>
-													<c:param name="findNo" value="${findBoard.findNo }"></c:param>
-												</c:url>
-												<li class="page-item"><a class="page-link"
-													href="${prevUrl }"><i class="bi bi-chevron-left"></i></a></li>
-												<c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }"
-													var="p">
-													<c:url var="pageUrl" value="/findBoard/detail.do">
-														<c:param name="page" value="${p }"></c:param>
-														<c:param name="findNo" value="${findBoard.findNo }"></c:param>
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${pageUrl }">${p }</a></li>
-												</c:forEach>
-												<c:url var="nextUrl" value="/findBoard/detail.do">
-													<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
-													<c:param name="findNo" value="${findBoard.findNo }"></c:param>
-												</c:url>
-												<li class="page-item"><a class="page-link"
-													href="${nextUrl }"><i class="bi bi-chevron-right"></i></a></li>
-											</ul>
-										</nav>
-									</div>
+									
 								</div>
 								<!-- End blog comments -->
 	
@@ -445,55 +417,62 @@
 		<!-- Template Main JS File -->
 		<script src="../resources/assets/js/main.js"></script>
 	
-		<!-- 지도 api -->
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07ff3550f3413fb406de3abc16437467"></script>
 		<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07ff3550f3413fb406de3abc16437467&libraries=services,clusterer,drawing"></script>
+		<!-- 지도 api -->
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07ff3550f3413fb406de3abc16437467"></script>
 	
 		<script>
-		<!-- 지도 api -->
+			<!-- 댓글 등록 유효성 체크 -->
+			function insertCheck() {
+	    		const findRContent = document.querySelector("#findRContent");
+	    		if (findRContent.value.trim() === "") {
+	    			alert('내용을 입력하세요');
+	    			return false;
+	   	        }else {
+	   	        	return true;
+	   	        }
+	    	};
+			<!-- 지도 api -->
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(37.470596042652, 126.936957347952), // 지도의 중심좌표
-				level : 3
-			// 지도의 확대 레벨
+				level : 3 // 지도의 확대 레벨
 			};
-	
-			// 지도를 생성합니다    
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-	
+			// 지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+			
 			// 주소-좌표 변환 객체를 생성합니다
 			var geocoder = new kakao.maps.services.Geocoder();
-	
-			// 마커 생성
-			var marker = new kakao.maps.Marker(
-					{
-						position : new kakao.maps.LatLng(37.470596042652,
-								126.936957347952),
-						map : map
-					});
-	
-			marker.setMap(map);
+
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch('경기 성남시 분당구 판교역로 235 에이치스퀘어', function(result,
-					status) {
-	
-				// 정상적으로 검색이 완료됐으면 
-				if (status === kakao.maps.services.Status.OK) {
-	
-					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-					// 결과값으로 받은 위치를 마커로 표시합니다
-					var marker = new kakao.maps.Marker({
-						map : map,
-						position : coords
-					});
-	
-					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-					map.setCenter(coords);
-				}
-			});
+			geocoder.addressSearch('${findBoard.getPlace}', function(result, status) {
+
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					console.log(coords);
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords
+			        });
+
+			        // 인포윈도우로 장소에 대한 설명을 표시합니다
+			        var infowindow = new kakao.maps.InfoWindow({
+			            content: '<div style="width:150px;text-align:center;padding:3px 0;">보관 장소</div>'
+			        });
+			        infowindow.open(map, marker);
+
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        map.setCenter(coords);
+			    } 
+			});    	
+			
 	
 			// 좋아요 로그인 확인 
 			function showLoginAlert() {

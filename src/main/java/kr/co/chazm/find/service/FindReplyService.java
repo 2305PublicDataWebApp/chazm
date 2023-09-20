@@ -28,27 +28,32 @@ public interface FindReplyService {
 	 */
 	int deleteFindReply(int findRNo);
 
+	/**
+	 * 습득물 게시판 게시글 삭제로 인한 댓글 삭제 Service
+	 * @param findNo
+	 * @return int
+	 */
+	int deleteFindBoardReply(int findNo);
+
 	/** 
 	 * 습득물 게시판 댓글 전체 갯수 조회 Service
 	 * @param findNo
 	 * @return int
 	 */
-	int getListCount(int findNo);
+	int getReplyCount(int findNo);
 
 	/**
 	 * 습득물 게시판 댓글 전체 조회 Service
-	 * @param pInfo
 	 * @param findNo
 	 * @return List
 	 */
-	List<FindReply> selectFindReplyList(PageInfo pInfo, int findNo);
+	List<FindReply> selectFindReplyList(int findNo);
 
 	/**
 	 * 습득물 게시판 대댓글 조회 Service
-	 * @param pInfo
 	 * @param findNo
-	 * @return
+	 * @return List
 	 */
-	List<FindReply> selectFindReReplyList(PageInfo pInfo, int findNo);
+	List<FindReply> selectFindReReplyList(int findNo);
 
 }

@@ -54,13 +54,13 @@ public class FindBoardController {
 			Member member = memberService.selectOneById(memberId);
 			String findWriter = member.getMemberId();
 			String memberName = member.getMemberName();
-			String getPlace = member.getMemberAddress() + " " + member.getMemberDetailAddress();
+			String getPlace = member.getMemberAddress();
 			findBoard.setFindWriter(findWriter);
 			findBoard.setMemberName(memberName);
 			findBoard.setGetPlace(getPlace);
 			findBoard.setFindWriter(findWriter);
 			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
-				// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장 
+				// 파일 정보(이름, 리네임, 경로) 및 파일 저장 
 				Map<String, Object> fBMap = this.saveFile(request, uploadFile);
 				findBoard.setFindFilename((String)fBMap.get("fileName"));
 				findBoard.setFindFilerename((String)fBMap.get("fileRename"));
@@ -68,6 +68,13 @@ public class FindBoardController {
 			}
 			int result = findBoardService.insertFindBoard(findBoard);
 			if(result > 0) {
+				//POINT_TBL INSERT, MEMBER_TBL UPDATE
+				Map<String, Object> pMap = new HashMap<String, Object>(); 
+				pMap.put("memberId", memberId);
+				pMap.put("point", 500);
+				pMap.put("pointDetails", "습득물 게시판 글 작성 포인트 지급");
+				int insertPoint = findBoardService.insertPoint(pMap);
+				int updateMemberPoint = findBoardService.updateMemberPoint(pMap);
 				mv.addObject("msg", "게시글이 등록되었습니다.");
 				mv.addObject("url", "/findBoard/list.do");
 				mv.setViewName("common/message");
@@ -96,7 +103,7 @@ public class FindBoardController {
 				if(fileRename != null) {
 					this.deleteFile(fileRename, request);
 				}
-				// 새로운 파일 저장 - 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장 
+				// 새로운 파일 저장 - 파일 정보(이름, 리네임, 경로) 및 파일 저장 
 				Map<String, Object> fBMap = this.saveFile(request, uploadFile);
 				findBoard.setFindFilename((String)fBMap.get("fileName"));
 				findBoard.setFindFilerename((String)fBMap.get("fileRename"));
@@ -127,6 +134,16 @@ public class FindBoardController {
 		try {
 			int result = findBoardService.deleteFindBoard(findNo);
 			if(result > 0) {
+				// 댓글 있는지 갯수 확인 하고 진행 
+				int reply = findReplyService.getReplyCount(findNo);
+				if(reply > 0) {
+					int replyDel = findReplyService.deleteFindBoardReply(findNo);
+				}
+				// 좋아요 있는지 갯수 확인 하고 진행
+				int like = findBoardService.getLikeCont(findNo);
+				if(like > 0) {
+					int likeDel = findBoardService.deleteFindBoardLike(findNo);
+				}
 				mv.addObject("msg", "게시글이 삭제되었습니다.");
 				mv.addObject("url", "/findBoard/list.do");
 				mv.setViewName("common/message");
@@ -145,9 +162,27 @@ public class FindBoardController {
 	
 	// 인계완료 
 	@RequestMapping(value = "/findBoard/complete.do", method = RequestMethod.POST)
-	public ModelAndView findComplete(ModelAndView mv, @RequestParam("findNo") int findNo) {
+	public ModelAndView findComplete(ModelAndView mv, @RequestParam("findNo") int findNo, HttpSession session) {
 		int result = findBoardService.findComplete(findNo);
 		if(result > 0) {
+			// 댓글 있는지 갯수 확인 하고 진행 
+			int reply = findReplyService.getReplyCount(findNo);
+			if(reply > 0) {
+				int replyComplte = findReplyService.deleteFindBoardReply(findNo);
+			}
+			// 좋아요 있는지 갯수 확인 하고 진행
+			int like = findBoardService.getLikeCont(findNo);
+			if(like > 0) {
+				int likeComplte = findBoardService.deleteFindBoardLike(findNo);
+			}
+			String memberId = (String)session.getAttribute("memberId");
+			//POINT_TBL INSERT, MEMBER_TBL UPDATE
+			Map<String, Object> pMap = new HashMap<String, Object>(); 
+			pMap.put("memberId", memberId);
+			pMap.put("point", 1000);
+			pMap.put("pointDetails", "습득물 인계완료 포인트 지급");
+			int insertPoint = findBoardService.insertPoint(pMap);
+			int updateMemberPoint = findBoardService.updateMemberPoint(pMap);
 			mv.addObject("msg", "인계 처리가 완료되었습니다.");
 			mv.addObject("url", "/findBoard/list.do");
 			mv.setViewName("common/message");
@@ -238,12 +273,11 @@ public class FindBoardController {
 			if(findBoard != null) {
 				FindLike findLike = new FindLike(findNo, memberId);
 				int likeYn = findBoardService.selectLikeYn(findLike);
-				Integer totalCount = findReplyService.getListCount(findNo);
-				PageInfo pInfo = this.getReplyPageInfo(currentPage, totalCount);
-				List<FindReply> fRList = findReplyService.selectFindReplyList(pInfo, findNo);
-				List<FindReply> fRRList = findReplyService.selectFindReReplyList(pInfo, findNo);
+				Integer replyCount = findReplyService.getReplyCount(findNo);
+				List<FindReply> fRList = findReplyService.selectFindReplyList(findNo);
+				List<FindReply> fRRList = findReplyService.selectFindReReplyList(findNo);
 				mv.addObject("findBoard", findBoard);
-				mv.addObject("pInfo", pInfo).addObject("fRList", fRList).addObject("fRRList", fRRList).addObject("totalCount", totalCount);
+				mv.addObject("fRList", fRList).addObject("fRRList", fRRList).addObject("totalCount", replyCount);
 				mv.addObject("likeYn", likeYn);
 				mv.setViewName("find/findBoardDetail");
 			} else {

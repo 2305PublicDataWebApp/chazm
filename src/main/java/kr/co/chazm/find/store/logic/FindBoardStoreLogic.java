@@ -82,6 +82,12 @@ public class FindBoardStoreLogic implements FindBoardStore{
 	}
 
 	@Override
+	public int deleteFindBoardLike(SqlSession sqlSession, int findNo) {
+		int result = sqlSession.insert("FindLikeMapper.deleteFindBoardLike", findNo);
+		return result;
+	}
+
+	@Override
 	public int selectLikeYn(SqlSession sqlSession, FindLike findLike) {
 		int result = sqlSession.selectOne("FindLikeMapper.selectLikeYn", findLike);
 		return result;
@@ -90,6 +96,24 @@ public class FindBoardStoreLogic implements FindBoardStore{
 	@Override
 	public int findComplete(SqlSession sqlSession, int findNo) {
 		int result = sqlSession.update("FindBoardMapper.findComplete", findNo);
+		return result;
+	}
+
+	@Override
+	public int getLikeCont(SqlSession sqlSession, int findNo) {
+		int result = sqlSession.selectOne("FindLikeMapper.getLikeCont", findNo);
+		return result;
+	}
+
+	@Override
+	public int insertPoint(SqlSession sqlSession, Map<String, Object> pMap) {
+		int result = sqlSession.insert("FindBoardMapper.insertPoint", pMap);
+		return result;
+	}
+
+	@Override
+	public int updateMemberPoint(SqlSession sqlSession, Map<String, Object> pMap) {
+		int result = sqlSession.update("FindBoardMapper.updateMemberPoint", pMap);
 		return result;
 	}
 	

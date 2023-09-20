@@ -92,6 +92,34 @@ public interface FindBoardService {
 	 * @return int
 	 */
 	int findComplete(int findNo);
+
+	/**
+	 * 습득물 게시판 게시글 삭제로 인한 좋아요 삭제 Service
+	 * @param findNo
+	 * @return int 
+	 */
+	int deleteFindBoardLike(int findNo);
+
+	/**
+	 * 습득물 게시판 게시글 좋아요 갯수 조회 Service
+	 * @param findNo
+	 * @return int
+	 */
+	int getLikeCont(int findNo);
+
+	/**
+	 * 습득물 게시판 게시글 작성 포인트 지급(포인트) Service
+	 * @param memberId
+	 * @return int
+	 */
+	int insertPoint(Map<String, Object> pMap);
+
+	/**
+	 * 습득물 게시판 게시글 작성 포인트 지급(멤버) Service
+	 * @param memberId
+	 * @return int
+	 */
+	int updateMemberPoint(Map<String, Object> pMap);
 	
 	
 }

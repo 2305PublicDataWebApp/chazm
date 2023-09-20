@@ -144,12 +144,12 @@
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">공항</h4></a>
 	                    </div>
-	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="음식점"
-	                    <c:if test="${paramMap.findPlace == '음식점' }">style="background-color: #ffc107;"</c:if>>
+	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="기타"
+	                    <c:if test="${paramMap.findPlace == '기타' }">style="background-color: #ffc107;"</c:if>>
 	                        <div class="icon"><img src="../resources/assets/img/restaurant.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></i></div>
-	                        <h4 class="title">음식점</h4></a>
+	                        <h4 class="title">기타</h4></a>
 	                    </div>
 	                </div>
 	    
@@ -222,11 +222,14 @@
                                     <li><a class="dropdown-item dd-color" data-value="흰색">흰색</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="검정">검정</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="빨강">빨강</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="주황">주황</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="노랑">노랑</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="초록">초록</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="파랑">파랑</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="보라">보라</a></li>
                                     <li><a class="dropdown-item dd-color" data-value="분홍">분홍</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="갈색">갈색</a></li>
+                                    <li><a class="dropdown-item dd-color" data-value="기타">기타</a></li>
                                 </ul>
 	                        </div>
 	    					<input type="hidden" name="findColor" id="selectedColorInput" value="">

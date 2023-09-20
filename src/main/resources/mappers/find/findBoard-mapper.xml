@@ -135,4 +135,15 @@
 	</select>
 	
 	
+	<insert id="insertPoint">
+		INSERT INTO POINT_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{memberId}, #{point}, #{pointDetails}, DEFAULT)
+	</insert>
+	<update id="updateMemberPoint">
+		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT + #{point} WHERE MEMBER_ID = #{memberId} 
+	</update>
+	
+	
+	
+	
+	
 </mapper>
