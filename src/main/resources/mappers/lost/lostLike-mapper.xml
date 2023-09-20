@@ -11,17 +11,16 @@
 	</resultMap>
 	
 	<!-- 회원아이디당 좋아요 눌렀는지 아닌지 체크  -->
-	<select id="checkLike" resultType="int">
+	<select id="checkLikeYn" resultType="_int">
 		SELECT COUNT (*) FROM LOST_LIKE_TBL WHERE REF_LOST_NO = #{refLostNo} AND MEMBER_ID = #{memberId}
 	</select>
 	
-	<insert id="pushLostLike">
-		INSERT INTO LOST_LIKE_TBL VALUES(SEQ_LOST_L_NO.NEXTVAL,#{refLostNo},#{memberId})
+	<insert id="insertLostLike">
+		INSERT INTO LOST_LIKE_TBL VALUES(SEQ_LOST_L_NO.NEXTVAL, #{refLostNo}, #{memberId})
 	</insert>
 	
 	<delete id="deleteLostLike">
-		DELETE * FROM LOST_LIKE_TBL WHERE MEMBER_ID = #{memberId} AND REF_LOST_NO = #{refLostNo}
+		DELETE FROM LOST_LIKE_TBL WHERE REF_LOST_NO = #{refLostNo} AND MEMBER_ID = #{memberId}
 	</delete>
-	
 	
 </mapper>

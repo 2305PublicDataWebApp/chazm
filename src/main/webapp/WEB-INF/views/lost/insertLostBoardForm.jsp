@@ -66,7 +66,7 @@
         <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
 <!-- *****MAIN************************************************************************************ -->
-        <main id="main" class="sections-bg">
+        <main id="main" class="">
             <section id="mainLayer1" class="">
                 <div class="section-header ">
                     <h2>찾아주세요</h2>
@@ -104,35 +104,43 @@
 												</button>
 												<ul class="dropdown-menu ">
 													<div class="d-flex">
-														<li ><div data-value="clothes" class="dropdown-item category-icon dd-category" id="clothes" >
-															<div class="icon"><i class="bi bi-handbag" style="color:#fff"></i></div>
-															<h4 id="titleClothes" class="title" style="color:#fff">의류</h4>
-															</div>
-														</li>
-														<li><div data-value="bag" class="dropdown-item category-icon dd-category" id="bag" >
-															<div class="icon"><i class="bi bi-handbag" style="color:#fff"></i></div>
-															<h4 id="titleBag" class="title" style="color:#fff">가방</h4>
-															</div>
-														</li>
-														<li><div data-value="wallet" class="dropdown-item category-icon dd-category" >
-															<div class="icon"><i class="bi bi-wallet2" style="color:#fff"></i></div>
+														<li><div data-value="지갑" class="dropdown-item category-icon dd-category" >
+															<div class="icon"><img src="../resources/assets/img/wallet.png" class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">지갑</h4>
 															</div>
 														</li>
-														<li><div data-value="phone" class="dropdown-item category-icon dd-category" >
-															<div class="icon"><i class="bi bi-phone" style="color:#fff"></i></div>
+														<li><div data-value="가방" class="dropdown-item category-icon dd-category" id="bag" >
+															<div class="icon"><img src="../resources/assets/img/bag.png"
+                                                   								 class="testimonial-img flex-shrink-0" alt=""></div>
+															<h4 id="titleBag" class="title" style="color:#fff">가방</h4>
+															</div>
+														</li>
+														<li><div data-value="핸드폰" class="dropdown-item category-icon dd-category" >
+															<div class="icon"><img src="../resources/assets/img/phone.png"
+                                                    							class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">핸드폰</h4>
 															</div>
 														</li>
-														<li><div data-value="cateEtc" class="dropdown-item category-icon dd-category" >
-															<div class="icon"><i class="bi bi-smartwatch" style="color:#fff"></i></div>
-															<h4 class="title" style="color:#fff">그 외</h4>
+														<li ><div data-value="의류" class="dropdown-item category-icon dd-category" id="clothes" >
+															<div class="icon">
+															<img src="../resources/assets/img/clothes.png"
+                                                    			class="testimonial-img flex-shrink-0" alt="">
+															</div>
+															<h4 id="titleClothes" class="title" style="color:#fff">의류</h4>
+															</div>
+														</li>
+														<li><div data-value="기타" class="dropdown-item category-icon dd-category" >
+															<div class="icon">
+															<img src="../resources/assets/img/others.png"
+                                                    			class="testimonial-img flex-shrink-0" alt=""></div>
+															<h4 class="title" style="color:#fff">기타</h4>
 															</div>
 														</li>
 														<input type="hidden"  name="lostCategory" id="selectedCategoryInput" value="">
 													</div>
 												</ul>
 											</div>
+											
 											<!--분실장소-->                    
 											<div class="btn-group w-100">
 												<button type="button"  
@@ -142,25 +150,35 @@
 												</button>
 												<ul class="dropdown-menu ">
 													<div class="d-flex">
-														<li ><div data-value="bus" class="dropdown-item category-icon dd-place" >
-															<div class="icon"><i class="bi bi-bus-front" style="color:#fff"></i></div>
+														<li ><div data-value="버스" class="dropdown-item category-icon dd-place" >
+															<div class="icon">
+															<img src="../resources/assets/img/bus.png"
+                                                    			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">버스</h4>
 														</div></li>
-														<li><div data-value="subway" class="dropdown-item category-icon dd-place" >
-															<div class="icon"><i class="bi bi-train-front" style="color:#fff"></i></div>
+														<li><div data-value="지하철" class="dropdown-item category-icon dd-place" >
+															<div class="icon">
+															<img src="../resources/assets/img/train.png"
+                                                    			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">지하철</h4>
 														</div></li>
-														<li><div data-value="taxi" class="dropdown-item category-icon dd-place" >
-															<div class="icon"><i class="bi bi-taxi-front" style="color:#fff"></i></div>
+														<li><div data-value="택시" class="dropdown-item category-icon dd-place" >
+															<div class="icon">
+															<img src="../resources/assets/img/taxi.png"
+                                                    			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">택시</h4>
 														</div></li>
-														<li><div data-value="airport" class="dropdown-item category-icon dd-place">
-															<div class="icon"><i class="bi bi-airplane" style="color:#fff"></i></div>
+														<li><div data-value="공항" class="dropdown-item category-icon dd-place">
+															<div class="icon">
+															<img src="../resources/assets/img/airplane.png"
+                                                    			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">공항</h4>
 														</div></li>
-														<li><div data-value="plcEtc" class="dropdown-item category-icon dd-place" >
-															<div class="icon"><i class="bi bi-building" style="color:#fff"></i></div>
-															<h4 class="title" style="color:#fff">그 외</h4>
+														<li><div data-value="그 외" class="dropdown-item category-icon dd-place" >
+															<div class="icon">
+															<img src="../resources/assets/img/restaurant.png"
+                                                    			class="testimonial-img flex-shrink-0" alt=""></div>
+															<h4 class="title" style="color:#fff">기타</h4>
 														</div></li>
 														<input type="hidden"  name="lostPlace" id="selectedPlaceInput" value="">
 													</div>
@@ -171,28 +189,30 @@
 										
 										<!--분실지역-->
 										<div class="d-flex mt-2 w-100 justify-content-between">
-											<div id="lostLocation" class="btn-group w-100 ">
-												<button type="button" class="btn dropdown-toggle text-center border-dark-subtle "  style="background-color: #fff; height : 40px;" data-bs-toggle="dropdown" aria-expanded="false">
+											<div  class="btn-group w-100 ">
+												<button id="selectedLocation" type="button" 
+													class="btn dropdown-toggle text-center border-dark-subtle" 
+													style="background-color: #fff; height : 40px;" data-bs-toggle="dropdown" aria-expanded="false">
 													<span id="selectedLocation">분실지역(시 / 도)</span>
 												</button>
 												<ul class="dropdown-menu w-100">
-	                                            	<li><a class="dropdown-item dd-location" data-value="seoul">서울특별시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="busan">부산광역시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="daegu">대구광역시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="incheon">인천광역시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="gwanju">광주광역시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="daejeon">대전광역시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="ulsan">울산광역시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="sejong">세종특별자치시</a></li>
-													<li><a class="dropdown-item dd-location" data-value="gyeonggi">경기도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="gangwon">강원도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="chungbuk">충청북도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="chungnam">충청남도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="jeonbuk">전라북도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="jeonnam">전라남도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="gyeongbuk">경상북도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="gyeongnam">경상남도</a></li>
-													<li><a class="dropdown-item dd-location" data-value="jeju">제주특별자치도</a></li>
+	                                            	<li class="dropdown-item dd-location" value="서울특별시">서울특별시</li>
+													<li class="dropdown-item dd-location" value="부산광역시">부산광역시</li>
+													<li class="dropdown-item dd-location" value="대구광역시">대구광역시</li>
+													<li class="dropdown-item dd-location" value="인천광역시">인천광역시</li>
+													<li class="dropdown-item dd-location" value="광주광역시">광주광역시</li>
+													<li class="dropdown-item dd-location" value="대전광역시">대전광역시</li>
+													<li class="dropdown-item dd-location" value="울산광역시">울산광역시</li>
+													<li class="dropdown-item dd-location" value="세종특별자치시">세종특별자치시</li>
+													<li class="dropdown-item dd-location" value="경기도">경기도</li>
+													<li class="dropdown-item dd-location" value="강원도">강원도</li>
+													<li class="dropdown-item dd-location" value="충청북도">충청북도</li>
+													<li class="dropdown-item dd-location" value="충청남도">충청남도</li>
+													<li class="dropdown-item dd-location" value="전라북도">전라북도</li>
+													<li class="dropdown-item dd-location" value="전라남도">전라남도</li>
+													<li class="dropdown-item dd-location" value="경상북도">경상북도</li>
+													<li class="dropdown-item dd-location" value="경상남도">경상남도</li>
+													<li class="dropdown-item dd-location" value="제주특별자치도">제주특별자치도</li>
 													<input type="hidden" name="lostLocation" id="selectedLocationInput" value="">
 												</ul>
 											</div>
@@ -215,28 +235,43 @@
 										<!--분실물 색, 브랜드-->
 										<div id="colorBrand" class="d-flex mt-2 w-100" >
 											<div class="btn-group w-50 ">
-												<button id="selectedColor" type="button" class="btn dropdown-toggle border-dark-subtle"  style="background-color: #fff; height: 40px;" data-bs-toggle="dropdown" aria-expanded="true">
+												<button id="selectedColor" type="button" 
+													class="btn dropdown-toggle border-dark-subtle"  
+													style="background-color: #fff; height: 40px;" data-bs-toggle="dropdown" aria-expanded="true">
 													<span >색상</span>
 												</button>
 												<ul class="dropdown-menu">
-													<li class="dropdown-item dd-color" data-value="white">흰색</li>
-													<li class="dropdown-item dd-color" data-value="black">검정</li>
-													<li class="dropdown-item dd-color" data-value="red">빨강</li>
-													<li class="dropdown-item dd-color" data-value="yellow">노랑</li>
-													<li class="dropdown-item dd-color" data-value="green">초록</li>
-													<li class="dropdown-item dd-color" data-value="blue">파랑</li>
-													<li class="dropdown-item dd-color" data-value="purple">보라</li>
+													<li class="dropdown-item dd-color" value="흰색">흰색</li>
+													<li class="dropdown-item dd-color" value="검정">검정</li>
+													<li class="dropdown-item dd-color" value="빨강">빨강</li>
+													<li class="dropdown-item dd-color" value="노랑">노랑</li>
+													<li class="dropdown-item dd-color" value="초록">초록</li>
+													<li class="dropdown-item dd-color" value="파랑">파랑</li>
+													<li class="dropdown-item dd-color" value="보라">보라</li>
 													<input type="hidden" name="lostColor" id="selectedColorInput" value="">
 												</ul>
 											</div>
 											
 											
-											<div id="lostBrand" class="w-50">
+											<div id="lostBrand" class="w-50" >
 												<input type="text" name="lostBrand" placeholder="브랜드" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
 											</div>
 										</div>
+										
+										<!-- 분실장소지도기록 -->
+										<div class="d-flex"  style="margin-top : 10px;">
+											<input type="text" id="sample6_address" name="lostMaybe" value="" placeholder="분실추정되는 주소를 입력하세요" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
+											<input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="w-25">
+										</div>
+											<input type="hidden" id="sample6_postcode" placeholder="우편번호" class="me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
+											<input type="hidden" id="sample6_extraAddress" class="w-25 p-3 border border-dark-subtle rounded" style="height:40px; ">
+								
+										
+										
+
+								
 										<!--사진첨부-->
-										<input type="file" name="uploadFile" class="mt-2 form-control border-dark-subtle" id="inputGroupFile02">
+										<input type="file" name="uploadFile" class="mt-2 form-control border-dark-subtle" id="inputGroupFile02" style="margin-top : 10px;">
 									</div>
 								</div>	
                                     
@@ -245,11 +280,9 @@
                                     <textarea id="summernote" name="lostContent" spellcheck="false"></textarea>
                                 </div>
                                 <hr>
-                                <div id="mainPart3" class="d-flex justify-content-end">   
-                                    <div>
-                                        <button type="submit" class="btn" style="background-color: #4365BC; color:#fff">등록하기</button>
-                                        <button type="reset" class="btn" style="background-color: #818181; color:#fff">취소하기</button>
-                                    </div>
+                                <div id="mainPart3" class="d-flex">   
+	                                <button type="submit" class="btn" style="background-color: #4365BC; color:#fff" id="insertBtn">등록하기</button>
+	                                <button type="reset" class="btn" style="background-color: #818181; color:#fff" id="resetBtn">취소하기</button>
                                 </div>
                                 </form>
                                 <!-- End Blog Sidebar -->
@@ -260,9 +293,6 @@
             </section>
         </main>
         
-
-
-
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
         <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
@@ -281,22 +311,73 @@
 
         <!-- Template Main JS File -->
         <script src="../resources/assets/js/main.js"></script>
-
+		
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
+		    function sample6_execDaumPostcode() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		
+		                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var addr = ''; // 주소 변수
+		                var extraAddr = ''; // 참고항목 변수
+		
+		                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+		                    addr = data.roadAddress;
+		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+		                    addr = data.jibunAddress;
+		                }
+		
+		                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+		                if(data.userSelectedType === 'R'){
+		                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                        extraAddr += data.bname;
+		                    }
+		                    // 건물명이 있고, 공동주택일 경우 추가한다.
+		                    if(data.buildingName !== '' && data.apartment === 'Y'){
+		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                    }
+		                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                    if(extraAddr !== ''){
+		                        extraAddr = ' (' + extraAddr + ')';
+		                    }
+		                    // 조합된 참고항목을 해당 필드에 넣는다.
+		                    document.getElementById("sample6_extraAddress").value = extraAddr;
+		                
+		                } else {
+		                    document.getElementById("sample6_extraAddress").value = '';
+		                }
+		
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                document.getElementById('sample6_postcode').value = data.zonecode;
+		                document.getElementById("sample6_address").value = addr;
+		                // 커서를 상세주소 필드로 이동한다.
+// 		                document.getElementById("sample6_detailAddress").focus();
+		            }
+		        }).open();
+		    }
+		</script>
+		
         <script>
+        
+	        <!--첨부파일 미리보기-->
+			inputGroupFile02.addEventListener('change', (event) => {
+	            const file = event.target.files[0];
+	            if (file) {
+	                const reader = new FileReader();
+	                reader.onload = (e) => {
+	                    thumbnail.src = e.target.result;
+	                };
+	                reader.readAsDataURL(file);
+	            }
+	        });
 
-        // document.querySelectorAll('.dropdown-item').forEach(function(item) {
-        //         item.addEventListener('click', function() {
-        //             const iconClass = this.getAttribute('data-icon');
-        //             const iconElement = document.querySelector('.btn .icon i');
-        //             iconElement.className = `bi ${iconClass}`;
-        //         });
-        //     });
-        // </script>
-
-
-
-        <script>
-
+	      
        		<!--종류,장소 선택하기-->
             let icons = document.querySelectorAll(".category-icon");            
             const container = document.querySelector(".category-icon-select");
@@ -307,35 +388,8 @@
                 });
             });  
             
-            
-         <!--선택한 종류, 장소 데이터베이스에 보내기-->
-//          document.querySelector("form").addEventListener("submit", function(event) {
-//          	let items = document.querySelectorAll(".category-icon");
-//          	items.forEach(item => {
-//                 item.addEventListener('click', function (event) {
-//                     const selectedValue = this.getAttribute('value');
-				
-// //                     console.log('Selected Value:', selectedValue);
-//                 });
-//             });
-        	 
-//          });
-
-
-		 <!-- 드롭다운 값 입력 -->
-// 		 var categoryIcons = document.querySelectorAll(".dd-category");
-// 	        var selectedCategory = document.getElementById("selectedCategory");
-// 	        var selectedCategoryInput = document.getElementById("selectedCategoryInput");
-
-// 	        categoryIcons.forEach(function (icon) {
-// 	            icon.addEventListener("click", function () {
-// 	                var selectedValue = icon.getAttribute("data-value");
-// 	                selectedCategory.textContent = selectedValue;
-// 	                selectedCategoryInput.value = selectedValue;
-// 	            });
-// 	        });
-		        
-	        
+		 	<!-- 드롭다운 값 db전달 -->
+		 	//종류
 	        $(document).ready(function () {
                 $(".dd-category").click(function () {
                     var selectedCategory = $(this).data("value");
@@ -343,45 +397,40 @@
                     $("#selectedCategoryInput").val(selectedCategory);
                 });
             });
-            $(document).ready(function () {
-                $(".dd-location").click(function () {
-                    var selectedLocation = $(this).data("value");
-                    $("#selectedLocation").text(selectedLocation);
-                    $("#selectedLocationInput").val(selectedLocation);
-                });
-            });
-            $(document).ready(function () {
+	        
+	        //장소
+	        $(document).ready(function () {
                 $(".dd-place").click(function () {
                     var selectedPlace = $(this).data("value");
                     $("#selectedPlace").text(selectedPlace);
                     $("#selectedPlaceInput").val(selectedPlace);
                 });
             });
-//             $(document).ready(function () {
-//                 $(".dd-color").click(function () {
-//                     var selectedColor = $(this).data("value");
-//                     $("#selectedColor").text(selectedColor);
-//                     $("#selectedColorInput").val(selectedColor);
-//                 });
-//             });
-            
-            let colors = document.querySelectorAll(".dd-color");
+	        
+	        //지역
+            let locations = document.querySelectorAll(".dd-location");
+            const selectedLocation = document.querySelector("#selectedLocation");
+            locations.forEach(color => {
+            	color.addEventListener("click", function (event) {
+                    const selectedLocation = this.closest(".btn-group");  
+                    selectedLocation.querySelector("#selectedLocation").innerHTML = this.innerText;
+                    document.getElementById("selectedLocationInput").value = this.getAttribute("value"); //인풋히든 밸류에 값 넣기 
+                });
+            });
+
+			 //색상
+			let colors = document.querySelectorAll(".dd-color");
             const selectedColor = document.querySelector("#selectedColor");
             colors.forEach(color => {
             	color.addEventListener("click", function (event) {
-                    const selectedColor = this.closest(".btn-group");                    
+                    const selectedColor = this.closest(".btn-group");  
                     selectedColor.querySelector("#selectedColor").innerHTML = this.innerText;
-                    document.querySelector("#selectedColorInput").value = this.innerText;
+                    document.getElementById("selectedColorInput").value = this.getAttribute("value"); //인풋히든 밸류에 값 넣기 
                 });
             });
 		        
-            
-            
-            
-		        
-		        
 
-   		<!-- summernote -->
+   		  <!-- summernote -->
           $(document).ready(function() {  
               //여기 아래 부분
               $('#summernote').summernote({
@@ -409,34 +458,9 @@
               });
           });
             
-            
-
-  
-			document.querySelector("form").addEventListener("submit", function(event) {
-			  	var warn = "${warn}";
-			    if (warn !== null && warn !== "") {
-			        alert(warn);
-			    }
-			});
-			
-		
-			
-			
-			//첨부파일 미리보기
-			inputGroupFile02.addEventListener('change', (event) => {
-	            const file = event.target.files[0];
-	            if (file) {
-	                const reader = new FileReader();
-	                reader.onload = (e) => {
-	                    thumbnail.src = e.target.result;
-	                };
-	                reader.readAsDataURL(file);
-	            }
-	        });
-
-
-
-
+          
+          <!--지도-->
+          
         </script>
     </body>
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.chazm.find.domain.FindBoard;
 import kr.co.chazm.lost.domain.LostBoard;
 import kr.co.chazm.lost.domain.LostLike;
 import kr.co.chazm.lost.domain.PageInfo;
@@ -69,17 +70,66 @@ public class LostBoardStoreLogic implements LostBoardStore {
 		return searchLostList;
 	}
 
+
 	@Override
-	public Integer pushLostLike(SqlSession session, LostLike lostLike) {
-		Integer result = session.insert("LostLikeMapper.pushLostLike", lostLike);
+	public Integer checkLikeYn(SqlSession session, LostLike lostLike) {
+		Integer result = session.selectOne("LostLikeMapper.checkLikeYn", lostLike);
+		return result;
+	}
+	
+	@Override
+	public Integer insertLostLike(SqlSession session, LostLike lostLike) {
+		Integer result = session.insert("LostLikeMapper.insertLostLike", lostLike);
 		return result;
 	}
 
 	@Override
 	public Integer deleteLostLike(SqlSession session, LostLike lostLike) {
-		Integer result = session.delete("LostLikeMapper.deleteLostLike", lostLike);
+		Integer result = session.insert("LostLikeMapper.deleteLostLike", lostLike);
 		return result;
 	}
+	
+	@Override
+	public Integer totalSearchFindCount(SqlSession session, String totalSearchKeyword) {
+		Integer result = session.selectOne("lostBoardMapper.totalSearchFindCount",totalSearchKeyword);
+		return result;
+	}
+	
+	@Override
+	public List<FindBoard> totalSearchFindByKeyword(SqlSession session, PageInfo fPInfo, String totalSearchKeyword) {
+		int limit = fPInfo.getRecordCountPerPage();
+		int offset = (fPInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<FindBoard>searchFindList = session.selectList("lostBoardMapper.totalSearchFindByKeyword", totalSearchKeyword, rowBounds);		
+		return searchFindList;
+	}
+	
+	@Override
+	public Integer totalSearchLostCount(SqlSession session, String totalSearchKeyword) {
+		Integer result = session.selectOne("lostBoardMapper.totalSearchLostCount",totalSearchKeyword);
+		return result;
+	}
+
+	@Override
+	public List<LostBoard> totalSearchLostByKeyword(SqlSession session, PageInfo lPInfo, String totalSearchKeyword) {
+		int limit = lPInfo.getRecordCountPerPage();
+		int offset = (lPInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<LostBoard>searchLostList = session.selectList("lostBoardMapper.totalSearchLostByKeyword", totalSearchKeyword, rowBounds);		
+		return searchLostList;
+	}
+	
+	
+
+
+
+
+
+
+
+
+
+	
 
 
 }

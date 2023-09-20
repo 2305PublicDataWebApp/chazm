@@ -59,8 +59,8 @@
                         <h3>물건을 잃어버렸나요?</h3>
                         <h3>누군가가 잃어버린 물건을 습득하셨나요?</h3>
                         <div class="d-flex col-md-12 justify-content-center justify-content-lg-start">
-                            <form action="" method="">
-                                <input type="text" name="" id="">
+                            <form action="/totalSearch/search.do" method="get">
+                                <input type="text" name="totalSearchKeyword" id="">
                                 <button type="submit"><img src="./resources/assets/img/search.png" alt="" style="width:40%;"></button>
                             </form>
                         </div>

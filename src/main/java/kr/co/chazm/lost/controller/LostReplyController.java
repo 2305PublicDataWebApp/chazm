@@ -21,7 +21,7 @@ public class LostReplyController {
 	 * 댓글등록
 	 * @param mv
 	 * @param lostReply
-	 * @param session
+	 * @param session/lostReply/update.do
 	 * @return
 	 */
 	@RequestMapping(value="/lostReply/insert.do", method=RequestMethod.POST)
@@ -35,10 +35,10 @@ public class LostReplyController {
 				lostReply.setLostRWriter(lostRWriter);
 				Integer result = lostReplyService.insertLostReply(lostReply);
 				if(result>0) {
-//					mv.setViewName("redirect:"+url);
-					mv.addObject("msg", "댓글을 등록했습니다.");
-					mv.addObject("url", url);
-					mv.setViewName("common/message");
+					mv.setViewName("redirect:"+url);
+//					mv.addObject("msg", "댓글을 등록했습니다.");
+//					mv.addObject("url", url);
+//					mv.setViewName("common/message");
 				}else {
 					mv.addObject("msg", "댓글등록에 실패했습니다.");
 					mv.addObject("url", url);
@@ -121,6 +121,10 @@ public class LostReplyController {
 				if(result>0) {
 //					mv.setViewName("redirect:"+url);
 					mv.addObject("msg", "댓글을 수정했습니다.");
+					mv.addObject("url", url);
+					mv.setViewName("common/message");
+				}else {
+					mv.addObject("msg", "댓글 수정에 실패했습니다.");
 					mv.addObject("url", url);
 					mv.setViewName("common/message");
 				}

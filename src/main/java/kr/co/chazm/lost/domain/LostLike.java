@@ -5,9 +5,17 @@ public class LostLike {
 	private int refLostNo;
 	private String memberId;
 	
+	public LostLike() {}
 	
 	
+	public LostLike(int refLostNo, String memberId) {
+		super();
+		this.refLostNo = refLostNo;
+		this.memberId = memberId;
+	}
+
 	
+
 	public int getLostLikeNo() {
 		return lostLikeNo;
 	}

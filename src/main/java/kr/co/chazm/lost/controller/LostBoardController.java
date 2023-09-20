@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.chazm.find.domain.FindBoard;
+import kr.co.chazm.find.service.FindBoardService;
 import kr.co.chazm.lost.domain.LostBoard;
 import kr.co.chazm.lost.domain.LostLike;
 import kr.co.chazm.lost.domain.LostReply;
 import kr.co.chazm.lost.domain.PageInfo;
 import kr.co.chazm.lost.service.LostBoardService;
 import kr.co.chazm.lost.service.LostReplyService;
+import kr.co.chazm.plusmember.domain.PlusMLike;
 
 @Controller
 public class LostBoardController {
@@ -34,6 +37,7 @@ public class LostBoardController {
 	private LostBoardService lostBoardService;
 	@Autowired
 	private LostReplyService lostReplyService;
+
 	
 	/**
 	 * 분실물 등록 페이지로 이동
@@ -68,16 +72,11 @@ public class LostBoardController {
 	@RequestMapping(value="/lostBoard/insert.do", method=RequestMethod.POST)
 	public ModelAndView insertLostBoard(ModelAndView mv
 										, @ModelAttribute LostBoard lostBoard
-//										, @RequestParam("lostNo") Integer lostNo
-										, @RequestParam("lostTitle") String lostTitle
-										, @RequestParam("lostContent") String lostContent
-										, @RequestParam("lostCategory") String lostCategory
-										, @RequestParam(value="lostLocation", required=false ) String lostLocation
 										, @RequestParam(value="lostPlace", required=false ) String lostPlace
 										, @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
 										, @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
-										, @RequestParam("lostColor") String lostColor
 										, @RequestParam(value="lostBrand", required=false ) String lostBrand
+										, @RequestParam(value="lostMaybe", required=false ) String lostMaybe
 										, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 										, HttpSession session
 										, HttpServletRequest request) {
@@ -155,16 +154,10 @@ public class LostBoardController {
 	@RequestMapping(value="/lostBoard/update.do", method=RequestMethod.POST)
 	public ModelAndView updateLostBoard(ModelAndView mv
 									  , @ModelAttribute LostBoard lostBoard
-//									  , @RequestParam("lostNo") String lostNo
-//									  , @RequestParam("lostTitle") String lostTitle
-//									  , @RequestParam("lostContent") String lostContent
-//									  , @RequestParam("lostCategory") String lostCategory
-//									  , @RequestParam(value="lostLocation", required=false ) String lostLocation
-//									  , @RequestParam(value="lostPlace", required=false ) String lostPlace
-//									  , @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
-//									  , @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
-//									  , @RequestParam("lostColor") String lostColor
-//									  , @RequestParam(value="lostBrand", required=false ) String lostBrand
+									  , @RequestParam(value="lostPlace", required=false ) String lostPlace
+									  , @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
+									  , @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
+									  , @RequestParam(value="lostBrand", required=false ) String lostBrand
 									  , @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 									  , HttpSession session
 									  , HttpServletRequest request) {
@@ -185,19 +178,18 @@ public class LostBoardController {
 				lostBoard.setLostFilepath((String)lFileMap.get("filePath"));  				
 			}
 			
-			String lostWriter = (String)session.getAttribute("memberId");;
-//			lostWriter = lostBoard.getLostWriter();
-			
+			String memberId = (String)session.getAttribute("memberId");;
+			String lostWriter = lostBoard.getLostWriter();
 			url = "/lostBoard/detail.do?lostNo="+lostBoard.getLostNo();
-			
-			//로그인여부 확인
-			if(lostWriter != null && !lostWriter.equals("")) {
+		
+			//글쓴사람만 수정 가능 
+			if(lostWriter != null && lostWriter.equals(memberId)) {
 				lostBoard.setLostWriter(lostWriter);
 				Integer result = lostBoardService.updateLostBoard(lostBoard);
 				if(result > 0) {
 					mv.setViewName("redirect:"+url);
 				}else {
-					mv.addObject("msg", "글 수정을 실패했습니다.");
+					mv.addObject("msg", "글 수정에 실패했습니다.");
 					mv.addObject("url", url);
 					mv.setViewName("common/message");
 				}
@@ -300,26 +292,56 @@ public class LostBoardController {
 		@RequestMapping(value="/lostBoard/detail.do", method=RequestMethod.GET)
 		public ModelAndView showLostBoardDetail(ModelAndView mv
 											, @RequestParam ("lostNo") Integer lostNo
-											
-											) {
+											, HttpSession session) {
 			//SELECT * FROM LOST_BOARD_TBL WHERE LOST_NO = ?
 			try {
-				LostBoard lostBoard = lostBoardService.selectOneByNo(lostNo);
-				if(lostBoard != null) {	
-					//댓글리스트 가져오기
-//					Integer totalReplyCount = lostReplyService.getReplyListCount();
-					List<LostReply>lRList = lostReplyService.selectReplyList(lostNo);
+				String memberId = (String) session.getAttribute("memberId");
 				
-					if(lRList.size() > 0) {
-//						mv.addObject("totalReplyCount", totalReplyCount);
-						mv.addObject("lRList", lRList);				
+				//로그인 한 경우에만 글상세보기 가능
+				if(memberId != null && !memberId.equals("")) {
+					LostBoard lostBoard = lostBoardService.selectOneByNo(lostNo);
+					if(lostBoard != null) {	
+						LostLike lostLike = new LostLike(lostNo, memberId);
+						Integer refLostNo = lostLike.getRefLostNo();
+						
+						LostReply lostReply = new LostReply();
+						Integer lostRNo = lostReply.getLostRParentNo();
+						//댓글리스트 가져오기
+						List<LostReply>lRList = lostReplyService.selectReplyList(lostNo);
+						//대댓글리스트 가져오기
+//						List<LostReply>lRRList = lostReplyService.selectRReplyList(lostRNo);
+						
+						//댓글수 카운트
+						Map<String, Integer> rCountMap = new HashMap<String, Integer>();
+						rCountMap.put("lostNo",lostNo);
+						rCountMap.put("lostRNo",lostRNo);
+//						Integer totalReplyCount = lostReplyService.getReplyListCount(refLostNo);
+						Integer totalReplyCount = lostReplyService.getReplyListCount(rCountMap); 
+						
+						//좋아요눌렀는지 여부 
+						Integer likeYn = lostBoardService.checkLikeYn(lostLike); // 0:안누름 / 1:누름
+						
+						if(lRList.size() > 0) {
+							mv.addObject("lRList", lRList);	
+						}else {
+							mv.addObject("msg", "등록된 댓글이 없습니다.");
+						}
+//						if(lRRList.size() > 0) {
+//							mv.addObject("lRRList", lRRList);	
+//						}
+						
+						mv.addObject("lostBoard", lostBoard);
+						mv.addObject("totalReplyCount", totalReplyCount);
+						mv.addObject("likeYn", likeYn);
+						mv.setViewName("lost/lostBoardDetail");
+						
 					}else {
-						mv.addObject("msg", "등록된 댓글이 없습니다.");
+						mv.addObject("msg", "게시글 조회에 실패했습니다");
+						mv.addObject("url", "/lostBoard/list.do");
+						mv.setViewName("common/message");
 					}
-					mv.addObject("lostBoard", lostBoard);
-					mv.setViewName("lost/lostBoardDetail");
 				}else {
-					mv.addObject("msg", "게시글 조회에 실패했습니다");
+					mv.addObject("msg", "로그인 해야 상세보기가 가능합니다");
 					mv.addObject("url", "/lostBoard/list.do");
 					mv.setViewName("common/message");
 				}
@@ -344,8 +366,9 @@ public class LostBoardController {
 	public ModelAndView searchLostBoard(ModelAndView mv
 									  , @RequestParam("lostSearchCondition") String lostSearchCondition
 									  , @RequestParam("lostSearchKeyword") String lostSearchKeyword
+									  , @RequestParam("lostLocation") String lostLocation
 									  , @RequestParam("lostBrand") String lostBrand
-//									  , @RequestParam("lostColor") String lostColor
+									  , @RequestParam("lostColor") String lostColor
 //									  , @RequestParam("lostStartDate") @DateTimeFormat(pattern = "yyyyMMdd") Date lostStartDate
 //									  , @RequestParam("lostEndDate") @DateTimeFormat(pattern = "yyyyMMdd") Date  lostEndDate
 									  , @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
@@ -354,8 +377,10 @@ public class LostBoardController {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("lostSearchCondition",lostSearchCondition);
 		searchMap.put("lostSearchKeyword",lostSearchKeyword);
+		searchMap.put("lostLocation",lostLocation);
 		searchMap.put("lostBrand",lostBrand);
-//		searchMap.put("lostColor",lostColor);
+		searchMap.put("lostColor",lostColor);
+		
 //		searchMap.put("lostStartDate",lostStartDate);
 //		searchMap.put("lostEndDate",lostEndDate);
 	
@@ -370,8 +395,9 @@ public class LostBoardController {
 			if(searchLostList.size()>0) {
 				mv.addObject("lostSearchCondition",lostSearchCondition)
 				.addObject("lostSearchKeyword",lostSearchKeyword)
+				.addObject("lostLocation",lostLocation)
 				.addObject("lostBrand",lostBrand)
-//				.addObject("lostColor",lostColor)
+				.addObject("lostColor",lostColor)
 				.addObject("pInfo",pInfo)
 				.addObject("searchLostList",searchLostList);
 				
@@ -390,69 +416,75 @@ public class LostBoardController {
 	
 	
 	//////좋아요 메소드/////////////////////////////////////////////////////////////////////////
-	
-	
-	@RequestMapping(value="/lostBoard/like.do", method=RequestMethod.GET)
-	public ModelAndView pushLostLike(ModelAndView mv
-									, @ModelAttribute LostLike lostLike
-									, HttpSession session) {
-		String url = "lostBoard/detail.do?lostNo="+lostLike.getRefLostNo();
-		try {
-			String memberId = (String)session.getAttribute("memberId");
-			boolean heartCheck = false; //빈 하트일때
-			if(memberId != null && !memberId.equals("")) {  //로그인해야 좋아요 가능
-//				lostLike.setMemberId(memberId);
-				Integer result = lostBoardService.pushLostLike(lostLike);
-				if(result>0) {
-					heartCheck = true;  //빨간 하트로 변경 
-					
-					mv.addObject("heartCheck", heartCheck);
-					mv.setViewName(url);
-				}
-			}
-		} catch (Exception e) {
-			mv.addObject("msg", "관리자에게 문의바랍니다");
-			mv.addObject("url", url);
-			mv.setViewName("common/message");
-		}
-		return mv;	
-	}
-	
-	
-	@RequestMapping(value="/lostBoard/deleteLike.do", method=RequestMethod.GET)
-	public ModelAndView deleteLostLike(ModelAndView mv
-									, @ModelAttribute LostLike lostLike
-									, HttpSession session) {
-		String url = "/lostBoard/detail.do?lostNo="+lostLike.getRefLostNo();
-		try {
-			String memberId = (String)session.getAttribute("memberId");
-			
-			
-			boolean heartCheck = true; //빨간 하트일 떄 
-			if(memberId != null && !memberId.equals("")) {  //로그인해야 좋아요 취소 가능
-				lostLike.setMemberId(memberId);
+		/**
+		 * 좋아요 등록
+		 * @param mv
+		 * @param lostLike
+		 * @param refLostNo
+		 * @param session
+		 * @return
+		 */
+		@RequestMapping(value = "/lostLike/insert.do", method = RequestMethod.GET)
+		public ModelAndView insertLostLike(ModelAndView mv
+										  , @RequestParam("refLostNo") int refLostNo
+										  , HttpSession session) {
+			String url = "";
+			try {
+				String memberId = (String) session.getAttribute("memberId");
+				LostLike lostLike = new LostLike(refLostNo, memberId);
+				url="/lostBoard/detail.do?lostNo="+refLostNo;
+				Integer result = lostBoardService.insertLostLike(lostLike);
 				
-				Integer result = lostBoardService.deleteLostLike(lostLike);
 				if(result>0) {
-					heartCheck = false;  //빈 하트로 변경 
+					mv.setViewName("redirect:"+url);
+				}else {
+					mv.addObject("msg", "좋아요를 실패했습니다.");
+					mv.addObject("url", url);
+					mv.setViewName("common/message");
 				}
+			} catch (Exception e) {
+				mv.addObject("msg", "관리자에게 문의해주세요.");
+				mv.addObject("url", url);
+				mv.setViewName("common/message");
 			}
-			mv.addObject("heartCheck", heartCheck);
-			mv.setViewName(url);
-			
-		} catch (Exception e) {
-			mv.addObject("msg", "관리자에게 문의바랍니다");
-			mv.addObject("url", url);
-			mv.setViewName("common/message");
+			return mv;
 		}
-		return mv;	
-	}
 	
+	
+		/**
+		 * 좋아요 삭제
+		 * @param mv
+		 * @param lostLike
+		 * @param refLostNo
+		 * @param session
+		 * @return
+		 */
+		@RequestMapping(value = "/lostLike/delete.do", method = RequestMethod.GET)
+		public ModelAndView deletePlusMLike(ModelAndView mv
+										  , @RequestParam("refLostNo") int refLostNo
+										  , HttpSession session) {
+			String url = "";
+			try {
+				String memberId = (String) session.getAttribute("memberId");
+				LostLike lostLike = new LostLike(refLostNo, memberId);
+				url="/lostBoard/detail.do?lostNo="+refLostNo;
+				Integer result = lostBoardService.deleteLostLike(lostLike);
+				if (result > 0) {
+					mv.setViewName("redirect:"+url);
+				} else {
+					mv.addObject("msg", "좋아요 취소를 실패했습니다.");
+					mv.addObject("url", url);
+					mv.setViewName("common/message");
+				}
+			} catch (Exception e) {
+				mv.addObject("msg", "좋아요에게 문의해주세요.");
+				mv.addObject("url", url);
+				mv.setViewName("common/message");
+			}
+			return mv;
+		}
 	
 
-	
-	
-	
 	
 //	공통메소드*******************************************************************************************
 	
@@ -529,6 +561,67 @@ public class LostBoardController {
 		
 		return fileMap;		
 		
+	}
+	
+	/**
+	 * 통합검색
+	 * @param mv
+	 * @param lostBoard
+	 * @param totalSearchKeyword
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping(value = "/totalSearch/search.do", method = RequestMethod.GET)
+	public ModelAndView searchLostBoard(ModelAndView mv
+									  , @ModelAttribute LostBoard lostBoard
+									  , @ModelAttribute FindBoard findBoard
+									  , @RequestParam("totalSearchKeyword") String totalSearchKeyword
+									  , @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+		
+		//통합서치 습득물파트 페이징처리
+		Integer totalSearchFindCount = lostBoardService.totalSearchFindCount(totalSearchKeyword); 
+		PageInfo fPInfo = this.getPageInfo(currentPage, totalSearchFindCount);
+		
+		//통합서치 분실물파트 페이징처리
+		Integer totalSearchLostCount = lostBoardService.totalSearchLostCount(totalSearchKeyword); 
+		PageInfo lPInfo = this.getPageInfo(currentPage, totalSearchLostCount);
+		
+		
+		
+		//통합서치 습득물 리스트 
+		List<FindBoard>tSFindList = lostBoardService.totalSearchFindByKeyword(fPInfo, totalSearchKeyword);
+		
+		//통합서치 분실물 리스트 
+		List<LostBoard>tSLostList = lostBoardService.totalSearchLostByKeyword(lPInfo, totalSearchKeyword);
+		try {
+			//습득물
+			if(tSFindList.size()>0) {
+				mv.addObject("totalSearchKeyword",totalSearchKeyword)
+				.addObject("fPInfo",fPInfo)
+				.addObject("tSFindList",tSFindList);
+				
+				mv.setViewName("lost/totalSearchNew");
+				
+			}else {
+				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("lost/totalSearchNew");
+			}
+			//분실물
+			if(tSLostList.size()>0) {
+				mv.addObject("totalSearchKeyword",totalSearchKeyword)
+				.addObject("lPInfo",lPInfo)
+				.addObject("tSLostList",tSLostList);
+				
+				mv.setViewName("lost/totalSearchNew");
+				
+			}else {
+				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("lost/totalSearchNew");
+			}	
+		} catch (Exception e) {
+			mv.addObject("msg", "관리자에게 문의바랍니다");
+			mv.addObject("url", "/lostBoard/list.do");
+			mv.setViewName("common/message");
+		}
+		return mv;
 	}
 	
 
