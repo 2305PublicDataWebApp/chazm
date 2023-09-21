@@ -860,8 +860,8 @@ color : #fff;
 }
 
     #picture {
-        width : 100%;
-        height : 90%;
+        width: 85%;
+    	height: 100%;
         border : 1px solid #ccc;
         border-radius: 10px;
         position: relative;
@@ -871,7 +871,9 @@ color : #fff;
 
     #picture>img{
         width: 100%;
+        max-width: 430px;
         height: 100%;
+        max-height: 430px;
         border-radius: 10px;
         opacity: 50%;
     }
@@ -972,18 +974,21 @@ input[type=text] {
     width: 950px;
     margin: 10px auto;
 }
+.btn-wrap {
+    display: flex;
+    justify-content: flex-end
+    
+} 
 
-
-/* #insertBtn { */
-/* 	width: 100px; */
-/*     height: 45px; */
-/*     margin-right: 15px; */
-/* } */
-       
-/* #resetBtn { */
-/* 	width: 100px; */
-/*     height: 45px; */
-/* } */
+ #insertBtn  {
+     width: 100px;
+     height: 45px;
+     margin-left : 15px;
+}
+#resetBtn {
+    width: 100px;
+    height: 45px;
+}
 /*////////////////////////////////////////////////////////////////*/
 
 

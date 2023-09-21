@@ -67,7 +67,38 @@
                 </div>
             </div>
         </section> -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+        <!-- End Top Bar -->
+
+        <header id="header" class="header d-flex align-items-center">
+
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <!-- Uncomment the line below if you also wish to use an image logo -->
+                    <!-- <img src="assets/img/logo.png" alt=""> -->
+                    <h1>찾음<span><img src="../resources/assets/img/light.png" alt="" style="width:30%;"></span></h1>
+                </a>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a href="#about">찾음이란?</a></li>
+                        <li><a href="#clients">찾아주세요</a></li>
+                        <li><a href="#services">주인을 찾아요</a></li>
+                        <li class="dropdown"><a href="#portfolio"><span>찾음+</span>  <i
+                            class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li><a href="#">찾음이 기부해요</a></li>
+                                <li><a href="#">포인트로 기부해요</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#team">로그아웃</a></li>
+                        <li><a href="blog.html">마이페이지</a></li>
+                </nav><!-- .navbar -->
+
+                <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+                <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+            </div>
+        </header><!-- End Header -->
+        <!-- End Header -->
 
         <!-- ======= Hero Section ======= -->
         <section id="hero" class="hero">
@@ -121,15 +152,15 @@
 									</c:url>
 	                                <c:if test="${!empty totalFind.findFilerename }">  <!-- 첨부이미지가 있을때 -->
 	                             		<a href="${detailFindUrl}" >
-	                             			<img src="../resources/fuploadFiles/${findBoard.findFilerename }" class="img-fluid"  alt="#">
+	                             			<img src="../resources/fuploadFiles/${findBoard.findFilerename }" class="img-fluid"  alt="#" style="width : 306px; height : 306px;">
 	                             		</a>
 									</c:if>
 									<c:if test="${empty totalFind.findFilerename }"> <!-- 첨부이미지가 없을때 -->
 										<a href="${detailFindUrl}" >
-											<img src="../resources/assets/img/noImage.jpg" class="img-fluid" alt="#">
+											<img src="../resources/assets/img/noImage.jpg" class="img-fluid" alt="#" style="width : 306px; height : 306px;">
 										</a>
 									</c:if>
-	                                <div class="portfolio-info">
+	                                <div class="portfolio-info" style="width:306px; height:150px; font-size: 15px;">
 	                                    <div>
 	                                        <h4><a href="${detailFindUrl}" title="More Details">${totalFind.findTitle}</a></h4>
 	                                        <p>${totalFind.fCreateDate}</p>
@@ -147,19 +178,43 @@
                        
                     </div>
                     <!-- End Portfolio Container -->
-                    <div class="mt-5 d-flex justify-content-center">
-                        <nav aria-label="Page navigation example r">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link"
-                                    href="#"><i class="bi bi-chevron-left"></i></a></li>
-                                
-                                <li class="page-item"><a class="page-link"
-                                        href="#">1</a></li>
-                                <li class="page-item"><a class="page-link"
-                                    href="#"><i class="bi bi-chevron-right"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                    <!-- 페이지 네비게이션 -->
+	                <div class="mt-5 d-flex justify-content-center">
+	                    <nav aria-label="Page navigation example r">
+	                        <ul class="pagination">
+		                        <c:if test="${fPInfo.startNavi != 1}">
+									<c:url var="prevUrl" value="/findBoard/search.do" >  
+										<c:param name="page" value="${fPInfo.startNavi -1 }"></c:param>
+										<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>		 								
+									</c:url>
+									<li class="page-item"><a href="${prevUrl}" class="page-link">Prev</a></li>
+								</c:if>
+	                            
+	                            <c:forEach begin="${fPInfo.startNavi}" end="${fPInfo.endNavi}"  var="p">
+									<c:url var="pageUrl" value="/findBoard/search.do" >  
+										<c:param name="page" value="${p}"></c:param> 	
+										<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>	
+									</c:url>
+									<c:choose>
+					                   <c:when test="${p == fPInfo.currentPage}">
+					                       <li class="page-item active" ><a href="${pageUrl}" class="page-link" style="background-color: #4365BC">${p}</a></li>
+					                   </c:when>
+					                   <c:otherwise>
+					                       <li class="page-item"><a href="${pageUrl}" class="page-link">${p}</a></li>
+					                   </c:otherwise>
+					                </c:choose>
+								</c:forEach>
+	
+		                        <c:if test="${fPInfo.endNavi != fPInfo.naviTotalCount}">
+									<c:url var="nextUrl" value="/findBoard/search.do" >  
+										<c:param name="page" value="${lPInfo.endNavi + 1}"></c:param> 								
+										<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>	
+									</c:url>
+									<li class="page-item"><a href="${nextUrl}" class="page-link">Next</a></li>
+								</c:if>
+	                        </ul>
+	                    </nav>
+	                </div>
                 </div>
                 
             </div>
@@ -190,15 +245,15 @@
 									</c:url>
 	                                <c:if test="${!empty totalLost.lostFilerename }">  <!-- 첨부이미지가 있을때 -->
 	                             		<a href="${detailLostUrl}" >
-	                             			<img src="../resources/assets/img/luploadFiles/${totalLost.lostFilerename}" class="img-fluid"  alt="#">
+	                             			<img src="../resources/luploadFiles/${totalLost.lostFilerename}" class="img-fluid"  alt="#" style="width : 306px; height : 306px;">
 	                             		</a>
 									</c:if>
 									<c:if test="${empty totalLost.lostFilerename }"> <!-- 첨부이미지가 없을때 -->
 										<a href="${detailLostUrl}" >
-											<img src="../resources/assets/img/noImage.jpg" class="img-fluid" alt="#">
+											<img src="../resources/assets/img/noImage.jpg" class="img-fluid" alt="#" style="width : 306px; height : 306px;">
 										</a>
 									</c:if>
-	                                <div class="portfolio-info">
+	                                <div class="portfolio-info" style="width:306px; height:150px; font-size: 15px;">
 	                                    <div>
 	                                        <h4><a href="${detailLostUrl}" title="More Details">${totalLost.lostTitle}</a></h4>
 	                                        <p>${totalLost.lCreateDate}</p>
@@ -257,8 +312,77 @@
             </div>
         </section>
     </main><!-- End #main -->
-    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-    
+
+        <!-- ======= Footer ======= -->
+        <footer id="footer" class="footer" >
+
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-5 col-md-12 footer-info">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <h2>찾음</h2>
+                            <img src="../resources/assets/img/light.png" alt="">
+                        </a>
+                        <p style="font-size:18px;">분실물 관리 통합 포털</p>
+                        <div class="social-links d-flex mt-4">
+                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-6 col-md-3 footer-links">
+                        <h4>찾음</h4>
+                        <ul>
+                            <li><a href="#">회사소개</a></li>
+                            <li><a href="#">채용</a></li>
+                            <li><a href="#">개인정보처리방침</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">기부</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-6 col-md-3 footer-links">
+                        <h4>서비스</h4>
+                        <ul>
+                            <li><a href="#">찾음이란?</a></li>
+                            <li><a href="#">찾아주세요</a></li>
+                            <li><a href="#">주인을 찾아요</a></li>
+                            <li><a href="#">찾음+</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 footer-contact text-center text-md-start">
+                        <h4>Contact Us</h4>
+                        <p>
+                            3F, 120, Namdaemun-ro <br>
+                            Jung-gu, Seoul<br>
+                            Republic of Korea <br><br>
+                            <strong>Phone:</strong> 02 2345 5678<br>
+                            <strong>Email:</strong> info@chazm.com<br>
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container mt-4">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Chazm</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+            </div>
+
+        </footer><!-- End Footer -->
+        <!-- End Footer -->
 
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>

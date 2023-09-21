@@ -422,14 +422,12 @@
 	    		const findDate = document.querySelector("#findDate");
 	    		if (findTitle.value.trim() == "") {
 	    			alert('제목(습득물명)을 입력하세요');
-	    			findTitle.focus();
 	    			return false;
 	   	        } else if (findDate.value == "") {
         			alert('습득일자를 선택하세요');
         			return false;
-       	        } else if (findContent.value.trim() === "") {
+       	        } else if (findContent.value === "") {
 	    			alert('내용을 입력하세요');
-	    			findContent.focus();
 	    			return false;
 	   	        }else {
 	   	        	return true;

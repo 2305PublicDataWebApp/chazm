@@ -60,7 +60,7 @@
                         <h3>누군가가 잃어버린 물건을 습득하셨나요?</h3>
                         <div class="d-flex col-md-12 justify-content-center justify-content-lg-start">
                             <form action="/totalSearch/search.do" method="get">
-                                <input type="text" name="totalSearchKeyword" id="">
+                                <input type="text" name="totalSearchKeyword" id="totalSearchKeyword" value="">
                                 <button type="submit"><img src="./resources/assets/img/search.png" alt="" style="width:40%;"></button>
                             </form>
                         </div>
@@ -86,10 +86,10 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=지갑">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/wallet.png"
-                                                    class="testimonial-img flex-shrink-0" alt="">
+                                                    class="testimonial-img flex-shrink-0" alt="" >
                                                 <h3 class="hover_text">
                                                     지갑
                                                 </h3>
@@ -102,7 +102,7 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=가방">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/bag.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -118,7 +118,7 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=핸드폰">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/phone.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -129,12 +129,12 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- End testimonial item -->
+                            </div>
 
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=의류">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/clothes.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -145,12 +145,12 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- End testimonial item -->
+                            </div>
 
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=기타">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/others.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -161,7 +161,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- End testimonial item -->
+                            </div>
 
                         </div>
                         <div class="swiper-pagination"></div>
@@ -182,8 +182,8 @@
 
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
-                                    <div class="testimonial-item">
-                                        <a href="#">
+                                    <div class="/totalSearch/search.do?totalSearchKeyword=버스">
+                                        <a href="javascript:void(0)">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/bus.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -199,7 +199,7 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=지하철">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/train.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -215,7 +215,7 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=택시">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/taxi.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -231,7 +231,7 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=공항">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/airplane.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
@@ -247,12 +247,12 @@
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
                                     <div class="testimonial-item">
-                                        <a href="#">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=기타">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/restaurant.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
                                                 <h3 class="hover_text">
-                                                    음식점
+                                                    기타
                                                 </h3>
                                             </div>
                                         </a>
@@ -322,6 +322,30 @@
 
         <!-- Template Main JS File -->
         <script src="./resources/assets/js/main.js"></script>
+        
+        <script>
+//         	function selectCategory(){
+//         		let categorys = document.querySelector("h3").innerHTML
+        		 
+//         		categorys.forEach(category => {
+//         			category.addEventListener("click", function (event) {
+//                         document.getElementById("totalSearchKeyword").value = categorys;
+//                     });
+// 	               }); 
+//         	}
+        	
+//         	function selectCategory(){
+// 			 const categories = document.querySelectorAll("h3");
+// 			 categories.forEach(function (category) {
+// 				 category.addEventListener("click", function () {
+// 			        const text = categories.textContent.trim();
+// 			        const inputElement = document.getElementById("totalSearchKeyword");
+// 			        inputElement.value = text;
+// 			      });
+// 			    });
+//         	}
+        	
+        </script>
     </body>
 
 </html>

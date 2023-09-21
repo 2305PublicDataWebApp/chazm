@@ -9,7 +9,6 @@ import kr.co.chazm.lost.domain.LostReply;
 
 public interface LostReplyStore {
 	
-//	public Integer getReplyListCount(SqlSession session);
 
 	public List<LostReply> selectReplyList(SqlSession session, Integer refLostNo);
 	
@@ -21,9 +20,8 @@ public interface LostReplyStore {
 
 	public Integer updateLostReply(SqlSession session, LostReply lostReply);
 
-//	public Integer getReplyListCount(SqlSession session, Integer refLostNo);
+	public Integer getReplyListCount(SqlSession session, Integer refLostNo);
 
-	public Integer getReplyListCount(SqlSession session, Map<String, Integer> rCountMap);
 
 
 

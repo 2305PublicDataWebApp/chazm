@@ -21,8 +21,10 @@ public class LostBoard {
 	private Date lUpdateDate;
 	private String lStateYN;
 	private String lostMaybe;
+	private int totalReplyCount;
 	
 
+	
 	public LostBoard() {}
 	
 	public LostBoard(String lostTitle, String lostContent, String lostFilename,
@@ -188,6 +190,14 @@ public class LostBoard {
 
 	public void setlStateYN(String lStateYN) {
 		this.lStateYN = lStateYN;
+	}
+	
+	public int getTotalReplyCount() {
+		return totalReplyCount;
+	}
+
+	public void setTotalReplyCount(int totalReplyCount) {
+		this.totalReplyCount = totalReplyCount;
 	}
 
 	@Override
