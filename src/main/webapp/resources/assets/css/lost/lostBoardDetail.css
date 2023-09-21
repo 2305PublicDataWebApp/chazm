@@ -944,17 +944,8 @@ color : #fff;
     padding-right: 100px ;
 }
 
-.category-icon {
-    background-color: #4365BC;
-    width : 80px;
-    height : 100px;
-    margin: 10px;
-    border-radius: 5px;
-}
-.icon {
-    font-size : 2.5em;
-    color : #fff;
-}
+
+
 
 
 #lostColor, #lostBrand {
@@ -993,12 +984,7 @@ transform : scale(1);
 	border-radius : 10px;
 }
 
-#mainPart2 {
-    width: 950px;
-    height: 300px;
-    --padding: 0 30px 20px;
-    margin: 0 auto;
-}
+
     #textarea {
         width : 100%;
         height : 100%;
@@ -1009,11 +995,7 @@ transform : scale(1);
         border-radius: 10px;
     }
 
-    #mainPart3 {
-        --background-color: #4365BC;
-        width: 950px;
-        margin: 10px auto;
-    }
+
        
         .btn-wrap {
             display: flex;
@@ -1054,60 +1036,6 @@ transform : scale(1);
     border : 1px solid #ccc;
 }
 
-#main_part1 {
-    --background-color: #7486b4;
-    width : 1000px;
-    padding: 20px 0;
-}
-
-
-    #picture_wrap {
-        width :50%;
-        display : flex;
-        justify-content: flex-end;
-        --align-items: center;
-        --padding: 30px;
-    }
-        #picture {
-            width : 450px;  
-            height : 450px;
-            /* width : 20vw;
-            height : 35vh; */
-            border : 1px solid #ccc;
-            border-radius: 10px;
-            position: relative;
-            background-size: cover;
-            --cursor:pointer;
-        }
-        #picture>img{
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            --vertical-align: middle;
-            opacity: 50%;
-            z-index: 1;
-            
-        }
-        .bi-camera {
-            --background-color: #fff;
-            font-size: 1000%;
-            color : black;
-            opacity: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
-    #lost_info_wrap {
-        width : 100%;
-        display : flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        padding: 0 80px 0 20px ;
-    }
-
     .category_icon {
         background-color: #4365BC;
         color : white;
@@ -1129,12 +1057,7 @@ transform : scale(1);
     }
 
 
-#main_part2 {
-    width : 1000px;
-    height: 300px;
-    padding: 0 30px 15px;
 
-}
 #contents {
     width : 1000px;
     
@@ -1150,27 +1073,7 @@ transform : scale(1);
     }
 
         
-    #hashtagContainer{    
-        min-width:400px;
-        max-width:1000px;
-        margin: 1em 0;
-        outline : none;
-    }
-
-    .hashtag-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .hashtag-box {
-        border: 1px solid #ccc;
-        padding: 5px;
-        margin: 5px;
-        background-color: #f0f0f0;
-        border-radius: 5px;
-        display: flex;
-        align-items: center; /* 내용을 세로 중앙 정렬 */
-    }
+ 
 
     .delete-button {
         background: none;
@@ -1187,9 +1090,7 @@ transform : scale(1);
     input[type=text] {
         outline: none;
     }
-    #main_part3 {
-        width : 1000px;
-    }
+
 
     #fState {
         padding: 1px;
@@ -1252,8 +1153,11 @@ transform : scale(1);
     text-align : center;
 }
 
-.lostContent p {
-	--padding : 30px;
+.lostContent {
+	border-top : 1px solid #ccc;
+	border-bottom : 1px solid #ccc;
+	padding : 30px;
+	margin-bottom: 10px;
 }
 
 #insertRReplyBtn {
