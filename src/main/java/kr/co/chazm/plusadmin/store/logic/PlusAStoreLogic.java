@@ -52,5 +52,23 @@ public class PlusAStoreLogic implements PlusAStore {
 		PlusABoard plusABoard = sqlSession.selectOne("PlusABoardMapper.selectOneByNo", plusANo);
 		return plusABoard;
 	}
+	
+	@Override
+	public int selectTotalMember(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("PlusABoardMapper.selectTotalMember");
+		return result;
+	}
+
+	@Override
+	public int selectTotalBoard(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("PlusABoardMapper.selectTotalBoard");
+		return result;
+	}
+
+	@Override
+	public int selectTotalGetY(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("PlusABoardMapper.selectTotalGetY");
+		return result;
+	}
 
 }

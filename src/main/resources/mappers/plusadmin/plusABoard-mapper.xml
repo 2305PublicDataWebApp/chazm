@@ -31,4 +31,13 @@
 	<select id="selectOneByNo" resultMap="plusABoardResultMap">
 		SELECT * FROM PLUS_A_BOARD_TBL WHERE PLUS_A_NO = #{plusANo}
 	</select>
+	<select id="selectTotalMember" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL WHERE M_STATUS_YN = 'Y' 
+	</select>
+	<select id="selectTotalBoard" resultType="_int">
+		SELECT (SELECT COUNT(*) FROM LOST_BOARD_TBL) + (SELECT COUNT(*) FROM FIND_BOARD_TBL) AS TOTAL_COUNT FROM DUAL
+	</select>
+	<select id="selectTotalGetY" resultType="_int">
+		SELECT COUNT(*) FROM FIND_BOARD_TBL WHERE GET_DATE IS NOT NULL
+	</select>
 </mapper>

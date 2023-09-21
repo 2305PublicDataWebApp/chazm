@@ -11,10 +11,12 @@
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
 /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Gothic:wght@700&display=swap');
+
 :root {
-  --font-default: "NanumGothic";
+  --font-default: 'Nanum Gothic';
   --font-primary: "Cafe24Supermagic-Bold";
-  --font-secondary: "NanumGothic";
+  --font-secondary: "Nanum Gothic";
 }
 @font-face {
 font-family: 'Cafe24Supermagic-Bold';
