@@ -196,12 +196,11 @@
                 const formMessage = $("#formMessage");
                 if (endDate <= startDate) {
                     e.preventDefault();
-                    formMessage.text("종료일은 시작일보다 미래날짜여야 합니다.");
+                    alert("종료일은 시작일보다 미래날짜여야 합니다.");
                 } else if (regContent === null || regContent.trim().length === 0) {
                     e.preventDefault();
-                    formMessage.text("내용을 입력해주세요");
+                    alert("내용을 입력해주세요");
                 } else {
-                	formMessage.text("");
                     submit(); // submit 함수 호출 (변경된 코드에는 없지만 필요한 경우 추가하세요)
                 }
             });

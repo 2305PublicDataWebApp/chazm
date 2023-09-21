@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-12">
                                 <!-- <label for="plusMContent">내용</label> -->
-                                <textarea class="form-control" id="summernote" name="plusMContent" id="plusMContent" cols="30" rows="10" required></textarea>
+                                <textarea class="form-control" id="summernote" name="plusMContent" cols="30" rows="10"></textarea>
                             </div>
                             <div class="row btn-area justify-content-center">
                             	<div class="d-flex justify-content-center" id="formMessage" style="color:red; font-size:20px" ></div>
@@ -183,12 +183,11 @@
                 const formMessage = $("#formMessage");
                 if (endDate <= startDate) {
                     e.preventDefault();
-                    formMessage.text("종료일은 시작일보다 미래날짜여야 합니다.");
+                    alert("종료일은 시작일보다 미래날짜여야 합니다.");
                 } else if (regContent === null || regContent.trim().length === 0) {
                     e.preventDefault();
-                    formMessage.text("내용을 입력해주세요");
+                    alert("내용을 입력해주세요");
                 } else {
-                	formMessage.text("");
                     submit(); // submit 함수 호출 (변경된 코드에는 없지만 필요한 경우 추가하세요)
                 }
             });
