@@ -71,16 +71,20 @@ public class MemberController {
 			int inserPoint = mService.updateMemberPoint(memberId);
 			
 			if (result > 0) {
-				mv.setViewName("redirect:/member/login.do");
+				mv.addObject("msg", "회원가입이 성공적으로 완료되었습니다. 환영합니다!");
+				mv.addObject("url", "/member/login.do");
+				mv.setViewName("common/message");
 				
 			} else {
 				mv.addObject("msg", "회원가입에 실패했습니다.");
-				mv.setViewName("member/signIDNMember");
+				mv.addObject("url", "member/signIDNMember");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "관리자에게 문의 바랍니다.");
-			mv.setViewName("member/signIDNMember");
+			mv.addObject("url", "member/signIDNMember");
+			mv.setViewName("common/message");
 		}
 		return mv;
 	}
@@ -388,7 +392,7 @@ public class MemberController {
 			int result = mService.updateMemberPw(member);
 			if (result > 0) {
 				mv.addObject("msg", "비밀번호 변경이 완료되었습니다.");
-				mv.addObject("url", "/member/login.do");
+				mv.addObject("url", "/member/logout.do");
 				mv.setViewName("common/message");
 			} else {
 				mv.addObject("msg", "비밀번호 변경이 완료되지 않았습니다.");

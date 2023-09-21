@@ -171,16 +171,16 @@
 											</div>
 											<div class="find-info">
 												<ul class="find-info">
-													<li><p class="find01">습득 지역</p>
+													<li><p class="find01" style="color:black;">습득 지역</p>
 														<p class="find02">${findBoard.findLocation }</p></li>
-													<li><p class="find01">색상</p>
+													<li><p class="find01" style="color:black;">색상</p>
 														<p class="find02">${findBoard.findColor }</p></li>
 													<c:if test="${findBoard.findBrand ne null}">
-														<li><p class="find01">브랜드</p>
+														<li><p class="find01" style="color:black;">브랜드</p>
 															<p class="find02">${findBoard.findBrand }</p></li>
 													</c:if>
 													<c:if test="${findBoard.findBrand eq null}">
-														<li><p class="find01">브랜드</p>
+														<li><p class="find01" style="color:black;">브랜드</p>
 															<p class="find02">X</p></li>
 													</c:if>
 											</ul>
@@ -191,11 +191,11 @@
 											지도 공간</div>
 										<div class="find-info">
 											<ul class="find-info">
-												<li><p class="find01">습득일자</p>
+												<li><p class="find01" style="color:black;">습득일자</p>
 													<p class="find02">${findBoard.findDate }</p></li>
-												<li><p class="find01">보관 장소</p>
+												<li><p class="find01" style="color:black;">보관 장소</p>
 													<p class="find02">${findBoard.getPlace }</p></li>
-												<li><p class="find01">유실물 상태</p>
+												<li><p class="find01" style="color:black;">유실물 상태</p>
 													<p class="find02">보관중</p></li>
 											</ul>
 										</div>
