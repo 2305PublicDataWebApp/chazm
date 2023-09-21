@@ -7,7 +7,6 @@ import kr.co.chazm.lost.domain.LostReply;
 
 public interface LostReplyService {
 
-//	public Integer getReplyListCount();
 
 	public List<LostReply> selectReplyList(Integer refLostNo);
 	
@@ -19,8 +18,7 @@ public interface LostReplyService {
 
 	public Integer updateLostReply(LostReply lostReply);
 
-//	public Integer getReplyListCount(Integer refLostNo);
-	public Integer getReplyListCount(Map<String, Integer> rCountMap);
+	public Integer getReplyListCount(Integer refLostNo);
 
 	
 

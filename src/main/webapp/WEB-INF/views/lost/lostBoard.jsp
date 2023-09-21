@@ -299,7 +299,7 @@
 									</c:url>
 	                             	<c:if test="${!empty lostOne.lostFilerename }">  <!-- 첨부이미지가 있을때 -->
 	                             		<a href="${detailUrl}" >
-	                             			<img src="../resources/assets/img/luploadFiles/${lostOne.lostFilerename}" class="img-fluid" style="width:450px; height:350px;" alt="#">
+	                             			<img src="../resources/luploadFiles/${lostOne.lostFilerename}" class="img-fluid" style="width:450px; height:350px;" alt="#">
 	                             		</a>
 									</c:if>
 									<c:if test="${empty lostOne.lostFilerename }"> <!-- 첨부이미지가 없을때 -->
@@ -309,7 +309,12 @@
 									</c:if>
 	                                  
 	                                 <div class="portfolio-info">
+	                                 <div class="d-flex justify-content-between">
 	                                    <h4><a href="${detailUrl}" title="More Details">${lostOne.lostTitle}</a></h4>
+	                                    <div class="d-flex ">
+		                                    <i class="bi bi-chat-dots commentIcon"></i> ${lostOne.totalReplyCount}
+	                                 	</div>
+	                                 </div>
 	                                    <p>${lostOne.lCreateDate}</p><p>${lostOne.lostWriter}</p>
 	                                 </div>
 	                             </div>
@@ -397,14 +402,32 @@
 				
 
     		<!--종류,장소 선택하기-->
+//             let icons = document.querySelectorAll(".category-icon");            
+//             const container = document.querySelector(".category-icon-select");
+//             icons.forEach(icon => {
+//                 icon.addEventListener("click", function (event) {
+//                     const container = this.closest(".btn-group");                    
+//                     container.querySelector(".category-icon-select").innerHTML = this.innerText;
+//                 });
+//             });  
             let icons = document.querySelectorAll(".category-icon");            
             const container = document.querySelector(".category-icon-select");
             icons.forEach(icon => {
                 icon.addEventListener("click", function (event) {
+                	// Remove the 'selected' class from all icons
+                    icons.forEach(otherIcon => {
+                        otherIcon.classList.remove("selected");
+                    });
+                	
+                 // Add the 'selected' class to the clicked icon
+                    this.classList.add("selected");
+                 
+                 
                     const container = this.closest(".btn-group");                    
                     container.querySelector(".category-icon-select").innerHTML = this.innerText;
                 });
             });  
+            
             
 		 	<!-- 드롭다운 값 db전달 -->
 		 	//종류

@@ -355,7 +355,7 @@ border-radius: 10px 10px 0 0;
 font-size: 28px;
 font-weight: 700;
 padding: 0;
-margin: 20px 0 0 0;
+margin: 20px 0 0 20px;
 color: var(--color-default);
 }
 
@@ -582,6 +582,15 @@ display: inline-block; /* hover 상태에서 보이게 함 */
 
 .heart-button:hover .like-img {
 display: none; /* hover 상태에서 첫 번째 이미지 숨김 */
+color : red;
+}
+
+.bi-suit-heart-fill {
+	color: red;
+}
+
+.bi-suit-heart-fill .like-img {
+	color: red;
 }
 
 /* ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */
@@ -893,7 +902,7 @@ color : #fff;
         --border : 1px solid #ccc;
         width: 930px;
         height : 30px;
-        margin: 0 auto;
+        --margin: 0 auto;
         padding: 5px 5px 5px 10px;
     }
     
@@ -1014,7 +1023,7 @@ transform : scale(1);
         #updateBtn  {
             width: 100px;
             height: 45px;
-            margin-right: 15px;
+            margin-left : 15px;
         }
         #deleteBtn {
             width: 100px;
@@ -1031,9 +1040,7 @@ transform : scale(1);
 	
 }
 
-#comment-rreply{
-	margin-left : 50px;
-}
+
 /*////////////////////////////////////////////////////////////////*/
 #lost_data_container {
     --background-color: #7486b4;
@@ -1233,6 +1240,16 @@ transform : scale(1);
     font-size: 20px;
     width: 100px;
     height: 30px;
+    text-align : center;
+}
+
+.lost-info ul li p.lost02 {
+    font-weight: bold;
+    color: #333;
+    font-size: 20px;
+    width: 100px;
+    height: 30px;
+    text-align : center;
 }
 
 .lostContent p {
