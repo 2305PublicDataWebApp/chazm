@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-5 col-md-12 footer-info">
-                        <a href="/index.jsp" class="logo d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center">
                             <h2>찾음</h2>
                             <img src="../resources/assets/img/light.png" alt="">
                         </a>

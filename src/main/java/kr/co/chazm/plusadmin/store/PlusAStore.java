@@ -56,5 +56,28 @@ public interface PlusAStore {
 	 */
 	PlusABoard selectOneByNo(SqlSession sqlSession, int plusANo);
 
+	/**
+	 * 전체 가입자수 조회 Store
+	 * 
+	 * @param sqlSession
+	 * @return int
+	 */
+	int selectTotalMember(SqlSession sqlSession);
+
+	/**
+	 * 전체 게시글 수 조회 Store
+	 * 
+	 * @param sqlSession
+	 * @return int
+	 */
+	int selectTotalBoard(SqlSession sqlSession);
+
+	/**
+	 * 인계완료 게시글 수 조회 Store
+	 * 
+	 * @param sqlSession
+	 * @return int
+	 */
+	int selectTotalGetY(SqlSession sqlSession);
 
 }

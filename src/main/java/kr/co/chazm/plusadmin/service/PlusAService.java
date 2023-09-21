@@ -47,6 +47,26 @@ public interface PlusAService {
 	 * @return PlusABoard
 	 */
 	PlusABoard selectOneByNo(int plusANo);
+	
+	/**
+	 * 전체 가입자 수 조회 Service
+	 * 
+	 * @return int
+	 */
+	int selectTotalMember();
 
+	/**
+	 * 전체 게시글 수 조회 Service
+	 * 
+	 * @return
+	 */
+	int selectTotalBoard();
+
+	/**
+	 * 인계완료 게시글 수 조회 Service
+	 * 
+	 * @return int
+	 */
+	int selectTotalGetY();
 
 }
