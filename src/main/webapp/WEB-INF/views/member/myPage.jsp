@@ -94,10 +94,10 @@
 								<hr>
 								<div class="donation-btn">
 									<button type="button" class="btn btn-primary"
-										style="width: 100px; height: 40px; font-size: 10px; border:none"
+										style="width: 100px; height: 40px; font-size: 10px; border: none"
 										onclick="checkDelete()">회원 탈퇴</button>
 									<button type="button" class="btn btn-primary"
-										style="width: 100px; height: 40px; font-size: 10px; border:none"
+										style="width: 100px; height: 40px; font-size: 10px; border: none"
 										data-bs-toggle="modal" data-bs-target="#updatePwModal"">비밀번호
 										변경</button>
 								</div>
@@ -123,14 +123,14 @@
 											style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
 											<c:if test="${memberGrade eq 1 }">
 												<h5 style="margin-top: 50px">
-												<i class="bi bi-person-square"></i>
+													<i class="bi bi-person-square"></i>
 												</h5>
 												<br>
 												<h5 style="margin-top: 50px">개인회원</h5>
 											</c:if>
 											<c:if test="${memberGrade eq 2 }">
 												<h5 style="margin-top: 50px">
-												<i class="bi bi-building"></i>
+													<i class="bi bi-building"></i>
 												</h5>
 												<br>
 												<h5 style="margin-top: 50px">기업회원</h5>
@@ -166,7 +166,7 @@
 												<div class="row pt-1">
 													<div class="col-6 mb-3">
 														<h5>주소</h5>
-														<p class="text-muted" style="width:400px;">${member.memberAddress }</p>
+														<p class="text-muted" style="width: 400px;">${member.memberAddress }</p>
 													</div>
 												</div>
 												<div class="d-flex justify-content-start">
@@ -193,19 +193,19 @@
 										<div class="four col-md-3">
 											<div class="counter-box colored">
 												<c:if test="${memberGrade eq 1 }">
-													<i class="bi bi-pencil-fill"></i> <span
-														data-purecounter-start="0"
+													<i class="bi bi-pencil-fill"></i>
+													<span data-purecounter-start="0"
 														data-purecounter-end="${myPostCount}"
-														data-purecounter-duration="1" class="purecounter counter"></span>		
+														data-purecounter-duration="1" class="purecounter counter"></span>
 													<p>작성한 글</p>
 												</c:if>
 												<c:if test="${memberGrade eq 2 }">
-													<i class="bi bi-pencil-fill"></i> <span
-														data-purecounter-start="0"
+													<i class="bi bi-pencil-fill"></i>
+													<span data-purecounter-start="0"
 														data-purecounter-end="${myPostFindCount}"
-														data-purecounter-duration="1" class="purecounter counter"></span>		
+														data-purecounter-duration="1" class="purecounter counter"></span>
 													<p>작성한 글</p>
-												</c:if>												
+												</c:if>
 											</div>
 										</div>
 										<div class="four col-md-3">
@@ -569,7 +569,7 @@
 									value="${member.memberEmail }">
 								<button class="btn btn-outline-secondary" type="button"
 									id="verifyEmail" data-bs-target="#emailVerificationModal"
-									data-bs-toggle="modal">인증</button>
+									data-bs-toggle="modal" id="#emailVerificationModal">인증</button>
 							</div>
 						</div>
 						<div class="mb-3">
@@ -631,7 +631,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">닫기</button>
-							<button type="submit" class="btn btn-primary">수정완료</button>
+							<button type="submit" class="btn btn-primary" id="pwSubmitButton">수정완료</button>
 						</div>
 					</form>
 					<!--2안  -->
@@ -661,8 +661,7 @@
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">닫기</button>
 					<button type="button" class="btn btn-primary"
-						id="verifyVerificationCode" data-bs-target="#exampleModal"
-						data-bs-toggle="modal">인증 완료</button>
+						id="verifyVerificationCode">인증 완료</button>
 				</div>
 			</div>
 		</div>
@@ -690,8 +689,7 @@
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">닫기</button>
 					<button type="button" class="btn btn-primary"
-						id="emailVerifyVerificationCode" data-bs-target="#exampleModal"
-						data-bs-toggle="modal">인증 완료</button>
+						id="emailVerifyVerificationCode" >인증 완료</button>
 				</div>
 			</div>
 		</div>
@@ -771,6 +769,7 @@
 							window.close();
 						}
 					}).open();
+		}
 
 			// 비밀번호 유효성 검사
 			document.getElementById("memberPw").addEventListener(
@@ -809,22 +808,26 @@
 										.getElementById("memberPw").value;
 								const confirmPasswordError = document
 										.getElementById("confirmPasswordError");
-
+								const submitButton = document.getElementById("pwSubmitButton");
+								
 								if (confirmPassword.length === 0) {
 									confirmPasswordError.textContent = "비밀번호를 한번 더 입력하세요.";
+									submitButton.disabled = true;
 									return;
 								}
 
 								if (confirmPassword !== memberPw) {
 									confirmPasswordError.textContent = "비밀번호가 일치하지 않습니다.";
 									confirmPasswordError.style.color = "red";
+									submitButton.disabled = true; 
 								} else {
 									confirmPasswordError.textContent = "비밀번호가 일치합니다.";
 									confirmPasswordError.style.color = "green";
+									 submitButton.disabled = false;
 								}
 							});
 
-		}
+		
 		// 랜덤 인증번호 생성 함수
 		function generateRandomCode() {
 			return Math.floor(1000 + Math.random() * 9000);
@@ -863,53 +866,76 @@
 
 												if (parseInt(enteredCode) === verificationCode) {
 													alert("인증이 완료되었습니다.");
+													$("#exampleModal").modal("show");
+													$("#verificationModal")
+													.modal("hide");
 												} else {
+													
 													verificationError.textContent = "인증번호가 일치하지 않습니다.";
+													verificationError.style.color = "red";
 												}
 											});
 						});
 
 		//이메일 인증
-			document.getElementById("verifyEmail").addEventListener("click", function () {
-			    const memberEmail = document.getElementById("memberEmail").value;
-				
-			    $.ajax({
-			        url: "/confirmMail.do",
-			        type: "POST",
-			        data: { memberEmail: memberEmail },
-			        success: function () {
-			            // 이메일 발송 성공 시 모달 표시
-			            $("#emailVerificationModal").modal("show");
-			            alert("인증 이메일을 발송하였습니다.");
-			        },
-			        error: function () {
-			            alert("이메일 발송 중 오류가 발생했습니다.");
-			        }
-			    });
-			});
+		document.getElementById("verifyEmail")
+				.addEventListener(
+						"click",
+						function() {
+							const memberEmail = document
+									.getElementById("memberEmail").value;
 
-		  	document.getElementById("emailVerifyVerificationCode").addEventListener("click", function () {
-	                const enteredCode = document.getElementById("emailVerificationCode").value;
-	                const verificationError = document.getElementById("emailVerificationError");
+							$.ajax({
+								url : "/confirmMail.do",
+								type : "POST",
+								data : {
+									memberEmail : memberEmail
+								},
+								success : function() {
+									// 이메일 발송 성공 시 모달 표시
+									$("#emailVerificationModal").modal("show");
+									alert("인증 이메일을 발송하였습니다.");
+								},
+								error : function() {
+									alert("이메일 발송 중 오류가 발생했습니다.");
+								}
+							});
+						});
 
-	                $.ajax({
-	                    url: "/verifyEmailCode.do",
-	                    type: "POST",
-	                    data: { enteredCode: enteredCode },
-	                    success: function (response) {
-	                        if (response === "success") {
-	                            alert("이메일 인증이 완료되었습니다.");
-	                            $("#emailVerificationModal").modal("hide");
-	                            isEmailVerified = true;
-	                        } else {
-	                        	verificationError.textContent = "인증번호가 일치하지 않습니다.";
-	                        }
-	                    },
-	                    error: function () {
-	                        alert("인증 코드 확인 중 오류가 발생했습니다.");
-	                    }
-	                });
-	            });
+		document
+				.getElementById("emailVerifyVerificationCode")
+				.addEventListener(
+						"click",
+						function() {
+							const enteredCode = document
+									.getElementById("emailVerificationCode").value;
+							const verificationError = document
+									.getElementById("emailVerificationError");
+
+							$
+									.ajax({
+										url : "/verifyEmailCode.do",
+										type : "POST",
+										data : {
+											enteredCode : enteredCode
+										},
+										success : function(response) {
+											if (response === "success") {
+												alert("이메일 인증이 완료되었습니다.");
+												$("#emailVerificationModal")
+														.modal("hide");
+												$("#exampleModal").modal("show");
+												isEmailVerified = true;
+											} else {
+												verificationError.textContent = "인증번호가 일치하지 않습니다.";
+												verificationError.style.color = "red";
+											}
+										},
+										error : function() {
+											alert("인증 코드 확인 중 오류가 발생했습니다.");
+										}
+									});
+						});
 	</script>
 </body>
 

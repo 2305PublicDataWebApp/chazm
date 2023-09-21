@@ -286,7 +286,7 @@
 									memberPwError.textContent = "비밀번호를 입력하세요.";
 									return;
 								} else {
-									memberPwError.textConten= "";
+									memberPwError.textContent= "";
 								}
 	
 								// 비밀번호 조건 검사 추가
