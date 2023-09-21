@@ -346,7 +346,6 @@ public class FindBoardController {
 			mv.addObject("url", "/findBoard/list.do");
 			mv.setViewName("common/message");
 		}
-		
 		return mv;
 	}
 	
