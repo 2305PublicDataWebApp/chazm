@@ -65,8 +65,8 @@
 		   <main class="form-signin">
 		       <form action="/member/login.do" method="post">
 		
-		       <h1 class="h3 mb-3 fw-normal text-center" style="color: #4365BC; font-size: 40px;">로그인
-		           <img src="../resources/assets/img/light.png" alt="" style="width:10%; padding-bottom: 5px;"></h1>
+		       <h2 class="mb-3 text-center" style="color: #4365BC; font-size: 40px;">로그인
+		           <img src="../resources/assets/img/light.png" alt="" style="width:10%; padding-bottom: 5px;"></h2>
 		       <div class="form-floating">
 		           <input type="text" class="form-control" id="memberID" name="memberId" placeholder="아이디 입력...">
 		           <label for="id">아이디</label>

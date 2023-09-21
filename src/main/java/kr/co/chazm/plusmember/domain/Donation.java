@@ -9,7 +9,8 @@ public class Donation {
 	private String memberId;
 	private int dntPoint;
 	private Timestamp dntDate;
-
+	private PlusMBoard plusMBoard;
+	
 	public Donation() {}
 	
 	public Donation(int refPlusMNo, String memberId) {
@@ -56,6 +57,13 @@ public class Donation {
 
 	public void setDntDate(Timestamp dntDate) {
 		this.dntDate = dntDate;
+	}
+	public PlusMBoard getPlusMBoard() {
+		return plusMBoard;
+	}
+
+	public void setPlusMBoard(PlusMBoard plusMBoard) {
+		this.plusMBoard = plusMBoard;
 	}
 
 	@Override

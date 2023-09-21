@@ -161,4 +161,39 @@ public interface PlusMBoardService {
 	 */
 	int selectLikeCount(int plusMNo);
 
+	/**
+	 * 기부 내역 아이디로 조회 Service
+	 * @param memberId
+	 * @return List<Donation>
+	 */
+	List<Donation> showDonationById(String memberId);
+
+	/**
+	 * 기부 내역 donationNo로 Title 가져오기 Service
+	 * @param donationInfoMap
+	 * @return Donation
+	 */
+	List<Donation> showDonationTitle(Map<String, Object> donationInfoMap);
+
+	/**
+	 * 기부횟수 Serivce
+	 * @param memberId
+	 * @return int
+	 */
+	int countDoationById(String memberId);
+
+	/**
+	 * 기부 내역 금액 총합 Service
+	 * @param memberId
+	 * @return
+	 */
+	int totalDonationById(String memberId);
+
+	/**
+	 * 최근 기부 내역 아이디로 조회 Service
+	 * @param memberId
+	 * @return int
+	 */
+	int showRecentDonationByID(String memberId);
+
 }

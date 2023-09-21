@@ -24,6 +24,16 @@
 		<result property="refPlusMNo" column="REF_PLUS_M_NO"/>
 		<result property="memberId" column="MEMBER_ID"/>
 	</resultMap>
+	<resultMap type="Donation" id="donationResultMap">
+		<id property="donationNo" column="DONATION_NO" />
+		<result property="refPlusMNo" column="REF_PLUS_M_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="dntPoint" column="DNT_POINT" />
+		<result property="dntDate" column="DNT_DATE" />
+		
+		 <association property="plusMBoard" resultMap="plusMBoardResultMap" />
+	</resultMap>
+	
 	<insert id="insertPlusMBoard">
 		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
 	</insert>
@@ -96,4 +106,37 @@
 	<select id="selectMemberPoint" resultType="_int">
 		SELECT MEMBER_POINT FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<select id="showDonationById" resultMap="donationResultMap">
+		SELECT * FROM
+		DONATION_TBL WHERE MEMBER_ID = #{memberId} ORDER BY DNT_DATE DESC
+	</select>
+
+	<select id="showDonationTitle" resultMap="donationResultMap">
+	    SELECT d.*, (SELECT PLUS_M_TITLE
+	                 FROM PLUS_M_BOARD_TBL
+	                 WHERE PLUS_M_NO = d.REF_PLUS_M_NO) AS PLUS_M_TITLE
+	    FROM DONATION_TBL d
+	    WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="countDoationById" resultType="_int">
+		SELECT COUNT(*) FROM DONATION_TBL WHERE MEMBER_ID=#{memberId}
+	</select>
+	
+	<select id="totalDonationById" resultType="_int">
+		SELECT  NVL(SUM(DNT_POINT), 0) FROM DONATION_TBL WHERE MEMBER_ID=#{memberId}
+	</select>	
+
+	<select id="showRecentDonationByID" resultType="_int">
+		SELECT NVL(
+		    (SELECT DNT_POINT
+		    FROM (
+		        SELECT DNT_POINT, ROW_NUMBER() OVER (ORDER BY DNT_DATE DESC) AS rn
+		        FROM DONATION_TBL
+		        WHERE MEMBER_ID = #{memberId}
+		    )
+		    WHERE rn = 1), 0) AS recentDonation
+		FROM DUAL
+	</select>	
 </mapper>

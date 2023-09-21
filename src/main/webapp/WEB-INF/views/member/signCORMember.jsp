@@ -143,7 +143,7 @@
 								<div class="mb-3 custom-input">
 									<label for="email" class="form-label">사업자 등록 번호</label>
 									<div class="input-group">
-										<input type="email" class="form-control" id="businessNo"
+										<input type="text" class="form-control" id="businessNo"
 											name="businessNo" required placeholder="사업자 등록번호 - 제외 10자리">
 										<button class="btn btn-outline-secondary" type="button"
 											id="verifyBusinessNo">인증</button>
@@ -196,7 +196,35 @@
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">닫기</button>
 						<button type="button" class="btn btn-primary"
-							id="verifyVerificationCode">인증 완료</button>
+							id="verifyVerificationCode" >인증 완료</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 이메일 인증 모달 -->
+		<div class="modal fade" id="emailVerificationModal" tabindex="-1"
+			aria-labelledby="verificationModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="verificationModalLabel">이메일 인증</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- 인증번호 입력 폼 -->
+						<div class="mb-3">
+							<label for="verificationCode" class="form-label">인증번호 입력</label>
+							<input type="text" class="form-control"
+								id="emailVerificationCode" required>
+						</div>
+						<div id="emailVerificationError" class="validation"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary"
+							id="emailVerifyVerificationCode">인증 완료</button>
 					</div>
 				</div>
 			</div>
@@ -221,6 +249,11 @@
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	
+	    let isEmailVerified = false;
+	    let isPhoneVerified = false;
+	    let isBusinessNoVerified = false;
+	    
 		function checkId() {
 			const memberId = document.querySelector("#memberId").value;
 			if (memberId === "" || memberId === null) {
@@ -296,13 +329,16 @@
 
 					if (confirmPassword.length === 0) {
 						confirmPasswordError.textContent = "비밀번호를 한번 더 입력하세요.";
+						confirmPasswordError.style.color = "red";
 						return;
 					}
 
 					if (confirmPassword !== memberPw) {
 						confirmPasswordError.textContent = "비밀번호가 일치하지 않습니다.";
+						confirmPasswordError.style.color = "red";
 					} else {
-						confirmPasswordError.textContent = "";
+						confirmPasswordError.textContent = "비밀번호가 일치합니다.";
+						confirmPasswordError.style.color = "green";
 					}
 				});
 
@@ -448,6 +484,7 @@
 																	var b_stt = result.data[0].b_stt; // "b_stt" 값을 추출
 																	if (b_stt === "계속사업자") {
 																		formattedMessage = "인증이 완료되었습니다.";
+																		isBusinessNoVerified = true;
 																	} else {
 																		formattedMessage = "사업자번호 "
 																				+ businessNo
@@ -471,7 +508,7 @@
 						});
 		// 랜덤 인증번호 생성 함수
 		function generateRandomCode() {
-			return Math.floor(1000 + Math.random() * 9000); // 1000부터 9999까지의 랜덤 숫자 생성
+			return Math.floor(1000 + Math.random() * 9000);
 		}
 
 		document
@@ -479,7 +516,6 @@
 				.addEventListener(
 						"click",
 						function() {
-							// 핸드폰 번호 유효성 검사 (핸드폰 번호 입력 필드의 id를 확인해주세요)
 							const memberPhone = document
 									.getElementById("memberPhone").value;
 							const memberPhoneError = document
@@ -490,13 +526,11 @@
 								return;
 							}
 
-							// 핸드폰 번호가 유효하다고 가정하고, 랜덤 인증번호 생성
 							const verificationCode = generateRandomCode();
 
 							// 생성된 인증번호를 alert 창에 표시
 							alert("인증번호가 발송되었습니다. 인증번호: " + verificationCode);
 
-							// 모달 창 열기
 							$("#verificationModal").modal("show");
 
 							// 인증번호 확인 버튼 리스너
@@ -514,12 +548,93 @@
 														.toString()) {
 													alert("인증이 완료되었습니다.");
 													$("#verificationModal")
-															.modal("hide"); // 모달 창 닫기
+															.modal("hide"); 
+													isPhoneVerified = true;
 												} else {
 													verificationError.textContent = "인증번호가 일치하지 않습니다.";
 												}
 											});
 						});
+
+		//이메일 인증
+		document.getElementById("verifyEmail")
+				.addEventListener(
+						"click",
+						function() {
+							const memberEmail = document
+									.getElementById("memberEmail").value;
+
+							$.ajax({
+								url : "/confirmCORMail.do",
+								type : "POST",
+								data : {
+									memberEmail : memberEmail
+								},
+								success : function() {
+									// 이메일 발송 성공 시 모달 표시
+									$("#emailVerificationModal").modal("show");
+									alert("인증 이메일을 발송하였습니다.");
+								},
+								error : function() {
+									alert("이메일 발송 중 오류가 발생했습니다.");
+								}
+							});
+						});
+
+		document
+				.getElementById("emailVerifyVerificationCode")
+				.addEventListener(
+						"click",
+						function() {
+							const enteredCode = document
+									.getElementById("emailVerificationCode").value;
+							const verificationError = document
+									.getElementById("emailVerificationError");
+
+							$
+									.ajax({
+										url : "/verifyEmailCode.do",
+										type : "POST",
+										data : {
+											enteredCode : enteredCode
+										},
+										success : function(response) {
+											if (response === "success") {
+												alert("이메일 인증이 완료되었습니다.");
+												$("#emailVerificationModal")
+														.modal("hide");
+												 isEmailVerified = true;
+											} else {
+												verificationError.textContent = "인증번호가 일치하지 않습니다.";
+											}
+										},
+										error : function() {
+											alert("인증 코드 확인 중 오류가 발생했습니다.");
+										}
+									});
+						});
+		
+		document.querySelector(".sign-form").addEventListener("submit", function (e) {
+		    const unverifiedFields = []; // 인증되지 않은 필드를 저장할 배열
+
+		    if (!isEmailVerified) {
+		        unverifiedFields.push("이메일");
+		    }
+
+		    if (!isPhoneVerified) {
+		        unverifiedFields.push("핸드폰");
+		    }
+
+		    if (!isBusinessNoVerified) {
+		        unverifiedFields.push("사업자 등록번호");
+		    }
+
+		    if (unverifiedFields.length > 0) {
+		        const errorMessage = unverifiedFields.join(", ") + "를 인증해주세요.";
+		        alert(errorMessage);
+		        e.preventDefault();
+		    }
+		});
 	</script>
 
 </body>

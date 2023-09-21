@@ -142,7 +142,13 @@
 		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT + #{point} WHERE MEMBER_ID = #{memberId} 
 	</update>
 	
+	<select id="showFindBoardById" resultMap="FindBoardResultMap">
+		SELECT * FROM FIND_BOARD_TBL WHERE FIND_WRITER=#{findWriter} AND F_STATE_YN = 'Y' ORDER BY F_CREATE_DATE DESC
+	</select>
 	
+	<select id="countFindBoardById" resultType="_int">
+		SELECT COUNT(*) FROM FIND_BOARD_TBL WHERE FIND_WRITER=#{findWriter} AND F_STATE_YN = 'Y'
+	</select>	
 	
 	
 	

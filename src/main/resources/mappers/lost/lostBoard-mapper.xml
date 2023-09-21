@@ -172,7 +172,13 @@
 		ORDER BY LOST_NO DESC
 	</select>
 	
+	<select id="showLostBoardById" resultMap="lostBoardResultMap">
+		SELECT * FROM LOST_BOARD_TBL WHERE LOST_WRITER=#{lostWriter} AND L_STATE_YN = 'Y' ORDER BY L_CREATE_DATE DESC
+	</select>	
 
+	<select id="countLostBoardById" resultType="_int">
+		SELECT COUNT(*) FROM LOST_BOARD_TBL WHERE LOST_WRITER=#{lostWriter} AND L_STATE_YN = 'Y'
+	</select>
 
 </mapper>
  

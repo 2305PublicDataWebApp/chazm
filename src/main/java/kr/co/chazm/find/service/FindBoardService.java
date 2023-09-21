@@ -121,5 +121,18 @@ public interface FindBoardService {
 	 */
 	int updateMemberPoint(Map<String, Object> pMap);
 	
+	/**
+	 * 아이디로 작성 글 조회 Service
+	 * @param memberId
+	 * @return List<FindBoard>
+	 */
+	List<FindBoard> showFindBoardById(String memberId);
+
+	/**
+	 * 아이디로 작성한 글 갯수 Service
+	 * @param memberId
+	 * @return int
+	 */
+	int countFindBoardById(String memberId);
 	
 }

@@ -117,5 +117,16 @@ public class FindBoardStoreLogic implements FindBoardStore{
 		return result;
 	}
 	
+	@Override
+	public List<FindBoard> showFindBoardById(SqlSession sqlSession, String memberId) {
+		List<FindBoard> getPosts = sqlSession.selectList("FindBoardMapper.showFindBoardById", memberId);
+		return getPosts;
+	}
+
+	@Override
+	public int countFindBoardById(SqlSession sqlSession, String memberId) {
+		int result = sqlSession.selectOne("FindBoardMapper.countFindBoardById", memberId);
+		return result;
+	}
 	
 }

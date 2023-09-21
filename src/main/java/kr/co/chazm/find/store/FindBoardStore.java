@@ -138,5 +138,21 @@ public interface FindBoardStore {
 	 * @return int
 	 */
 	int updateMemberPoint(SqlSession sqlSession, Map<String, Object> pMap);
+	
+	/**
+	 * 게시글 아이디로 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return List<FindBoard>
+	 */
+	List<FindBoard> showFindBoardById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 아이디로 작성한 글 갯수 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int countFindBoardById(SqlSession sqlSession, String memberId);
 
 }

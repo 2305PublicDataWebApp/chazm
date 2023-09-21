@@ -11,8 +11,10 @@
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
 /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Gothic:wght@700&display=swap');
+
 :root {
-  --font-default: "NanumGothic";
+  --font-default: 'Nanum Gothic';
   --font-primary: "Cafe24Supermagic-Bold";
   --font-secondary: "NanumGothic";
 }
@@ -1807,6 +1809,10 @@ section {
   padding : 5px;
 }
 
+table td{
+	vertical-align : middle;
+}
+
 .tableArea .writeBtn {
   background: var(--color-primary);
   border: 0;
@@ -2981,3 +2987,29 @@ section {
       /* fallback for old browsers */
       background: #4365BC;
       }
+      
+    .myPageSideMenu {
+    	margin-left : 5px;
+    	font-size : 17px;
+    }
+	.myPageSideMenu a {
+		display: block;
+		text-decoration: none;
+		padding: 10px 0;
+		color: #333; /* 텍스트 색상 */
+		font-weight: bold;
+		transition: color 0.2s; /* 색상 변화에 애니메이션 적용 */
+	}
+	
+	.myPageSideMenu a:hover {
+		color: #4365BC; /* 호버 시 텍스트 색상 변경 */
+	}
+	
+	.bi.bi-building {
+ 		font-size : 100px;
+	}
+	
+	.bi.bi-person-square{
+		font-size : 100px;
+	}
+	

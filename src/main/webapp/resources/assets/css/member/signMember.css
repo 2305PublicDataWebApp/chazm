@@ -1,3 +1,16 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Gothic:wght@700&display=swap');
+
+:root {
+  --font-default: 'Nanum Gothic';
+  --font-primary: "Cafe24Supermagic-Bold";
+  --font-secondary: "NanumGothic";
+}
+@font-face {
+  font-family: 'Cafe24Supermagic-Bold';
+  src: url("/resources/fonts/Cafe24Supermagic-Bold.woff") format("woff");
+}
+
 body {
     display: flex;
     flex-direction: column;

@@ -181,4 +181,43 @@ public interface PlusMBoardStore {
 	 */
 	int selectLikeCount(SqlSession sqlSession, int plusMNo);
 
+	/**
+	 * 기부 내역 아이디로 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return List<Donation>
+	 */
+	List<Donation> showDonationById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 기부 번호로 제목 가져오기 Store
+	 * @param sqlSession
+	 * @param donationInfoMap
+	 * @return
+	 */
+	List<Donation> showDonationTitle(SqlSession sqlSession, Map<String, Object> donationInfoMap);
+
+	/**
+	 * 기부 횟수 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int countDoationById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 기부 내역 금액 총액 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int totalDonationById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 최근 기부 내역 아이디로 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return
+	 */
+	int showRecentDonationByID(SqlSession sqlSession, String memberId);
 }
