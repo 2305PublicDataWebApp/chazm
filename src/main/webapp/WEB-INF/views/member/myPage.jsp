@@ -280,13 +280,13 @@
 															href="${prevUrl }"><i class="bi bi-chevron-left"></i></a></li>
 														<c:forEach begin="${pageLostInfo.startNavi }"
 															end="${pageLostInfo.endNavi }" var="p">
-															<c:url var="pageUrl" value="/plusA/list.do">
+															<c:url var="pageUrl" value="/member/myPage.do">
 																<c:param name="page" value="${p }"></c:param>
 															</c:url>
 															<li class="page-item"><a class="page-link"
 																href="${pageUrl }">${p }</a></li>
 														</c:forEach>
-														<c:url var="nextUrl" value="/plusA/list.do">
+														<c:url var="nextUrl" value="/member/myPage.do">
 															<c:param name="page" value="${pageLostInfo.endNavi + 1 }"></c:param>
 														</c:url>
 														<li class="page-item"><a class="page-link"
