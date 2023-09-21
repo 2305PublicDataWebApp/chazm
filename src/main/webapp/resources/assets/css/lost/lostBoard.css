@@ -812,6 +812,11 @@ color: #fff;
     .icon {
         font-size : 2.5em;
     }
+    
+.category-icon.selected {
+    background-color: #ffd94d; 
+    color: #fff; 
+}
 
 #searchContent {
     --background-color: blue;
@@ -846,3 +851,6 @@ input[type=submit] {
     padding-top : 0px;
 }
 
+.commentIcon {
+	margin-right : 2px;
+}

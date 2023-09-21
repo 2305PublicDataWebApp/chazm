@@ -355,7 +355,7 @@
         	<!-- 글 등록 유효성 체크 -->
         	function insertCheck() {
         		const findTitle = document.querySelector("#findTitle");
-        		const findContent = document.querySelector("#summernote").innerText;
+        		const findContent = document.querySelector("#summernote");
         		const findCategory = document.querySelector("#selectedCategoryInput");
         		const findPlace = document.querySelector("#selectedPlaceInput");
         		const findLocation = document.querySelector("#selectedLocationInput");
@@ -363,10 +363,8 @@
         		const findColor = document.querySelector("#selectedColorInput");
         		const imgFile = document.querySelector("#imageUpload");
         		
-        		var regContent = findContent.replace(/<[^>]*>/g, '');
         		if (findTitle.value.trim() === "") {
         			alert('제목(습득물명)을 입력하세요');
-        			findTitle.focus();
         			return false;
        	        } else if (findCategory.value == "") {
         			alert('습득물 종류를 선택하세요');
@@ -388,10 +386,10 @@
        	        } else if (imgFile.value == "") {
         			alert('이미지파일을 첨부하세요');
         			return false;
-       	        } else if (regContent.trim() === "") {
+       	        } else if (findContent.value == "") {
         			alert('내용을 입력하세요');
         			return false;
-       	        }else {
+       	        } else {
        	        	return true;
        	        }
         	};

@@ -74,37 +74,37 @@
             </section>
     
             <!-- ======= 습득물 검색 ======= -->
-            <form action="/findBoard/search.do" method="post">
+            <form action="/findBoard/search.do" method="get">
 	            <div id="searchBox" class="section align-self-center m-auto mb-5 p-3">
 	                <div id="category_box" class="w-50 text-center">
 	                
 	                	<input type="hidden" name="findCategory" id="selectedCategoryInput" value="">
 	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="지갑">
-	                        <div class="icon"><img src="../resources/assets/img/wallet.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/wallet.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">지갑</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="가방">
-	                        <div class="icon"><img src="../resources/assets/img/bag.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/bag.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">가방</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="핸드폰">
-	                        <div class="icon"><img src="../resources/assets/img/phone.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/phone.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">핸드폰</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="의류">
-	                        <div class="icon"><img src="../resources/assets/img/clothes.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/clothes.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">의류</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findCategory" data-value="기타">
-	                        <div class="icon"><img src="../resources/assets/img/others.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/others.png"
 	   	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">기타</h4></a>
@@ -112,31 +112,31 @@
 	                    
 	                    <input type="hidden" name="findPlace" id="selectedPlaceInput" value="">
 	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="버스">
-	                        <div class="icon"><img src="../resources/assets/img/bus.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/bus.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">버스</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="지하철">
-	                        <div class="icon"><img src="../resources/assets/img/train.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/train.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></i></div>
 	                        <h4 class="title">지하철</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="택시">
-	                        <div class="icon"><img src="../resources/assets/img/taxi.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/taxi.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">택시</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="공항">
-	                        <div class="icon"><img src="../resources/assets/img/airplane.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/airplane.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">공항</h4></a>
 	                    </div>
 	                    <div data-filter="*" class="filter-active category_icon findPlace" data-value="기타">
-	                        <div class="icon"><img src="../resources/assets/img/restaurant.png"
+	                        <a href="javascript:void(0)"><div class="icon"><img src="../resources/assets/img/restaurant.png"
     	                                                    style="width : 40px;
 	                                                        height : 40px;"></div>
 	                        <h4 class="title">기타</h4></a>
@@ -159,13 +159,13 @@
 	                    
 	                    <div id="find_date" class="d-flex m-2 w-100" >
 	                        <div class="w-50">
-	                            <input type="date" name="findDateStart"  class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
+	                            <input type="date" name="findDateStart" id="findDateStart" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
 	                        </div>
 	                        <div class="w-auto ms-2 me-2 d-flex align-items-center">
 	                            <h5 class="text-white " > ~ </h5>
 	                        </div>
 	                        <div class="w-50">
-	                            <input type="date" name="findDateEnd" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
+	                            <input type="date" name="findDateEnd" id="findDateEnd" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
 	                        </div>
 	                    </div>
 	    
@@ -225,7 +225,9 @@
 	                    <div class="d-flex position-relative">
 	                        <div class="blank w-75"></div>
 	                        <div id="searchBtn" class=" d-flex justify-content-end w-25 " >
-	                            <input type="submit" name="" value="검색" class="border rounded" style="background-color: aliceblue; color: #4365BC; height:50px;">
+	                            <button type="submit" name="search" id="search" class="border rounded" 
+	                            style="background-color: aliceblue; color: #4365BC; font-weight:bold; width: 150px; height:50px;"
+	                            onClick="return dateCheck()">검색</button>
 	                        </div>
 	                    </div>
 	                </div>
@@ -239,16 +241,7 @@
     
                     <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                         data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
-    
-                        <!-- <div>
-                            <ul class="portfolio-flters">
-                                <li data-filter="*" class="filter-active">All</li>
-                                <li data-filter=".filter-app">App</li>
-                                <li data-filter=".filter-product">Product</li>
-                                <li data-filter=".filter-branding">Branding</li>
-                                <li data-filter=".filter-books">Books</li>
-                            </ul> End Portfolio Filters -->
-                        </div> 
+                   	</div> 
     
                         <div class="row gy-4 portfolio-container">
                             <c:forEach var="findBoard" items="${ fBList }" varStatus="i">
@@ -261,6 +254,7 @@
 	                                    <div class="portfolio-info">
 	                                        <h4><a href="/findBoard/detail.do?findNo=${findBoard.findNo }" title="More Details">${findBoard.findTitle }</a></h4>
 	                                        <p>${findBoard.memberName }</p>
+<%-- 	                                        <p>${findBoard.fCreateDate }</p> --%>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -275,12 +269,24 @@
 	                        	<c:if test="${pInfo.startNavi ne '1' }">
 	                        		<li class="page-item"><a class="page-link" href="/findBoard/list.do?page=${pInfo.startNavi-1 }" class="first"><i class="bi bi-chevron-left"></i></a></li>
 			                    </c:if>
+			                    
+			                    
 			                    <c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
 									<c:url var="pageUrl" value="/findBoard/list.do">
 										<c:param name="page" value="${p }"></c:param>
 									</c:url>
-									<li class="page-item"><a class="page-link" href="${pageUrl }">${p }</a></li>
+									<c:choose>
+					                    <c:when test="${p == pInfo.currentPage}">
+					                        <li class="page-item active" ><a href="${pageUrl}" class="page-link" style="background-color: #4365BC">${p}</a></li>
+					                    </c:when>
+					                    <c:otherwise>
+					                        <li class="page-item"><a href="${pageUrl}" class="page-link">${p}</a></li>
+					                    </c:otherwise>
+					                </c:choose>
 								</c:forEach>
+								
+								
+								
 								<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
 									<li class="page-item"><a class="page-link" href="/findBoard/list.do?page=${pInfo.endNavi+1 }" class="last"><i class="bi bi-chevron-right"></i></a></li>
 								</c:if>
@@ -309,6 +315,28 @@
         <script src="../resources/assets/js/main.js"></script>
         
         <script>
+	        <!-- 습득일자 오늘 날짜 이후로는 선택되지 않도록 하기  -->
+	    	var date = new Date(); 
+			var year = date.getFullYear(); 
+			var month = ('0' + (date.getMonth() + 1)).slice(-2);
+			var day = ('0' + date.getDate()).slice(-2);
+			var today = year + '-' + month  + '-' + day; 
+			document.getElementById("findDateStart").setAttribute("max", today);
+			document.getElementById("findDateEnd").setAttribute("max", today);
+			<!-- 습득일자 유효성 체크 -->
+			function dateCheck() {
+                const findDateStart = document.querySelector("#findDateStart").value;
+                const findDateEnd = document.querySelector("#findDateEnd").value;
+                if ((findDateStart === "" && findDateEnd != "") || (findDateStart != "" && findDateEnd === "")) {
+                    alert("시작일자와 끝일자를 모두 선택하거나 비워주세요.");
+                    return false;
+                } else if(findDateStart > findDateEnd) {
+                	alert("시작일자는 끝일자보다 이전 날짜여야 합니다.");
+                    return false;
+                } else {
+                    return true;
+                }
+			};
 	        <!-- 드롭다운 값 입력 -->
 	        $(document).ready(function () {
 	            $(".dd-location").click(function () {
@@ -332,7 +360,7 @@
 	                var $selectedElement = $(this);
 	                if(!$selectedElement.hasClass("selected")) {
 	                	$(".findCategory").removeClass("selected").css("background-color", "aliceblue");
-	                    $selectedElement.addClass("selected").css("background-color", "#ffc107");
+	                    $selectedElement.addClass("selected").css("background-color", "#ffd94d");
 	                    $("#selectedCategoryInput").val(selectedCategory);
 	                    console.log($("#selectedCategoryInput").val());
 	                } else {
@@ -348,7 +376,7 @@
 	                var $selectedElement = $(this);
 	                if(!$selectedElement.hasClass("selected")) {
 	                	$(".findPlace").removeClass("selected").css("background-color", "aliceblue");
-	                	$selectedElement.addClass("selected").css("background-color", "#ffc107");
+	                	$selectedElement.addClass("selected").css("background-color", "#ffd94d");
 		                $("#selectedPlaceInput").val(selectedPlace);
 		                console.log($("#selectedPlaceInput").val());
 	                } else {

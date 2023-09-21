@@ -54,16 +54,12 @@ public class LostReplyServiceImpl implements LostReplyService {
 		return result;
 	}
 
-//	@Override
-//	public Integer getReplyListCount(Integer refLostNo) {
-//		Integer result = lostReplyStore.getReplyListCount(session, refLostNo);
-//		return result;
-//	}
 	@Override
-	public Integer getReplyListCount(Map<String, Integer> rCountMap) {
-		Integer result = lostReplyStore.getReplyListCount(session, rCountMap);
+	public Integer getReplyListCount(Integer refLostNo) {
+		Integer result = lostReplyStore.getReplyListCount(session, refLostNo);
 		return result;
 	}
+
 
 	
 
