@@ -117,4 +117,16 @@ public class FindBoardServiceImpl implements FindBoardService{
 		int result = findBoardStore.updateMemberPoint(sqlSession, pMap);
 		return result;
 	}
+	
+	@Override
+	public List<FindBoard> showFindBoardById(String memberId) {
+		List<FindBoard> getPosts = findBoardStore.showFindBoardById(sqlSession, memberId);
+		return getPosts;
+	}
+
+	@Override
+	public int countFindBoardById(String memberId) {
+		int result = findBoardStore.countFindBoardById(sqlSession, memberId);
+		return result;
+	}
 }

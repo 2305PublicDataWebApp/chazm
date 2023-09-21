@@ -18,6 +18,14 @@
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
 	
+	<resultMap type="Point" id="pointResultMap">
+		<id property="pointNo" column="POINT_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="pointAmount" column="POINT_AMOUNT"/>
+		<result property="pointDetails" column="POINT_DETAILS"/>
+		<result property="pUpdateDate" column="P_UPDATE_DATE"/>
+	</resultMap>
+	
 	<insert id="insertIDNMember">
 		INSERT INTO MEMBER_TBL VALUES(#{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberEmail}, #{memberPostCode}, #{memberAddress}, #{memberDetailAddress}, DEFAULT, DEFAULT, DEFAULT, 1)
 	</insert>
@@ -25,6 +33,10 @@
 	<insert id="insertCORMember">
 		INSERT INTO MEMBER_TBL VALUES(#{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberEmail}, #{memberPostCode}, #{memberAddress}, #{memberDetailAddress}, DEFAULT, DEFAULT, #{businessNo}, 2)	
 	</insert>
+	
+	<insert id="updateMemberPoint">
+		INSERT INTO POINT_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{memberId}, '+1000', '회원가입 축하 포인트 지급', DEFAULT)
+	</insert>	
 	
 	<update id="updateMember">
 		UPDATE MEMBER_TBL SET MEMBER_PHONE=#{memberPhone}, MEMBER_EMAIL=#{memberEmail}, MEMBER_POSTCODE=#{memberPostCode}, MEMBER_ADDRESS=#{memberAddress}, MEMBER_DETAILADDRESS=#{memberDetailAddress} WHERE MEMBER_ID=#{memberId}
@@ -37,6 +49,14 @@
 	<update id="deleteMember">
 		UPDATE MEMBER_TBL SET M_STATUS_YN = 'N' WHERE MEMBER_ID=#{memberId}
 	</update>
+	
+	<update id="updatePwByIdAndEmail">
+		UPDATE MEMBER_TBL SET MEMBER_PW=#{memberPw} WHERE MEMBER_ID=#{memberId} AND MEMBER_EMAIL=#{memberEmail}
+	</update>
+	
+	<update id="updatePwByIdAndPhone">
+		UPDATE MEMBER_TBL SET MEMBER_PW=#{memberPw} WHERE MEMBER_ID=#{memberId} AND MEMBER_PHONE=#{memberPhone}
+	</update>	
 	
 	<select id="selectCheckLogin" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId} AND MEMBER_PW=#{memberPw} AND M_STATUS_YN='Y'
@@ -57,5 +77,24 @@
  	<select id="selectCheckById" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId}
  	</select>
- 			
+ 	
+ 	<select id="totalPointsById" resultType="_int">
+		SELECT SUM(TO_NUMBER(REGEXP_SUBSTR(POINT_AMOUNT, '\d+', 1, LEVEL))) AS sum_of_numbers
+		FROM POINT_TBL
+		WHERE MEMBER_ID = #{member.memberId}
+		CONNECT BY REGEXP_SUBSTR(POINT_AMOUNT, '\d+', 1, LEVEL) IS NOT NULL
+		AND PRIOR SYS_GUID() IS NOT NULL
+		AND PRIOR POINT_AMOUNT = POINT_AMOUNT
+		GROUP BY MEMBER_ID
+ 	</select>
+ 	
+ 	<select id="showPointById" resultMap="pointResultMap">
+ 		SELECT * FROM POINT_TBL WHERE MEMBER_ID = #{member.memberId}
+ 	</select>
+ 	
+ 	<select id="totalUsePointById" resultType="_int">
+		SELECT NVL(SUM(NVL(TO_NUMBER(REPLACE(POINT_AMOUNT, '-', '')), 0)), 0) AS TOTAL_AMOUNT
+		FROM POINT_TBL 
+		WHERE MEMBER_ID = #{memberId} AND POINT_AMOUNT LIKE '%' || '-' || '%'
+ 	</select>
 </mapper>

@@ -134,4 +134,33 @@ public class PlusMBoardStoreLogic implements PlusMBoardStore {
 		return result;
 	}
 
+	@Override
+	public List<Donation> showDonationById(SqlSession sqlSession, String memberId) {
+		List<Donation> lDonation = sqlSession.selectList("PlusMBoardMapper.showDonationById", memberId);
+		return lDonation;
+	}
+
+	@Override
+	public List<Donation> showDonationTitle(SqlSession sqlSession, Map<String, Object> donationInfoMap) {
+		List<Donation> dOne = sqlSession.selectList("PlusMBoardMapper.showDonationTitle", donationInfoMap);
+		return dOne;
+	}
+
+	@Override
+	public int countDoationById(SqlSession sqlSession, String memberId) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.countDoationById", memberId);
+		return result;
+	}
+
+	@Override
+	public int totalDonationById(SqlSession sqlSession, String memberId) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.totalDonationById", memberId);
+		return result;
+	}
+
+	@Override
+	public int showRecentDonationByID(SqlSession sqlSession, String memberId) {
+		int result = sqlSession.selectOne("PlusMBoardMapper.showRecentDonationByID", memberId);
+		return result;
+	}
 }

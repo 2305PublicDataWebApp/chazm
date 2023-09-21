@@ -113,7 +113,17 @@ public class LostBoardServiceImpl implements LostBoardService{
 		return searchLostList;
 	}
 
-	
+	@Override
+	public List<LostBoard> showLostBoardById(String memberId) {
+		List<LostBoard> getPosts = lostBoardStore.showLostBoardById(session ,memberId);
+		return getPosts;
+	}
+
+	@Override
+	public int countLostBoardById(String memberId) {
+		int result = lostBoardStore.countLostBoardById(session, memberId);
+		return result;
+	}
 
 
 

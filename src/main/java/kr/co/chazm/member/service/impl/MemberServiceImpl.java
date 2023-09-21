@@ -1,10 +1,13 @@
 package kr.co.chazm.member.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.chazm.member.domain.Member;
+import kr.co.chazm.member.domain.Point;
 import kr.co.chazm.member.service.MemberService;
 import kr.co.chazm.member.store.MemberStore;
 
@@ -76,5 +79,42 @@ public class MemberServiceImpl implements MemberService{
 		int result = mStore.selectCheckById(sqlSession, memberId);
 		return result;
 	}
+
+	@Override
+	public int updateMemberPoint(String memberId) {
+		int result = mStore.updateMemberPoint(sqlSession, memberId);
+		return result;
+	}
+
+	@Override
+	public int totalPointsById(String memberId) {
+		int result = mStore.totalPointsById(sqlSession, memberId);
+		return result;
+	}
+
+	@Override
+	public List<Point> showPointById(String memberId) {
+		List<Point> gePointList = mStore.showPointById(sqlSession, memberId);
+		return gePointList;
+	}
+
+	@Override
+	public int totalUsePointById(String memberId) {
+		int result = mStore.totalUsePointById(sqlSession, memberId);
+		return result;
+	}
+
+	@Override
+	public int updatePwByIdAndEmail(Member member) {
+		int result = mStore.updatePwByIdAndEmail(sqlSession, member);
+		return result;
+	}
+
+	@Override
+	public int updatePwByIdAndPhone(Member member) {
+		int result = mStore.updatePwByIdAndPhone(sqlSession, member);
+		return result;
+	}
+	
 
 }

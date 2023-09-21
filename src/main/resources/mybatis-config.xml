@@ -19,7 +19,9 @@
 		<typeAlias type="kr.co.chazm.lost.domain.LostLike" alias="LostLike"/>		
 		<typeAlias type="kr.co.chazm.find.domain.FindBoard" alias="FindBoard"/>
 		<typeAlias type="kr.co.chazm.find.domain.FindReply" alias="FindReply"/>
-		<typeAlias type="kr.co.chazm.find.domain.FindLike" alias="FindLike"/>				    	
+		<typeAlias type="kr.co.chazm.find.domain.FindLike" alias="FindLike"/>
+		<typeAlias type="kr.co.chazm.plusmember.domain.Donation" alias="Donation"/>
+						    	
     </typeAliases>
     <mappers>
 		<mapper resource="mappers/member/member-mapper.xml"/>

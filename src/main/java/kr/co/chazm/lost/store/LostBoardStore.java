@@ -45,7 +45,21 @@ public interface LostBoardStore {
 
 	public List<LostBoard> totalSearchLostByKeyword(SqlSession session, PageInfo lPInfo, String totalSearchKeyword);
 	
+	/**
+	 * 마이페이지 작성 게시글(분실물 게시판) 조회 Store
+	 * @param session
+	 * @param memberId
+	 * @return
+	 */
+	public List<LostBoard> showLostBoardById(SqlSession session, String memberId);
 
+	/**
+	 * 마이페이지 작성 게시글(분실물 게시판) 갯수 Store
+	 * @param session
+	 * @param memberId
+	 * @return
+	 */
+	public int countLostBoardById(SqlSession session, String memberId);
 
 
 

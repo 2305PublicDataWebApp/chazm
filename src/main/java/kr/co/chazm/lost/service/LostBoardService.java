@@ -58,6 +58,19 @@ public interface LostBoardService {
 	
 	public List<LostBoard> totalSearchLostByKeyword(PageInfo lPInfo, String totalSearchKeyword);
 
+	/**
+	 * 마이페이지 작성 게시글 조회 Service
+	 * @param memberId
+	 * @return List<LostBoard>
+	 */
+	public List<LostBoard> showLostBoardById(String memberId);
+
+	/**
+	 * 마이페이지 작성 게시글 갯수 조회 Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int countLostBoardById(String memberId);
 
 
 

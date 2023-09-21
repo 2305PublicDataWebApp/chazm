@@ -1,6 +1,9 @@
 package kr.co.chazm.member.service;
 
+import java.util.List;
+
 import kr.co.chazm.member.domain.Member;
+import kr.co.chazm.member.domain.Point;
 
 public interface MemberService {
 
@@ -73,5 +76,47 @@ public interface MemberService {
 	 * @return int
 	 */
 	int selectCheckById(String memberId);
+
+	/**
+	 * 회원가입 포인트 추가 Service
+	 * @param memberId
+	 * @return
+	 */
+	int updateMemberPoint(String memberId);
+
+	/**
+	 * 회원 누적 포인트 조회 Service
+	 * @param memberId
+	 * @return
+	 */
+	int totalPointsById(String memberId);
+
+	/**
+	 * 아이디로 포인트 내역 조회 Service
+	 * @param memberId
+	 * @return
+	 */
+	List<Point> showPointById(String memberId);
+
+	/**
+	 * 총 사용한 포인트 아이디로 조회 Service
+	 * @param memberId
+	 * @return int
+	 */
+	int totalUsePointById(String memberId);
+
+	/**
+	 * 이메일 인증 후 비밀번호 변경 기능 Service
+	 * @param member
+	 * @return int
+	 */
+	int updatePwByIdAndEmail(Member member);
+
+	/**
+	 * 핸드폰 인증 후 비밀번호 변경 기능 Service
+	 * @param member
+	 * @return int
+	 */
+	int updatePwByIdAndPhone(Member member);
 
 }

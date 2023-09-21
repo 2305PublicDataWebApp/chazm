@@ -1,8 +1,11 @@
 package kr.co.chazm.member.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.co.chazm.member.domain.Member;
+import kr.co.chazm.member.domain.Point;
 
 public interface MemberStore {
 
@@ -85,5 +88,53 @@ public interface MemberStore {
 	 * @return int
 	 */
 	int selectCheckById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 회원가입 포인트 지급 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return
+	 */
+	int updateMemberPoint(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 누적 포인트 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return
+	 */
+	int totalPointsById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 아이디로 포인트 내역 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return
+	 */
+	List<Point> showPointById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 포인트 사용 내역 아이디로 조회 Store
+	 * @param sqlSession
+	 * @param memberId
+	 * @return int
+	 */
+	int totalUsePointById(SqlSession sqlSession, String memberId);
+
+	/**
+	 * 이메일 인증 후 비밀번호 변경 Stroe 
+	 * @param sqlSession
+	 * @param member
+	 * @return int
+	 */
+	int updatePwByIdAndEmail(SqlSession sqlSession, Member member);
+
+	/**
+	 * 핸드폰 인증 후 비밀번호 변경 Stroe 
+	 * @param sqlSession
+	 * @param member
+	 * @return int
+	 */
+	int updatePwByIdAndPhone(SqlSession sqlSession, Member member);
 
 }

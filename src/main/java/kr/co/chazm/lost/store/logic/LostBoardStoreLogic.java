@@ -119,7 +119,17 @@ public class LostBoardStoreLogic implements LostBoardStore {
 		return searchLostList;
 	}
 	
-	
+	@Override
+	public List<LostBoard> showLostBoardById(SqlSession session, String memberId) {
+		List<LostBoard> getPosts = session.selectList("lostBoardMapper.showLostBoardById", memberId);
+		return getPosts;
+	}
+
+	@Override
+	public int countLostBoardById(SqlSession session, String memberId) {
+		int result = session.selectOne("lostBoardMapper.countLostBoardById", memberId);
+		return result;
+	}
 
 
 

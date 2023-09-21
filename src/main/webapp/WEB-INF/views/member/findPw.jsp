@@ -71,11 +71,11 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	
 		<main class="form-signin">
-			<h1 class="h3 mb-3 fw-normal text-center"
+			<h2 class="mb-3 text-center"
 				style="color: #4365BC; font-size: 40px;">
-				비밀번호 찾기(변경) <img src="../resources/assets/img/light.png" alt=""
+				비밀번호 찾기 <img src="../resources/assets/img/light.png" alt=""
 					style="width: 10%; padding-bottom: 5px;">
-			</h1>
+			</h2>
 			<div class="container mt-5">
 				<div class="row">
 					<div class="col-md-12">
@@ -95,8 +95,8 @@
 						<!-- 이메일 인증 폼 -->
 						<div id="emailAuthenticationForm" style="display: block;"
 							class="mt-3">
-							<h1>이메일 인증</h1>
-							<form action="/member/findPwByEmail" method="post">
+							<h3>이메일 인증</h3>
+							<form>
 								<input type="text" class="form-control" id="memberId"
 									name="memberId" required placeholder="아이디를 입력해 주세요">
 								<div id="memberIdError" class="validation"></div>							
@@ -115,7 +115,7 @@
 										id="findIdByEmail">인증확인</button>
 								</div>
 								<button class="btn btn-lg login-button" type="button"
-									id="findIdEmail" data-bs-toggle="modal" data-bs-target="#exampleModal">비밀번호 변경</button>
+									id="findIdEmail" data-bs-toggle="modal" data-bs-target="#emailModal">비밀번호 변경</button>
 								<div id="emailError" class="validation"></div>
 							</form>
 						</div>
@@ -123,13 +123,14 @@
 						<!-- 핸드폰 인증 폼 -->
 						<div id="phoneAuthenticationForm" style="display: none;"
 							class="mt-3">
-							<h1>핸드폰 인증</h1>
-							<form action="/member/findPwByPhone" method="post">
+							<h3>핸드폰 인증</h3>
+							<form method="post">
 								<input type="text" class="form-control" id="memberId"
 									name="memberId" required placeholder="아이디를 입력해 주세요">
 								<div id="memberIdError" class="validation"></div>							
 								<div class="input-group">
-									<input type="text" class="form-control" id="memberPhone"
+									<input type="text" class="form-control" id="
+"
 										name="memberPhone" required placeholder="핸드폰번호를 입력해 주세요">
 									<button class="btn btn-outline-secondary" type="button"
 										id="verifyPhone">인증</button>
@@ -143,7 +144,7 @@
 										id="findIdByPhone">인증확인</button>
 								</div>
 								<button class="btn btn-lg login-button" type="button"
-									id="findIdPhone" data-bs-toggle="modal" data-bs-target="#exampleModal">비밀번호 변경</button>
+									id="findIdPhone" data-bs-toggle="modal" data-bs-target="#phoneModal">비밀번호 변경</button>
 								<div id="phoneError" class="validation"></div>						
 							</form>
 						</div>
@@ -151,18 +152,19 @@
 				</div>
 			</div>
 		</main>
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="emailModal" tabindex="-1"
+				aria-labelledby="emailModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
+							<h5 class="modal-title" id="emailModalLabel">비밀번호 변경</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-						<form class="sign-form" action="/member/updatePw.do" method="post">
+						<form class="sign-form" action="/member/updatePwByEmail.do" method="post">
 								<input type="hidden" class="form-control" id="memberIdModal" name="memberId" required placeholder="아이디를 입력해 주세요">
+								<input type="hidden" class="form-control" id="memberEmailModal" name="memberEmail" required placeholder="아이디를 입력해 주세요">
 								<div class="mb-3">
 									<label for="password" class="form-label">새 비밀번호</label> <input
 										type="password" class="form-control" id="memberPw"
@@ -181,7 +183,41 @@
 									<button type="submit" class="btn btn-primary">수정완료</button>
 								</div>								
 							</form>
-								<!--2안  -->
+						</div>
+					</div>
+				</div>
+			</div>
+					<div class="modal fade" id="phoneModal" tabindex="-1"
+				aria-labelledby="phoneModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="phoneModalLabel">비밀번호 변경</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+						<form class="sign-form" action="/member/updatePwByPhone.do" method="post">
+								<input type="hidden" class="form-control" id="memberIdModal" name="memberId" required placeholder="아이디를 입력해 주세요">
+								<input type="hidden" class="form-control" id="memberPhoneModal" name="memberPhone" required placeholder="아이디를 입력해 주세요">
+								<div class="mb-3">
+									<label for="password" class="form-label">새 비밀번호</label> <input
+										type="password" class="form-control" id="memberPw"
+										name="memberPw" placeholder="비밀번호를 입력해 주세요">
+									<div id="memberPwError" class="validation"></div>
+								</div>
+								<div class="mb-3">
+									<label for="confirmPassword" class="form-label">새 비밀번호 확인</label> <input
+										type="password" class="form-control" id="confirmPassword"
+										name="confirmPassword" placeholder="비밀번호를 한번 더 입력해 주세요">
+									<div id="confirmPasswordError" class="validation"></div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">닫기</button>
+									<button type="submit" class="btn btn-primary">수정완료</button>
+								</div>								
+							</form>
 						</div>
 					</div>
 				</div>
@@ -282,9 +318,18 @@
 				            }
 				        });
 				        
-				        $('#exampleModal').on('show.bs.modal', function (event) {
-				        	  var memberId = $('#memberId').val(); // 아이디 입력 필드의 값 가져오기
+				        $('#emailModal').on('show.bs.modal', function (event) {
+				        	  var memberId = $('#memberId').val(); 
+				        	  var memberEmail = $('#memberEmail').val();
+				        	  $('#memberIdModal').val(memberId);
+				        	  $('#memberEmailModal').val(memberEmail);
+				        	});
+				        
+				        $('#phoneModal').on('show.bs.modal', function (event) {
+				        	  var memberId = $('#memberId').val();
+				        	  var memberPhone = $('#memberPhone').val(); 
 				        	  $('#memberIdModal').val(memberId); // 모달 폼의 아이디 입력 필드에 설정
+				        	  $('#memberPhoneModal').val(memberPhone);
 				        	});
 				        
 						// 비밀번호 유효성 검사

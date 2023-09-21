@@ -136,4 +136,33 @@ public class PlusMBoardServiceImpl implements PlusMBoardService {
 		return result;
 	}
 
+	@Override
+	public List<Donation> showDonationById(String memberId) {
+		List<Donation> lDonation = plusMBoardStore.showDonationById(sqlSession, memberId);
+		return lDonation;
+	}
+
+	@Override
+	public List<Donation> showDonationTitle(Map<String, Object> donationInfoMap) {
+		List<Donation> dOne = plusMBoardStore.showDonationTitle(sqlSession, donationInfoMap);
+		return dOne;
+	}
+
+	@Override
+	public int countDoationById(String memberId) {
+		int result =  plusMBoardStore.countDoationById(sqlSession, memberId);
+		return result;
+	}
+
+	@Override
+	public int totalDonationById(String memberId) {
+		int result =  plusMBoardStore.totalDonationById(sqlSession, memberId);
+		return result;
+	}
+
+	@Override
+	public int showRecentDonationByID(String memberId) {
+		int result = plusMBoardStore.showRecentDonationByID(sqlSession, memberId);
+		return result;
+	}	
 }
