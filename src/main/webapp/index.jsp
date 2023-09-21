@@ -182,8 +182,8 @@
 
                             <div class="swiper-slide">
                                 <div class="testimonial-wrap">
-                                    <div class="/totalSearch/search.do?totalSearchKeyword=버스">
-                                        <a href="javascript:void(0)">
+                                	<div class="testimonial-item">
+                                        <a href="/totalSearch/search.do?totalSearchKeyword=버스">
                                             <div class="d-flex align-items-center">
                                                 <img src="./resources/assets/img/bus.png"
                                                     class="testimonial-img flex-shrink-0" alt="">
