@@ -392,7 +392,7 @@ public class MemberController {
 			int result = mService.updateMemberPw(member);
 			if (result > 0) {
 				mv.addObject("msg", "비밀번호 변경이 완료되었습니다.");
-				mv.addObject("url", "/member/login.do");
+				mv.addObject("url", "/member/logout.do");
 				mv.setViewName("common/message");
 			} else {
 				mv.addObject("msg", "비밀번호 변경이 완료되지 않았습니다.");
