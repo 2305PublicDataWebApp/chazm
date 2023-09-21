@@ -56,7 +56,7 @@
 	                    <p>찾음은 모든 분실물과 습득물을 한 곳에서 등록,조회가 가능한 분실물 통합 서비스 포털입니다.</p>
 	                    <div class="d-flex justify-content-center justify-content-lg-start">
 	                        <a href="#about" class="btn-get-started">찾음이란?</a>
-	                        <a href="#about" class="btn-get-started">찾음 서비스</a>
+	                        <a href="#faq" class="btn-get-started">자주 묻는 질문</a>
 	                    </div>
 	                </div>
 	            </div>

@@ -55,4 +55,21 @@ public class PlusAServiceImpl implements PlusAService{
 		return plusABoard;
 	}
 
+	@Override
+	public int selectTotalMember() {
+		int result = plusAStore.selectTotalMember(sqlSession);
+		return result;
+	}
+
+	@Override
+	public int selectTotalBoard() {
+		int result = plusAStore.selectTotalBoard(sqlSession);
+		return result;
+	}
+
+	@Override
+	public int selectTotalGetY() {
+		int result = plusAStore.selectTotalGetY(sqlSession);
+		return result;
+	}
 }
