@@ -269,25 +269,21 @@ public class FindBoardController {
 			, ModelAndView mv) {
 		try {			
 			String memberId = (String) session.getAttribute("memberId");
-			if(memberId != null && !memberId.equals("")) {
-				FindBoard findBoard = findBoardService.selectFindBoardByNo(findNo);
-				if(findBoard != null) {
-					FindLike findLike = new FindLike(findNo, memberId);
-					int likeYn = findBoardService.selectLikeYn(findLike);
-					Integer replyCount = findReplyService.getReplyCount(findNo);
-					List<FindReply> fRList = findReplyService.selectFindReplyList(findNo);
-					List<FindReply> fRRList = findReplyService.selectFindReReplyList(findNo);
-					mv.addObject("findBoard", findBoard);
-					mv.addObject("fRList", fRList).addObject("fRRList", fRRList).addObject("totalCount", replyCount);
-					mv.addObject("likeYn", likeYn);
-					mv.setViewName("find/findBoardDetail");
-				} else {
-					mv.addObject("msg", "게시글 조회가 완료되지 않았습니다.");
-					mv.addObject("url", "/findBoard/list.do");
-					mv.setViewName("common/message");
-				}
+			FindBoard findBoard = findBoardService.selectFindBoardByNo(findNo);
+			if(findBoard != null) {
+				FindLike findLike = new FindLike(findNo, memberId);
+				int likeYn = findBoardService.selectLikeYn(findLike);
+				Integer replyCount = findReplyService.getReplyCount(findNo);
+				List<FindReply> fRList = findReplyService.selectFindReplyList(findNo);
+				List<FindReply> fRRList = findReplyService.selectFindReReplyList(findNo);
+				mv.addObject("findBoard", findBoard);
+				mv.addObject("fRList", fRList).addObject("fRRList", fRRList).addObject("totalCount", replyCount);
+				mv.addObject("likeYn", likeYn);
+				mv.setViewName("find/findBoardDetail");
 			} else {
-				mv.addObject("msg", "로그인 후 이용 가능합니다.").addObject("url", "/findBoard/list.do").setViewName("common/message");
+				mv.addObject("msg", "게시글 조회가 완료되지 않았습니다.");
+				mv.addObject("url", "/findBoard/list.do");
+				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의하세요.");
