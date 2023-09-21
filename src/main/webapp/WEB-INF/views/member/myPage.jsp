@@ -94,10 +94,10 @@
 								<hr>
 								<div class="donation-btn">
 									<button type="button" class="btn btn-primary"
-										style="width: 100px; height: 40px; font-size: 10px"
-										onclick="checkDelete();">회원 탈퇴</button>
+										style="width: 100px; height: 40px; font-size: 10px; border:none"
+										onclick="checkDelete()">회원 탈퇴</button>
 									<button type="button" class="btn btn-primary"
-										style="width: 100px; height: 40px; font-size: 10px"
+										style="width: 100px; height: 40px; font-size: 10px; border:none"
 										data-bs-toggle="modal" data-bs-target="#updatePwModal"">비밀번호
 										변경</button>
 								</div>
@@ -398,7 +398,7 @@
 											<tr>
 												<input type="hidden" value="${donation.donationNo }">
 												<td><a
-													href="/plusMBoard/detail.do?plusMNo=${donation.donationNo }"
+													href="/plusMBoard/detail.do?plusMNo=${donation.refPlusMNo }"
 													class="accordion-button collapsed">${donation.plusMBoard.plusMTitle}
 												</a></td>
 												<td>${donation.dntPoint }</td>

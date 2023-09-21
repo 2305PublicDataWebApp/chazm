@@ -117,7 +117,7 @@
 	                 FROM PLUS_M_BOARD_TBL
 	                 WHERE PLUS_M_NO = d.REF_PLUS_M_NO) AS PLUS_M_TITLE
 	    FROM DONATION_TBL d
-	    WHERE MEMBER_ID = #{memberId}
+	    WHERE MEMBER_ID = #{memberId} ORDER BY DNT_DATE DESC
 	</select>
 	
 	<select id="countDoationById" resultType="_int">
