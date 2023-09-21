@@ -118,10 +118,16 @@
 	                                        <h4><a href="${detailFindUrl}" title="More Details">${totalFind.findTitle}</a></h4>
 	                                        <p>${totalFind.fCreateDate}</p>
 	                                    </div>
-	                                    <div class="donationBottom d-flex" style="justify-content: space-between;">
-	                                        <strong>종류 : ${totalFind.findCategory}</strong>
-	                                        <strong>색상 : ${totalFind.findColor}</strong>
-	                                        <strong>브랜드 : ${totalFind.findBrand}</strong>
+	                                    <div class="col donationBottom d-flex" style="justify-content: space-between;">
+	                                    	<c:if test="${totalFind.findCategory ne null }">
+		                                        <strong>종류 : ${totalFind.findCategory}</strong>	                                    	
+	                                    	</c:if>
+	                                    	<c:if test="${totalFind.findColor ne null }">
+		                                        <strong>색상 : ${totalFind.findColor}</strong>	                                    	
+	                                    	</c:if>
+	                                    	<c:if test="${totalFind.findBrand ne null }">
+		                                        <strong>브랜드 : ${totalFind.findBrand}</strong>	                                    	
+	                                    	</c:if>
 	                                    </div>
 	                                </div>
 	                            </div>
