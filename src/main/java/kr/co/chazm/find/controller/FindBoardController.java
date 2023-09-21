@@ -332,6 +332,7 @@ public class FindBoardController {
 		if (findBoard.getFindBrand() != null && !findBoard.getFindBrand().isEmpty()) {
 			paramMap.put("findBrand", findBoard.getFindBrand());
 		}
+		
 		int totalCount = findBoardService.getListCount(paramMap); // 페이징을 위한 검색 총 게시물 갯수 
 		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 		List<FindBoard> searchList = findBoardService.searchFindByKeyword(pInfo, paramMap);

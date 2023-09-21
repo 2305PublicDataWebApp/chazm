@@ -36,9 +36,9 @@ public interface LostBoardService {
 
 	public Integer deleteLostBoard(LostBoard lostBoard);
 
-	public Integer searchGetListCount(Map<String, Object> searchMap);
+	public Integer searchGetListCount(Map<String, String> searchMap);
 
-	public List<LostBoard> searchLostByKeyword(PageInfo pInfo, Map<String, Object> searchMap);
+	public List<LostBoard> searchLostByKeyword(PageInfo pInfo, Map<String, String> searchMap);
 
 	
 	//좋아요//////////////////////////////////////////////////////////////////////////

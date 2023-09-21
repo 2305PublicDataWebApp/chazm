@@ -67,7 +67,7 @@
 
 <!-- *****MAIN************************************************************************************ -->
         <main id="main" class="">
-            <section id="mainLayer1" class="">
+            <section id="mainLayer1" class="" style="padding-top:100px;">
                 <div class="section-header ">
                     <h2>찾아주세요</h2>
                     <p>빠르게 찾을 수 있도록 분실물을 등록해주세요!</p>
@@ -227,16 +227,9 @@
 										
 					
 										<!--분실일자-->
-										<div id="lostDate" class="d-flex mt-2 w-100" >
-											<div class="w-50">
-												<input type="date" name="lostStartDate" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;" value="${lostBoard.lostStartDate }"> 
-											</div>
-											<div class="w-auto ms-2 me-2 d-flex align-items-center">
-												<h5 class="text-black " > ~ </h5>
-											</div>
-											<div class="w-50">
-												<input type="date" name="lostEndDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;" value="${lostBoard.lostStartDate }">
-											</div>
+										<div id="lost_date" class="d-flex mt-2 w-100">
+											<input type="date" name="lostDateStart" id="lostDate" class="p-1 w-100 border border-dark-subtle rounded text-center"
+												style="height: 40px;" placeholder="분실일자">
 										</div>
 					
 										<!--분실물 색, 브랜드-->
@@ -247,13 +240,17 @@
 													<span id="selectedColor">${lostBoard.lostColor }</span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a class="dropdown-item dd-color" value="흰색">흰색</a></li>
-													<li><a class="dropdown-item dd-color" value="검정">검정</a></li>
-													<li><a class="dropdown-item dd-color" value="빨강">빨강</a></li>
-													<li><a class="dropdown-item dd-color" value="노랑">노랑</a></li>
-													<li><a class="dropdown-item dd-color" value="초록">초록</a></li>
-													<li><a class="dropdown-item dd-color" value="파랑">파랑</a></li>
-													<li><a class="dropdown-item dd-color" value="보라">보라</a></li>
+													<li class="dropdown-item dd-color" value="흰색">흰색</li>
+													<li class="dropdown-item dd-color" value="검정">검정</li>
+													<li class="dropdown-item dd-color" value="빨강">빨강</li>
+													<li class="dropdown-item dd-color" value="주황">주황</li>
+													<li class="dropdown-item dd-color" value="노랑">노랑</li>
+													<li class="dropdown-item dd-color" value="초록">초록</li>
+													<li class="dropdown-item dd-color" value="파랑">파랑</li>
+													<li class="dropdown-item dd-color" value="보라">보라</li>
+													<li class="dropdown-item dd-color" value="분홍">분홍</li>
+													<li class="dropdown-item dd-color" value="갈색">갈색</li>
+													<li class="dropdown-item dd-color" value="기타">기타</li>
 													<input type="hidden" name="lostColor" id="selectedColorInput" value="${lostBoard.lostColor }">
 												</ul>
 											</div>

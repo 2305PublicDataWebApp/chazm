@@ -56,13 +56,13 @@ public class LostBoardStoreLogic implements LostBoardStore {
 	}
 
 	@Override
-	public Integer searchGetListCount(SqlSession session, Map<String, Object> searchMap) {
+	public Integer searchGetListCount(SqlSession session, Map<String, String> searchMap) {
 		Integer result = session.selectOne("lostBoardMapper.searchGetListCount",searchMap);
 		return result;
 	}
 
 	@Override
-	public List<LostBoard> searchLostByKeyword(SqlSession session, PageInfo pInfo, Map<String, Object> searchMap) {
+	public List<LostBoard> searchLostByKeyword(SqlSession session, PageInfo pInfo, Map<String, String> searchMap) {
 		int limit = pInfo.getRecordCountPerPage();
 		int offset = (pInfo.getCurrentPage()-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
@@ -118,6 +118,20 @@ public class LostBoardStoreLogic implements LostBoardStore {
 		List<LostBoard>searchLostList = session.selectList("lostBoardMapper.totalSearchLostByKeyword", totalSearchKeyword, rowBounds);		
 		return searchLostList;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public List<LostBoard> showLostBoardById(SqlSession session, String memberId) {

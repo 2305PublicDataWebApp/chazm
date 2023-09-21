@@ -37,11 +37,7 @@ public class LostBoardController {
 	private LostReplyService lostReplyService;
 
 	
-	/**
-	 * 분실물 등록 페이지로 이동
-	 * @param mv
-	 * @return
-	 */
+	//분실물 등록 페이지로 이동
 	@RequestMapping(value="/lostBoard/insert.do", method=RequestMethod.GET)
 	public ModelAndView showInsertLostBoardForm(ModelAndView mv) {
 		mv.setViewName("lost/insertLostBoardForm");
@@ -49,30 +45,13 @@ public class LostBoardController {
 	}
 	
 	
-	/**
-	 * 분실물 등록
-	 * @param mv
-	 * @param lostBoard
-	 * @param lostTitle
-	 * @param lostContent
-	 * @param lostCategory
-	 * @param lostLocation
-	 * @param lostPlace
-	 * @param lostDate
-	 * @param lostColor
-	 * @param lostBrand
-	 * @param uploadFile
-	 * @param session
-	 * @param request
-	 * @return
-	 */
+	//분실물 등록
 	@ResponseBody 
 	@RequestMapping(value="/lostBoard/insert.do", method=RequestMethod.POST)
 	public ModelAndView insertLostBoard(ModelAndView mv
 										, @ModelAttribute LostBoard lostBoard
 										, @RequestParam(value="lostPlace", required=false ) String lostPlace
-										, @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
-										, @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
+										, @RequestParam(value="lostDate", required=false ) Date lostDate
 										, @RequestParam(value="lostBrand", required=false ) String lostBrand
 										, @RequestParam(value="lostMaybe", required=false ) String lostMaybe
 										, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
@@ -118,12 +97,7 @@ public class LostBoardController {
 	}
 	
 	
-	/**
-	 * 분실물게시판 글수정페이지로 이동
-	 * @param mv
-	 * @param lostNo
-	 * @return
-	 */
+	//분실물게시판 글수정페이지로 이동
 	@RequestMapping(value="/lostBoard/update.do", method=RequestMethod.GET)
 	public ModelAndView showUpdateLostBoardForm (ModelAndView mv
 									  			, @RequestParam("lostNo") Integer lostNo) {
@@ -140,21 +114,12 @@ public class LostBoardController {
 	}
 	
 	
-	/**
-	 * 분실물게시판 글수정
-	 * @param mv
-	 * @param board
-	 * @param session
-	 * @param uploadFile
-	 * @param request
-	 * @return
-	 */
+	//분실물게시판 글수정
 	@RequestMapping(value="/lostBoard/update.do", method=RequestMethod.POST)
 	public ModelAndView updateLostBoard(ModelAndView mv
 									  , @ModelAttribute LostBoard lostBoard
 									  , @RequestParam(value="lostPlace", required=false ) String lostPlace
-									  , @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
-									  , @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
+									  , @RequestParam(value="lostDate", required=false ) Date lostDate
 									  , @RequestParam(value="lostBrand", required=false ) String lostBrand
 									  , @RequestParam(value="lostMaybe", required=false ) String lostMaybe
 									  , @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
@@ -207,14 +172,7 @@ public class LostBoardController {
 	}
 	
 	
-	/**
-	 * 분실물게시판 글 삭제(비공개)
-	 * @param mv
-	 * @param lostNo
-	 * @param lostWriter
-	 * @param session
-	 * @return
-	 */
+	//분실물게시판 글 삭제(비공개)
 	@RequestMapping(value="/lostBoard/delete.do", method=RequestMethod.GET)
 	public ModelAndView deleteLostBoard(ModelAndView mv
 									 , @RequestParam ("lostNo") Integer lostNo
@@ -249,37 +207,24 @@ public class LostBoardController {
 		return mv;
 	}
 	
-	/**
-		 * 분실물 게시판 목록조회
-		 * @param mv
-		 * @param currentPage
-		 * @param session
-		 * @return
-		 */
+	 	//분실물 게시판 목록조회
 		@ResponseBody 
 		@RequestMapping(value="/lostBoard/list.do", method=RequestMethod.GET, produces="text/html;charset=UTF-8;")
 		public ModelAndView showLostBoardList(ModelAndView mv
 											, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 											,HttpSession session) {
-	//		String lostWriter = (String)session.getAttribute("memberId");
-			
-//			//댓글수 카운트
-//			LostReply lostReply = new LostReply();
-//			int lostNo = lostReply.getRefLostNo();
-//			Integer totalReplyCount = lostReplyService.getReplyListCount(lostNo); 
 			
 			Integer totalCount = lostBoardService.getListCount();
 			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 			List<LostBoard>lList = lostBoardService.selectLostBoardList(pInfo);
-//			Integer totalReplyCount = 0;
 			try {
 				if(lList.size()>0) {
 					for (LostBoard lostBoard : lList) {
 		                // 각 게시물에 대한 리플 갯수를 가져와서 설정
 		                int lostNo = lostBoard.getLostNo();
+		                //댓글 수 카운트
 		                Integer totalReplyCount = lostReplyService.getReplyListCount(lostNo);
 		                lostBoard.setTotalReplyCount(totalReplyCount);
-		                
 		            }
 					mv.addObject("lList", lList).addObject("pInfo",pInfo).setViewName("lost/lostBoard");
 				}else {
@@ -294,13 +239,7 @@ public class LostBoardController {
 		}
 
 
-	/**
-		 * 글상세보기
-		 * @param mv
-		 * @param lostNo
-		 * @param session
-		 * @return
-		 */
+		//글상세보기
 		@RequestMapping(value="/lostBoard/detail.do", method=RequestMethod.GET)
 		public ModelAndView showLostBoardDetail(ModelAndView mv
 											, @RequestParam ("lostNo") Integer lostNo
@@ -362,49 +301,46 @@ public class LostBoardController {
 		}
 
 
-	/**
-	 * 게시글 검색(+페이징)
-	 * @param mv
-	 * @param lostSearchCondition
-	 * @param lostSearchKeyword
-	 * @param currentPage
-	 * @return
-	 */
+	//게시글 검색(+페이징)
 	@RequestMapping(value="/lostBoard/search.do", method=RequestMethod.GET)
 	public ModelAndView searchLostBoard(ModelAndView mv
+									  , @ModelAttribute LostBoard lostBoard
+									  , @RequestParam(value="lostDateStart", required = false) String lostDateStart
+							          , @RequestParam(value="lostDateEnd", required = false) String lostDateEnd
 									  , @RequestParam("lostSearchCondition") String lostSearchCondition
 									  , @RequestParam("lostSearchKeyword") String lostSearchKeyword
-									  , @RequestParam("lostLocation") String lostLocation
-									  , @RequestParam("lostBrand") String lostBrand
-									  , @RequestParam("lostColor") String lostColor
-//									  , @RequestParam(value = "lostStartDate", required = false) String lostStartDate
-//									  , @RequestParam(value = "lostEndDate", required = false) String lostEndDate
-//									  , @RequestParam("lostStartDate") String lostStartDate
-//									  , @RequestParam("lostEndDate") String  lostEndDate
 									  , @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 									  ) {
-		 
-//		LostBoard lostBoard = new LostBoard();
-//		Date start = lostBoard.getLostStartDate();
-//		Date end = lostBoard.getLostEndDate();
-//		boolean dateChk = false;
-//
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); 
-//		Date startDate = dateFormat.parse(start);
-//		Date endtDate = dateFormat.parse(end);
-
-		
-	
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("lostSearchCondition",lostSearchCondition);
-		searchMap.put("lostSearchKeyword",lostSearchKeyword);
-		searchMap.put("lostLocation",lostLocation);
-		searchMap.put("lostBrand",lostBrand);
-		searchMap.put("lostColor",lostColor);
-//		searchMap.put("lostStartDate",lostStartDate);
-//		searchMap.put("lostEndDate",lostEndDate);
-	
-	
+		 	
+		Map<String, String> searchMap = new HashMap<String, String>();
+		// 검색 파라미터가 존재하는 경우에만 searchMap에 추가
+	    if (lostDateStart != null && !lostDateStart.isEmpty()) {
+	    	searchMap.put("lostDateStart", lostDateStart);
+	    }
+	    if (lostDateEnd != null && !lostDateEnd.isEmpty()) {
+	    	searchMap.put("lostDateEnd", lostDateEnd);
+	    }
+	    if (lostSearchCondition != null && !lostSearchCondition.isEmpty()) {
+	    	searchMap.put("lostSearchCondition", lostSearchCondition);
+	    }
+	    if (lostSearchKeyword != null && !lostSearchKeyword.isEmpty()) {
+	    	searchMap.put("lostSearchKeyword", lostSearchKeyword);
+	    }
+		if (lostBoard.getLostCategory() != null && !lostBoard.getLostCategory().isEmpty()) {
+			searchMap.put("lostCategory", lostBoard.getLostCategory());
+	    }
+		if (lostBoard.getLostLocation() != null && !lostBoard.getLostLocation().isEmpty()) {
+			searchMap.put("lostLocation", lostBoard.getLostLocation());			
+		}
+		if (lostBoard.getLostPlace() != null && !lostBoard.getLostPlace().isEmpty()) {	
+			searchMap.put("lostPlace", lostBoard.getLostPlace());
+		}
+		if (lostBoard.getLostColor() != null && !lostBoard.getLostColor().isEmpty()) {
+			searchMap.put("lostColor", lostBoard.getLostColor());
+		}
+		if (lostBoard.getLostBrand() != null && !lostBoard.getLostBrand().isEmpty()) {
+			searchMap.put("lostBrand", lostBoard.getLostBrand());
+		}
 		
 		//서치 페이징처리
 		Integer totalCount = lostBoardService.searchGetListCount(searchMap); 
@@ -412,27 +348,18 @@ public class LostBoardController {
 		
 		List<LostBoard>searchLostList = lostBoardService.searchLostByKeyword(pInfo, searchMap);
 		try {
-			
 			if(searchLostList.size()>0) {
-				
-				for (LostBoard lostBoard : searchLostList) {
+				for (LostBoard lBoard : searchLostList) {
 	                // 각 게시물에 대한 리플 갯수를 가져와서 설정
-	                int lostNo = lostBoard.getLostNo();
+	                int lostNo = lBoard.getLostNo();
 	                Integer totalReplyCount = lostReplyService.getReplyListCount(lostNo);
-	                lostBoard.setTotalReplyCount(totalReplyCount);
+	                lBoard.setTotalReplyCount(totalReplyCount);
 	            }
-				mv.addObject("lostSearchCondition",lostSearchCondition)
-				.addObject("lostSearchKeyword",lostSearchKeyword)
-				.addObject("lostLocation",lostLocation)
-				.addObject("lostBrand",lostBrand)
-				.addObject("lostColor",lostColor)
-//				.addObject("lostStartDate",lostStartDate)
-//				.addObject("lostEndDate",lostEndDate)
+				mv.addObject("searchMap",searchMap)
+				.addObject("lostBoard",lostBoard)
 				.addObject("pInfo",pInfo)
 				.addObject("searchLostList",searchLostList);
-				
 				mv.setViewName("lost/searchLostBoard");
-				
 			}else {
 				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("lost/searchLostBoard");
 			}	
@@ -446,14 +373,8 @@ public class LostBoardController {
 	
 	
 	//////좋아요 메소드/////////////////////////////////////////////////////////////////////////
-		/**
-		 * 좋아요 등록
-		 * @param mv
-		 * @param lostLike
-		 * @param refLostNo
-		 * @param session
-		 * @return
-		 */
+		
+		//좋아요 등록
 		@RequestMapping(value = "/lostLike/insert.do", method = RequestMethod.GET)
 		public ModelAndView insertLostLike(ModelAndView mv
 										  , @RequestParam("refLostNo") int refLostNo
@@ -481,14 +402,7 @@ public class LostBoardController {
 		}
 	
 	
-		/**
-		 * 좋아요 삭제
-		 * @param mv
-		 * @param lostLike
-		 * @param refLostNo
-		 * @param session
-		 * @return
-		 */
+		//좋아요 삭제
 		@RequestMapping(value = "/lostLike/delete.do", method = RequestMethod.GET)
 		public ModelAndView deletePlusMLike(ModelAndView mv
 										  , @RequestParam("refLostNo") int refLostNo

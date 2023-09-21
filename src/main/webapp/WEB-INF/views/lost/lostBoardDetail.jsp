@@ -191,15 +191,10 @@
 											</div>
 										</div>
 										<div id="lostDate" class="d-flex m-2 w-100" >
-                                            <div class="w-50">
-                                                <input type="text" value="${lostBoard.lostStartDate}" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
+                                            <div class="w-100">
+                                                <input type="text" value="${lostBoard.lostDate}" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
                                             </div>
-                                            <div class="w-auto ms-2 me-2 d-flex align-items-center">
-                                                <h5 class="text-black " > ~ </h5>
-                                            </div>
-                                            <div class="w-50">
-                                                <input type="text" value="${lostBoard.lostEndDate}" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
-                                            </div>
+                                         
                                         </div>
                                         
                                         <!-- 지도공간 -->

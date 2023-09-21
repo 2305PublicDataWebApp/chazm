@@ -58,7 +58,7 @@ h3,
 h4,
 h5,
 h6 {
-font-family: var(--font-primary);
+font-family: var(--font-default);
 }
 
 /*--------------------------------------------------------------
@@ -836,7 +836,7 @@ input[type=submit] {
     background-color: aliceblue;
     color: #4365BC;
     font-size:1.5em;
-    font-family: var(--font-primary);
+    font-family: var(--font-default);
 }
 
 

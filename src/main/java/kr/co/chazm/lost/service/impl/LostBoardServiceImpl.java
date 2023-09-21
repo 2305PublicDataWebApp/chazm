@@ -58,13 +58,13 @@ public class LostBoardServiceImpl implements LostBoardService{
 	}
 
 	@Override
-	public Integer searchGetListCount(Map<String, Object> searchMap) {
+	public Integer searchGetListCount(Map<String, String> searchMap) {
 		Integer result = lostBoardStore.searchGetListCount(session, searchMap);
 		return result;
 	}
 
 	@Override
-	public List<LostBoard> searchLostByKeyword(PageInfo pInfo, Map<String, Object> searchMap) {
+	public List<LostBoard> searchLostByKeyword(PageInfo pInfo, Map<String, String> searchMap) {
 		List<LostBoard>searchLostList = lostBoardStore.searchLostByKeyword(session, pInfo, searchMap);
 		return searchLostList;
 	}

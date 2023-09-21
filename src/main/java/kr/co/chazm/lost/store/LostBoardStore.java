@@ -24,9 +24,9 @@ public interface LostBoardStore {
 
 	public Integer deleteLostBoard(SqlSession session, LostBoard lostBoard);
 
-	public Integer searchGetListCount(SqlSession session, Map<String, Object> searchMap);
+	public Integer searchGetListCount(SqlSession session, Map<String, String> searchMap);
 
-	public List<LostBoard> searchLostByKeyword(SqlSession session, PageInfo pInfo, Map<String, Object> searchMap);
+	public List<LostBoard> searchLostByKeyword(SqlSession session, PageInfo pInfo, Map<String, String> searchMap);
 
 	
 //좋아요//////////////////////////////////////////////////////////////////

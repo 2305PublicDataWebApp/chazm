@@ -13,10 +13,9 @@
 		<result property="lostFilerename"  column="LOST_FILERENAME"/>
 		<result property="lostFilepath"    column="LOST_FILEPATH"/>
 		<result property="lostCategory"    column="LOST_CATEGORY"/>
-		<result property="lostLocation"    column="LOST_LOCATION"/>
 		<result property="lostPlace"       column="LOST_PLACE"/>	
-		<result property="lostStartDate"   column="LOST_START_DATE"/>
-		<result property="lostEndDate"     column="LOST_END_DATE"/>		
+		<result property="lostLocation"    column="LOST_LOCATION"/>
+		<result property="lostDate"        column="LOST_DATE"/>
 		<result property="lostColor"       column="LOST_COLOR"/>	
 		<result property="lostBrand"       column="LOST_BRAND"/>	
 		<result property="lCreateDate"     column="L_CREATE_DATE"/>	
@@ -67,7 +66,8 @@
 	<insert id="insertLostBoard">
 		INSERT INTO LOST_BOARD_TBL VALUES 
 		(SEQ_LOST_NO.NEXTVAL, #{lostTitle}, #{lostContent}, #{lostWriter}, 
-		#{lostFilename}, #{lostFilerename}, #{lostFilepath}, #{lostCategory} ,#{lostLocation} , #{lostPlace} , #{lostStartDate},  #{lostEndDate}, 
+		#{lostFilename}, #{lostFilerename}, #{lostFilepath}, 
+		#{lostCategory}  , #{lostPlace} ,#{lostLocation}, #{lostDate}, 
 		#{lostColor} , #{lostBrand} , DEFAULT, DEFAULT, DEFAULT, #{lostMaybe})
 	</insert>
 	
@@ -82,8 +82,7 @@
 		, LOST_CATEGORY= #{lostCategory}
 		, LOST_LOCATION= #{lostLocation}
 		, LOST_PLACE= #{lostPlace}
-		, LOST_START_DATE=#{lostStartDate}
-		, LOST_END_DATE= #{lostEndDate} 
+		, LOST_DATE=#{lostDate}
 		, L_UPDATE_DATE = DEFAULT 
 		WHERE LOST_NO = #{lostNo} AND LOST_WRITER = #{lostWriter} AND L_STATE_YN = 'Y' 
 	</update>
@@ -95,52 +94,97 @@
 
 	<!-- 분실물게시판 검색페이지 총 게시물 수  -->
 	<select id="searchGetListCount" resultType="_int">
-		SELECT COUNT (*) FROM LOST_BOARD_TBL
-		<if test="lostSearchCondition == 'lostTitle'">
-			WHERE LOST_TITLE LIKE '%'||#{lostSearchKeyword}||'%'
-		</if>
-		<if test="lostSearchCondition == 'lostContent'">
-			WHERE LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
-		</if> 
-		<if test="lostLocation != ''"> <!-- 입력을 하면 동작 -->
-			AND LOST_LOCATION LIKE '%'||#{lostLocation}||'%' 		
-		</if>
-		<if test="lostBrand != ''"> 
-			AND LOST_BRAND LIKE '%'||#{lostBrand}||'%' 		
-		</if>
- 		<if test="lostColor != ''"> 
-			AND LOST_COLOR LIKE '%'||#{lostColor}||'%'
-		</if>
-<!-- 		<if test="lostStartDate != '' and lostEndDate != ''"> -->
-<!--             AND (TO_DATE(#{lostStartDate}, 'YYYY-MM-DD')>=LOST_START_DATE AND TO_DATE(#{lostEndDate}, 'YYYY-MM-DD')<=LOST_END_DATE) -->
-<!--         </if> -->
- 		AND L_STATE_YN = 'Y'
+		SELECT COUNT(*) FROM LOST_BOARD_TBL 
+	    <where>
+	        <if test="lostSearchKeyword != null and !lostSearchKeyword.isEmpty()">
+	            <choose>
+	                <when test="lostSearchCondition == 'lostTitle'">
+	                    LOST_TITLE LIKE '%'||#{lostSearchKeyword}||'%'
+	                </when>
+	                <when test="lostSearchCondition == 'lostContent'">
+	                    LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
+	                </when>
+	            </choose>
+	        </if>
+	        <if test="lostDateStart != null and lostDateEnd != null">
+	            AND LOST_DATE BETWEEN TO_DATE(#{lostDateStart}, 'YYYY-MM-DD') AND TO_DATE(#{lostDateEnd}, 'YYYY-MM-DD')
+	        </if>
+	        <if test="lostCategory != null">
+	            AND LOST_CATEGORY = #{lostCategory}
+	        </if>
+	        <if test="lostLocation != null">
+	            AND LOST_LOCATION = #{lostLocation}
+	        </if>
+	        <if test="lostPlace != null">
+	            AND LOST_PLACE = #{lostPlace}
+	        </if>
+	        <if test="lostColor != null">
+	            AND LOST_COLOR = #{lostColor}
+	        </if>
+	        <if test="lostBrand != null">
+	            AND LOST_BRAND = #{lostBrand}
+	        </if>
+	        AND L_STATE_YN = 'Y'
+	    </where>
 	</select>
 	
 	<!-- 동적쿼리를 이용한 분실물검색 -->
 	<select id="searchLostByKeyword" resultMap="lostBoardResultMap">
-		SELECT * FROM LOST_BOARD_TBL 
-		<if test="lostSearchCondition == 'lostTitle'">
-			WHERE LOST_TITLE LIKE '%'||#{lostSearchKeyword}||'%'
-		</if>
-		<if test="lostSearchCondition == 'lostContent'">
-			WHERE LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
-		</if>
-		<if test="lostLocation != ''"> <!-- 입력을 하면 동작 -->
-			AND LOST_LOCATION LIKE '%'||#{lostLocation}||'%' 		
-		</if>
-		<if test="lostBrand != '' "> 
-			AND LOST_BRAND LIKE '%'||#{lostBrand}||'%' 		
-		</if>
-		<if test="lostColor != ''"> 
-			AND LOST_COLOR LIKE '%'||#{lostColor}||'%'
-		</if>
-<!-- 		<if test="lostStartDate != '' and lostEndDate != ''"> -->
-<!--             AND (TO_DATE(#{lostStartDate}, 'YYYY-MM-DD')>LOST_START_DATE AND TO_DATE(#{lostEndDate}, 'YYYY-MM-DD')<LOST_END_DATE) -->
-<!--         </if> -->
-		AND L_STATE_YN = 'Y'
-		ORDER BY LOST_NO DESC
+	    SELECT * FROM LOST_BOARD_TBL 
+	    <where>
+	        <if test="lostSearchKeyword != null and lostSearchKeyword != null">
+	            <choose>
+	                <when test="lostSearchCondition == 'lostTitle'">
+	                    LOST_TITLE LIKE '%'||#{lostSearchKeyword}||'%'
+	                </when>
+	                <when test="lostSearchCondition == 'lostContent'">
+	                    LOST_CONTENT LIKE '%'||#{lostSearchKeyword}||'%'
+	                </when>
+	            </choose>
+	        </if>
+	        <if test="lostDateStart != null and lostDateEnd != null">
+	            AND LOST_DATE BETWEEN TO_DATE(#{lostDateStart}, 'YYYY-MM-DD') AND TO_DATE(#{lostDateEnd}, 'YYYY-MM-DD')
+	        </if>
+	        <if test="lostCategory != null">
+	            AND LOST_CATEGORY = #{lostCategory}
+	        </if>
+	        <if test="lostLocation != null">
+	            AND LOST_LOCATION = #{lostLocation}
+	        </if>
+	        <if test="lostPlace != null">
+	            AND LOST_PLACE = #{lostPlace}
+	        </if>
+	        <if test="lostColor != null">
+	            AND LOST_COLOR = #{lostColor}
+	        </if>
+	        <if test="lostBrand != null">
+	            AND LOST_BRAND = #{lostBrand}
+	        </if>
+	        AND L_STATE_YN = 'Y' ORDER BY LOST_NO DESC
+	    </where>
 	</select>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- 분실물게시판 통합검색 총 게시물 수  -->
 	<select id="totalSearchFindCount" resultType="_int">
@@ -153,7 +197,7 @@
 		AND F_STATE_YN = 'Y'
 	</select>
 	
-	<!-- 동적쿼리를 이용한 습득물검색 -->
+	<!-- 동적쿼리를 이용한 습득물통합검색 -->
 	<select id="totalSearchFindByKeyword" resultMap="FindBoardResultMap">
 		SELECT * FROM FIND_BOARD_TBL 
 		WHERE (FIND_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
@@ -177,7 +221,7 @@
 		AND L_STATE_YN = 'Y'
 	</select>
 	
-	<!-- 동적쿼리를 이용한 분실물검색 -->
+	<!-- 동적쿼리를 이용한 분실물통합검색 -->
 	<select id="totalSearchLostByKeyword" resultMap="lostBoardResultMap">
 		SELECT * FROM LOST_BOARD_TBL 
 		WHERE (LOST_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
@@ -188,6 +232,16 @@
 		AND L_STATE_YN = 'Y'
 		ORDER BY LOST_NO DESC
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<select id="showLostBoardById" resultMap="lostBoardResultMap">
 		SELECT * FROM LOST_BOARD_TBL WHERE LOST_WRITER=#{lostWriter} AND L_STATE_YN = 'Y' ORDER BY L_CREATE_DATE DESC
