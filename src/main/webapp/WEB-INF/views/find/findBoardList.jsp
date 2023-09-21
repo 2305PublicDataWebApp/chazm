@@ -148,7 +148,6 @@
 	    
 	                    <div id="search_wrap" class="d-flex m-2 w-100 ">
 	                        <select name="findSearchCondition" class="w-25 border-end border-dark-subtle rounded-start text-center" style="height: 40px;">
-	                        	<option value="all">전체</option>
 	                            <option value="title">제목</option>
 	                            <option value="content">내용</option>
 	                        </select>
