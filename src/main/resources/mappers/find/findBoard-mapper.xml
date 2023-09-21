@@ -64,13 +64,13 @@
 	        <if test="findSearchKeyword != null and !findSearchKeyword.isEmpty()">
 	            <choose>
 	                <when test="findSearchCondition == 'title'">
-	                    FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%'
+	                    AND FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%'
 	                </when>
 	                <when test="findSearchCondition == 'content'">
-	                    FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%'
+	                    AND FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%'
 	                </when>
 	                <otherwise>
-	                    (FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%' OR FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%')
+	                    AND (FIND_TITLE LIKE '%'||#{findSearchKeyword}||'%' OR FIND_CONTENT LIKE '%'||#{findSearchKeyword}||'%')
 	                </otherwise>
 	            </choose>
 	        </if>

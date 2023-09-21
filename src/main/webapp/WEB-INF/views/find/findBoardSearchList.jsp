@@ -158,7 +158,6 @@
 	    
 	                    <div id="search_wrap" class="d-flex m-2 w-100 ">
 	                        <select name="findSearchCondition" class="w-25 border-end border-dark-subtle rounded-start text-center" style="height: 40px;">
-	                        	<option value="all" <c:if test="${paramMap.findSearchCondition == 'all' }">selected</c:if>>전체</option>
 	                            <option value="title" <c:if test="${paramMap.findSearchCondition == 'title' }">selected</c:if>>제목</option>
 	                            <option value="content" <c:if test="${paramMap.findSearchCondition == 'content' }">selected</c:if>>내용</option>
 	                        </select>
@@ -207,7 +206,7 @@
                                     <li><a class="dropdown-item dd-location" data-value="제주특별자치도">제주특별자치도</a></li>
                                 </ul>
 	                        </div>
-	    					<input type="hidden" name="findLocation" id="selectedLocationInput" value="">
+	    					<input type="hidden" name="findLocation" id="selectedLocationInput" value="${paramMap.findLocation}">
 	                    </div>
 	    
 	                    <div id="colorBrand" class="d-flex justify-content-between m-2 w-100 " >
@@ -232,7 +231,7 @@
                                     <li><a class="dropdown-item dd-color" data-value="기타">기타</a></li>
                                 </ul>
 	                        </div>
-	    					<input type="hidden" name="findColor" id="selectedColorInput" value="">
+	    					<input type="hidden" name="findColor" id="selectedColorInput" value="${paramMap.findColor}">
 	                        <div id="find_brand" class="w-50 ">
 	                            <input type="text" name="findBrand" placeholder="브랜드" class=" w-100 p-3 border border-dark-subtle rounded" 
 	                            value="${paramMap.findBrand}" style="height:40px;">
