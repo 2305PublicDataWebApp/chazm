@@ -234,7 +234,8 @@
 	                        </div>
 	    					<input type="hidden" name="findColor" id="selectedColorInput" value="">
 	                        <div id="find_brand" class="w-50 ">
-	                            <input type="text" name="findBrand" placeholder="브랜드" class=" w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
+	                            <input type="text" name="findBrand" placeholder="브랜드" class=" w-100 p-3 border border-dark-subtle rounded" 
+	                            value="${paramMap.findBrand}" style="height:40px;">
 	                        </div>
 	                    </div>
 	    
