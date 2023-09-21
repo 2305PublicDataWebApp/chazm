@@ -73,7 +73,8 @@ B1A3 세미프로젝트
     - **리워드 시스템**: 등급과 선물 또는 포상 시스템을 도입하여 사용자들에게 보상을 제공합니다.
     - **기부 시스템**: 주인을 찾지 못한 분실물들은 폐기처리가 됩니다. 그 중에서도 가장 인계률이 낮은 옷들을 찾음이 모아서 소외계층에게 기부합니다.
       
-![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/500f8064-c709-4078-b9ad-dd568aa3081a)
+![찾음_발표보고서-012](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/6f0374c5-5c1d-47fc-801f-32c022beb499)
+
 
 ---
 
@@ -115,7 +116,8 @@ B1A3 세미프로젝트
 - **분실물 수정 및 삭제**: 등록한 분실물 정보를 수정하거나 삭제할 수 있습니다.
 - **글 리스트 조회**: 본인이 등록한 글 목록을 조회할 수 있습니다.
   
-![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/f5f715e8-d818-4113-aa1d-213104a48f9d)
+![찾음_발표보고서-013](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/1ee3c1e5-67c3-42d3-a443-2a44da7bdfef)
+
 
 ---
 
@@ -126,7 +128,8 @@ B1A3 세미프로젝트
 - **개발도구**: STS, VS Code, Maven, SQL Developer
 - **협업도구**: GitHub, Slack
 
-![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/eaaeaacc-beda-490f-b8e8-09564cefba92)
+![찾음_발표보고서-015](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/045cd209-9fe7-4e2e-9dd8-a9b1ea579512)
+
 
 
 ---
