@@ -74,7 +74,7 @@
 					<div class="col-md-8">
 						<div class="card">
 							<div class="card-header" style="background: #fff; color: #4365BC;">
-								<h1>개인 회원가입</h1>
+								<h2>개인 회원가입</h2>
 							</div>
 							<div class="card-body">
 								<form class="sign-form" action="/member/insertIDN.do" method="post">
