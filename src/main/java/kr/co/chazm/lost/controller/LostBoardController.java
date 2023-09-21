@@ -158,6 +158,7 @@ public class LostBoardController {
 									  , @RequestParam(value="lostStartDate", required=false ) Date lostStartDate
 									  , @RequestParam(value="lostEndDate", required=false ) Date lostEndDate
 									  , @RequestParam(value="lostBrand", required=false ) String lostBrand
+									  , @RequestParam(value="lostMaybe", required=false ) String lostMaybe
 									  , @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 									  , HttpSession session
 									  , HttpServletRequest request) {
@@ -264,11 +265,24 @@ public class LostBoardController {
 											,HttpSession session) {
 	//		String lostWriter = (String)session.getAttribute("memberId");
 			
+//			//댓글수 카운트
+//			LostReply lostReply = new LostReply();
+//			int lostNo = lostReply.getRefLostNo();
+//			Integer totalReplyCount = lostReplyService.getReplyListCount(lostNo); 
+			
 			Integer totalCount = lostBoardService.getListCount();
 			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 			List<LostBoard>lList = lostBoardService.selectLostBoardList(pInfo);
+//			Integer totalReplyCount = 0;
 			try {
 				if(lList.size()>0) {
+					for (LostBoard lostBoard : lList) {
+		                // 각 게시물에 대한 리플 갯수를 가져와서 설정
+		                int lostNo = lostBoard.getLostNo();
+		                Integer totalReplyCount = lostReplyService.getReplyListCount(lostNo);
+		                lostBoard.setTotalReplyCount(totalReplyCount);
+		                
+		            }
 					mv.addObject("lList", lList).addObject("pInfo",pInfo).setViewName("lost/lostBoard");
 				}else {
 					mv.addObject("msg", "등록된 분실물 리스트가 없습니다").setViewName("lost/lostBoard");
@@ -312,11 +326,7 @@ public class LostBoardController {
 //						List<LostReply>lRRList = lostReplyService.selectRReplyList(lostRNo);
 						
 						//댓글수 카운트
-						Map<String, Integer> rCountMap = new HashMap<String, Integer>();
-						rCountMap.put("lostNo",lostNo);
-						rCountMap.put("lostRNo",lostRNo);
-//						Integer totalReplyCount = lostReplyService.getReplyListCount(refLostNo);
-						Integer totalReplyCount = lostReplyService.getReplyListCount(rCountMap); 
+						Integer totalReplyCount = lostReplyService.getReplyListCount(refLostNo);
 						
 						//좋아요눌렀는지 여부 
 						Integer likeYn = lostBoardService.checkLikeYn(lostLike); // 0:안누름 / 1:누름
@@ -342,7 +352,7 @@ public class LostBoardController {
 					}
 				}else {
 					mv.addObject("msg", "로그인 해야 상세보기가 가능합니다");
-					mv.addObject("url", "/lostBoard/list.do");
+					mv.addObject("url", "/member/login.do");
 					mv.setViewName("common/message");
 				}
 			} catch (Exception e) {
@@ -369,20 +379,33 @@ public class LostBoardController {
 									  , @RequestParam("lostLocation") String lostLocation
 									  , @RequestParam("lostBrand") String lostBrand
 									  , @RequestParam("lostColor") String lostColor
-//									  , @RequestParam("lostStartDate") @DateTimeFormat(pattern = "yyyyMMdd") Date lostStartDate
-//									  , @RequestParam("lostEndDate") @DateTimeFormat(pattern = "yyyyMMdd") Date  lostEndDate
+//									  , @RequestParam(value = "lostStartDate", required = false) String lostStartDate
+//									  , @RequestParam(value = "lostEndDate", required = false) String lostEndDate
+//									  , @RequestParam("lostStartDate") String lostStartDate
+//									  , @RequestParam("lostEndDate") String  lostEndDate
 									  , @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 									  ) {
+		 
+//		LostBoard lostBoard = new LostBoard();
+//		Date start = lostBoard.getLostStartDate();
+//		Date end = lostBoard.getLostEndDate();
+//		boolean dateChk = false;
+//
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); 
+//		Date startDate = dateFormat.parse(start);
+//		Date endtDate = dateFormat.parse(end);
+
 		
+	
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("lostSearchCondition",lostSearchCondition);
 		searchMap.put("lostSearchKeyword",lostSearchKeyword);
 		searchMap.put("lostLocation",lostLocation);
 		searchMap.put("lostBrand",lostBrand);
 		searchMap.put("lostColor",lostColor);
-		
 //		searchMap.put("lostStartDate",lostStartDate);
 //		searchMap.put("lostEndDate",lostEndDate);
+	
 	
 		
 		//서치 페이징처리
@@ -398,6 +421,8 @@ public class LostBoardController {
 				.addObject("lostLocation",lostLocation)
 				.addObject("lostBrand",lostBrand)
 				.addObject("lostColor",lostColor)
+//				.addObject("lostStartDate",lostStartDate)
+//				.addObject("lostEndDate",lostEndDate)
 				.addObject("pInfo",pInfo)
 				.addObject("searchLostList",searchLostList);
 				
@@ -535,7 +560,7 @@ public class LostBoardController {
 	public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws IllegalStateException, IOException{
 		Map<String, Object>fileMap = new HashMap<String, Object>();
 		//resources 경로 구하기 
-		String root = request.getSession().getServletContext().getRealPath("resources/assets/img"); //살제 저장하고싶은 경로(resources)
+		String root = request.getSession().getServletContext().getRealPath("resources"); //살제 저장하고싶은 경로(resources)
 		//파일 저장 경로 구하기
 		String savePath = root + "\\luploadFiles";
 		//파일이름 구하기
@@ -544,7 +569,7 @@ public class LostBoardController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");  
 		String strResult = sdf.format(new Date(System.currentTimeMillis()));
 		String ext = fileName.substring(fileName.lastIndexOf(".")+1);	
-		String fileRename = "l"+strResult+"."+ext; 
+		String fileRename = "L"+strResult+"."+ext; 
 		
 		//파일 저장 전 폴더만들기 
 		File saveFolder = new File(savePath);
@@ -557,7 +582,7 @@ public class LostBoardController {
 		uploadFile.transferTo(saveFile); 
 		fileMap.put("fileName", fileName);
 		fileMap.put("fileRename", fileRename);
-		fileMap.put("filePath", "../resources/assets/img/luploadFiles/"+fileRename);
+		fileMap.put("filePath", "../resources/luploadFiles/"+fileRename);
 		
 		return fileMap;		
 		
@@ -600,10 +625,10 @@ public class LostBoardController {
 				.addObject("fPInfo",fPInfo)
 				.addObject("tSFindList",tSFindList);
 				
-				mv.setViewName("lost/totalSearchNew");
+				mv.setViewName("common/totalSearchNew");
 				
 			}else {
-				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("lost/totalSearchNew");
+				mv.addObject("msg", "검색된 습득물 리스트가 없습니다").setViewName("common/totalSearchNew");
 			}
 			//분실물
 			if(tSLostList.size()>0) {
@@ -611,18 +636,21 @@ public class LostBoardController {
 				.addObject("lPInfo",lPInfo)
 				.addObject("tSLostList",tSLostList);
 				
-				mv.setViewName("lost/totalSearchNew");
+				mv.setViewName("common/totalSearchNew");
 				
 			}else {
-				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("lost/totalSearchNew");
+				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("common/totalSearchNew");
 			}	
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의바랍니다");
-			mv.addObject("url", "/lostBoard/list.do");
+			mv.addObject("url", "/index.jsp");
 			mv.setViewName("common/message");
 		}
 		return mv;
 	}
+	
+	
+	
 	
 
 }

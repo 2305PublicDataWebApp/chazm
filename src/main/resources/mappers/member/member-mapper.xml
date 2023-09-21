@@ -89,7 +89,7 @@
  	</select>
  	
  	<select id="showPointById" resultMap="pointResultMap">
- 		SELECT * FROM POINT_TBL WHERE MEMBER_ID = #{member.memberId}
+ 		SELECT * FROM POINT_TBL WHERE MEMBER_ID = #{member.memberId} ORDER BY P_UPDATE_DATE DESC
  	</select>
  	
  	<select id="totalUsePointById" resultType="_int">

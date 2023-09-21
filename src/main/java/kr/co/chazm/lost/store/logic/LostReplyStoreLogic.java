@@ -12,11 +12,6 @@ import kr.co.chazm.lost.store.LostReplyStore;
 @Repository
 public class LostReplyStoreLogic implements LostReplyStore{
 	
-//	@Override
-//	public Integer getReplyListCount(SqlSession session) {
-//		Integer result = session.selectOne("LostReplyMapper.getReplyListCount");
-//		return result;
-//	}
 
 	@Override
 	public List<LostReply> selectReplyList(SqlSession session, Integer refLostNo) {
@@ -49,14 +44,9 @@ public class LostReplyStoreLogic implements LostReplyStore{
 		return result;
 	}
 
-//	@Override
-//	public Integer getReplyListCount(SqlSession session, Integer refLostNo) {
-//		Integer result = session.selectOne("LostReplyMapper.getReplyListCount", refLostNo);
-//		return result;
-//	}
 	@Override
-	public Integer getReplyListCount(SqlSession session, Map<String, Integer> rCountMap) {
-		Integer result = session.selectOne("LostReplyMapper.getReplyListCount", rCountMap);
+	public Integer getReplyListCount(SqlSession session, Integer refLostNo) {
+		Integer result = session.selectOne("LostReplyMapper.getReplyListCount", refLostNo);
 		return result;
 	}
 

@@ -166,7 +166,7 @@
 												<div class="row pt-1">
 													<div class="col-6 mb-3">
 														<h5>주소</h5>
-														<p class="text-muted">${member.memberAddress }</p>
+														<p class="text-muted" style="width:400px;">${member.memberAddress }</p>
 													</div>
 												</div>
 												<div class="d-flex justify-content-start">
@@ -192,11 +192,20 @@
 									<div class="row" style="margin-bottom: 50px">
 										<div class="four col-md-3">
 											<div class="counter-box colored">
-												<i class="bi bi-pencil-fill"></i> <span
-													data-purecounter-start="0"
-													data-purecounter-end="${myPostCount}"
-													data-purecounter-duration="1" class="purecounter counter"></span>
-												<p>작성한 글</p>
+												<c:if test="${memberGrade eq 1 }">
+													<i class="bi bi-pencil-fill"></i> <span
+														data-purecounter-start="0"
+														data-purecounter-end="${myPostCount}"
+														data-purecounter-duration="1" class="purecounter counter"></span>		
+													<p>작성한 글</p>
+												</c:if>
+												<c:if test="${memberGrade eq 2 }">
+													<i class="bi bi-pencil-fill"></i> <span
+														data-purecounter-start="0"
+														data-purecounter-end="${myPostFindCount}"
+														data-purecounter-duration="1" class="purecounter counter"></span>		
+													<p>작성한 글</p>
+												</c:if>												
 											</div>
 										</div>
 										<div class="four col-md-3">
@@ -271,13 +280,13 @@
 															href="${prevUrl }"><i class="bi bi-chevron-left"></i></a></li>
 														<c:forEach begin="${pageLostInfo.startNavi }"
 															end="${pageLostInfo.endNavi }" var="p">
-															<c:url var="pageUrl" value="/plusA/list.do">
+															<c:url var="pageUrl" value="/member/myPage.do">
 																<c:param name="page" value="${p }"></c:param>
 															</c:url>
 															<li class="page-item"><a class="page-link"
 																href="${pageUrl }">${p }</a></li>
 														</c:forEach>
-														<c:url var="nextUrl" value="/plusA/list.do">
+														<c:url var="nextUrl" value="/member/myPage.do">
 															<c:param name="page" value="${pageLostInfo.endNavi + 1 }"></c:param>
 														</c:url>
 														<li class="page-item"><a class="page-link"
@@ -443,7 +452,7 @@
 								<div class="row" style="margin-bottom: 50px">
 									<div class="four col-md-3">
 										<div class="counter-box colored">
-											<i class="bi bi-piggy-bank"></i> <span
+											<i class="bi bi-p-circle"></i> <span
 												data-purecounter-start="0"
 												data-purecounter-end="${member.memberPoint }"
 												data-purecounter-duration="1" class="purecounter counter"></span>
@@ -452,7 +461,7 @@
 									</div>
 									<div class="four col-md-3">
 										<div class="counter-box">
-											<i class="bi bi-envelope-paper-heart"></i> <span
+											<i class="bi bi-piggy-bank-fill"></i> <span
 												data-purecounter-start="0"
 												data-purecounter-end="${memberTotalPoint}"
 												data-purecounter-duration="1" class="purecounter counter"></span>
@@ -462,7 +471,7 @@
 									<!-- 기업일경우 -->
 									<div class="four col-md-3">
 										<div class="counter-box">
-											<i class="bi bi-bag-heart"></i> <span
+											<i class="bi bi-sign-no-parking"></i> <span
 												data-purecounter-start="0"
 												data-purecounter-end="${totalUsePoint }"
 												data-purecounter-duration="1" class="purecounter counter"></span>
@@ -481,7 +490,7 @@
 									</colgroup>
 									<tr>
 										<th>포인트 사용처</th>
-										<th>사용내역</th>
+										<th>내역</th>
 										<th>사용일</th>
 									</tr>
 									<c:forEach items="${pointList }" var="pointList">
