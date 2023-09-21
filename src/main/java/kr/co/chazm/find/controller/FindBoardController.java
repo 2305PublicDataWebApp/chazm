@@ -294,7 +294,7 @@ public class FindBoardController {
 	}
 	
 	// 검색 기능 
-	@RequestMapping(value = "/findBoard/search.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/findBoard/search.do", method = RequestMethod.GET)
 	public ModelAndView showFindBoardSearch(
 			@RequestParam(value="findDateStart", required = false) String findDateStart
             , @RequestParam(value="findDateEnd", required = false) String findDateEnd
