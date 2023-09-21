@@ -209,9 +209,9 @@
 									</div>
 								</div>
 								<!-- End post content -->
-								<hr>
-								<div class="lostContent">${lostBoard.lostContent }</div>
-								<hr>
+								<div class="lostContent">
+									${lostBoard.lostContent }
+								</div>
 
 								<!-- 글수정버튼Url -->
                                 <c:url  var="updateLostBoardUrl" value="/lostBoard/update.do">
@@ -414,7 +414,7 @@
 		<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e18014706e90e67888b15942cf5bc5ae&libraries=services"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07ff3550f3413fb406de3abc16437467&libraries=services"></script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
