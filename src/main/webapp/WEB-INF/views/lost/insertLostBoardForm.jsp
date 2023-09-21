@@ -220,17 +220,21 @@
 										
 					
 										<!--분실일자-->
-										<div id="lostDate" class="d-flex mt-2 w-100" >
-											<div class="w-50">
-												<input type="date" name="lostStartDate" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;"> 
-											</div>
-											<div class="w-auto ms-2 me-2 d-flex align-items-center">
-												<h5 class="text-black " > ~ </h5>
-											</div>
-											<div class="w-50">
-												<input type="date" name="lostEndDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;">
-											</div>
-										</div>
+<!-- 										<div id="lostDate" class="d-flex mt-2 w-100" > -->
+<!-- 											<div class="w-50"> -->
+<!-- 												<input type="date" name="lostStartDate" class="p-1 w-100 border border-dark-subtle rounded-start text-center" style="height: 40px;">  -->
+<!-- 											</div> -->
+<!-- 											<div class="w-auto ms-2 me-2 d-flex align-items-center"> -->
+<!-- 												<h5 class="text-black " > ~ </h5> -->
+<!-- 											</div> -->
+<!-- 											<div class="w-50"> -->
+<!-- 												<input type="date" name="lostEndDate" class="p-1 w-100 border border-dark-subtle rounded-end text-center" style="height: 40px;"> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+												<div id="lost_date" class="d-flex mt-2 w-100">
+													<input type="date" name="lostStartDate" id="lostDate" class="p-1 w-100 border border-dark-subtle rounded text-center"
+														style="height: 40px;" placeholder="분실일자">
+												</div>
 					
 										<!--분실물 색, 브랜드-->
 										<div id="colorBrand" class="d-flex mt-2 w-100" >

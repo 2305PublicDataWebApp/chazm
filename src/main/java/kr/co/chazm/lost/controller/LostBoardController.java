@@ -22,14 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.chazm.find.domain.FindBoard;
-import kr.co.chazm.find.service.FindBoardService;
 import kr.co.chazm.lost.domain.LostBoard;
 import kr.co.chazm.lost.domain.LostLike;
 import kr.co.chazm.lost.domain.LostReply;
 import kr.co.chazm.lost.domain.PageInfo;
 import kr.co.chazm.lost.service.LostBoardService;
 import kr.co.chazm.lost.service.LostReplyService;
-import kr.co.chazm.plusmember.domain.PlusMLike;
 
 @Controller
 public class LostBoardController {
@@ -416,6 +414,13 @@ public class LostBoardController {
 		try {
 			
 			if(searchLostList.size()>0) {
+				
+				for (LostBoard lostBoard : searchLostList) {
+	                // 각 게시물에 대한 리플 갯수를 가져와서 설정
+	                int lostNo = lostBoard.getLostNo();
+	                Integer totalReplyCount = lostReplyService.getReplyListCount(lostNo);
+	                lostBoard.setTotalReplyCount(totalReplyCount);
+	            }
 				mv.addObject("lostSearchCondition",lostSearchCondition)
 				.addObject("lostSearchKeyword",lostSearchKeyword)
 				.addObject("lostLocation",lostLocation)
@@ -628,7 +633,7 @@ public class LostBoardController {
 				mv.setViewName("common/totalSearchNew");
 				
 			}else {
-				mv.addObject("msg", "검색된 습득물 리스트가 없습니다").setViewName("common/totalSearchNew");
+				mv.addObject("msg", "검색된 습득물이 없습니다").setViewName("common/totalSearchNew");
 			}
 			//분실물
 			if(tSLostList.size()>0) {
@@ -639,7 +644,7 @@ public class LostBoardController {
 				mv.setViewName("common/totalSearchNew");
 				
 			}else {
-				mv.addObject("msg", "검색된 분실물 리스트가 없습니다").setViewName("common/totalSearchNew");
+				mv.addObject("msg", "검색된 분실물이 없습니다").setViewName("common/totalSearchNew");
 			}	
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의바랍니다");

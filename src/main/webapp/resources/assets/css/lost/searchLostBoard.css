@@ -850,5 +850,13 @@ input[type=submit] {
 	padding: 10px;
 	text-align : center;
 	color : #c0c0c0;
-	
+}
+
+.category-icon.selected {
+    background-color: #ffd94d; 
+    color: #fff; 
+}
+
+.commentIcon {
+	margin-right : 2px;
 }
