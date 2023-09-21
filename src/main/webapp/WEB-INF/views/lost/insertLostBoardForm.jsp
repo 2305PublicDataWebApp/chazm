@@ -280,10 +280,11 @@
                                     <textarea id="summernote" name="lostContent" spellcheck="false"></textarea>
                                 </div>
                                 <hr>
-                                <div id="mainPart3" class="d-flex">   
+                                 <div class="btn-wrap">  
 	                                <button type="submit" class="btn" style="background-color: #4365BC; color:#fff" id="insertBtn">등록하기</button>
 	                                <button type="reset" class="btn" style="background-color: #818181; color:#fff" id="resetBtn">취소하기</button>
                                 </div>
+
                                 </form>
                                 <!-- End Blog Sidebar -->
                             </div>

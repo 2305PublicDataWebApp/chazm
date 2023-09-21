@@ -842,3 +842,11 @@ input[type=submit] {
     padding-top : 0px;
 }
 
+.no-lost{
+	--border-top : 1px dotted #ccc;
+	--border-bottom : 1px dotted #ccc;
+	padding: 10px;
+	text-align : center;
+	color : #c0c0c0;
+	
+}

@@ -111,7 +111,7 @@
 								<div class="content">
 									<div class="content-img">
 										<c:if test="${!empty lostBoard.lostFilerename }">  <!-- 첨부이미지 있을때 -->
-                                            <img src="../resources/assets/img/luploadFiles/${lostBoard.lostFilerename}" data-gallery="portfolio-gallery-app" class="glightbox"></a>
+                                            <img src="../resources/luploadFiles/${lostBoard.lostFilerename}" data-gallery="portfolio-gallery-app" class="glightbox"></a>
                                              
                                         </c:if>
 <%--                                         <c:if test="${empty lostBoard.lostFilerename }">  <!-- 첨부이미지 없을때 --> --%>
@@ -260,176 +260,125 @@
 							               	</div>       			
 		                                </div>
 			              			</c:if>
-			              			<c:forEach var="lostReply" items="${lRList}" varStatus="i"> 
-			              				<!-- 댓글 css-->
-			              				<c:if test="${lostReply.level == '1' }">
-										<div id="comment-${lostReply.lostRNo}" class="comment reply-border">
-		                                    <div class="d-flex">
-		                                        <div class="comment-img"><img src="#" alt=""></div>
-			                                        <div>
+			              			
+			              			
+				              			<c:forEach var="lostReply" items="${lRList}" varStatus="i"> 
+<!-- 				              			<div class="reply-border"> -->
+				              				<!-- 댓글 css-->
+				              				<c:if test="${lostReply.level == '1' }">
+											<div id="comment-${lostReply.lostRNo}" class="comment ">
+			                                    <div class="d-flex">
+			                                        <div class="comment-img"><img src="#" alt=""></div>
+				                                        <div>
+															<h5>${lostReply.lostRWriter }
+				                                          
+																<!-- 내가 쓴 글일때만 버튼 보이게 (댓쓴사람만 수정,삭제하도록)  -->
+			                                    				<c:if test="${lostReply.lostRWriter eq memberId }">
+				                                    				<!-- 댓수정버튼 -->
+																	<a href="javascript:void(0)" class="reply" 
+					                                            		onclick="showEditForm(this,'${lostReply.lostRNo}')">   <!-- 수정폼 오픈 -->
+					                                            		<i class="bi bi-eraser-fill"></i> 수정
+					                                            	</a>
+					                                            	<!-- 댓삭제버튼 -->
+					                                            	<c:url var="deleteReplyUrl" value="/lostReply/delete.do">
+																		<c:param name="lostRNo" value="${lostReply.lostRNo }"></c:param>
+																		<c:param name="lostRWriter" value="${lostReply.lostRWriter }"></c:param>  <!-- 자기 자신(로그인한 사람)것만 지울수 있게함 -->
+																		<c:param name="refLostNo" value="${lostReply.refLostNo }"></c:param> <!-- 성공하면 디테일.jsp로 가기위한 boardNo셋팅 -->
+																	</c:url>
+																	<a href="javascript:void(0)" class="reply" 
+																		onclick="deleteReply('${deleteReplyUrl}')">
+																		<i class="bi bi-x-circle"></i> 삭제
+																	</a>
+																</c:if>
+																
+						                     						<!-- 대댓달기버튼 -->
+						                                            <a href="javascript:void(0)" class="reply" onclick="showRReplyForm('${lostReply.lostRNo}')">
+						                                            	<i class="bi bi-reply-fill"></i> Reply
+						                                            </a>
+				                                            	
+				                                        	</h5>
+				                                        	<time datetime="2020-01-01">
+				                                        		<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${lostReply.lostRCreateDate}"/>
+				                                        	</time>
+				                                            <p>${lostReply.lostRContent }</p>
+				                                        </div>
+				                                    </div>
+				                                </div>
+		                                	</c:if>
+		                                	
+		                                	
+		                                	<!-- 대댓글 css -->
+		                                	<c:if test="${lostReply.level == '2' }">
+		                                	<div id="comment-rreply" class="comment comment-reply ">
+												<div class="d-flex">
+													<div class="comment-img">
+														<img src="assets/img/blog/comments-3.jpg" alt="">
+													</div>
+													<div>
 														<h5>${lostReply.lostRWriter }
-			                                          
-															<!-- 내가 쓴 글일때만 버튼 보이게 (댓쓴사람만 수정,삭제하도록)  -->
-		                                    				<c:if test="${lostReply.lostRWriter eq memberId }">
-			                                    				<!-- 댓수정버튼 -->
-																<a href="javascript:void(0)" class="reply" 
-				                                            		onclick="showEditForm(this,'${lostReply.lostRNo}')">   <!-- 수정폼 오픈 -->
-				                                            		<i class="bi bi-eraser-fill"></i> 수정
-				                                            	</a>
-				                                            	<!-- 댓삭제버튼 -->
-				                                            	<c:url var="deleteReplyUrl" value="/lostReply/delete.do">
+															<!-- 내가 쓴 글일때만 버튼 보이게 (대댓쓴사람만 수정,삭제하도록)  -->
+															<c:if test="${lostReply.lostRWriter eq memberId }">
+																<!-- 대댓수정버튼 -->
+																<a href="javascript:void(0)" class="reply"
+																	onclick="showEditForm(this,'${lostReply.lostRNo}')"> <!-- 수정폼 오픈 -->
+																	<i class="bi bi-eraser-fill"></i> 수정
+																</a>
+																
+																<!-- 대댓삭제버튼 -->
+																<c:url var="deleteRReplyUrl" value="/lostReply/delete.do">
 																	<c:param name="lostRNo" value="${lostReply.lostRNo }"></c:param>
-																	<c:param name="lostRWriter" value="${lostReply.lostRWriter }"></c:param>  <!-- 자기 자신(로그인한 사람)것만 지울수 있게함 -->
-																	<c:param name="refLostNo" value="${lostReply.refLostNo }"></c:param> <!-- 성공하면 디테일.jsp로 가기위한 boardNo셋팅 -->
+																	<c:param name="lostRWriter" value="${lostReply.lostRWriter }"></c:param>
+																	<c:param name="refLostNo" value="${lostReply.refLostNo }"></c:param>
 																</c:url>
-																<a href="javascript:void(0)" class="reply" 
-																	onclick="deleteReply('${deleteReplyUrl}')">
+																<a href="javascript:void(0)" class="reply"
+																	onclick="deleteReply('${deleteRReplyUrl}');"> 
 																	<i class="bi bi-x-circle"></i> 삭제
 																</a>
 															</c:if>
-															
-					                     						<!-- 대댓달기버튼 -->
-					                                            <a href="javascript:void(0)" class="reply" onclick="showRReplyForm('${lostReply.lostRNo}')">
-					                                            	<i class="bi bi-reply-fill"></i> Reply
-					                                            </a>
-			                                            	
-			                                        	</h5>
-			                                        	<time datetime="2020-01-01">
+														</h5>
+														<time datetime="2020-01-01">
 			                                        		<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${lostReply.lostRCreateDate}"/>
 			                                        	</time>
-			                                            <p>${lostReply.lostRContent }</p>
-			                                        </div>
-			                                    </div>
-			                                </div>
-	                                	</c:if>
-	                                	<!-- 대댓글 css -->
-	                                	<c:if test="${lostReply.level == '2' }">
-	                                	<div id="comment-rreply" class="comment comment-reply">
-											<div class="d-flex">
-												<div class="comment-img">
-													<img src="assets/img/blog/comments-3.jpg" alt="">
-												</div>
-												<div>
-													<h5>${lostReply.lostRWriter }
-														<!-- 내가 쓴 글일때만 버튼 보이게 (대댓쓴사람만 수정,삭제하도록)  -->
-														<c:if test="${lostReply.lostRWriter eq memberId }">
-															<!-- 대댓수정버튼 -->
-															<a href="javascript:void(0)" class="reply"
-																onclick="showEditForm(this,'${lostReply.lostRNo}')"> <!-- 수정폼 오픈 -->
-																<i class="bi bi-eraser-fill"></i> 수정
-															</a>
-															
-															<!-- 대댓삭제버튼 -->
-															<c:url var="deleteRReplyUrl" value="/lostReply/delete.do">
-																<c:param name="lostRNo" value="${lostReply.lostRNo }"></c:param>
-																<c:param name="lostRWriter" value="${lostReply.lostRWriter }"></c:param>
-																<c:param name="refLostNo" value="${lostReply.refLostNo }"></c:param>
-															</c:url>
-															<a href="javascript:void(0)" class="reply"
-																onclick="deleteReply'${deleteRReplyUrl}');"> 
-																<i class="bi bi-x-circle"></i> 삭제
-															</a>
-														</c:if>
-													</h5>
-													<time datetime="2020-01-01">
-		                                        		<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${lostReply.lostRCreateDate}"/>
-		                                        	</time>
-													<p>${lostReply.lostRContent }</p>
+														<p>${lostReply.lostRContent }</p>
+													</div>
 												</div>
 											</div>
-										</div>
-										</c:if>	
-											<!-- 댓글 수정하기폼 숨겼다 보이기 -->
-			                                <div id="replyEditForm" style="display:none;">
-												<form action="/lostReply/update.do" method="post">
-				                                   <input type="hidden" name="lostRWriter" value="${lostReply.lostRWriter}">
-				                                   <input type="hidden" name="lostRNo" value="${lostReply.lostRNo}">
-				                                   <input type="hidden" name="refLostNo" value="${lostReply.refLostNo }">
-				                                      <div class="row">
-				                                          <div class="col input-area align-items-center">
-				                                              <i class="bi bi-arrow-return-right"></i>
-				                                              <textarea name="lostRContent" class="form-control"
-				                                                  value="${lostReply.lostRContent }"></textarea>
-			                                              	  <button id="updateBtn" type="submit" class="btn btn-primary"
-			                                              			onclick="updateReplyBtn(this,'${lostReply.lostRNo}','${lostReply.refLostNo}');"><h5>수정완료</h5></button>
-				                                          </div>
-				                                      </div>
-				                                </form>
-			                                </div>
-			                                
-											<!-- 대댓글 쓰기-->
-											<form action="/lostReply/insert.do" method="post">
-											<input type="hidden" name="refLostNo" value="${lostReply.refLostNo }"> <!-- 게시글번호 -->
-											<input type="hidden" name="lostRParentNo" value="${lostReply.lostRNo }"> <!-- 댓글번호 -->
-											<div id="addForm-${lostReply.lostRNo }" style="display: none;">
-											<div class="row">
-												<div class="col input-area align-items-center">
-													<textarea class="form-control" name="lostRContent"
-														placeholder="대댓글을 남겨주세요."></textarea>
-													<button id="insertRReplyBtn" type="submit" class="btn btn-primary">완료</button>
-												</div>
-											</div>
-												</div>
-											</form>
-											
-											<!-- 대댓글목록 -->
-<%-- 											<c:forEach var="lostRReply" items="${lRRList }"> --%>
-<%-- 												<c:if test="${lostReply.lostRNo eq lostRReply.lostRParentNo }"> <!-- 댓글번호=대댓글의 모댓글번호일 때 --> --%>
-<!-- 													<div id="comment-rreply" class="comment comment-reply"> -->
-<!-- 														<div class="d-flex"> -->
-<!-- 															<div class="comment-img"> -->
-<!-- 																<img src="assets/img/blog/comments-3.jpg" alt=""> -->
-<!-- 															</div> -->
-<!-- 															<div> -->
-<%-- 																<h5>${lostRReply.lostRWriter } --%>
-<!-- 																	내가 쓴 글일때만 버튼 보이게 (대댓쓴사람만 수정,삭제하도록)  -->
-<%-- 																	<c:if test="${lostRReply.lostRWriter eq memberId }"> --%>
-<!-- 																		대댓수정버튼 -->
-<!-- 																		<a href="javascript:void(0)" class="reply" -->
-<%-- 																			onclick="showEditForm(this,'${lostRReply.lostRNo}')"> <!-- 수정폼 오픈 --> --%>
-<!-- 																			<i class="bi bi-eraser-fill"></i> 수정 -->
-<!-- 																		</a> -->
-																		
-<!-- 																		대댓삭제버튼 -->
-<%-- 																		<c:url var="deleteRReplyUrl" value="/lostReply/delete.do"> --%>
-<%-- 																			<c:param name="lostRNo" value="${lostRReply.lostRNo }"></c:param> --%>
-<%-- 																			<c:param name="lostRWriter" value="${lostRReply.lostRWriter }"></c:param> --%>
-<%-- 																			<c:param name="refLostNo" value="${lostRReply.refLostNo }"></c:param> --%>
-<%-- 																		</c:url> --%>
-<!-- 																		<a href="javascript:void(0)" class="reply" -->
-<%-- 																			onclick="deleteReply'${deleteRReplyUrl}');">  --%>
-<!-- 																			<i class="bi bi-x-circle"></i> 삭제 -->
-<!-- 																		</a> -->
-<%-- 																	</c:if> --%>
-<!-- 																</h5> -->
-<!-- 																<time datetime="2020-01-01"> -->
-<%-- 					                                        		<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${lostRReply.lostRCreateDate}"/> --%>
-<!-- 					                                        	</time> -->
-<%-- 																<p>${lostRReply.lostRContent }</p> --%>
-<!-- 															</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 													대댓글 수정하기폼 숨겼다 보이기 -->
-<!-- 													<div id="" style="display:none;"> -->
-<!-- 														<form action="/lostReply/update.do" method="post"> -->
-<%-- 						                                   <input type="hidden" name="lostRNo" value="${lostRReply.lostRNo }">  --%>
-<%-- 														   <input type="hidden" name="refLostNo" value="${lostRReply.refLostNo }"> --%>
-<%-- 														   <input type="hidden" name="lostRParentNo" value="${lostRReply.lostRParentNo }"> --%>
-<!-- 						                                      <div class="row"> -->
-<!-- 						                                          <div class="col input-area align-items-center"> -->
-<!-- 						                                              <i class="bi bi-arrow-return-right"></i> -->
-<%-- 						                                              <textarea name="lostRContent" class="form-control">${lostRReply.lostRContent }</textarea> --%>
-<!-- 					                                              	  <button type="submit" class="btn btn-primary" -->
-<%-- 					                                              			onclick="updateRReplyBtn(this,'${lostRReply.lostRNo}','${lostRReply.refLostNo}')"> --%>
-<!-- 					                                              			<h5>수정완료</h5> -->
-<!-- 					                                              	  </button> -->
-<!-- 						                                          </div> -->
-<!-- 						                                      </div> -->
-<!-- 						                                </form> -->
-<!-- 				                                	</div> -->
-<%-- 												</c:if> --%>
-<%-- 											</c:forEach> --%>
-		                              	</c:forEach>
+											</c:if>	
+												<!-- 댓글 수정하기폼 숨겼다 보이기 -->
+				                                <div id="replyEditForm" style="display:none;">
+													<form action="/lostReply/update.do" method="post">
+					                                   <input type="hidden" name="lostRWriter" value="${lostReply.lostRWriter}">
+					                                   <input type="hidden" name="lostRNo" value="${lostReply.lostRNo}">
+					                                   <input type="hidden" name="refLostNo" value="${lostReply.refLostNo }">
+					                                      <div class="row">
+					                                          <div class="col input-area align-items-center">
+					                                              <i class="bi bi-arrow-return-right"></i>
+					                                              <textarea name="lostRContent" class="form-control"
+					                                                  value="${lostReply.lostRContent }"></textarea>
+				                                              	  <button id="updateBtn" type="submit" class="btn btn-primary"
+				                                              			onclick="updateReplyBtn(this,'${lostReply.lostRNo}','${lostReply.refLostNo}');"><h5>수정완료</h5></button>
+					                                          </div>
+					                                      </div>
+					                                </form>
+				                                </div>
+				                                
+												<!-- 대댓글 쓰기-->
+												<form action="/lostReply/insert.do" method="post">
+												<input type="hidden" name="refLostNo" value="${lostReply.refLostNo }"> <!-- 게시글번호 -->
+												<input type="hidden" name="lostRParentNo" value="${lostReply.lostRNo }"> <!-- 댓글번호 -->
+													<div id="addForm-${lostReply.lostRNo }" style="display: none;">
+														<div class="row">
+															<div class="col input-area align-items-center">
+																<textarea class="form-control" name="lostRContent"
+																	placeholder="대댓글을 남겨주세요."></textarea>
+																<button id="insertRReplyBtn" type="submit" class="btn btn-primary">완료</button>
+															</div>
+														</div>
+													</div>
+												</form>
+<!-- 												</div> -->
+			                              	</c:forEach>
+			              			
 									</div>
 								</article>
 								<!-- End blog post -->
@@ -525,21 +474,6 @@
 			function showEditForm(obj) {
 				obj.parentElement.parentElement.parentElement.parentElement.nextElementSibling.style.display="";
 			}
-
-			//댓글수정
-//	 		function updateReplyBtn(url){
-//	 			location.href=url;
-//	 		}
-			
-			//댓글수정폼 보이기 
-// 			function showEditForm(lostRNo) {
-// 				const editForm = document.querySelector("#editForm-" + lostRNo);
-// 				if (editForm.style.display == "none") {
-// 					editForm.style.display = "block";
-// 				} else {
-// 					editForm.style.display = "none";
-// 				}
-// 			}
 			
 			//댓글수정
 			function updateReplyBtn(obj, lostRNo, refLostNo){
@@ -555,7 +489,16 @@
 			}
 			
 			
-			
+			// 대댓글 등록폼 
+			function showRReplyForm(lostRNo) {
+				const addForm = document.querySelector("#addForm-" + lostRNo);
+				if (addForm.style.display == "none") {
+					addForm.style.display = "block";
+				} else {
+					addForm.style.display = "none";
+				}
+			}
+
 			
 			
 			
@@ -580,16 +523,7 @@
 			
 			
 			
-			// 대댓글 등록폼 
-			function showRReplyForm(lostRNo) {
-				const addForm = document.querySelector("#addForm-" + lostRNo);
-				if (addForm.style.display == "none") {
-					addForm.style.display = "block";
-				} else {
-					addForm.style.display = "none";
-				}
-			}
-
+			
 			
 		</script>
 	</body>
