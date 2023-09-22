@@ -75,22 +75,27 @@ public class LostBoardController {
 				Integer result = lostBoardService.insertLostBoard(lostBoard);
 				if(result > 0) {
 //					mv.setViewName("redirect://lostBoard/detail.do?lostNo="+lostNo);
-					mv.setViewName("redirect:/lostBoard/list.do");
+					String memberId = lostBoard.getLostWriter();
+					int rOne = lostBoardService.insertPoint(memberId);
+					rOne += lostBoardService.updateMemberPoint(memberId);
+					mv.addObject("msg", "게시글이 등록되었습니다.");
+					mv.addObject("url", "/lostBoard/list.do");
+					mv.setViewName("common/message");
 					
 				}else {
 //					mv.setViewName("<script>alert('글 등록에 실패했습니다'); history.back();</script>");
 					mv.addObject("msg", "글 등록에 실패했습니다.");
-					mv.addObject("url", "lost/lostBoard");
+					mv.addObject("url", "/lostBoard/list.do");
 					mv.setViewName("common/message");
 				}
 			}else {
 				mv.addObject("msg", "로그인해야 글 등록이 가능합니다.");
-				mv.addObject("url", "lost/lostBoard");
+				mv.addObject("url", "/lostBoard/list.do");
 				mv.setViewName("common/message");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", "관리자에게 문의해주세요.");
-			mv.addObject("url", "lost/lostBoard");
+			mv.addObject("url", "/lostBoard/list.do");
 			mv.setViewName("common/message");
 		}
 		return mv;
@@ -520,15 +525,16 @@ public class LostBoardController {
 									  , @ModelAttribute LostBoard lostBoard
 									  , @ModelAttribute FindBoard findBoard
 									  , @RequestParam("totalSearchKeyword") String totalSearchKeyword
-									  , @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+									  , @RequestParam(value="findPage", required=false, defaultValue="1") Integer currentFindPage
+									  , @RequestParam(value="lostPage", required=false, defaultValue="1") Integer currentLostPage) {
 		
 		//통합서치 습득물파트 페이징처리
 		Integer totalSearchFindCount = lostBoardService.totalSearchFindCount(totalSearchKeyword); 
-		PageInfo fPInfo = this.getPageInfo(12, currentPage, totalSearchFindCount);
+		PageInfo fPInfo = this.getPageInfo(12, currentFindPage, totalSearchFindCount);
 		
 		//통합서치 분실물파트 페이징처리
 		Integer totalSearchLostCount = lostBoardService.totalSearchLostCount(totalSearchKeyword); 
-		PageInfo lPInfo = this.getPageInfo(12, currentPage, totalSearchLostCount);
+		PageInfo lPInfo = this.getPageInfo(12, currentLostPage, totalSearchLostCount);
 		
 		
 		

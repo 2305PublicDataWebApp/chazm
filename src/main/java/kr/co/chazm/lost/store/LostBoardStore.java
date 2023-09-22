@@ -61,6 +61,22 @@ public interface LostBoardStore {
 	 */
 	public int countLostBoardById(SqlSession session, String memberId);
 
+	/**
+	 * 게시글 등록시 회원 포인트 지급 Store
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int updateMemberPoint(SqlSession session, String memberId);
+
+	/**
+	 * 게시글 등록시 포인트 테이블 insert Store
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int insertPoint(SqlSession session, String memberId);
+
 
 
 

@@ -125,6 +125,18 @@ public class LostBoardServiceImpl implements LostBoardService{
 		return result;
 	}
 
+	@Override
+	public int updateMemberPoint(String memberId) {
+		int result = lostBoardStore.updateMemberPoint(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int insertPoint(String memberId) {
+		int result = lostBoardStore.insertPoint(session, memberId);
+		return result;
+	}
+
 
 
 

@@ -72,6 +72,20 @@ public interface LostBoardService {
 	 */
 	public int countLostBoardById(String memberId);
 
+	/**
+	 * 게시글 등록시 회원 포인트 지급 Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int updateMemberPoint(String memberId);
+
+	/**
+	 * 게시글 등록시 포인트 테이블 insert Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int insertPoint(String memberId);
+
 
 
 

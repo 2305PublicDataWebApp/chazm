@@ -145,6 +145,18 @@ public class LostBoardStoreLogic implements LostBoardStore {
 		return result;
 	}
 
+	@Override
+	public int updateMemberPoint(SqlSession session, String memberId) {
+		int result = session.update("lostBoardMapper.updateMemberPoint", memberId);
+		return result;
+	}
+
+	@Override
+	public int insertPoint(SqlSession session, String memberId) {
+		int result = session.insert("lostBoardMapper.insertPoint", memberId);
+		return result;
+	}
+
 
 
 
