@@ -40,8 +40,10 @@ public class PlusAController {
 
 	// 게시글 등록
 	@RequestMapping(value = "/plusABoard/insert.do", method = RequestMethod.POST)
-	public ModelAndView insertPlusABoard(ModelAndView mv, @ModelAttribute PlusABoard plusABoard) {
+	public ModelAndView insertPlusABoard(ModelAndView mv, @ModelAttribute PlusABoard plusABoard, HttpSession session) {
 		try {
+			String memberId = (String) session.getAttribute("memberId");
+			plusABoard.setPlusAWriter(memberId);
 			int result = plusAService.insertPlusABoard(plusABoard);
 			if (result > 0) {
 				mv.addObject("msg", "게시글이 등록되었습니다.");

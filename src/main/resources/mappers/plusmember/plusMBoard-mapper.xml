@@ -35,7 +35,7 @@
 	</resultMap>
 	
 	<insert id="insertPlusMBoard">
-		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, '관리자', #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
+		INSERT INTO PLUS_M_BOARD_TBL VALUES(SEQ_PLUS_M_NO.NEXTVAL, #{plusMTitle}, #{plusMContent}, #{plusMWriter}, #{plusMDntPlace}, #{plusMGoalAmount}, DEFAULT, #{plusMFilename}, #{plusMFilerename}, #{plusMFilepath}, #{plusMStartDate}, #{plusMEndDate}, DEFAULT, DEFAULT)
 	</insert>
 	<insert id="insertDonation">
 		INSERT INTO DONATION_TBL VALUES(SEQ_DONATION_NO.NEXTVAL, #{refPlusMNo}, #{memberId}, #{dntPoint}, DEFAULT)

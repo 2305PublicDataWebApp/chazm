@@ -54,8 +54,10 @@ public class PlusMBoardController {
 	@RequestMapping(value = "/plusMBoard/insert.do", produces = "text/html;charset=UTF-8;", method = RequestMethod.POST)
 	public ModelAndView insertPlusMBoard(ModelAndView mv, @ModelAttribute PlusMBoard plusMBoard,
 			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		try {
+			String memberId = (String) session.getAttribute("memberId");
+			plusMBoard.setPlusMWriter(memberId);
 			if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
 				Map<String, Object> pMap = this.saveFile(request, uploadFile);
 				plusMBoard.setPlusMFilename((String) pMap.get("fileName"));
