@@ -205,7 +205,7 @@
 	                                        ${plusABoard.plusATitle }
 	                                    </button>
 	                                </td>
-	                                <td>${plusABoard.plusAWriter }</td>
+	                                <td><c:if test="${plusABoard.plusAWriter eq 'admin' }">관리자</c:if></td>
 	                                <td>${plusABoard.plusACreateDate }</td>
 	                                <td><input class="form-check-input" type="radio" name="checkBoard" id="" value=${plusABoard.plusANo }></td>
 	                            </tr>
