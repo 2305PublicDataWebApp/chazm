@@ -342,6 +342,11 @@ public class FindBoardController {
 		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 		List<FindBoard> searchList = findBoardService.searchFindByKeyword(pInfo, paramMap);
 		if(!searchList.isEmpty()) {
+			for(FindBoard fBoard : searchList) {
+				int findNo = fBoard.getFindNo();
+				Integer totalReplyCount = findReplyService.getReplyCount(findNo);
+				fBoard.setTotalReplyCount(totalReplyCount);
+			}
 			mv.addObject("paramMap", paramMap);
 			mv.addObject("findBoard", findBoard);
 			mv.addObject("pInfo", pInfo);

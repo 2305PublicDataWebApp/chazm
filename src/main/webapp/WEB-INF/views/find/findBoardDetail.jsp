@@ -296,7 +296,7 @@
 														 <i class="bi bi-arrow-return-right"></i>
 														<textarea class="form-control" name="findRContent"
 															placeholder="응원의 댓글을 남겨주세요." required>${findReply.findRContent }</textarea>
-														<button type="submit" class="btn btn-primary">
+														<button type="submit" class="btn btn-primary" style="width:100px;height:45px;margin-left:15px;">
 															<i class="bi bi-send"></i>
 														</button>
 													</div>
@@ -315,7 +315,7 @@
 															value="${findReply.findRNo }">
 														<textarea class="form-control" name="findRContent"
 															placeholder="응원의 댓글을 남겨주세요."></textarea>
-														<button type="submit" class="btn btn-primary">
+														<button type="submit" class="btn btn-primary" style="width:100px;height:45px;margin-left:15px;">
 															<i class="bi bi-send"></i>
 														</button>
 													</div>
@@ -372,7 +372,7 @@
 																 <i class="bi bi-arrow-return-right"></i>
 																<textarea class="form-control" name="findRContent"
 																	placeholder="응원의 댓글을 남겨주세요.">${findReReply.findRContent }</textarea>
-																<button type="submit" class="btn btn-primary">
+																<button type="submit" class="btn btn-primary" style="width:100px;height:45px;margin-left:15px;">
 																	<i class="bi bi-send"></i>
 																</button>
 															</div>
