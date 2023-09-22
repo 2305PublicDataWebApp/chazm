@@ -22,7 +22,14 @@ public class FindBoard {
 	private Date fCreateDate;
 	private Date fUpdateDate;
 	private char fStateYn;
+	private int totalReplyCount;
 	
+	public int getTotalReplyCount() {
+		return totalReplyCount;
+	}
+	public void setTotalReplyCount(int totalReplyCount) {
+		this.totalReplyCount = totalReplyCount;
+	}
 	public int getFindNo() {
 		return findNo;
 	}

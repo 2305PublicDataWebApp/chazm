@@ -293,6 +293,7 @@
 															value="${findReply.findRNo }"> <input
 															type="hidden" name="refFindNo"
 															value="${findReply.refFindNo }">
+														 <i class="bi bi-arrow-return-right"></i>
 														<textarea class="form-control" name="findRContent"
 															placeholder="응원의 댓글을 남겨주세요." required>${findReply.findRContent }</textarea>
 														<button type="submit" class="btn btn-primary">
@@ -368,6 +369,7 @@
 																	value="${findReReply.refFindNo }">
 																<input type="hidden" name="findRParentNo"
 																	value="${findReReply.findRParentNo }">
+																 <i class="bi bi-arrow-return-right"></i>
 																<textarea class="form-control" name="findRContent"
 																	placeholder="응원의 댓글을 남겨주세요.">${findReReply.findRContent }</textarea>
 																<button type="submit" class="btn btn-primary">

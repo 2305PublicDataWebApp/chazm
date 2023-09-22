@@ -251,9 +251,14 @@
 	                                        onerror="this.src='../resources/assets/img/no-image.jpg'" 
 	                                        class="img-fluid" style="width:450px; height:350px;"></a>
 	                                    <div class="portfolio-info">
-	                                        <h4><a href="/findBoard/detail.do?findNo=${findBoard.findNo }" title="More Details">${findBoard.findTitle }</a></h4>
+		                                    <div class="d-flex justify-content-between">
+		                                        <h4><a href="/findBoard/detail.do?findNo=${findBoard.findNo }" title="More Details">${findBoard.findTitle }</a></h4>
+		                                        <div class="d-flex ">
+				                                    <i class="bi bi-chat-dots commentIcon"></i> ${findBoard.totalReplyCount}
+			                                 	</div>
+		                                    </div>
 	                                        <p>${findBoard.memberName }</p>
-<%-- 	                                        <p>${findBoard.fCreateDate }</p> --%>
+	                                        <p>${findBoard.fCreateDate }</p>
 	                                    </div>
 	                                </div>
 	                            </div>
