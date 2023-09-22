@@ -351,7 +351,7 @@
 					                                              <textarea name="lostRContent" class="form-control"
 					                                                  value="${lostReply.lostRContent }"></textarea>
 				                                              	  <button id="updateBtn" type="submit" class="btn btn-primary"
-				                                              			onclick="updateReplyBtn(this,'${lostReply.lostRNo}','${lostReply.refLostNo}');"><h5>수정완료</h5></button>
+				                                              			onclick="updateReplyBtn(this,'${lostReply.lostRNo}','${lostReply.refLostNo}');"><i class="bi bi-send"></i></button>
 					                                          </div>
 					                                      </div>
 					                                </form>
