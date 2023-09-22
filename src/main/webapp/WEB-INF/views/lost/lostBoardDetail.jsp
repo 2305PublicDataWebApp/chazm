@@ -365,7 +365,7 @@
 															<div class="col input-area align-items-center">
 																<textarea class="form-control" name="lostRContent"
 																	placeholder="대댓글을 남겨주세요."></textarea>
-																<button id="insertRReplyBtn" type="submit" class="btn btn-primary">완료</button>
+																<button id="insertRReplyBtn" type="submit" class="btn btn-primary"><i class="bi bi-send"></i></button>															
 															</div>
 														</div>
 													</div>
