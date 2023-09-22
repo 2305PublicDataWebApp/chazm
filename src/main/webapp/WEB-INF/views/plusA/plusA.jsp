@@ -208,7 +208,7 @@
 	                                <td><c:if test="${plusABoard.plusAWriter eq 'admin' }">관리자</c:if></td>
 	                                <td>${plusABoard.plusACreateDate }</td>
 	                                <td><input class="form-check-input" type="radio" name="checkBoard" id="" value=${plusABoard.plusANo }></td>
-	                            </tr>
+	                            </tr> 
 	                            <tr id="plusA-content-${plusABoard.plusANo }" class="accordion-collapse collapse" data-bs-parent="#plusAlist" data-aos="fade-up">
 	                                <td colspan="4" class="accordion-body">
 	                                	<div>
