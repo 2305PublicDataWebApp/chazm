@@ -26,7 +26,7 @@
 <!-- 		SELECT * FROM LOST_REPLY_TBL WHERE REF_LOST_NO = #{refLostNo} AND LOST_R_STATE_YN = 'Y' -->
 <!-- 	</select> -->
 	
-	<!-- 댓글목록(대댓글) -->
+	<!-- 댓글목록(+대댓글) -->
 	<select id="selectReplyList" resultMap="LostReplyResultMap">
 <!-- 		SELECT * FROM LOST_REPLY_TBL WHERE REF_LOST_NO = #{lostRParentNo} AND LOST_R_STATE_YN = 'Y' -->
 		SELECT LEVEL, LOST_REPLY_TBL.* FROM LOST_REPLY_TBL  

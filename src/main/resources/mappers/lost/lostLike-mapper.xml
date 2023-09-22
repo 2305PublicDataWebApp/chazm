@@ -15,10 +15,12 @@
 		SELECT COUNT (*) FROM LOST_LIKE_TBL WHERE REF_LOST_NO = #{refLostNo} AND MEMBER_ID = #{memberId}
 	</select>
 	
+	<!-- 좋아요 등록 -->
 	<insert id="insertLostLike">
 		INSERT INTO LOST_LIKE_TBL VALUES(SEQ_LOST_L_NO.NEXTVAL, #{refLostNo}, #{memberId})
 	</insert>
 	
+	<!-- 좋아요 취소 -->
 	<delete id="deleteLostLike">
 		DELETE FROM LOST_LIKE_TBL WHERE REF_LOST_NO = #{refLostNo} AND MEMBER_ID = #{memberId}
 	</delete>

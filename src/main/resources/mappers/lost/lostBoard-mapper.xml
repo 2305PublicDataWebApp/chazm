@@ -164,27 +164,7 @@
 	    </where>
 	</select>
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	<!-- 분실물게시판 통합검색 총 게시물 수  -->
 	<select id="totalSearchFindCount" resultType="_int">
@@ -237,14 +217,7 @@
 		ORDER BY LOST_NO DESC
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	<select id="showLostBoardById" resultMap="lostBoardResultMap">

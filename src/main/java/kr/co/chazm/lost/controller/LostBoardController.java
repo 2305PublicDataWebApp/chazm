@@ -437,12 +437,7 @@ public class LostBoardController {
 	
 //	공통메소드*******************************************************************************************
 	
-	/**
-	 * 페이지네이션 메소드
-	 * @param currentPage
-	 * @param totalCount
-	 * @return
-	 */
+	//페이지네이션 메소드
 	public PageInfo getPageInfo(int recordCountPerPage, Integer currentPage, Integer totalCount) {
 //		int recordCountPerPage = 0;
 		int naviCountPerPage = 5;
@@ -459,11 +454,7 @@ public class LostBoardController {
 		return pInfo;
 	}
 	
-	/**
-	 * 파일삭제 메소드
-	 * @param fileRename
-	 * @param request
-	 */
+	//파일삭제 메소드
 	private void deleteFile(String fileRename, HttpServletRequest request ) {
 		String root = request.getSession().getServletContext().getRealPath("resources"); //파일 경로 가져오기
 		String delFilepath = root+"\\luploadFiles\\"+fileRename;
@@ -473,14 +464,7 @@ public class LostBoardController {
 		}
 	}
 	
-	/**
-	 * 파일저장메소드
-	 * @param request
-	 * @param uploadFile
-	 * @return
-	 * @throws IllegalStateException
-	 * @throws IOException
-	 */
+	//파일저장메소드
 	public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws IllegalStateException, IOException{
 		Map<String, Object>fileMap = new HashMap<String, Object>();
 		//resources 경로 구하기 
@@ -512,14 +496,7 @@ public class LostBoardController {
 		
 	}
 	
-	/**
-	 * 통합검색
-	 * @param mv
-	 * @param lostBoard
-	 * @param totalSearchKeyword
-	 * @param currentPage
-	 * @return
-	 */
+	//통합검색
 	@RequestMapping(value = "/totalSearch/search.do", method = RequestMethod.GET)
 	public ModelAndView searchLostBoard(ModelAndView mv
 									  , @ModelAttribute LostBoard lostBoard

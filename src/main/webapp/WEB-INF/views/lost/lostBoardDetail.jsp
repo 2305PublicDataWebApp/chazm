@@ -288,7 +288,7 @@
 																
 						                     						<!-- 대댓달기버튼 -->
 						                                            <a href="javascript:void(0)" class="reply" onclick="showRReplyForm('${lostReply.lostRNo}')">
-						                                            	<i class="bi bi-reply-fill"></i> Reply
+						                                            	<i class="bi bi-reply-fill"></i> 답글
 						                                            </a>
 				                                            	
 				                                        	</h5>
@@ -348,8 +348,7 @@
 					                                      <div class="row">
 					                                          <div class="col input-area align-items-center">
 					                                              <i class="bi bi-arrow-return-right"></i>
-					                                              <textarea name="lostRContent" class="form-control"
-					                                                  value="${lostReply.lostRContent }"></textarea>
+					                                              <textarea name="lostRContent" class="form-control">${lostReply.lostRContent }</textarea>
 				                                              	  <button id="updateBtn" type="submit" class="btn btn-primary"
 				                                              			onclick="updateReplyBtn(this,'${lostReply.lostRNo}','${lostReply.refLostNo}');"><i class="bi bi-send"></i></button>
 					                                          </div>
@@ -357,7 +356,7 @@
 					                                </form>
 				                                </div>
 				                                
-												<!-- 대댓글 쓰기-->
+												<!-- 대댓글 쓰기폼-->
 												<form action="/lostReply/insert.do" method="post">
 												<input type="hidden" name="refLostNo" value="${lostReply.refLostNo }"> <!-- 게시글번호 -->
 												<input type="hidden" name="lostRParentNo" value="${lostReply.lostRNo }"> <!-- 댓글번호 -->

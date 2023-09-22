@@ -17,13 +17,7 @@ public class LostReplyController {
 	@Autowired
 	private LostReplyService lostReplyService;
 	
-	/**
-	 * 댓글등록
-	 * @param mv
-	 * @param lostReply
-	 * @param session/lostReply/update.do
-	 * @return
-	 */
+	//댓글등록
 	@RequestMapping(value="/lostReply/insert.do", method=RequestMethod.POST)
 	public ModelAndView insertLostReply(ModelAndView mv
 									  , @ModelAttribute LostReply lostReply
@@ -58,13 +52,7 @@ public class LostReplyController {
 	}
 	
 	
-	/**
-	 * 댓글 삭제 
-	 * @param mv
-	 * @param lostReply
-	 * @param session
-	 * @return
-	 */
+	//댓글 삭제 
 	@RequestMapping(value="/lostReply/delete.do", method=RequestMethod.GET)
 	public ModelAndView deleteLostReply (ModelAndView mv
 										, @ModelAttribute LostReply lostReply
@@ -100,13 +88,7 @@ public class LostReplyController {
 		return mv;
 	}
 	
-	/**
-	 * 댓글 수정
-	 * @param mv
-	 * @param lostReply
-	 * @param session
-	 * @return
-	 */
+	//댓글 수정
 	@RequestMapping(value="/lostReply/update.do", method=RequestMethod.POST)
 	public ModelAndView updateLostReply(ModelAndView mv
 								 , @ModelAttribute LostReply lostReply
