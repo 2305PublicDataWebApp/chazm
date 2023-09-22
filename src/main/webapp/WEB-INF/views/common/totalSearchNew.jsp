@@ -217,10 +217,16 @@
 	                                        <h4><a href="${detailLostUrl}" title="More Details">${totalLost.lostTitle}</a></h4>
 	                                        <p>${totalLost.lCreateDate}</p>
 	                                    </div>
-	                                    <div class="donationBottom d-flex" style="justify-content: space-between;">
-	                                        <strong>종류 : ${totalLost.lostCategory}</strong>
-	                                        <strong>색상 : ${totalLost.lostColor}</strong>
-	                                        <strong>브랜드 : ${totalLost.lostBrand}</strong>
+	                                    <div class="col donationBottom d-flex" style="justify-content: space-between;">
+	                                    	<c:if test="${totalLost.lostCategory ne null }">
+		                                        <strong>종류 : ${totalLost.lostCategory}</strong>	                                    	
+	                                    	</c:if>
+	                                    	<c:if test="${totalLost.lostColor ne null }">
+		                                        <strong>색상 : ${totalLost.lostColor}</strong>	                                    	
+	                                    	</c:if>
+	                                    	<c:if test="${totalLost.lostBrand ne null }">
+		                                        <strong>브랜드 : ${totalLost.lostBrand}</strong>	                                    	
+	                                    	</c:if>
 	                                    </div>
 	                                </div>
 	                            </div>
