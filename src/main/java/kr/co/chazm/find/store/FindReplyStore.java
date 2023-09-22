@@ -65,4 +65,5 @@ public interface FindReplyStore {
 	 */
 	List<FindReply> selectFindReReplyList(SqlSession sqlSession, int findNo);
 
+
 }

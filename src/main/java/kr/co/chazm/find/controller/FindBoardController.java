@@ -246,6 +246,11 @@ public class FindBoardController {
 			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
 			List<FindBoard> fBList = findBoardService.selectFindBoardList(pInfo);
 			if(!fBList.isEmpty()) {
+				for(FindBoard findBoard : fBList) {
+					int findNo = findBoard.getFindNo();
+					Integer totalReplyCount = findReplyService.getReplyCount(findNo);
+					findBoard.setTotalReplyCount(totalReplyCount);
+				}
 				mv.addObject("pInfo", pInfo).addObject("fBList", fBList).setViewName("find/findBoardList");
 			} else {
 				mv.addObject("msg", "게시글 목록 조회가 완료되지 않았습니다.");
