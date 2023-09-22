@@ -142,15 +142,15 @@
 	                    <nav aria-label="Page navigation example r">
 	                        <ul class="pagination">
 		                        <c:if test="${fPInfo.startNavi != 1}">
-									<c:url var="prevUrl" value="/findBoard/search.do" >  
+									<c:url var="prevUrl" value="/totalSearch/search.do" >  
 										<c:param name="page" value="${fPInfo.startNavi -1 }"></c:param>
 										<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>		 								
 									</c:url>
-									<li class="page-item"><a href="${prevUrl}" class="page-link">Prev</a></li>
+									<li class="page-item"><a href="${prevUrl}" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
 								</c:if>
 	                            
 	                            <c:forEach begin="${fPInfo.startNavi}" end="${fPInfo.endNavi}"  var="p">
-									<c:url var="pageUrl" value="/findBoard/search.do" >  
+									<c:url var="pageUrl" value="/totalSearch/search.do" >  
 										<c:param name="page" value="${p}"></c:param> 	
 										<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>	
 									</c:url>
@@ -165,11 +165,11 @@
 								</c:forEach>
 	
 		                        <c:if test="${fPInfo.endNavi != fPInfo.naviTotalCount}">
-									<c:url var="nextUrl" value="/findBoard/search.do" >  
+									<c:url var="nextUrl" value="/totalSearch/search.do" >  
 										<c:param name="page" value="${lPInfo.endNavi + 1}"></c:param> 								
 										<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>	
 									</c:url>
-									<li class="page-item"><a href="${nextUrl}" class="page-link">Next</a></li>
+									<li class="page-item"><a href="${nextUrl}" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
 								</c:if>
 	                        </ul>
 	                    </nav>
@@ -235,15 +235,15 @@
                     <nav aria-label="Page navigation example r">
                         <ul class="pagination">
 	                        <c:if test="${lPInfo.startNavi != 1}">
-								<c:url var="prevUrl" value="/lostBoard/search.do" >  
+								<c:url var="prevUrl" value="/totalSearch/search.do" >  
 									<c:param name="page" value="${lPInfo.startNavi -1 }"></c:param>
 									<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>		 								
 								</c:url>
-								<li class="page-item"><a href="${prevUrl}" class="page-link">Prev</a></li>
+								<li class="page-item"><a href="${prevUrl}" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
 							</c:if>
                             
                             <c:forEach begin="${lPInfo.startNavi}" end="${lPInfo.endNavi}"  var="p">
-								<c:url var="pageUrl" value="/lostBoard/search.do" >  
+								<c:url var="pageUrl" value="/totalSearch/search.do" >  
 									<c:param name="page" value="${p}"></c:param> 	
 									<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>	
 								</c:url>
@@ -258,11 +258,11 @@
 							</c:forEach>
 
 	                        <c:if test="${lPInfo.endNavi != lPInfo.naviTotalCount}">
-								<c:url var="nextUrl" value="/lostBoard/search.do" >  
+								<c:url var="nextUrl" value="/totalSearch/search.do" >  
 									<c:param name="page" value="${lPInfo.endNavi + 1}"></c:param> 								
 									<c:param name="totalSearchKeyword" value="${totalSearchKeyword}"></c:param>	
 								</c:url>
-								<li class="page-item"><a href="${nextUrl}" class="page-link">Next</a></li>
+								<li class="page-item"><a href="${nextUrl}" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
 							</c:if>
                         </ul>
                     </nav>
