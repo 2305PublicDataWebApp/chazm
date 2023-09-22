@@ -73,7 +73,7 @@
                                 <h5>소중한물건을 잃어버리셨나요? </h5>
                             </div>
                             <div>
-                                <button id="insertLostBtn" onclick="insertLostBoard();">분실물 등록</button>
+                                <button id="insertLostBtn" onclick="insertLostBoard('${memberId}');">분실물 등록</button>
 <!--                                  -->
                             </div>
                         </div>
