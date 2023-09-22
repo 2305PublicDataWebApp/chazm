@@ -191,6 +191,7 @@
 		SELECT COUNT (*) FROM FIND_BOARD_TBL
 		WHERE (FIND_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_CATEGORY LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
@@ -202,6 +203,7 @@
 		SELECT * FROM FIND_BOARD_TBL 
 		WHERE (FIND_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR FIND_CATEGORY LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
 		OR FIND_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
@@ -215,6 +217,7 @@
 		SELECT COUNT (*) FROM LOST_BOARD_TBL
 		WHERE (LOST_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_CATEGORY LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
@@ -226,6 +229,7 @@
 		SELECT * FROM LOST_BOARD_TBL 
 		WHERE (LOST_TITLE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_CONTENT LIKE '%'||#{totalSearchKeyword}||'%'
+		OR LOST_CATEGORY LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_PLACE LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_COLOR LIKE '%'||#{totalSearchKeyword}||'%'
 		OR LOST_BRAND LIKE '%'||#{totalSearchKeyword}||'%')
