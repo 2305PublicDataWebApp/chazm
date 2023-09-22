@@ -215,7 +215,7 @@ public class LostBoardController {
 											,HttpSession session) {
 			
 			Integer totalCount = lostBoardService.getListCount();
-			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
+			PageInfo pInfo = this.getPageInfo(9, currentPage, totalCount);
 			List<LostBoard>lList = lostBoardService.selectLostBoardList(pInfo);
 			try {
 				if(lList.size()>0) {
@@ -344,7 +344,7 @@ public class LostBoardController {
 		
 		//서치 페이징처리
 		Integer totalCount = lostBoardService.searchGetListCount(searchMap); 
-		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
+		PageInfo pInfo = this.getPageInfo(9, currentPage, totalCount);
 		
 		List<LostBoard>searchLostList = lostBoardService.searchLostByKeyword(pInfo, searchMap);
 		try {
@@ -438,8 +438,8 @@ public class LostBoardController {
 	 * @param totalCount
 	 * @return
 	 */
-	public PageInfo getPageInfo(Integer currentPage, Integer totalCount) {
-		int recordCountPerPage = 9;
+	public PageInfo getPageInfo(int recordCountPerPage, Integer currentPage, Integer totalCount) {
+//		int recordCountPerPage = 0;
 		int naviCountPerPage = 5;
 		int naviTotalCount;
 		
@@ -524,11 +524,11 @@ public class LostBoardController {
 		
 		//통합서치 습득물파트 페이징처리
 		Integer totalSearchFindCount = lostBoardService.totalSearchFindCount(totalSearchKeyword); 
-		PageInfo fPInfo = this.getPageInfo(currentPage, totalSearchFindCount);
+		PageInfo fPInfo = this.getPageInfo(12, currentPage, totalSearchFindCount);
 		
 		//통합서치 분실물파트 페이징처리
 		Integer totalSearchLostCount = lostBoardService.totalSearchLostCount(totalSearchKeyword); 
-		PageInfo lPInfo = this.getPageInfo(currentPage, totalSearchLostCount);
+		PageInfo lPInfo = this.getPageInfo(12, currentPage, totalSearchLostCount);
 		
 		
 		
