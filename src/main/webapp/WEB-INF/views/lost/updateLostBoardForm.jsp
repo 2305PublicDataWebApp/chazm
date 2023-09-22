@@ -182,7 +182,7 @@
                                                     			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">공항</h4>
 														</div></li>
-														<li><div data-value="그 외" class="dropdown-item category-icon dd-place" >
+														<li><div data-value="기타" class="dropdown-item category-icon dd-place" >
 															<div class="icon">
 															<img src="../resources/assets/img/restaurant.png"
                                                     			class="testimonial-img flex-shrink-0" alt=""></div>
