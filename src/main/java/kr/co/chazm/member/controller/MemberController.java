@@ -143,7 +143,7 @@ public class MemberController {
 				session.setAttribute("memberName", mOne.getMemberName());
 				mv.setViewName("redirect:/index.jsp");				
 			} else {
-				mv.addObject("msg", "아이디나 비밀벊가 일치하지 않습니다.");
+				mv.addObject("msg", "아이디나 비밀번호가 일치하지 않습니다.");
 				mv.addObject("url", "/member/login.do");
 				mv.setViewName("common/message");
 			}
