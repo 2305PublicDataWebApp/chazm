@@ -442,7 +442,7 @@ public class FindBoardController {
 	}
 
 	private PageInfo getPageInfo(Integer currentPage, Integer totalCount) {
-		int recordCountPerPage = 12;
+		int recordCountPerPage = 9;
 		int naviCountPerPage = 5;
 		int naviTotalCount = (int)Math.ceil((double)totalCount / recordCountPerPage);
 		int startNavi = ((int)((double)currentPage/naviCountPerPage+0.9)-1)*naviCountPerPage+1;
@@ -454,16 +454,5 @@ public class FindBoardController {
 		return pInfo;
 	}
 
-	private PageInfo getReplyPageInfo(Integer currentPage, Integer totalCount) {
-		int recordCountPerPage = 10;
-		int naviCountPerPage = 5;
-		int naviTotalCount = (int)Math.ceil((double)totalCount / recordCountPerPage);
-		int startNavi = ((int)((double)currentPage/naviCountPerPage+0.9)-1)*naviCountPerPage+1;
-		int endNavi = startNavi + naviCountPerPage - 1;
-		if(endNavi > naviTotalCount) {
-			endNavi = naviTotalCount;
-		}
-		PageInfo pInfo = new PageInfo(currentPage, totalCount, naviTotalCount, recordCountPerPage, naviCountPerPage, startNavi, endNavi);
-		return pInfo;
-	}
+
 }
