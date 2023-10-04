@@ -1,4 +1,3 @@
-![아이디찾기](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/930bd36d-d134-4d38-beb0-37ea3b22386b)
 # chazm
 B1A3 세미프로젝트
 
@@ -196,3 +195,12 @@ B1A3 세미프로젝트
 
 ## 분실물 삭제
 ![lostDelete](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/6b0ec4d5-40ff-4170-ab98-7b66d711009d)
+
+## 습득물 상세페이지
+![습득물게시판 좋아요,지도](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/6dcde6b1-ada9-49fd-ba13-d11720190172)
+
+## 습득물 검색
+![습득물게시판 검색기능 ](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/a9e2909c-2258-4a77-9d5a-97518c2ce0b7)
+
+## 슬득물 상세페이지 댓글 및 답글
+![습득물게시판 댓글답댓글 ](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/34c7ce12-1dc9-4893-9d2c-bca954d1ca12)
