@@ -83,6 +83,7 @@
 		, LOST_LOCATION= #{lostLocation}
 		, LOST_PLACE= #{lostPlace}
 		, LOST_DATE=#{lostDate}
+		, LOST_MAYBE = #{lostMaybe}
 		, L_UPDATE_DATE = DEFAULT 
 		WHERE LOST_NO = #{lostNo} AND LOST_WRITER = #{lostWriter} AND L_STATE_YN = 'Y' 
 	</update>

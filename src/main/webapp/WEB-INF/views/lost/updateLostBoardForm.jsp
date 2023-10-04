@@ -229,7 +229,7 @@
 										<!--분실일자-->
 										<div id="lost_date" class="d-flex mt-2 w-100">
 											<input type="date" name="lostDate1" id="lostDate" class="p-1 w-100 border border-dark-subtle rounded text-center"
-												style="height: 40px;" placeholder="분실일자">
+												style="height: 40px;" placeholder="분실일자" value="${lostBoard.lostDate }">
 										</div>
 					
 										<!--분실물 색, 브랜드-->
@@ -263,7 +263,7 @@
 										
 										<!-- 분실장소지도기록 -->
 										<div class="d-flex"  style="margin-top : 10px;">
-											<input type="text" id="sample6_address" name="lostMaybe1" value="" placeholder="분실추정되는 주소를 입력하세요" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
+											<input type="text" id="sample6_address" name="lostMaybe1" value="${lostBoard.lostMaybe}" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
 											<input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="w-25">
 										</div>
 											<input type="hidden" id="sample6_postcode" placeholder="우편번호" class="me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
@@ -271,7 +271,7 @@
 								
 								
 										<!--사진첨부-->
-										<input type="file" name="uploadFile" class="mt-2 form-control border-dark-subtle" id="inputGroupFile02">
+										<input type="file" name="uploadFile" class="mt-2 form-control border-dark-subtle" id="inputGroupFile02" value="${lostBoard.lostFilerename}">
 									</div>
 								</div>	
                                     
