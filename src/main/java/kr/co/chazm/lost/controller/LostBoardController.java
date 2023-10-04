@@ -51,7 +51,7 @@ public class LostBoardController {
 	public ModelAndView insertLostBoard(ModelAndView mv
 										, @ModelAttribute LostBoard lostBoard
 										, @RequestParam(value="lostPlace1", required=false ) String lostPlace
-										, @RequestParam(value="lostDate1", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd")Date lostDate //@ModelAttribute에서도 lostDate가있기 때문에 도메인의 필드명과 다른 키값으로 받아줘야 함 
+										, @RequestParam(value="lostDate1", required=false ) String lostDate //@ModelAttribute에서도 lostDate가있기 때문에 도메인의 필드명과 다른 키값으로 받아줘야 함 
 										, @RequestParam(value="lostBrand1", required=false ) String lostBrand
 										, @RequestParam(value="lostMaybe1", required=false ) String lostMaybe
 										, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
@@ -60,9 +60,14 @@ public class LostBoardController {
 //		LostBoard lostBoard = new LostBoard(lostTitle, lostContent, null, null, null, lostCategory, lostLocation, lostPlace, lostDate, lostColor, lostBrand);
 		
 		try {
+			java.sql.Date lostedDate = null; 
+			if(!"".equals(lostDate)) {
+				lostedDate = new java.sql.Date(Date.valueOf(lostDate).getTime());
+			} //String으로 받아야함 그 후에 수동으로 날짜타입으로 변환시켜야함
+			
 			String lostWriter = (String)session.getAttribute("memberId");
 			lostBoard.setLostPlace(lostPlace);
-			lostBoard.setLostDate(lostDate);
+			lostBoard.setLostDate(lostedDate);
 			lostBoard.setLostBrand(lostBrand);
 			lostBoard.setLostMaybe(lostMaybe);
 			//로그인 한 경우에만 글쓰기 가능
@@ -127,15 +132,26 @@ public class LostBoardController {
 	public ModelAndView updateLostBoard(ModelAndView mv
 									  , @ModelAttribute LostBoard lostBoard
 									  , @RequestParam(value="lostPlace1", required=false ) String lostPlace
-									  , @RequestParam(value="lostDate1", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd")Date lostDate //@ModelAttribute에서도 lostDate가있기 때문에 도메인의 필드명과 다른 키값으로 받아줘야 함 
+									  , @RequestParam(value="lostDate1", required=false ) String lostDate //@ModelAttribute에서도 lostDate가있기 때문에 도메인의 필드명과 다른 키값으로 받아줘야 함 
 									  , @RequestParam(value="lostBrand1", required=false ) String lostBrand
 									  , @RequestParam(value="lostMaybe1", required=false ) String lostMaybe
 									  , @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 									  , HttpSession session
 									  , HttpServletRequest request) {
-		//UPDATE LOST_BOARD_TBL SET  ~ WHERE LOST_NO = ? AND LOST_WRITER = ? AND L_STATE_YN = 'Y' 
+		//UPDATE LOST_BOARD_TBL SET  ~ WHERE LOST_NO = ? AND LOST_WRITER = ? AND L_STATE_YN = 'Y'
+		//  @DateTimeFormat(pattern="yyyy-MM-dd") Date lostDate
 		String url ="";
 		try {
+//			java.sql.Date chalStartDate = new java.sql.Date(challenge.getChalStartDate().getTime());  //데이터타입 데이트일때
+			java.sql.Date lostedDate = null; //데이터타입 스트링일때 (널체크 포함) 
+			if(!"".equals(lostDate)) {
+				lostedDate = new java.sql.Date(Date.valueOf(lostDate).getTime());
+			}
+			lostBoard.setLostPlace(lostPlace);
+			lostBoard.setLostDate(lostedDate);
+			lostBoard.setLostBrand(lostBrand);
+			lostBoard.setLostMaybe(lostMaybe);
+			
 			//기존 삭제 후 재등록(저장)
 			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
 				String lostFilerename = lostBoard.getLostFilerename();
