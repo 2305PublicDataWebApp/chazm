@@ -1,8 +1,9 @@
+
 # chazm
 B1A3 세미프로젝트
 
 
-![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/57b017dc-3dba-470c-831e-6fbab1c10f88)
+![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/e18b35d2-ba31-4e13-afad-d26f469d34cf)
 
 
 # 프로젝트명
@@ -15,8 +16,6 @@ B1A3 세미프로젝트
 
 **팀명** : B1A3 (B형 1명, A형 3명)
 
-![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/af4d07fb-270f-42c9-93c0-988589eb4069)
-
 # 팀 역할
 
 - 팀장
@@ -25,6 +24,10 @@ B1A3 세미프로젝트
     - 권태우 : 회원 관리 기능, 노션&깃허브 관리
     - 이기윤 :  분실물 등록 게시판, 메인페이지 통합 검색기능
     - 채성실 : PPT제작, 찾음+ 게시판
+
+![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/56fcb23b-2aaf-4a31-a3aa-4952ecfc734b)
+
+
 
 - 팀 노션:
 
@@ -73,7 +76,8 @@ B1A3 세미프로젝트
     - **리워드 시스템**: 등급과 선물 또는 포상 시스템을 도입하여 사용자들에게 보상을 제공합니다.
     - **기부 시스템**: 주인을 찾지 못한 분실물들은 폐기처리가 됩니다. 그 중에서도 가장 인계률이 낮은 옷들을 찾음이 모아서 소외계층에게 기부합니다.
       
-![찾음_발표보고서-012](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/6f0374c5-5c1d-47fc-801f-32c022beb499)
+![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/3b7a879b-c686-4a65-b1db-987676bb6f3a)
+
 
 
 ---
@@ -116,7 +120,7 @@ B1A3 세미프로젝트
 - **분실물 수정 및 삭제**: 등록한 분실물 정보를 수정하거나 삭제할 수 있습니다.
 - **글 리스트 조회**: 본인이 등록한 글 목록을 조회할 수 있습니다.
   
-![찾음_발표보고서-013](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/1ee3c1e5-67c3-42d3-a443-2a44da7bdfef)
+![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/a2c61814-35d5-4d0c-aa39-8a285d0897d8)
 
 
 ---
@@ -128,7 +132,8 @@ B1A3 세미프로젝트
 - **개발도구**: STS, VS Code, Maven, SQL Developer
 - **협업도구**: GitHub, Slack
 
-![찾음_발표보고서-015](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/045cd209-9fe7-4e2e-9dd8-a9b1ea579512)
+![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/730865fc-ec7c-4b29-96c2-581a389a70bc)
+
 
 
 
@@ -138,7 +143,8 @@ B1A3 세미프로젝트
 
 우리 프로젝트의 작업 일정은 아래와 같습니다. 
 
-![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/617d2400-ebbe-47fe-86f1-8e4f6caefda5)
+![image](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/ac446233-0a82-481f-8221-eb0413a83f85)
+
 
 ---
 
