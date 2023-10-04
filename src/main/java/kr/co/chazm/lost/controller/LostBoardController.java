@@ -126,10 +126,10 @@ public class LostBoardController {
 	@RequestMapping(value="/lostBoard/update.do", method=RequestMethod.POST)
 	public ModelAndView updateLostBoard(ModelAndView mv
 									  , @ModelAttribute LostBoard lostBoard
-									  , @RequestParam(value="lostPlace", required=false ) String lostPlace
-									  , @RequestParam(value="lostDate", required=false ) Date lostDate
-									  , @RequestParam(value="lostBrand", required=false ) String lostBrand
-									  , @RequestParam(value="lostMaybe", required=false ) String lostMaybe
+									  , @RequestParam(value="lostPlace1", required=false ) String lostPlace
+									  , @RequestParam(value="lostDate1", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd")Date lostDate //@ModelAttribute에서도 lostDate가있기 때문에 도메인의 필드명과 다른 키값으로 받아줘야 함 
+									  , @RequestParam(value="lostBrand1", required=false ) String lostBrand
+									  , @RequestParam(value="lostMaybe1", required=false ) String lostMaybe
 									  , @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 									  , HttpSession session
 									  , HttpServletRequest request) {

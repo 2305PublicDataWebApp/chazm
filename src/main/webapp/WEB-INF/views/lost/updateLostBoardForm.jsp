@@ -188,7 +188,7 @@
                                                     			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">기타</h4>
 														</div></li>
-														<input type="hidden"  name="lostPlace" id="selectedPlaceInput" value="${lostBoard.lostPlace }">
+														<input type="hidden"  name="lostPlace1" id="selectedPlaceInput" value="${lostBoard.lostPlace }">
 													</div>
 												</ul>
 											</div>
@@ -228,7 +228,7 @@
 					
 										<!--분실일자-->
 										<div id="lost_date" class="d-flex mt-2 w-100">
-											<input type="date" name="lostDateStart" id="lostDate" class="p-1 w-100 border border-dark-subtle rounded text-center"
+											<input type="date" name="lostDate1" id="lostDate" class="p-1 w-100 border border-dark-subtle rounded text-center"
 												style="height: 40px;" placeholder="분실일자">
 										</div>
 					
@@ -257,13 +257,13 @@
 											
 											
 											<div id="lostBrand" class="w-50">
-												<input type="text" name="lostBrand" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;" value="${lostBoard.lostBrand }">
+												<input type="text" name="lostBrand1" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;" value="${lostBoard.lostBrand }">
 											</div>
 										</div>
 										
 										<!-- 분실장소지도기록 -->
 										<div class="d-flex"  style="margin-top : 10px;">
-											<input type="text" id="sample6_address" name="lostMaybe" value="" placeholder="분실추정되는 주소를 입력하세요" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
+											<input type="text" id="sample6_address" name="lostMaybe1" value="" placeholder="분실추정되는 주소를 입력하세요" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
 											<input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="w-25">
 										</div>
 											<input type="hidden" id="sample6_postcode" placeholder="우편번호" class="me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
@@ -284,7 +284,7 @@
                                 <div class="btn-wrap">
 								<!-- 내가 쓴 글일때만 버튼 보이게 (글쓴사람만 수정,삭제하도록)  -->
                                 <c:if test="${lostBoard.lostWriter eq memberId }">  
-                                    <button id="updateBtn" type="submit" class="btn" style="background-color: #4365BC; color:#fff">수정완료</button>
+                                    <button id="updateBtn" type="button" class="btn" style="background-color: #4365BC; color:#fff" onClick="insertCheck()">수정완료</button>
                                     <button id="deleteBtn" type="reset" class="btn" style="background-color: #818181; color:#fff">취소하기</button>
                                 </c:if>
                                 </div>
