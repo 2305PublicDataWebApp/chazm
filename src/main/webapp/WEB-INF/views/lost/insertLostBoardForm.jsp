@@ -79,7 +79,7 @@
                     <div class="row g-5">
                         <div class="col-lg-12">
                             <div class="sidebar">
-                            	<form action="/lostBoard/insert.do" method="post" enctype="multipart/form-data">
+                            	<form action="/lostBoard/insert.do" method="post" id="insertForm" enctype="multipart/form-data">
 								<div id="mainPart1" class="d-flex">
 									<!-- 사진 -->
 									<div id="pictureWrap">
@@ -90,8 +90,8 @@
 									
 									<div id="infoWrap">
 										<!--제목 -->
-										<div id="lostTitle" >
-											<input type="text" name="lostTitle" placeholder="제목을 입력해주세요." class="w-100 p-3 border border-dark-subtle rounded text-md-start" style="height : 50px">
+										<div>
+											<input type="text" name="lostTitle" id="lostTitle" placeholder="제목을 입력해주세요." class="w-100 p-3 border border-dark-subtle rounded text-md-start" style="height : 50px">
 										</div>
 										
 										<div id="wrap" class="mt-2">
@@ -180,7 +180,7 @@
                                                     			class="testimonial-img flex-shrink-0" alt=""></div>
 															<h4 class="title" style="color:#fff">기타</h4>
 														</div></li>
-														<input type="hidden"  name="lostPlace" id="selectedPlaceInput" value="">
+														<input type="hidden"  name="lostPlace1" id="selectedPlaceInput" value="">
 													</div>
 												</ul>
 											</div>
@@ -221,7 +221,7 @@
 					
 										<!--분실일자-->
 										<div id="lost_date" class="d-flex mt-2 w-100">
-											<input type="date" name="lostDate" id="lostDate" class="p-1 w-100 border border-dark-subtle rounded text-center"
+											<input type="date" name="lostDate1" id="lostDate1" class="p-1 w-100 border border-dark-subtle rounded text-center"
 												style="height: 40px;" placeholder="분실일자">
 										</div>
 					
@@ -251,20 +251,17 @@
 											
 											
 											<div id="lostBrand" class="w-50" >
-												<input type="text" name="lostBrand" placeholder="브랜드" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
+												<input type="text" name="lostBrand1" placeholder="브랜드" class="w-100 p-3 border border-dark-subtle rounded" style="height:40px;">
 											</div>
 										</div>
 										
 										<!-- 분실장소지도기록 -->
 										<div class="d-flex"  style="margin-top : 10px;">
-											<input type="text" id="sample6_address" name="lostMaybe" value="" placeholder="분실추정되는 주소를 입력하세요" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
+											<input type="text" id="sample6_address" name="lostMaybe1" value="" placeholder="분실추정되는 주소를 입력하세요" class="w-75 me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
 											<input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="w-25">
 										</div>
 											<input type="hidden" id="sample6_postcode" placeholder="우편번호" class="me-1 p-3 border border-dark-subtle rounded" style="height:40px;">
 											<input type="hidden" id="sample6_extraAddress" class="w-25 p-3 border border-dark-subtle rounded" style="height:40px; ">
-								
-										
-										
 
 								
 										<!--사진첨부-->
@@ -278,7 +275,7 @@
                                 </div>
                                 <hr>
                                  <div class="btn-wrap">  
-	                                <button type="submit" class="btn" style="background-color: #4365BC; color:#fff" id="insertBtn">등록하기</button>
+	                                <button type="button" class="btn" style="background-color: #4365BC; color:#fff" id="insertBtn" onClick="insertCheck()">등록하기</button>
 	                                <button type="reset" class="btn" style="background-color: #818181; color:#fff" id="resetBtn">취소하기</button>
                                 </div>
 
@@ -375,6 +372,42 @@
 	            }
 	        });
 
+			 <!--유효성-->
+	         function insertCheck() {
+	      		const lostTitle = document.querySelector("#lostTitle");
+	      		const lostContent = document.querySelector("#summernote");
+	      		const lostCategory = document.querySelector("#selectedCategoryInput");
+	      		const lostLocation = document.querySelector("#selectedLocationInput");
+	      		const lostColor = document.querySelector("#selectedColorInput");
+	      		
+	      		if (lostTitle.value.trim() == "") {
+	      			alert('제목(분실물)을 입력하세요');
+	      			lostTitle.focus();
+	      			return false;
+	   	        } 
+				if (lostCategory.value == "") {
+	      			alert('분실물 종류를 선택하세요');
+	      			document.querySelector("#selectedCategory").focus;
+	      			return false;
+				}
+	   	        if (lostLocation.value == "") {
+	    			alert('분실지역을 선택하세요');
+	    			document.querySelector("#selectedLocation").focus;
+	    			return false;
+	   	        } 
+	   	        if (lostColor.value == "") {
+	    			alert('분실물 색상을 선택하세요');
+	    			document.querySelector("#selectedColor").focus;
+	    			return false;
+	   	        } 
+	   	        if (lostContent.value == "") {
+	    			alert('내용을 입력하세요');
+	    			lostContent.focus();
+	    			return false;
+	   	        } 
+	  	        document.querySelector("#insertForm").submit();
+	      	}
+	          
 	      
        		<!--종류,장소 선택하기-->
             let icons = document.querySelectorAll(".category-icon");            
@@ -457,7 +490,7 @@
           });
             
           
-          <!--지도-->
+         
           
         </script>
     </body>
