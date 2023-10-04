@@ -1,4 +1,4 @@
-
+![아이디찾기](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/930bd36d-d134-4d38-beb0-37ea3b22386b)
 # chazm
 B1A3 세미프로젝트
 
@@ -149,4 +149,50 @@ B1A3 세미프로젝트
 ---
 
 # 구현화면
-![127 0 0 1_8098_ (1)](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/d196d8c2-761a-4238-b398-d5cde117b49d)
+
+## 메인페이지
+![메인](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/0b37cb99-c9f8-4dfe-b40c-346d20a66c6a)
+
+## 회원가입
+![회원가입1](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/90d50b14-540e-4315-9af4-2113f928d00b)
+![회원가입2](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/0ecf4434-0538-4b7e-94b0-1f0bfd994aff)
+![기업회원가입](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/e9669a98-b2ed-4351-988e-8cf531ef1316)
+
+## 아이디/비밀번호 찾기
+![아이디찾기](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/a79ad1bd-0d62-4005-9720-e0692f6af718)
+![비밀번호찾기](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/ada7a3d0-756a-4497-b292-6793eccc674f)
+
+## 로그인
+![다운로드](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/de309e36-efe2-4834-9b49-80e47fd50a56)
+
+## 마이페이지
+![마이페이지](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/e303c69e-bf8e-46a5-92c2-5a15c1ba275e)
+
+
+## 포인트 기부 페이지 목록
+![포인트로기부해요_목록](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/e23fe1c4-8feb-4f7f-85d1-27dc96b5b0c0)
+
+## 포인트 기부 페이지 상세
+![포인트로기부해요_상세](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/323110d5-35ca-4b70-95a8-952fc4501446)
+
+
+## 찾음 기부 페이지 리스트
+![찾음이기부해요_리스트](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/86b2558e-a400-4c6d-86d7-7dd1439b2f51)
+
+## 분실물 등록
+![lostBoardinsert](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/ae7cc0ae-d983-4b85-995f-650f526b27b1)
+
+## 분실물 등록 수정
+![lostUpdate](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/0234b0f4-a805-49c7-ad95-a225e287181d)
+
+## 분실물 리스트
+![lostBoardlist](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/b119eaec-92f1-4d8e-a514-9afcf174cbff)
+
+## 분실물 상세페이지
+![lostBoardDetail](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/5f64463b-dd3d-4c1e-90f6-c6b43f301c27)
+
+## 분실물 검색
+![lostSearch](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/dd87fad0-6e39-4358-aa98-f39a80ba7b22)
+
+## 분실물 삭제
+![lostDelete](https://github.com/2305PublicDataWebApp/chazm/assets/134674169/6b0ec4d5-40ff-4170-ab98-7b66d711009d)
