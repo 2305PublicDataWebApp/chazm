@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,14 +47,13 @@ public class LostBoardController {
 	
 	
 	//분실물 등록
-	@ResponseBody 
 	@RequestMapping(value="/lostBoard/insert.do", method=RequestMethod.POST)
 	public ModelAndView insertLostBoard(ModelAndView mv
 										, @ModelAttribute LostBoard lostBoard
-										, @RequestParam(value="lostPlace", required=false ) String lostPlace
-										, @RequestParam(value="lostDate", required=false ) Date lostDate
-										, @RequestParam(value="lostBrand", required=false ) String lostBrand
-										, @RequestParam(value="lostMaybe", required=false ) String lostMaybe
+										, @RequestParam(value="lostPlace1", required=false ) String lostPlace
+										, @RequestParam(value="lostDate1", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd")Date lostDate //@ModelAttribute에서도 lostDate가있기 때문에 도메인의 필드명과 다른 키값으로 받아줘야 함 
+										, @RequestParam(value="lostBrand1", required=false ) String lostBrand
+										, @RequestParam(value="lostMaybe1", required=false ) String lostMaybe
 										, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 										, HttpSession session
 										, HttpServletRequest request) {
@@ -61,7 +61,10 @@ public class LostBoardController {
 		
 		try {
 			String lostWriter = (String)session.getAttribute("memberId");
-
+			lostBoard.setLostPlace(lostPlace);
+			lostBoard.setLostDate(lostDate);
+			lostBoard.setLostBrand(lostBrand);
+			lostBoard.setLostMaybe(lostMaybe);
 			//로그인 한 경우에만 글쓰기 가능
 			if(lostWriter != null && !lostWriter.equals("")) {
 				lostBoard.setLostWriter(lostWriter);

@@ -79,7 +79,7 @@
                     <div class="row g-5">
                         <div class="col-lg-12">
                             <div class="sidebar">
-                            	<form action="/lostBoard/update.do" method="post" enctype="multipart/form-data">
+                            	<form action="/lostBoard/update.do" method="post" id="updateForm"  enctype="multipart/form-data">
 								<input type="hidden" name="lostNo" value="${lostBoard.lostNo}">
 								<input type="hidden" name="lostWriter" value="${lostBoard.lostWriter}">
 								
@@ -98,8 +98,8 @@
 									
 									<div id="infoWrap">
 										<!--제목 -->
-										<div id="lostTitle" >
-											<input type="text" name="lostTitle" class="w-100 p-3 border border-dark-subtle rounded text-md-start" style="height : 50px" value="${lostBoard.lostTitle }">
+										<div>
+											<input type="text" name="lostTitle" id="lostTitle" class="w-100 p-3 border border-dark-subtle rounded text-md-start" style="height : 50px" value="${lostBoard.lostTitle }">
 										</div>
 										
 										<div id="wrap" class="mt-2">
@@ -441,7 +441,41 @@
                 });
             });
 
-            
+			 <!--유효성-->
+	         function insertCheck() {
+	      		const lostTitle = document.querySelector("#lostTitle");
+	      		const lostContent = document.querySelector("#summernote");
+	      		const lostCategory = document.querySelector("#selectedCategoryInput");
+	      		const lostLocation = document.querySelector("#selectedLocationInput");
+	      		const lostColor = document.querySelector("#selectedColorInput");
+	      		
+	      		if (lostTitle.value.trim() == "") {
+	      			alert('제목(분실물)을 입력하세요');
+	      			lostTitle.focus();
+	      			return false;
+	   	        } 
+				if (lostCategory.value == "") {
+	      			alert('분실물 종류를 선택하세요');
+	      			document.querySelector("#selectedCategory").focus;
+	      			return false;
+				}
+	   	        if (lostLocation.value == "") {
+	    			alert('분실지역을 선택하세요');
+	    			document.querySelector("#selectedLocation").focus;
+	    			return false;
+	   	        } 
+	   	        if (lostColor.value == "") {
+	    			alert('분실물 색상을 선택하세요');
+	    			document.querySelector("#selectedColor").focus;
+	    			return false;
+	   	        } 
+	   	        if (lostContent.value == "") {
+	    			alert('내용을 입력하세요');
+	    			lostContent.focus();
+	    			return false;
+	   	        } 
+	  	        document.querySelector("#updateForm").submit();
+	      	}
 		        
 		        
 		        
